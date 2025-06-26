@@ -34,3 +34,6 @@ npm-debug.log*
 # Misc
 .DS_Store
 *.pem
+
+# MCP configuration (contains sensitive tokens)
+.mcp.json
