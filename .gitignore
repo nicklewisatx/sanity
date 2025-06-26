@@ -37,3 +37,6 @@ npm-debug.log*
 
 # MCP configuration (contains sensitive tokens)
 .mcp.json
+
+# Deployment guide (contains sensitive tokens)
+DEPLOYMENT_GUIDE.md
