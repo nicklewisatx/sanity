@@ -40,3 +40,7 @@ npm-debug.log*
 
 # Deployment guide (contains sensitive tokens)
 DEPLOYMENT_GUIDE.md
+
+# Setup files (contain sensitive tokens)
+setup-process.log
+set-vercel-env.sh
