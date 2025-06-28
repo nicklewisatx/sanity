@@ -31,12 +31,17 @@
     "slugify": "^1.6.6"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
     "@types/node": "^24",
     "@types/react": "19.1.8",
     "@types/react-dom": "19.1.6",
+    "@vitejs/plugin-react": "^4.6.0",
     "@workspace/eslint-config": "workspace:^",
     "@workspace/typescript-config": "workspace:*",
+    "jsdom": "^26.1.0",
     "postcss": "^8",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^3.4.17",
+    "vitest": "^3.2.4"
   }
 }
