@@ -29,5 +29,10 @@
   "packageManager": "pnpm@10.12.2",
   "engines": {
     "node": ">=20"
+  },
+  "pnpm": {
+    "overrides": {
+      "@sanity/client": "^7.6.0"
+    }
   }
 }
