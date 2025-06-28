@@ -159,6 +159,73 @@ const featureCardsIconBlock = /* groq */ `
   }
 `;
 
+// Technology queries fragments
+const technologyFragment = /* groq */ `
+  _id,
+  _type,
+  title,
+  slug,
+  tags,
+  description[]{
+    ...,
+    ${markDefsFragment}
+  },
+  logo{
+    ...,
+    ...asset->{
+      "alt": coalesce(alt, altText, originalFilename, "no-alt"),
+      "blurData": metadata.lqip,
+      "dominantColor": metadata.palette.dominant.background
+    },
+  },
+  homepage,
+  buzzRating
+`;
+
+// Resource queries fragments
+const resourceFragment = /* groq */ `
+  _id,
+  _type,
+  title,
+  slug,
+  link,
+  description[]{
+    ...,
+    ${markDefsFragment}
+  },
+  date,
+  tags,
+  "technology": technology->{
+    ${technologyFragment}
+  }
+`;
+
+const technologyShowcaseBlock = /* groq */ `
+  _type == "technologyShowcase" => {
+    ...,
+    "technologies": technologies[]->{
+      ${technologyFragment}
+    }
+  }
+`;
+
+const resourceSectionBlock = /* groq */ `
+  _type == "resourceSection" => {
+    ...,
+    "technology": technology->{
+      ${technologyFragment}
+    },
+    "resources": select(
+      defined(technology) => *[_type == "resource" && technology._ref == ^.technology._ref] | order(date desc)[0...^.limit] {
+        ${resourceFragment}
+      },
+      *[_type == "resource"] | order(date desc)[0...^.limit] {
+        ${resourceFragment}
+      }
+    )
+  }
+`;
+
 const pageBuilderFragment = /* groq */ `
   pageBuilder[]{
     ...,
@@ -168,7 +235,9 @@ const pageBuilderFragment = /* groq */ `
     ${faqAccordionBlock},
     ${featureCardsIconBlock},
     ${subscribeNewsletterBlock},
-    ${imageLinkCardsBlock}
+    ${imageLinkCardsBlock},
+    ${technologyShowcaseBlock},
+    ${resourceSectionBlock}
   }
 `;
 
@@ -383,5 +452,46 @@ export const querySettingsData = defineQuery(`
     "logo": logo.asset->url + "?w=80&h=40&dpr=3&fit=max",
     "socialLinks": socialLinks,
     "contactEmail": contactEmail,
+  }
+`);
+
+// Technology queries
+export const queryTechnologiesData = defineQuery(`
+  *[_type == "technology"] | order(buzzRating desc, title asc) {
+    ${technologyFragment}
+  }
+`);
+
+export const queryTechnologyBySlug = defineQuery(`
+  *[_type == "technology" && slug.current == $slug][0]{
+    ${technologyFragment}
+  }
+`);
+
+// Resource queries
+export const queryResourcesData = defineQuery(`
+  *[_type == "resource"] | order(date desc) {
+    ${resourceFragment}
+  }
+`);
+
+export const queryResourcesByTechnology = defineQuery(`
+  *[_type == "resource" && technology._ref == $technologyId] | order(date desc) {
+    ${resourceFragment}
+  }
+`);
+
+// Update blog query to include technologies
+export const queryBlogWithTechnologies = defineQuery(`
+  *[_type == "blog" && slug.current == $slug][0]{
+    ...,
+    "slug": slug.current,
+    ${blogAuthorFragment},
+    ${imageFragment},
+    ${richTextFragment},
+    ${pageBuilderFragment},
+    "technologies": technologies[]->{
+      ${technologyFragment}
+    }
   }
 `);

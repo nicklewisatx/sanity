@@ -12,7 +12,9 @@ import { FaqAccordion } from "./sections/faq-accordion";
 import { FeatureCardsWithIcon } from "./sections/feature-cards-with-icon";
 import { HeroBlock } from "./sections/hero";
 import { ImageLinkCards } from "./sections/image-link-cards";
+import { ResourceSection } from "./sections/resource-section";
 import { SubscribeNewsletter } from "./sections/subscribe-newsletter";
+import { TechnologyShowcase } from "./sections/technology-showcase";
 
 type PageBlock = NonNullable<
   NonNullable<QueryHomePageDataResult>["pageBuilder"]
@@ -37,6 +39,8 @@ const BLOCK_COMPONENTS = {
   featureCardsIcon: FeatureCardsWithIcon,
   subscribeNewsletter: SubscribeNewsletter,
   imageLinkCards: ImageLinkCards,
+  technologyShowcase: TechnologyShowcase,
+  resourceSection: ResourceSection,
 } as const;
 
 type BlockType = keyof typeof BLOCK_COMPONENTS;

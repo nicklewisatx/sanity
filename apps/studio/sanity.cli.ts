@@ -10,6 +10,6 @@ export default defineCliConfig({
     projectId: projectId,
     dataset: dataset,
   },
-  studioHost: 'nicklewistheblog',
+  studioHost: "nicklewistheblog",
   autoUpdates: false,
 });

@@ -16,6 +16,7 @@ This guide contains essential information for day-to-day development with this S
 ## Key Commands
 
 ### Development
+
 ```bash
 # Run both web and studio in parallel
 pnpm dev
@@ -26,6 +27,7 @@ pnpm dev --filter=studio
 ```
 
 ### Building & Deployment
+
 ```bash
 # Build all apps
 pnpm build
@@ -46,6 +48,7 @@ cd apps/studio && npx sanity deploy
 ## Sanity Studio Development
 
 ### Schema Organization
+
 ```
 apps/studio/schemaTypes/
 ├── documents/       # Main content types (blog, page, etc.)
@@ -58,7 +61,9 @@ apps/studio/schemaTypes/
 ### Schema Types Overview
 
 #### Document Schemas (`/documents/`)
+
 Main content types that appear in Studio:
+
 - `author.ts` - Author profiles
 - `blog.ts` - Blog posts with rich content
 - `page.ts` - Generic pages with page builder
@@ -66,14 +71,18 @@ Main content types that appear in Studio:
 - `settings.ts` - Site-wide settings
 
 #### Block Schemas (`/blocks/`)
+
 Reusable components for page builder:
+
 - `hero.ts` - Hero sections
-- `cta.ts` - Call-to-action blocks  
+- `cta.ts` - Call-to-action blocks
 - `faq-accordion.ts` - FAQ sections
 - `feature-cards-icon.ts` - Feature cards
 
 #### Object Schemas (`/objects/`)
+
 Shared data structures:
+
 - `button.ts` - Button with link and style
 - `custom-url.ts` - URL with internal/external handling
 - `custom-link.ts` - Link for portable text
@@ -81,46 +90,47 @@ Shared data structures:
 ### Adding a New Schema
 
 #### 1. Create a New Document Type
+
 ```typescript
 // apps/studio/schemaTypes/documents/product.ts
-import { defineType, defineField } from 'sanity';
+import { defineType, defineField } from "sanity";
 
 export const product = defineType({
-  name: 'product',
-  title: 'Product',
-  type: 'document',
+  name: "product",
+  title: "Product",
+  type: "document",
   fields: [
     defineField({
-      name: 'title',
-      title: 'Title',
-      type: 'string',
+      name: "title",
+      title: "Title",
+      type: "string",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
+      name: "slug",
+      title: "Slug",
+      type: "slug",
       options: {
-        source: 'title',
+        source: "title",
         maxLength: 96,
       },
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'price',
-      title: 'Price',
-      type: 'number',
+      name: "price",
+      title: "Price",
+      type: "number",
       validation: (Rule) => Rule.required().positive(),
     }),
     defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'richText', // Uses common richText field
+      name: "description",
+      title: "Description",
+      type: "richText", // Uses common richText field
     }),
     defineField({
-      name: 'image',
-      title: 'Product Image',
-      type: 'image',
+      name: "image",
+      title: "Product Image",
+      type: "image",
       options: {
         hotspot: true,
       },
@@ -128,9 +138,9 @@ export const product = defineType({
   ],
   preview: {
     select: {
-      title: 'title',
-      media: 'image',
-      price: 'price',
+      title: "title",
+      media: "image",
+      price: "price",
     },
     prepare({ title, media, price }) {
       return {
@@ -144,51 +154,52 @@ export const product = defineType({
 ```
 
 #### 2. Create a Reusable Block
+
 ```typescript
 // apps/studio/schemaTypes/blocks/product-grid.ts
-import { defineType, defineField } from 'sanity';
-import { Package } from 'lucide-react';
+import { defineType, defineField } from "sanity";
+import { Package } from "lucide-react";
 
 export const productGrid = defineType({
-  name: 'productGrid',
-  title: 'Product Grid',
-  type: 'object',
+  name: "productGrid",
+  title: "Product Grid",
+  type: "object",
   icon: Package,
   fields: [
     defineField({
-      name: 'title',
-      title: 'Title',
-      type: 'string',
+      name: "title",
+      title: "Title",
+      type: "string",
     }),
     defineField({
-      name: 'products',
-      title: 'Products',
-      type: 'array',
-      of: [{ type: 'reference', to: [{ type: 'product' }] }],
+      name: "products",
+      title: "Products",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "product" }] }],
       validation: (Rule) => Rule.required().min(1),
     }),
     defineField({
-      name: 'columns',
-      title: 'Columns',
-      type: 'number',
+      name: "columns",
+      title: "Columns",
+      type: "number",
       initialValue: 3,
       options: {
         list: [
-          { title: '2 Columns', value: 2 },
-          { title: '3 Columns', value: 3 },
-          { title: '4 Columns', value: 4 },
+          { title: "2 Columns", value: 2 },
+          { title: "3 Columns", value: 3 },
+          { title: "4 Columns", value: 4 },
         ],
       },
     }),
   ],
   preview: {
     select: {
-      title: 'title',
-      products: 'products',
+      title: "title",
+      products: "products",
     },
     prepare({ title, products }) {
       return {
-        title: title || 'Product Grid',
+        title: title || "Product Grid",
         subtitle: `${products?.length || 0} products`,
       };
     },
@@ -197,10 +208,11 @@ export const productGrid = defineType({
 ```
 
 #### 3. Register the Schema
+
 ```typescript
 // apps/studio/schemaTypes/index.ts
-import { product } from './documents/product';
-import { productGrid } from './blocks/product-grid';
+import { product } from "./documents/product";
+import { productGrid } from "./blocks/product-grid";
 
 export const schemaTypes = [
   // ... existing schemas
@@ -210,22 +222,24 @@ export const schemaTypes = [
 ```
 
 #### 4. Add Block to Page Builder
+
 ```typescript
 // apps/studio/schemaTypes/common.ts
 export const pageBuilderField = defineField({
-  name: 'pageBuilder',
-  title: 'Page Builder',
-  type: 'array',
+  name: "pageBuilder",
+  title: "Page Builder",
+  type: "array",
   of: [
-    { type: 'hero' },
-    { type: 'cta' },
-    { type: 'productGrid' }, // Add new block
+    { type: "hero" },
+    { type: "cta" },
+    { type: "productGrid" }, // Add new block
     // ... other blocks
   ],
 });
 ```
 
 #### 5. Generate TypeScript Types
+
 ```bash
 cd apps/studio
 pnpm run type
@@ -234,6 +248,7 @@ pnpm run type
 ### Editing Existing Schemas
 
 #### Adding Fields
+
 ```typescript
 // Add to existing schema
 defineField({
@@ -245,17 +260,20 @@ defineField({
 ```
 
 #### Modifying Field Types
+
 ⚠️ **Warning**: Changing field types can cause data loss. Consider:
+
 1. Create new field with different name
 2. Migrate data via script
 3. Remove old field later
 
 #### Adding Validation
+
 ```typescript
 defineField({
   name: 'email',
   type: 'string',
-  validation: (Rule) => 
+  validation: (Rule) =>
     Rule.required()
       .email()
       .error('Please enter a valid email'),
@@ -265,17 +283,19 @@ defineField({
 ### Common Field Patterns
 
 #### Rich Text with Custom Marks
+
 ```typescript
-import { richTextField } from '../common';
+import { richTextField } from "../common";
 
 defineField({
   ...richTextField,
-  name: 'content',
-  title: 'Content',
+  name: "content",
+  title: "Content",
 });
 ```
 
 #### Reference Fields
+
 ```typescript
 defineField({
   name: 'author',
@@ -287,6 +307,7 @@ defineField({
 ```
 
 #### Array of References
+
 ```typescript
 defineField({
   name: 'relatedProducts',
@@ -297,6 +318,7 @@ defineField({
 ```
 
 #### Conditional Fields
+
 ```typescript
 defineField({
   name: 'salePrice',
@@ -309,6 +331,7 @@ defineField({
 ## Schema to Component Architecture
 
 ### Overview of Data Flow
+
 ```
 Sanity Schema → GROQ Query → Type Generation → React Component
      ↓              ↓              ↓                ↓
@@ -318,6 +341,7 @@ Sanity Schema → GROQ Query → Type Generation → React Component
 ### Creating Components for Schemas
 
 #### 1. Define the GROQ Query
+
 ```typescript
 // apps/web/src/lib/sanity/query.ts
 
@@ -359,6 +383,7 @@ export const PRODUCTS_QUERY = /* groq */ `
 ```
 
 #### 2. Create the Component
+
 ```typescript
 // apps/web/src/components/blocks/product-grid.tsx
 import { SanityImage } from "@/components/sanity-image";
@@ -371,7 +396,7 @@ type ProductGridProps = PagebuilderType<"productGrid">;
 export function ProductGrid({ title, products, columns = 3 }: ProductGridProps) {
   const gridCols = {
     2: "grid-cols-2",
-    3: "grid-cols-3", 
+    3: "grid-cols-3",
     4: "grid-cols-4",
   };
 
@@ -419,6 +444,7 @@ export function ProductGrid({ title, products, columns = 3 }: ProductGridProps) 
 ```
 
 #### 3. Register Component in PageBuilder
+
 ```typescript
 // apps/web/src/components/pagebuilder.tsx
 import { ProductGrid } from "./blocks/product-grid";
@@ -433,6 +459,7 @@ const BLOCK_COMPONENTS = {
 ```
 
 #### 4. Create Shared UI Components
+
 ```typescript
 // packages/ui/src/components/product-card.tsx
 import { cn } from "@workspace/ui/lib/utils";
@@ -483,7 +510,9 @@ export function ProductCard({
 ### Key Patterns for Component Reusability
 
 #### 1. Use GROQ Fragments
+
 Define reusable query fragments for consistent data shapes:
+
 ```typescript
 const imageFragment = /* groq */ `
   image{
@@ -497,12 +526,14 @@ const imageFragment = /* groq */ `
 ```
 
 #### 2. Wrapper Components for Sanity Data
+
 Create wrapper components that handle Sanity-specific data:
+
 ```typescript
 // components/sanity-buttons.tsx
 export function SanityButtons({ buttons }: { buttons?: ButtonType[] }) {
   if (!buttons?.length) return null;
-  
+
   return (
     <div className="flex gap-4">
       {buttons.map((button, index) => (
@@ -516,7 +547,9 @@ export function SanityButtons({ buttons }: { buttons?: ButtonType[] }) {
 ```
 
 #### 3. Type Extraction Utilities
+
 Use TypeScript utilities to extract types from queries:
+
 ```typescript
 // types.ts
 import type { QueryHomePageDataResult } from "@/data/sanity.types";
@@ -529,7 +562,9 @@ export type PagebuilderType<T extends string> = Extract<
 ```
 
 #### 4. Portable Text Components
+
 Customize portable text rendering:
+
 ```typescript
 // components/richtext.tsx
 const components: Partial<PortableTextReactComponents> = {
@@ -555,6 +590,7 @@ const components: Partial<PortableTextReactComponents> = {
 5. **Visual Editing**: Add `data-sanity` attributes for live preview
 
 ### GROQ Query Examples
+
 ```groq
 // Get all blog posts
 *[_type == "blog"] | order(publishedAt desc) {
@@ -603,17 +639,20 @@ const components: Partial<PortableTextReactComponents> = {
 ### Key Files & Patterns
 
 #### Data Fetching (`apps/web/src/data/`)
+
 - `sanity.fetch.ts` - Main fetch utility with caching
 - `sanity.queries.ts` - All GROQ queries
 - Use `loadQuery()` for server components
 - Queries are cached and revalidated on content changes
 
 #### Components (`apps/web/src/components/`)
+
 - Server Components by default
 - Client components marked with `'use client'`
 - Shared UI components in `packages/ui/`
 
 #### Live Preview Setup
+
 ```tsx
 // In any page component
 import { LiveQuery } from "@/data/sanity.types";
@@ -624,19 +663,20 @@ const data = await loadQuery<BlogPost>(BLOG_QUERY, params, {
 });
 
 // Wrap with LiveQuery for preview
-<LiveQuery 
+<LiveQuery
   enabled={draftMode().isEnabled}
   query={query}
   params={params}
   initial={data}
 >
   {(data) => <BlogPost post={data} />}
-</LiveQuery>
+</LiveQuery>;
 ```
 
 ### Environment Variables
 
 #### Required for Web App
+
 ```bash
 NEXT_PUBLIC_SANITY_PROJECT_ID=7pbquh5r
 NEXT_PUBLIC_SANITY_DATASET=production
@@ -644,6 +684,7 @@ SANITY_API_READ_TOKEN=<your-token>  # For draft mode
 ```
 
 #### Required for Studio
+
 ```bash
 SANITY_STUDIO_PROJECT_ID=7pbquh5r
 SANITY_STUDIO_DATASET=production
@@ -654,27 +695,32 @@ SANITY_STUDIO_PRESENTATION_URL=https://your-site.com
 ## Common Tasks
 
 ### Creating Blog Posts
+
 1. Open Studio at `/studio` or `https://[your-project].sanity.studio`
 2. Create new Blog document
 3. Fill required fields: title, slug, author, body
 4. Publish when ready
 
 ### Adding Images
+
 - Use Sanity's image pipeline for optimization
 - Images are automatically served from Sanity's CDN
 - Use `next-sanity/image` for URL generation:
+
 ```tsx
 import { urlForImage } from "@/utils/image";
 
-<img src={urlForImage(image).width(800).url()} />
+<img src={urlForImage(image).width(800).url()} />;
 ```
 
 ### Updating Navigation
+
 1. Edit Navbar document in Studio
 2. Add/remove navigation items
 3. Changes reflect immediately after publishing
 
 ### Creating New Pages
+
 1. Create Page document in Studio
 2. Set slug (e.g., "about" for /about)
 3. Add content blocks
@@ -683,15 +729,18 @@ import { urlForImage } from "@/utils/image";
 ## Debugging & Troubleshooting
 
 ### Check Sanity Connection
+
 ```bash
 # In studio directory
 npx sanity debug
 ```
 
 ### View GROQ Query Results
+
 Use Vision plugin at `/studio/vision` to test queries
 
 ### Clear Next.js Cache
+
 ```bash
 rm -rf apps/web/.next
 ```

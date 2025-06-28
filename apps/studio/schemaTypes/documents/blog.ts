@@ -134,6 +134,19 @@ export const blog = defineType({
         "The main content of your blog post with text, images, and formatting",
       group: GROUP.MAIN_CONTENT,
     }),
+    defineField({
+      name: "technologies",
+      title: "Related Technologies",
+      type: "array",
+      description: "Technologies mentioned or used in this blog post",
+      of: [
+        defineArrayMember({
+          type: "reference",
+          to: [{ type: "technology" }],
+        }),
+      ],
+      group: GROUP.MAIN_CONTENT,
+    }),
     ...seoFields,
     ...ogFields,
   ],

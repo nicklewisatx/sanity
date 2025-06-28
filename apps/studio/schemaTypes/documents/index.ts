@@ -6,8 +6,18 @@ import { footer } from "./footer";
 import { homePage } from "./home-page";
 import { navbar } from "./navbar";
 import { page } from "./page";
+import { resource } from "./resource";
 import { settings } from "./settings";
+import { technology } from "./technology";
 
 export const singletons = [homePage, blogIndex, settings, footer, navbar];
 
-export const documents = [blog, page, faq, author, ...singletons];
+export const documents = [
+  blog,
+  page,
+  faq,
+  author,
+  technology,
+  resource,
+  ...singletons,
+];
