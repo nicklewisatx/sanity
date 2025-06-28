@@ -4,7 +4,10 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "lint": "eslint . --max-warnings 0"
+    "lint": "eslint . --max-warnings 0",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check-types": "tsc --noEmit"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.11",
@@ -30,6 +33,7 @@
     "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
     "autoprefixer": "^10.4.21",
+    "eslint": "^9.29.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.14"
   },

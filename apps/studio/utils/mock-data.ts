@@ -1,6 +1,5 @@
 import { faker } from "@faker-js/faker";
 import { PromisePool } from "@supercharge/promise-pool";
-import type { SanityClient } from "sanity";
 import slugify from "slugify";
 
 import {
@@ -42,7 +41,7 @@ const LOGO_URL =
   "https://cdn.sanity.io/images/rqdz6bx6/production/56ec9a9bbac2260f825a5ad471dd9581a3f92868-167x32.svg";
 
 async function generateImage(
-  client: SanityClient,
+  client: any,
   { width, height, url, type, category }: ImageOptions,
 ): Promise<ImageAsset> {
   const imageUrl = url ?? getImageUrl({ width, height, category });
@@ -75,7 +74,7 @@ async function fetchImageBuffer(url: string): Promise<ArrayBuffer> {
   return fetch(url).then((res) => res.arrayBuffer());
 }
 
-async function uploadImageToSanity(client: SanityClient, buffer: ArrayBuffer) {
+async function uploadImageToSanity(client: any, buffer: ArrayBuffer) {
   return client.assets.upload("image", Buffer.from(buffer), {
     title: faker.lorem.words(3),
   });
@@ -102,7 +101,7 @@ const IMAGE_ASSETS_CONFIG = [
 
 // Main export for image generation
 export async function generateAndUploadMockImages(
-  client: SanityClient,
+  client: any,
 ): Promise<ImageAsset[]> {
   console.log("🎨 Starting image generation...");
 
@@ -243,7 +242,7 @@ function generateFAQBlock(faqs: FAQs) {
 }
 
 export async function checkIfDataExists(
-  client: SanityClient,
+  client: any,
 ): Promise<boolean> {
   const { homePage } = await client.fetch(`{
     "homePage": defined(*[_type == 'homePage' && _id == 'homePage'][0]._id),
