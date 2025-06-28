@@ -13,7 +13,11 @@
     "deploy": "sanity deploy",
     "type": "sanity schema extract --enforce-required-fields && sanity typegen generate",
     "check-types": "tsc --noEmit",
-    "postinstall": "sanity exec scripts/cli-alert-for-data.ts"
+    "postinstall": "sanity exec scripts/cli-alert-for-data.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "schema:validate": "sanity schema validate",
+    "deploy:studio": "pnpm run schema:validate && sanity deploy"
   },
   "keywords": [
     "sanity"
