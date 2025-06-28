@@ -1,47 +1,40 @@
-import { describe, it, expect } from 'vitest'
-import { render } from '@testing-library/react'
-import { HeroBlock } from '@/components/sections/hero'
+import { render } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 
-describe('HeroBlock', () => {
-  it('renders without crashing', () => {
+import { HeroBlock } from "@/components/sections/hero";
+
+describe("HeroBlock", () => {
+  it("renders without crashing", () => {
     const { container } = render(
-      <HeroBlock 
-        _type="hero"
-        title="Test Hero Title"
-        buttons={[]}
-      />
-    )
-    expect(container).toBeTruthy()
-  })
+      <HeroBlock _type="hero" title="Test Hero Title" buttons={[]} />,
+    );
+    expect(container).toBeTruthy();
+  });
 
-  it('displays title', () => {
+  it("displays title", () => {
     const { getByText } = render(
-      <HeroBlock 
-        _type="hero"
-        title="Welcome to our site"
-        buttons={[]}
-      />
-    )
-    
-    expect(getByText('Welcome to our site')).toBeInTheDocument()
-  })
+      <HeroBlock _type="hero" title="Welcome to our site" buttons={[]} />,
+    );
 
-  it('renders buttons when provided', () => {
+    expect(getByText("Welcome to our site")).toBeInTheDocument();
+  });
+
+  it("renders buttons when provided", () => {
     const { getByText } = render(
-      <HeroBlock 
+      <HeroBlock
         _type="hero"
         title="Test Hero"
         buttons={[
           {
-            _key: 'button1',
-            text: 'Get Started',
-            href: '/get-started',
-            variant: 'default' as const
-          }
+            _key: "button1",
+            text: "Get Started",
+            href: "/get-started",
+            variant: "default" as const,
+          },
         ]}
-      />
-    )
-    
-    expect(getByText('Get Started')).toBeInTheDocument()
-  })
-})
+      />,
+    );
+
+    expect(getByText("Get Started")).toBeInTheDocument();
+  });
+});
