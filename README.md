@@ -137,3 +137,4 @@ Now that you've deployed your Next.js application and Sanity Studio, you can opt
 
 They will be able to access the deployed Studio, where you can collaborate together on creating content.
 # Deployment fixed
+
