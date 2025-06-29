@@ -1,11 +1,11 @@
-import winston from 'winston';
-import 'winston-daily-rotate-file';
-import { join } from 'path';
-import { mkdirSync } from 'fs';
-import { resolve } from 'path';
+import winston from "winston";
+import "winston-daily-rotate-file";
+import { join } from "path";
+import { mkdirSync } from "fs";
+import { resolve } from "path";
 
-const isProduction = process.env.NODE_ENV === 'production';
-const logDirectory = resolve(process.cwd(), process.env.LOG_DIR || 'logs');
+const isProduction = process.env.NODE_ENV === "production";
+const logDirectory = resolve(process.cwd(), process.env.LOG_DIR || "logs");
 
 // Error throttling configuration
 interface ThrottleEntry {
@@ -23,7 +23,7 @@ const THROTTLE_LOG_INTERVAL = 10; // Log every 10th occurrence after threshold
 try {
   mkdirSync(logDirectory, { recursive: true });
 } catch (error) {
-  console.error('Failed to create log directory:', error);
+  console.error("Failed to create log directory:", error);
 }
 
 const levels = {
@@ -35,71 +35,75 @@ const levels = {
 };
 
 const colors = {
-  error: 'red',
-  warn: 'yellow',
-  info: 'green',
-  http: 'magenta',
-  debug: 'white',
+  error: "red",
+  warn: "yellow",
+  info: "green",
+  http: "magenta",
+  debug: "white",
 };
 
 winston.addColors(colors);
 
 // Console format with colors for development
 const consoleFormat = winston.format.combine(
-  winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
+  winston.format.timestamp({ format: "YYYY-MM-DD HH:mm:ss:ms" }),
   winston.format.errors({ stack: true }),
   isProduction
     ? winston.format.json()
     : winston.format.combine(
         winston.format.colorize({ all: true }),
         winston.format.printf(
-          (info) => `${info.timestamp} ${info.level}: ${info.message}${info.stack ? '\n' + info.stack : ''}`
-        )
-      )
+          (info) =>
+            `${info.timestamp} ${info.level}: ${info.message}${info.stack ? "\n" + info.stack : ""}`,
+        ),
+      ),
 );
 
 // File format without colors
 const fileFormat = winston.format.combine(
-  winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
+  winston.format.timestamp({ format: "YYYY-MM-DD HH:mm:ss:ms" }),
   winston.format.errors({ stack: true }),
   winston.format.uncolorize(),
-  winston.format.json()
+  winston.format.json(),
 );
 
 const transports: winston.transport[] = [
   new winston.transports.Console({
-    level: process.env.LOG_LEVEL || 'info',
+    level: process.env.LOG_LEVEL || "info",
     format: consoleFormat,
   }),
 ];
 
 // Configuration is now silent unless there's an error
 
-if (isProduction || process.env.ENABLE_FILE_LOGS === 'true') {
+if (isProduction || process.env.ENABLE_FILE_LOGS === "true") {
   transports.push(
     new winston.transports.DailyRotateFile({
-      level: 'error',
-      filename: join(logDirectory, 'error-%DATE%.log'),
-      datePattern: 'YYYY-MM-DD',
+      level: "error",
+      filename: join(logDirectory, "error-%DATE%.log"),
+      datePattern: "YYYY-MM-DD",
       zippedArchive: true,
-      maxSize: '20m',
-      maxFiles: '14d',
+      maxSize: "20m",
+      maxFiles: "14d",
       format: fileFormat,
     }),
     new winston.transports.DailyRotateFile({
-      filename: join(logDirectory, 'combined-%DATE%.log'),
-      datePattern: 'YYYY-MM-DD',
+      filename: join(logDirectory, "combined-%DATE%.log"),
+      datePattern: "YYYY-MM-DD",
       zippedArchive: true,
-      maxSize: '20m',
-      maxFiles: '14d',
+      maxSize: "20m",
+      maxFiles: "14d",
       format: fileFormat,
-    })
+    }),
   );
 }
 
 // Function to check if an error should be throttled
-function shouldThrottle(message: string, level: string): { throttle: boolean; info?: string } {
-  if (level !== 'error' && level !== 'warn') {
+function shouldThrottle(
+  message: string,
+  level: string,
+): { throttle: boolean; info?: string } {
+  if (level !== "error" && level !== "warn") {
     return { throttle: false };
   }
 
@@ -137,9 +141,9 @@ function shouldThrottle(message: string, level: string): { throttle: boolean; in
 
   // After threshold, only log every Nth occurrence
   if ((entry.count - THROTTLE_THRESHOLD) % THROTTLE_LOG_INTERVAL === 0) {
-    return { 
-      throttle: false, 
-      info: ` [Repeated ${entry.count} times in ${Math.round((now - entry.firstSeen) / 1000)}s]` 
+    return {
+      throttle: false,
+      info: ` [Repeated ${entry.count} times in ${Math.round((now - entry.firstSeen) / 1000)}s]`,
     };
   }
 
@@ -154,9 +158,9 @@ class ThrottledLogger {
     this.winston = winstonLogger;
   }
 
-  private log(level: string, message: string, meta?: any) {
+  private log(level: string, message: string, meta?: unknown) {
     const { throttle, info } = shouldThrottle(message, level);
-    
+
     if (throttle) {
       return;
     }
@@ -165,44 +169,49 @@ class ThrottledLogger {
     return this.winston.log(level, enhancedMessage, meta);
   }
 
-  error(message: string, meta?: any) {
-    return this.log('error', message, meta);
+  error(message: string, meta?: unknown) {
+    return this.log("error", message, meta);
   }
 
-  warn(message: string, meta?: any) {
-    return this.log('warn', message, meta);
+  warn(message: string, meta?: unknown) {
+    return this.log("warn", message, meta);
   }
 
-  info(message: string, meta?: any) {
+  info(message: string, meta?: unknown) {
     return this.winston.info(message, meta);
   }
 
-  http(message: string, meta?: any) {
-    return this.winston.log('http', message, meta);
+  http(message: string, meta?: unknown) {
+    return this.winston.log("http", message, meta);
   }
 
-  debug(message: string, meta?: any) {
+  debug(message: string, meta?: unknown) {
     return this.winston.debug(message, meta);
   }
 
-  child(options: any) {
+  child(options: Record<string, unknown>) {
     return new ThrottledLogger(this.winston.child(options));
   }
 }
 
 const winstonLogger = winston.createLogger({
-  level: process.env.LOG_LEVEL || 'info',
+  level: process.env.LOG_LEVEL || "info",
   levels,
   transports,
   exitOnError: false,
 });
 
 // Add custom level methods to winston logger
-(winstonLogger as any).http = function(message: string, meta?: any) {
-  return this.log('http', message, meta);
+interface ExtendedLogger extends winston.Logger {
+  http: (message: string, meta?: unknown) => winston.Logger;
+}
+
+const extendedLogger = winstonLogger as ExtendedLogger;
+extendedLogger.http = function (message: string, meta?: unknown) {
+  return this.log("http", message, meta);
 };
 
-const logger = new ThrottledLogger(winstonLogger);
+const logger = new ThrottledLogger(extendedLogger);
 
 export default logger;
 
