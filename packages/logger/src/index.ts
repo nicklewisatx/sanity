@@ -182,7 +182,7 @@ class ThrottledLogger {
   }
 
   http(message: string, meta?: unknown) {
-    return this.winston.log("http", message, meta);
+    return this.winston.http(message, meta);
   }
 
   debug(message: string, meta?: unknown) {
@@ -201,15 +201,8 @@ const winstonLogger = winston.createLogger({
   exitOnError: false,
 });
 
-// Add custom level methods to winston logger
-interface ExtendedLogger extends winston.Logger {
-  http: (message: string, meta?: unknown) => winston.Logger;
-}
-
-const extendedLogger = winstonLogger as ExtendedLogger;
-extendedLogger.http = function (message: string, meta?: unknown) {
-  return this.log("http", message, meta);
-};
+// Winston already has the http level, we just need to use it correctly
+const extendedLogger = winstonLogger;
 
 const logger = new ThrottledLogger(extendedLogger);
 
