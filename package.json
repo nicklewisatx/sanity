@@ -11,9 +11,13 @@
     "test": "turbo run test",
     "test:watch": "turbo run test:watch",
     "test:ui": "vitest --ui",
+    "e2e": "playwright test",
+    "e2e:ui": "playwright test --ui",
+    "e2e:debug": "playwright test --debug",
     "validate": "turbo run lint check-types test"
   },
   "devDependencies": {
+    "@playwright/test": "^1.53.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@vitejs/plugin-react": "^4.6.0",
@@ -21,6 +25,7 @@
     "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
     "jsdom": "^26.1.0",
+    "playwright": "^1.53.1",
     "prettier": "^3.6.2",
     "turbo": "^2.5.4",
     "typescript": "5.7.3",
