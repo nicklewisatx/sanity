@@ -1,0 +1,94 @@
+name: Deploy to Vercel
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ vars.TURBO_TEAM }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref == 'refs/heads/main' && 'Production' || 'Preview' }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10.12.2
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run tests
+        run: pnpm test
+
+      - name: Run linting
+        run: pnpm lint
+
+      - name: Run type checking
+        run: pnpm check-types
+
+      - name: Build project
+        run: pnpm build
+        env:
+          # Sanity Configuration
+          NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
+          NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}
+          NEXT_PUBLIC_SANITY_API_VERSION: ${{ secrets.NEXT_PUBLIC_SANITY_API_VERSION }}
+          NEXT_PUBLIC_SANITY_STUDIO_URL: ${{ secrets.NEXT_PUBLIC_SANITY_STUDIO_URL }}
+          SANITY_API_READ_TOKEN: ${{ secrets.SANITY_API_READ_TOKEN }}
+          SANITY_API_WRITE_TOKEN: ${{ secrets.SANITY_API_WRITE_TOKEN }}
+          SANITY_STUDIO_PROJECT_ID: ${{ secrets.SANITY_STUDIO_PROJECT_ID }}
+          SANITY_STUDIO_DATASET: ${{ secrets.SANITY_STUDIO_DATASET }}
+          SANITY_STUDIO_PRESENTATION_URL: ${{ secrets.SANITY_STUDIO_PRESENTATION_URL }}
+          SANITY_STUDIO_PRODUCTION_HOSTNAME: ${{ secrets.SANITY_STUDIO_PRODUCTION_HOSTNAME }}
+          SANITY_STUDIO_TITLE: ${{ secrets.SANITY_STUDIO_TITLE }}
+          # Logging Configuration
+          LOG_LEVEL: ${{ secrets.LOG_LEVEL }}
+          LOG_DIR: ${{ secrets.LOG_DIR }}
+          ENABLE_FILE_LOGS: ${{ secrets.ENABLE_FILE_LOGS }}
+          EDGE_LOG_HTTP: ${{ secrets.EDGE_LOG_HTTP }}
+          EDGE_LOG_ENDPOINT: ${{ secrets.EDGE_LOG_ENDPOINT }}
+          # Runtime Configuration
+          NODE_ENV: ${{ secrets.NODE_ENV }}
+          NEXT_RUNTIME: ${{ secrets.NEXT_RUNTIME }}
+          HOST_NAME: ${{ secrets.HOST_NAME }}
+
+      - name: Deploy to Vercel
+        if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: ${{ github.ref == 'refs/heads/main' && '--prod' || '' }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-comment: true
