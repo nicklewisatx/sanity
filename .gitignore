@@ -44,3 +44,7 @@ DEPLOYMENT_GUIDE.md
 # Setup files (contain sensitive tokens)
 setup-process.log
 set-vercel-env.sh
+
+# Logs
+logs/
+*.log

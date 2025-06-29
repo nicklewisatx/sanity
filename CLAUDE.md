@@ -43,6 +43,44 @@ pnpm format
 cd apps/studio && npx sanity deploy
 ```
 
+## Logging
+
+We use a centralized logger package (`@workspace/logger`) based on Winston for consistent logging across all applications.
+
+### Using the Logger
+
+```typescript
+import logger from '@workspace/logger';
+
+// Basic logging
+logger.info('Server started on port 3000');
+logger.error('Failed to connect to database', { error: err });
+logger.warn('API rate limit approaching');
+logger.debug('User data:', { userId: 123 });
+
+// Create a child logger for specific services
+import { createChildLogger } from '@workspace/logger';
+
+const dbLogger = createChildLogger('database');
+dbLogger.info('Connection established');
+```
+
+### Log Levels
+- `error`: Critical errors requiring immediate attention
+- `warn`: Warning conditions that should be reviewed
+- `info`: General informational messages
+- `http`: HTTP request logging
+- `debug`: Detailed debugging information
+
+### Configuration
+- Development: Colorized console output, debug level
+- Production: JSON format, info level, daily rotating files
+- Log files: `logs/error-YYYY-MM-DD.log` and `logs/combined-YYYY-MM-DD.log`
+- Environment variables:
+  - `LOG_LEVEL`: Override default log level
+  - `LOG_DIR`: Custom log directory (default: `logs`)
+  - `ENABLE_FILE_LOGS`: Enable file logging in development
+
 ## Sanity Studio Development
 
 ### Schema Organization
