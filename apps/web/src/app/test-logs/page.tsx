@@ -1,3 +1,5 @@
+'use client';
+
 import { testServerLogging } from './actions';
 
 export default function TestLogsPage() {
