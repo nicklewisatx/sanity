@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
-    "dev": "turbo dev",
+    "dev": "./scripts/kill-ports.sh && turbo dev",
+    "dev:no-kill": "turbo dev",
+    "dev:concurrent": "./scripts/kill-ports.sh && concurrently -n \"web,studio\" -c \"cyan,magenta\" \"pnpm --filter=web dev:no-kill\" \"pnpm --filter=studio dev\"",
     "lint": "turbo lint",
     "check-types": "turbo check-types",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
@@ -20,6 +22,7 @@
     "@vitest/ui": "^3.2.4",
     "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
+    "concurrently": "^9.2.0",
     "jsdom": "^26.1.0",
     "prettier": "^3.6.2",
     "turbo": "^2.5.4",

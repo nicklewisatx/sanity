@@ -13,6 +13,7 @@ import { media, mediaAssetSource } from "sanity-plugin-media";
 import { Logo } from "./components/logo";
 import { locations } from "./location";
 import { presentationUrl } from "./plugins/presentation-url";
+import { studioLogger } from "./plugins/logger";
 import { schemaTypes } from "./schemaTypes";
 import { structure } from "./structure";
 import { createPageTemplate, getPresentationUrl } from "./utils/helper";
@@ -50,6 +51,7 @@ export default defineConfig({
     iconPicker(),
     media(),
     presentationUrl(),
+    studioLogger(),
     unsplashImageAsset(),
   ],
 

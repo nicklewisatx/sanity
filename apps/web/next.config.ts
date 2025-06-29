@@ -21,6 +21,12 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Make environment variables available to Edge Runtime
+  env: {
+    LOG_LEVEL: process.env.LOG_LEVEL || 'debug',
+    EDGE_LOG_HTTP: process.env.EDGE_LOG_HTTP || '',
+    EDGE_LOG_ENDPOINT: process.env.EDGE_LOG_ENDPOINT || '/api/logs',
+  },
 };
 
 export default nextConfig;
