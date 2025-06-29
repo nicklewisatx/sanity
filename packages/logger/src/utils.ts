@@ -18,8 +18,7 @@ export function safeStringify(obj: unknown): string {
       return {
         name: value.name,
         message: value.message,
-        stack: value.stack,
-        ...value // Include any custom properties
+        stack: value.stack
       }
     }
     
@@ -54,9 +53,20 @@ export function safeStringify(obj: unknown): string {
  */
 export function getLogLevel(): string {
   // In Edge runtime, we need to access env differently
-  const level = (typeof process !== 'undefined' && process.env?.LOG_LEVEL) || 
-                (typeof globalThis !== 'undefined' && (globalThis as any).LOG_LEVEL) ||
-                'info'
+  let level = 'info'
+  
+  // Check for process.env in Node.js environments
+  if (typeof globalThis !== 'undefined' && 'process' in globalThis) {
+    const proc = (globalThis as any).process
+    if (proc?.env?.LOG_LEVEL) {
+      level = proc.env.LOG_LEVEL
+    }
+  }
+  
+  // Check for globalThis.LOG_LEVEL in edge environments
+  if (typeof globalThis !== 'undefined' && 'LOG_LEVEL' in globalThis) {
+    level = (globalThis as any).LOG_LEVEL
+  }
   
   return level.toLowerCase()
 }
