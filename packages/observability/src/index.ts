@@ -4,8 +4,8 @@ import {
   ConsoleSpanExporter,
   SimpleSpanProcessor,
 } from "@opentelemetry/sdk-trace-base";
-import { getConfig, isEnabled } from "./config";
-import { logger } from "./utils/logging";
+import { getConfig, isEnabled } from "./config.js";
+import { logger } from "./utils/logging.js";
 
 export function initializeObservability(): void {
   if (!isEnabled()) {
@@ -84,7 +84,7 @@ export function initializeObservability(): void {
 }
 
 // Export utilities
-export * from "./utils/tracing";
-export * from "./utils/logging";
-export { getConfig, isEnabled } from "./config";
-export type { ObservabilityConfig } from "./config";
+export * from "./utils/tracing.js";
+export * from "./utils/logging.js";
+export { getConfig, isEnabled } from "./config.js";
+export type { ObservabilityConfig } from "./config.js";

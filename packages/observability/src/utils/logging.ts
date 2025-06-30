@@ -1,6 +1,6 @@
 import { trace } from "@opentelemetry/api";
-import { shouldLog } from "../config";
-import type { ObservabilityConfig } from "../config";
+import { shouldLog } from "../config.js";
+import type { ObservabilityConfig } from "../config.js";
 
 interface LogContext {
   traceId?: string;
