@@ -17,9 +17,12 @@ export interface Logger {
 const getLogtailToken = (): string | undefined => {
   // Edge runtime compatible env access
   if (typeof globalThis !== 'undefined' && (globalThis as any).process?.env) {
-    return (globalThis as any).process.env.LOGTAIL_TOKEN
+    return (globalThis as any).process.env.LOGTAIL_SOURCE_TOKEN || (globalThis as any).process.env.LOGTAIL_TOKEN
   }
   // Cloudflare Workers
+  if (typeof globalThis !== 'undefined' && (globalThis as any).LOGTAIL_SOURCE_TOKEN) {
+    return (globalThis as any).LOGTAIL_SOURCE_TOKEN
+  }
   if (typeof globalThis !== 'undefined' && (globalThis as any).LOGTAIL_TOKEN) {
     return (globalThis as any).LOGTAIL_TOKEN
   }
@@ -40,8 +43,19 @@ const getIngestionHost = (): string | undefined => {
 // Create Logtail instance if token exists
 const token = getLogtailToken()
 const ingestionHost = getIngestionHost()
+
+// Debug logging
+if (typeof console !== 'undefined') {
+  console.log('[Logger] Initializing with:', {
+    hasToken: !!token,
+    tokenPrefix: token ? token.substring(0, 8) + '...' : 'none',
+    ingestionHost: ingestionHost || 'default',
+    environment: typeof globalThis !== 'undefined' && (globalThis as any).process?.env?.NODE_ENV
+  })
+}
+
 const logtail = token ? new Logtail(token, {
-  endpoint: ingestionHost ? `https://${ingestionHost}` : undefined
+  ...(ingestionHost ? { endpoint: `https://${ingestionHost}` } : {})
 }) : null
 
 // Fallback console logger

@@ -37,8 +37,16 @@ pnpm dev
 
 ```bash
 # Development
-pnpm dev                    # Start all apps
+pnpm dev                    # Start all apps in background mode
+pnpm watch                  # Start all apps with live console output (formerly pnpm dev)
+pnpm dev:bg                # Start all apps in background (same as pnpm dev)
 pnpm dev --filter=web      # Start specific app
+
+# Process Management
+pnpm kill                  # Kill processes on ports 3000-3004 & 3333
+pnpm stop                  # Same as kill - stops all dev processes
+pnpm status               # Show running app processes
+pnpm restart              # Kill and restart development
 
 # Code Quality
 pnpm lint                  # Run linter
@@ -49,6 +57,20 @@ pnpm check-types          # Type checking
 cd apps/studio && pnpm run type     # Generate types
 cd apps/studio && npx sanity deploy # Deploy studio
 ```
+
+## Process Management
+
+The project includes scripts for managing development processes:
+
+- **`pnpm dev`** - Starts development servers in background mode (shows initial output then exits)
+- **`pnpm watch`** - Starts development servers with live console output (use for debugging)
+- **`pnpm kill` / `pnpm stop`** - Gracefully terminates all processes running on ports 3000-3004 and 3333
+- **`pnpm status`** - Shows the status of tracked development processes
+- **`pnpm restart`** - Stops all processes and restarts development servers
+
+When running `pnpm dev`, the processes will start up, show initial output, then continue running in the background after the command exits. Use `pnpm status` to check if servers are running and `pnpm stop` or `pnpm kill` to stop them.
+
+**Important**: Avoid using `pnpm watch` for normal development as it keeps the terminal occupied. Use `pnpm dev` instead to run servers in the background.
 
 ## Environment Variables
 
