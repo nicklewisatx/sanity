@@ -21,7 +21,6 @@ pnpm dev
 
 - [📚 Stack & Architecture](./docs/stack.md) - Technology overview and project structure
 - [🚀 Local Development](./docs/local-development.md) - Commands, workflow, and environment setup
-- [📝 Logging](./docs/logging.md) - Centralized logging with Winston
 
 ### Development
 

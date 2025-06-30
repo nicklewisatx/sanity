@@ -3,6 +3,7 @@
 import type * as React from "react";
 
 import { ThemeProvider } from "./theme-provider";
+import { ErrorLogger } from "./error-logger";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -12,6 +13,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       enableSystem
       disableTransitionOnChange
     >
+      <ErrorLogger />
       {children}
     </ThemeProvider>
   );

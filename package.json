@@ -5,6 +5,7 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
+    "dev:log": "node scripts/dev-with-logs.js",
     "lint": "turbo lint",
     "check-types": "turbo check-types",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
@@ -34,5 +35,8 @@
     "overrides": {
       "@sanity/client": "^7.6.0"
     }
+  },
+  "dependencies": {
+    "@logtail/node": "^0.5.5"
   }
 }
