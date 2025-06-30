@@ -1,139 +1,94 @@
-import type { LogLevel, LogContext, LogEntry, Logger } from './types.js'
-import { safeStringify, shouldLog } from './utils.js'
+import { Logtail } from '@logtail/node'
 
-// Configuration - edge-compatible way to access env vars
-const getEnv = (key: string, defaultValue = ''): string => {
-  // In edge runtime, env vars are available on globalThis
+export type LogLevel = 'error' | 'warn' | 'info' | 'debug'
+
+export interface LogContext {
+  [key: string]: any
+}
+
+export interface Logger {
+  error: (message: string, context?: LogContext) => void
+  warn: (message: string, context?: LogContext) => void
+  info: (message: string, context?: LogContext) => void
+  debug: (message: string, context?: LogContext) => void
+}
+
+// Get Logtail token from environment
+const getLogtailToken = (): string | undefined => {
+  // Edge runtime compatible env access
   if (typeof globalThis !== 'undefined' && (globalThis as any).process?.env) {
-    return (globalThis as any).process.env[key] || defaultValue
+    return (globalThis as any).process.env.LOGTAIL_TOKEN
   }
-  return defaultValue
-}
-
-const LOG_BUFFER_SIZE = parseInt(getEnv('LOG_BUFFER_SIZE', '100'))
-const LOG_FLUSH_INTERVAL = parseInt(getEnv('LOG_FLUSH_INTERVAL', '5000')) // 5 seconds
-const EDGE_LOG_HTTP = getEnv('EDGE_LOG_HTTP') === 'true'
-const EDGE_LOG_ENDPOINT = getEnv('EDGE_LOG_ENDPOINT', '/api/logs')
-const LOG_API_KEY = getEnv('LOG_API_KEY')
-
-// Log buffer for batching
-let logBuffer: LogEntry[] = []
-let flushTimer: number | null = null
-
-/**
- * Create a log entry with consistent structure
- */
-function createLogEntry(level: LogLevel, message: string, context?: LogContext): LogEntry {
-  return {
-    level,
-    message,
-    timestamp: new Date().toISOString(),
-    ...(context && { context })
+  // Cloudflare Workers
+  if (typeof globalThis !== 'undefined' && (globalThis as any).LOGTAIL_TOKEN) {
+    return (globalThis as any).LOGTAIL_TOKEN
   }
+  return undefined
 }
 
-/**
- * Send logs to HTTP endpoint
- */
-async function sendLogs(logs: LogEntry[]): Promise<void> {
-  if (!EDGE_LOG_HTTP || logs.length === 0) return
-
-  try {
-    const response = await fetch(EDGE_LOG_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        ...(LOG_API_KEY && { 'Authorization': `Bearer ${LOG_API_KEY}` })
-      },
-      body: JSON.stringify({ logs }),
-      // Short timeout for edge environments
-      signal: AbortSignal.timeout(3000)
-    })
-
-    if (!response.ok) {
-      console.error(`Failed to send logs: ${response.status} ${response.statusText}`)
-    }
-  } catch (error) {
-    // Silently fail to avoid infinite loops
-    console.error('Log drain error:', error)
+// Get ingestion host from environment (for EU region)
+const getIngestionHost = (): string | undefined => {
+  if (typeof globalThis !== 'undefined' && (globalThis as any).process?.env) {
+    return (globalThis as any).process.env.LOGTAIL_INGESTION_HOST
   }
+  if (typeof globalThis !== 'undefined' && (globalThis as any).LOGTAIL_INGESTION_HOST) {
+    return (globalThis as any).LOGTAIL_INGESTION_HOST
+  }
+  return undefined
 }
 
-/**
- * Flush log buffer
- */
-async function flushLogs(): Promise<void> {
-  if (logBuffer.length === 0) return
+// Create Logtail instance if token exists
+const token = getLogtailToken()
+const ingestionHost = getIngestionHost()
+const logtail = token ? new Logtail(token, {
+  endpoint: ingestionHost ? `https://${ingestionHost}` : undefined
+}) : null
 
-  const logsToSend = [...logBuffer]
-  logBuffer = []
-
-  await sendLogs(logsToSend)
-}
-
-/**
- * Schedule log flush
- */
-function scheduleFlush(): void {
-  if (flushTimer) return
-
-  flushTimer = setTimeout(async () => {
-    flushTimer = null
-    await flushLogs()
-    // Reschedule if there are more logs
-    if (logBuffer.length > 0) {
-      scheduleFlush()
-    }
-  }, LOG_FLUSH_INTERVAL) as unknown as number
-}
-
-/**
- * Output log to console
- */
-function outputLog(level: LogLevel, entry: LogEntry): void {
-  const logString = safeStringify(entry)
+// Fallback console logger
+const consoleLog = (level: LogLevel, message: string, context?: LogContext) => {
+  const logData = { level, message, timestamp: new Date().toISOString(), ...context }
   
-  // Access console methods dynamically to support mocking
-  const consoleMethods = {
-    error: (...args: any[]) => console.error(...args),
-    warn: (...args: any[]) => console.warn(...args),
-    info: (...args: any[]) => console.info(...args),
-    debug: (...args: any[]) => console.log(...args), // Use log for debug since console.debug might be filtered
+  switch (level) {
+    case 'error':
+      console.error(JSON.stringify(logData))
+      break
+    case 'warn':
+      console.warn(JSON.stringify(logData))
+      break
+    case 'info':
+      console.info(JSON.stringify(logData))
+      break
+    case 'debug':
+      console.log(JSON.stringify(logData))
+      break
   }
-  
-  const logMethod = consoleMethods[level]
-  if (logMethod) {
-    logMethod(logString)
-  }
+}
 
-  // Add to buffer for HTTP draining
-  if (EDGE_LOG_HTTP) {
-    logBuffer.push(entry)
-    
-    // Flush immediately if buffer is full
-    if (logBuffer.length >= LOG_BUFFER_SIZE) {
-      flushLogs().catch(() => {})
-    } else {
-      scheduleFlush()
+// Main logging function
+const log = (level: LogLevel, message: string, context?: LogContext) => {
+  if (logtail) {
+    // Use Logtail's native methods
+    switch (level) {
+      case 'error':
+        logtail.error(message, context)
+        break
+      case 'warn':
+        logtail.warn(message, context)
+        break
+      case 'info':
+        logtail.info(message, context)
+        break
+      case 'debug':
+        logtail.debug(message, context)
+        break
     }
+  } else {
+    // Fallback to console
+    consoleLog(level, message, context)
   }
 }
 
-/**
- * Log with specific level
- */
-function log(level: LogLevel, message: string, context?: LogContext): void {
-  if (!shouldLog(level)) {
-    return
-  }
-  
-  const entry = createLogEntry(level, message, context)
-  outputLog(level, entry)
-}
-
-/**
- * Main logger instance
- */
+// Export logger instance
 export const logger: Logger = {
   error: (message: string, context?: LogContext) => log('error', message, context),
   warn: (message: string, context?: LogContext) => log('warn', message, context),
@@ -141,5 +96,11 @@ export const logger: Logger = {
   debug: (message: string, context?: LogContext) => log('debug', message, context),
 }
 
-// Re-export types for convenience
-export type { LogLevel, LogContext, LogEntry, Logger } from './types.js'
+// Flush logs on process exit (Node.js only)
+if (typeof globalThis !== 'undefined' && (globalThis as any).process?.on) {
+  (globalThis as any).process.on('exit', () => {
+    if (logtail) {
+      logtail.flush()
+    }
+  })
+}
