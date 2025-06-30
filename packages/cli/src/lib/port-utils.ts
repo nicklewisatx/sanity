@@ -13,7 +13,7 @@ export async function checkPorts(ports: number[]): Promise<PortStatus[]> {
       const availablePort = await detectPort(port);
       const available = availablePort === port;
       
-      let process: string | undefined;
+      let processName: string | undefined;
       if (!available) {
         try {
           // Try to get process info
@@ -22,7 +22,7 @@ export async function checkPorts(ports: number[]): Promise<PortStatus[]> {
             const pid = stdout.trim();
             if (pid) {
               const { stdout: psOutput } = await execa('ps', ['-p', pid, '-o', 'comm=']);
-              process = psOutput.trim();
+              processName = psOutput.trim();
             }
           }
         } catch {
@@ -30,7 +30,7 @@ export async function checkPorts(ports: number[]): Promise<PortStatus[]> {
         }
       }
       
-      return { port, available, process };
+      return { port, available, process: processName };
     })
   );
   
@@ -110,9 +110,12 @@ async function getPortPids(port: number): Promise<number[]> {
       for (const line of lines) {
         if (line.includes(`:${port}`)) {
           const parts = line.trim().split(/\\s+/);
-          const pid = parseInt(parts[parts.length - 1], 10);
-          if (!isNaN(pid)) {
-            pids.push(pid);
+          const lastPart = parts[parts.length - 1];
+          if (lastPart) {
+            const pid = parseInt(lastPart, 10);
+            if (!isNaN(pid)) {
+              pids.push(pid);
+            }
           }
         }
       }
