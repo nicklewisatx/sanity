@@ -5,6 +5,9 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
+    "start": "./scripts/start-dev.sh",
+    "start:background": "nohup ./scripts/start-dev.sh > dev.log 2>&1 &",
+    "start:claude": "turbo dev --no-daemon --concurrency=4",
     "lint": "turbo lint",
     "check-types": "turbo check-types",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",

@@ -27,6 +27,7 @@ pnpm dev
 - [🎨 Frontend Guide](./docs/frontend.md) - Next.js patterns, components, and data fetching
 - [🗄️ Sanity Backend](./docs/sanity-backend.md) - Schemas, GROQ queries, and Studio development
 - [⚡ Performance](./docs/performance.md) - Optimization techniques and best practices
+- [📊 Observability](./docs/observability.md) - OpenTelemetry integration and tracing
 
 ### Support
 
@@ -39,6 +40,7 @@ pnpm dev
 # Development
 pnpm dev                    # Start all apps
 pnpm dev --filter=web      # Start specific app
+pnpm start                  # Start dev server in background (recommended for AI assistants)
 
 # Code Quality
 pnpm lint                  # Run linter
@@ -70,11 +72,20 @@ SANITY_STUDIO_DATASET=production
 1. **Make Changes**: Edit files, hot reload works automatically
 2. **Check Types**: Run `pnpm check-types` before committing
 3. **Format Code**: Run `pnpm format` to ensure consistency
-3. **Tests**: Run `pnpm test` to check tests
-4. **Generate Types**: After schema changes, run type generation
+4. **Tests**: Run `pnpm test` to check tests
+5. **Generate Types**: After schema changes, run type generation
 
 ## Need Help?
 
 - Check [Troubleshooting Guide](./docs/troubleshooting.md) for common issues
 - Use Vision plugin at `/studio/vision` to test GROQ queries
 - Enable debug logging with `LOG_LEVEL=debug pnpm dev`
+
+## Important Reminders
+
+- **Claude Code Dev Server Fix**: To avoid timeouts when running dev servers:
+  - Use `pnpm start:claude` for a Claude Code-optimized dev server (runs with --no-daemon and --concurrency=1)
+  - Use `pnpm start:background` to run completely in background with logs in `dev.log`
+  - The `start` script now includes automatic port cleanup to prevent conflicts
+- **OpenTelemetry Setup**: The project has OpenTelemetry integration prepared. See [Local Development Guide](./docs/local-development.md) for telemetry configuration details
+- **Sanity Visual Editing**: When working with Sanity's visual editing feature, the `stega` parameter is a valid option for `sanityFetch`. See: https://www.sanity.io/docs/visual-editing/stega

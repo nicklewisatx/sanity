@@ -241,9 +241,7 @@ function generateFAQBlock(faqs: FAQs) {
   };
 }
 
-export async function checkIfDataExists(
-  client: any,
-): Promise<boolean> {
+export async function checkIfDataExists(client: any): Promise<boolean> {
   const { homePage } = await client.fetch(`{
     "homePage": defined(*[_type == 'homePage' && _id == 'homePage'][0]._id),
   }`);

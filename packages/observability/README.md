@@ -47,9 +47,11 @@ AXIOM_DOMAIN=api.axiom.co        # Optional: Axiom API domain
 
 ```typescript
 export async function register() {
-  if (process.env.NEXT_RUNTIME === 'nodejs') {
-    const { initializeObservability } = await import('@workspace/observability')
-    initializeObservability()
+  if (process.env.NEXT_RUNTIME === "nodejs") {
+    const { initializeObservability } = await import(
+      "@workspace/observability"
+    );
+    initializeObservability();
   }
 }
 ```
@@ -61,8 +63,8 @@ const nextConfig = {
   experimental: {
     instrumentationHook: true,
   },
-  transpilePackages: ['@workspace/observability'],
-}
+  transpilePackages: ["@workspace/observability"],
+};
 ```
 
 ## Usage
@@ -70,6 +72,7 @@ const nextConfig = {
 ### Automatic Instrumentation
 
 Once configured, OpenTelemetry automatically instruments:
+
 - HTTP requests (incoming and outgoing)
 - Database queries
 - Next.js server components
@@ -78,38 +81,42 @@ Once configured, OpenTelemetry automatically instruments:
 ### Custom Spans
 
 ```typescript
-import { withSpan, createSpan, setSpanAttributes } from '@workspace/observability'
+import {
+  withSpan,
+  createSpan,
+  setSpanAttributes,
+} from "@workspace/observability";
 
 // Async function with automatic span management
-const result = await withSpan('fetch-user-data', async (span) => {
-  setSpanAttributes(span, { userId: '123' })
-  const user = await fetchUser('123')
-  return user
-})
+const result = await withSpan("fetch-user-data", async (span) => {
+  setSpanAttributes(span, { userId: "123" });
+  const user = await fetchUser("123");
+  return user;
+});
 
 // Manual span management
-const span = createSpan('process-payment')
+const span = createSpan("process-payment");
 try {
-  span.setAttribute('amount', 100)
-  await processPayment()
-  span.setStatus({ code: SpanStatusCode.OK })
+  span.setAttribute("amount", 100);
+  await processPayment();
+  span.setStatus({ code: SpanStatusCode.OK });
 } catch (error) {
-  span.recordException(error)
-  throw error
+  span.recordException(error);
+  throw error;
 } finally {
-  span.end()
+  span.end();
 }
 ```
 
 ### Structured Logging
 
 ```typescript
-import { logger } from '@workspace/observability'
+import { logger } from "@workspace/observability";
 
 // Logs include trace context automatically
-logger.info('User logged in', { userId: '123' })
-logger.warn('Rate limit approaching', { remaining: 10 })
-logger.error('Payment failed', { error: error.message })
+logger.info("User logged in", { userId: "123" });
+logger.warn("Rate limit approaching", { remaining: 10 });
+logger.error("Payment failed", { error: error.message });
 ```
 
 ## Development Workflow
@@ -124,6 +131,7 @@ OTEL_LOG_LEVEL=debug
 ```
 
 Output appears in your terminal with structured format:
+
 ```
 [2024-01-01T12:00:00.000Z] [INFO] User logged in {"userId":"123","traceId":"abc123","spanId":"def456"}
 ```
@@ -159,25 +167,28 @@ OTEL_ENABLED=false
 ### Check if OpenTelemetry is Running
 
 ```typescript
-import { isEnabled, getConfig } from '@workspace/observability'
+import { isEnabled, getConfig } from "@workspace/observability";
 
-console.log('OTEL enabled:', isEnabled())
-console.log('OTEL config:', getConfig())
+console.log("OTEL enabled:", isEnabled());
+console.log("OTEL config:", getConfig());
 ```
 
 ### Common Issues
 
 **No telemetry data appearing:**
+
 - Verify `OTEL_ENABLED=true`
 - Check console for initialization messages
 - Ensure `instrumentationHook` is enabled in Next.js config
 
 **Axiom export failing:**
+
 - Verify API token and dataset are correct
 - Check network connectivity to Axiom
 - Look for error messages in console
 
 **Performance impact:**
+
 - Ensure `OTEL_ENABLED=false` in production
 - Use sampling for high-traffic scenarios
 - Monitor span creation in hot paths

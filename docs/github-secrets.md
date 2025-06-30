@@ -14,6 +14,7 @@ The project uses GitHub secrets to securely store environment variables for diff
 ## Secret Categories
 
 ### 1. Sanity Configuration
+
 - `NEXT_PUBLIC_SANITY_PROJECT_ID`: Your Sanity project ID
 - `NEXT_PUBLIC_SANITY_DATASET`: Dataset name (preview/production)
 - `NEXT_PUBLIC_SANITY_API_VERSION`: API version date
@@ -27,6 +28,7 @@ The project uses GitHub secrets to securely store environment variables for diff
 - `SANITY_STUDIO_TITLE`: Studio title
 
 ### 2. Logging Configuration
+
 - `LOG_LEVEL`: Logging level (debug/info/warn/error)
 - `LOG_DIR`: Directory for log files
 - `ENABLE_FILE_LOGS`: Whether to write logs to files
@@ -34,11 +36,13 @@ The project uses GitHub secrets to securely store environment variables for diff
 - `EDGE_LOG_ENDPOINT`: Endpoint for edge logs
 
 ### 3. Runtime Configuration
+
 - `NODE_ENV`: Environment (preview/production)
 - `NEXT_RUNTIME`: Next.js runtime (nodejs/edge)
 - `HOST_NAME`: Application hostname
 
 ### 4. Repository-Level Secrets
+
 - `SANITY_DEPLOY_TOKEN`: Token for deploying Sanity Studio
 - `VERCEL_TOKEN`: Vercel deployment token (optional)
 - `VERCEL_ORG_ID`: Vercel organization ID (optional)
@@ -109,7 +113,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: ${{ github.ref == 'refs/heads/main' && 'Production' || 'Preview' }}
-    
+
     steps:
       - name: Build
         env:
@@ -129,14 +133,17 @@ jobs:
 ## Troubleshooting
 
 ### Secret not found
+
 - Ensure the secret name matches exactly (case-sensitive)
 - Verify the environment is specified correctly
 - Check that the workflow has the correct environment specified
 
 ### Permission denied
+
 - Ensure you have admin access to the repository
 - For organization repos, check organization secret policies
 
 ### Workflow can't access secrets
+
 - Add `environment: Production` or `environment: Preview` to the job
 - Ensure the branch protection rules allow the workflow to run

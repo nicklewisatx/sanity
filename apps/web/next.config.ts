@@ -7,7 +7,6 @@ const nextConfig: NextConfig = {
     reactCompiler: true,
     // ppr: true,
     inlineCss: true,
-    instrumentationHook: true,
   },
   logging: {
     fetches: {},

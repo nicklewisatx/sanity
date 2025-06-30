@@ -110,6 +110,7 @@ The template includes a GitHub Actions workflow [`deploy-sanity.yml`](https://ra
 Set `SANITY_STUDIO_PRODUCTION_HOSTNAME` to whatever you want your deployed Sanity Studio hostname to be. Eg. for `SANITY_STUDIO_PRODUCTION_HOSTNAME=my-cool-project` you'll get a studio URL of `https://my-cool-project.sanity.studio` (and `<my-branch-name>-my-cool-project.sanity.studio` for PR previews builds done automatically via the `deploy-sanity.yml` github CI workflow when you open a PR.)
 
 Set `SANITY_STUDIO_PRESENTATION_URL` to your web app front-end URL (from the Vercel deployment). This URL is required for production deployments and should be:
+
 - Set in your GitHub repository secrets for CI/CD deployments
 - Set in your local environment if deploying manually with `npx sanity deploy`
 - Not needed for local development, where preview will automatically use http://localhost:3000
@@ -136,5 +137,5 @@ You have the freedom to deploy your Next.js app to your hosting provider of choi
 Now that you've deployed your Next.js application and Sanity Studio, you can optionally invite a collaborator to your Studio. Open up [Manage](https://www.sanity.io/manage), select your project and click "Invite project members"
 
 They will be able to access the deployed Studio, where you can collaborate together on creating content.
-# Deployment fixed
 
+# Deployment fixed

@@ -2,15 +2,14 @@ import { notFound } from "next/navigation";
 
 import { PageBuilder } from "@/components/pagebuilder";
 import { client } from "@/lib/sanity/client";
-import { sanityFetch } from "@/lib/sanity/live";
+import { sanityFetch } from "@/lib/sanity/fetch-with-tracing";
 import { querySlugPageData, querySlugPagePaths } from "@/lib/sanity/query";
 import { getSEOMetadata } from "@/lib/seo";
 
-async function fetchSlugPageData(slug: string, stega = true) {
+async function fetchSlugPageData(slug: string) {
   return await sanityFetch({
     query: querySlugPageData,
     params: { slug: `/${slug}` },
-    stega,
   });
 }
 
@@ -32,7 +31,7 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const slugString = slug.join("/");
-  const { data: pageData } = await fetchSlugPageData(slugString, false);
+  const { data: pageData } = await fetchSlugPageData(slugString);
   return getSEOMetadata(
     pageData
       ? {
