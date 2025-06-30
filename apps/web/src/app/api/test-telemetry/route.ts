@@ -1,6 +1,6 @@
-import { NextResponse } from "next/server";
-import { withSpan, logger } from "@workspace/observability";
 import type { Span } from "@opentelemetry/api";
+import { logger, withSpan } from "@workspace/observability";
+import { NextResponse } from "next/server";
 
 async function queryAxiomForTraces(traceId: string) {
   const axiomToken = process.env.AXIOM_API_TOKEN;

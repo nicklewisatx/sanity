@@ -1,7 +1,8 @@
-import { withSpan } from "@workspace/observability";
-import { sanityFetch as originalSanityFetch } from "./live";
-import type { QueryParams } from "next-sanity";
 import type { Span } from "@opentelemetry/api";
+import type { QueryParams } from "next-sanity";
+import { withSpan } from "@workspace/observability";
+
+import { sanityFetch as originalSanityFetch } from "./live";
 
 /**
  * Wrapper around sanityFetch that adds OpenTelemetry tracing

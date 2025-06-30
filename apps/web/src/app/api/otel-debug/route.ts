@@ -1,6 +1,6 @@
+import { context, trace } from "@opentelemetry/api";
+import { getConfig, isEnabled } from "@workspace/observability";
 import { NextResponse } from "next/server";
-import { trace, context } from "@opentelemetry/api";
-import { isEnabled, getConfig } from "@workspace/observability";
 
 export async function GET() {
   const config = getConfig();
