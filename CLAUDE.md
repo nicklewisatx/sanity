@@ -38,20 +38,25 @@ pnpm dev
 ```bash
 # Development
 pnpm dev                    # Start all apps in background mode
-pnpm watch                  # Start all apps with live console output (formerly pnpm dev)
-pnpm dev:bg                # Start all apps in background (same as pnpm dev)
-pnpm dev --filter=web      # Start specific app
+pnpm watch                  # Start all apps with live console output
+pnpm dev --filter=web      # Start only the web app
+pnpm dev --filter=studio   # Start only Sanity studio
 
 # Process Management
 pnpm kill                  # Kill processes on ports 3000-3004 & 3333
 pnpm stop                  # Same as kill - stops all dev processes
-pnpm status               # Show running app processes
+pnpm status               # Show running app processes and environment
 pnpm restart              # Kill and restart development
+
+# Environment Management
+pnpm env:validate         # Validate environment configuration
+pnpm env:setup           # Setup environment files interactively
 
 # Code Quality
 pnpm lint                  # Run linter
 pnpm format               # Format code
 pnpm check-types          # Type checking
+pnpm validate            # Run lint, type-check, and tests
 
 # Sanity
 cd apps/studio && pnpm run type     # Generate types
@@ -60,32 +65,65 @@ cd apps/studio && npx sanity deploy # Deploy studio
 
 ## Process Management
 
-The project includes scripts for managing development processes:
+The project uses a TypeScript-based CLI for managing development processes:
 
-- **`pnpm dev`** - Starts development servers in background mode (shows initial output then exits)
+- **`pnpm dev`** - Starts development servers in background mode with environment validation
 - **`pnpm watch`** - Starts development servers with live console output (use for debugging)
-- **`pnpm kill` / `pnpm stop`** - Gracefully terminates all processes running on ports 3000-3004 and 3333
-- **`pnpm status`** - Shows the status of tracked development processes
-- **`pnpm restart`** - Stops all processes and restarts development servers
+- **`pnpm kill` / `pnpm stop`** - Gracefully terminates all processes with retry logic
+- **`pnpm status`** - Shows detailed status including environment, processes, and ports
+- **`pnpm restart`** - Cleanly restarts the development environment
 
-When running `pnpm dev`, the processes will start up, show initial output, then continue running in the background after the command exits. Use `pnpm status` to check if servers are running and `pnpm stop` or `pnpm kill` to stop them.
+### Advanced Options
 
-**Important**: Avoid using `pnpm watch` for normal development as it keeps the terminal occupied. Use `pnpm dev` instead to run servers in the background.
+```bash
+# Start specific apps
+pnpm dev --filter=web        # Start only Next.js
+pnpm dev --filter=studio     # Start only Sanity Studio
+
+# Skip environment checks
+pnpm dev --skip-env-check    # Bypass environment validation
+
+# Force kill processes
+pnpm kill --force           # Skip graceful shutdown
+
+# Kill specific port
+pnpm kill --port 3000       # Kill only port 3000
+
+# Status in JSON format
+pnpm status --json          # Machine-readable output
+```
 
 ## Environment Variables
 
-Create `.env.local` files:
+The project uses centralized environment configuration with validation:
 
 ```bash
-# apps/web/.env.local
+# Setup environment files
+pnpm env:setup              # Create .env.local files from examples
+
+# Validate configuration
+pnpm env:validate           # Check all required variables
+```
+
+### Required Variables
+
+```bash
+# Core Sanity Configuration
 NEXT_PUBLIC_SANITY_PROJECT_ID=your-project-id
 NEXT_PUBLIC_SANITY_DATASET=production
-SANITY_API_READ_TOKEN=your-token
 
-# apps/studio/.env.local
-SANITY_STUDIO_PROJECT_ID=your-project-id
-SANITY_STUDIO_DATASET=production
+# Optional but Recommended
+SANITY_API_READ_TOKEN=your-token
+LOGTAIL_TOKEN=your-logtail-token
 ```
+
+### Environment Files
+
+- `.env.local` - Root environment (shared across all apps)
+- `apps/web/.env.local` - Web app specific
+- `apps/studio/.env.local` - Studio specific
+
+Priority: `process.env` > `.env.local` > `.env`
 
 ## Development Workflow
 
