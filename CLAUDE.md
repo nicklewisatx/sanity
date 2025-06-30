@@ -21,7 +21,6 @@ pnpm dev
 
 - [📚 Stack & Architecture](./docs/stack.md) - Technology overview and project structure
 - [🚀 Local Development](./docs/local-development.md) - Commands, workflow, and environment setup
-- [📝 Logging](./docs/logging.md) - Centralized logging with Winston
 
 ### Development
 
@@ -71,6 +70,7 @@ SANITY_STUDIO_DATASET=production
 1. **Make Changes**: Edit files, hot reload works automatically
 2. **Check Types**: Run `pnpm check-types` before committing
 3. **Format Code**: Run `pnpm format` to ensure consistency
+3. **Tests**: Run `pnpm test` to check tests
 4. **Generate Types**: After schema changes, run type generation
 
 ## Need Help?

@@ -32,7 +32,6 @@ This project is a modern monorepo built with cutting-edge technologies for optim
 │   └── studio/       # Sanity Studio v3
 ├── packages/         # Shared packages
 │   ├── ui/          # Shared UI components
-│   ├── logger/      # Winston logger package
 │   └── configs/     # Shared configurations
 ├── docs/            # Project documentation
 ├── scripts/         # Build and utility scripts
@@ -70,5 +69,4 @@ This project is a modern monorepo built with cutting-edge technologies for optim
 ### Shared Packages
 
 - `@workspace/ui`: Shared React components
-- `@workspace/logger`: Centralized logging with Winston
 - `@workspace/configs`: Shared ESLint, TypeScript, and other configs
