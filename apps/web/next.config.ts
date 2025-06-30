@@ -2,11 +2,12 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  transpilePackages: ["@workspace/ui"],
+  transpilePackages: ["@workspace/ui", "@workspace/observability"],
   experimental: {
     reactCompiler: true,
     // ppr: true,
     inlineCss: true,
+    instrumentationHook: true,
   },
   logging: {
     fetches: {},
