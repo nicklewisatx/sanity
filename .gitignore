@@ -44,4 +44,4 @@ DEPLOYMENT_GUIDE.md
 # Setup files (contain sensitive tokens)
 setup-process.log
 set-vercel-env.sh
-dev.log
+dev.log.claude-tsc-cache.json

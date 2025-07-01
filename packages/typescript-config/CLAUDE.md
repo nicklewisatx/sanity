@@ -9,6 +9,7 @@ This package provides shared TypeScript configurations for the monorepo, ensurin
 ## Configuration Files
 
 Typically includes:
+
 - **base.json:** Core TypeScript settings
 - **react.json:** React-specific settings
 - **node.json:** Node.js backend settings
@@ -17,6 +18,7 @@ Typically includes:
 ## Usage
 
 In app/package `tsconfig.json`:
+
 ```json
 {
   "extends": "@workspace/typescript-config/base.json",
@@ -29,6 +31,7 @@ In app/package `tsconfig.json`:
 ## Key Settings
 
 Common compiler options:
+
 - **strict:** true - Maximum type safety
 - **esModuleInterop:** true - Better imports
 - **skipLibCheck:** true - Faster builds
@@ -45,6 +48,7 @@ Common compiler options:
 ## Path Mapping
 
 Supports workspace imports:
+
 ```json
 {
   "paths": {
@@ -70,6 +74,7 @@ Supports workspace imports:
 ## Maintenance Notes
 
 **IMPORTANT:** Update this file when:
+
 - TypeScript version updates
 - New compiler options added
 - Target environments change

@@ -1,0 +1,11 @@
+{
+  "hooks": {
+    "typescript": {
+      "enableFormatting": true,
+      "enableLinting": true,
+      "enableTypeChecking": false,
+      "lintRules": ["no-unused-vars", "no-undef", "prefer-const"],
+      "timeout": 2000
+    }
+  }
+}

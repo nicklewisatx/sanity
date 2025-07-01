@@ -28,6 +28,7 @@ packages/observability/
 ## Exports
 
 Dual module system support:
+
 - **ESM:** `./dist/index.js`
 - **CommonJS:** `./dist/index.cjs`
 - **Types:** `./dist/index.d.ts`
@@ -43,27 +44,30 @@ Dual module system support:
 ## Usage
 
 ### In Next.js (instrumentation.ts)
+
 ```typescript
-import { registerOTel } from '@workspace/observability'
+import { registerOTel } from "@workspace/observability";
 
 export function register() {
-  registerOTel('next-app')
+  registerOTel("next-app");
 }
 ```
 
 ### Manual Instrumentation
-```typescript
-import { trace } from '@opentelemetry/api'
 
-const tracer = trace.getTracer('my-service')
-const span = tracer.startSpan('operation-name')
+```typescript
+import { trace } from "@opentelemetry/api";
+
+const tracer = trace.getTracer("my-service");
+const span = tracer.startSpan("operation-name");
 // ... do work
-span.end()
+span.end();
 ```
 
 ## Configuration
 
 Environment variables:
+
 ```bash
 OTEL_EXPORTER_OTLP_ENDPOINT=https://your-collector.com
 OTEL_SERVICE_NAME=your-service
@@ -94,35 +98,38 @@ pnpm type-check
 ## Common Patterns
 
 ### Creating Spans
+
 ```typescript
 async function doWork() {
-  return tracer.startActiveSpan('work', async (span) => {
+  return tracer.startActiveSpan("work", async (span) => {
     try {
       // Your code here
       span.setAttributes({
-        'work.type': 'processing',
-        'work.items': 42
-      })
-      return result
+        "work.type": "processing",
+        "work.items": 42,
+      });
+      return result;
     } finally {
-      span.end()
+      span.end();
     }
-  })
+  });
 }
 ```
 
 ### Error Tracking
+
 ```typescript
-span.recordException(error)
+span.recordException(error);
 span.setStatus({
   code: SpanStatusCode.ERROR,
-  message: error.message
-})
+  message: error.message,
+});
 ```
 
 ## Telemetry Backends
 
 Compatible with:
+
 - **Jaeger:** Local development
 - **Axiom:** Production monitoring
 - **Datadog:** APM integration
@@ -165,6 +172,7 @@ Compatible with:
 ## Maintenance Notes
 
 **IMPORTANT:** Update this file when:
+
 - New instrumentation libraries added
 - Export formats change
 - Configuration options added
