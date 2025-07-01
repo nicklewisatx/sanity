@@ -13,6 +13,10 @@ export default defineConfig({
     headless: true,
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
+    // Add Vercel protection bypass header if available
+    extraHTTPHeaders: process.env.VERCEL_PROTECTION_BYPASS_SECRET ? {
+      'x-vercel-protection-bypass': process.env.VERCEL_PROTECTION_BYPASS_SECRET,
+    } : undefined,
   },
   projects: [
     {
