@@ -12,8 +12,9 @@ This is a modern monorepo project using Next.js 15, Sanity Studio v3, and TurboR
 - `/packages/observability/CLAUDE.md` - OpenTelemetry integration
 - `/packages/eslint-config/CLAUDE.md` - ESLint configuration
 - `/packages/typescript-config/CLAUDE.md` - TypeScript configuration
+- `/packages/e2e/CLAUDE.md` - Playwright E2E testing
 
-**Last Updated:** 2025-07-01
+**Last Updated by Claude:** 2025-07-01 - Added pnpm lock file reminder
 
 ### Keeping CLAUDE.md Files Updated
 
@@ -71,6 +72,11 @@ pnpm lint                  # Run linter
 pnpm format               # Format code
 pnpm check-types          # Type checking
 
+# Testing
+pnpm test                  # Run unit tests
+pnpm test:e2e             # Run E2E tests
+pnpm --filter=@repo/e2e test:ui  # Run E2E tests in UI mode
+
 # Sanity
 cd apps/studio && pnpm run type     # Generate types
 cd apps/studio && npx sanity deploy # Deploy studio
@@ -107,6 +113,7 @@ SANITY_STUDIO_DATASET=production
 
 ## Important Reminders
 
+- **pnpm Lock Files**: **ALWAYS** commit `pnpm-lock.yaml` when adding new packages or dependencies. Without the lockfile, CI/CD deployments will fail because pnpm workspaces require it for dependency resolution. Local tests may pass but deployments will fail without it.
 - **Claude Code Dev Server Fix**: To avoid timeouts when running dev servers:
   - Use `pnpm start:claude` for a Claude Code-optimized dev server (runs with --no-daemon and --concurrency=1)
   - Use `pnpm start:background` to run completely in background with logs in `dev.log`
