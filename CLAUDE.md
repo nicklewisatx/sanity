@@ -2,6 +2,28 @@
 
 This is a modern monorepo project using Next.js 15, Sanity Studio v3, and TurboRepo.
 
+## CLAUDE.md Maintenance
+
+**IMPORTANT:** Each package and app has its own CLAUDE.md file with specific context:
+- `/apps/web/CLAUDE.md` - Next.js frontend application
+- `/apps/studio/CLAUDE.md` - Sanity Studio CMS
+- `/packages/ui/CLAUDE.md` - Shared UI components
+- `/packages/observability/CLAUDE.md` - OpenTelemetry integration
+- `/packages/eslint-config/CLAUDE.md` - ESLint configuration
+- `/packages/typescript-config/CLAUDE.md` - TypeScript configuration
+
+**Last Updated:** 2025-07-01
+
+### Keeping CLAUDE.md Files Updated
+
+When making significant changes:
+1. Update the relevant package/app CLAUDE.md file
+2. Include "Last Updated by Claude" timestamp
+3. Document new patterns, dependencies, or structure changes
+4. Keep descriptions concise but comprehensive
+
+These files help AI assistants understand the codebase efficiently.
+
 ## Quick Start
 
 ```bash
