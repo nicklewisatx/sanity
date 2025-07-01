@@ -5,6 +5,7 @@ This is a modern monorepo project using Next.js 15, Sanity Studio v3, and TurboR
 ## CLAUDE.md Maintenance
 
 **IMPORTANT:** Each package and app has its own CLAUDE.md file with specific context:
+
 - `/apps/web/CLAUDE.md` - Next.js frontend application
 - `/apps/studio/CLAUDE.md` - Sanity Studio CMS
 - `/packages/ui/CLAUDE.md` - Shared UI components
@@ -17,6 +18,7 @@ This is a modern monorepo project using Next.js 15, Sanity Studio v3, and TurboR
 ### Keeping CLAUDE.md Files Updated
 
 When making significant changes:
+
 1. Update the relevant package/app CLAUDE.md file
 2. Include "Last Updated by Claude" timestamp
 3. Document new patterns, dependencies, or structure changes
@@ -111,3 +113,15 @@ SANITY_STUDIO_DATASET=production
   - The `start` script now includes automatic port cleanup to prevent conflicts
 - **OpenTelemetry Setup**: The project has OpenTelemetry integration prepared. See [Local Development Guide](./docs/local-development.md) for telemetry configuration details
 - **Sanity Visual Editing**: When working with Sanity's visual editing feature, the `stega` parameter is a valid option for `sanityFetch`. See: https://www.sanity.io/docs/visual-editing/stega
+
+## Claude Code Hooks
+
+This project includes TypeScript hooks for bug prevention when using Claude Code:
+
+- **Automatic Formatting**: Prettier runs on TypeScript/JavaScript files before edits
+- **Essential Linting**: Catches common errors (unused vars, undefined vars, prefer-const)
+- **Fast Performance**: 2-second timeout ensures no workflow interruptions
+- **Workspace Aware**: Uses pnpm filters for monorepo efficiency
+
+Configuration: `.claude/config.json` - Customize lint rules and enable/disable features
+Documentation: See [Claude Hooks Guide](./docs/claude-hooks.md) for detailed information

@@ -44,16 +44,19 @@ apps/web/
 ## Important Patterns
 
 ### Data Fetching
+
 - Server Components by default
 - `server-only` imports for server-side code
 - Sanity client with proper caching strategies
 
 ### Styling
+
 - Tailwind CSS with custom configuration
 - Component-based styling approach
 - Dark mode support built-in
 
 ### Testing
+
 - Vitest for unit tests
 - React Testing Library for component tests
 - Test files colocated with components
@@ -79,6 +82,7 @@ pnpm format
 ## Environment Variables
 
 Required in `.env.local`:
+
 ```
 NEXT_PUBLIC_SANITY_PROJECT_ID=your-project-id
 NEXT_PUBLIC_SANITY_DATASET=production
@@ -112,6 +116,7 @@ SANITY_API_READ_TOKEN=your-token
 ## Maintenance Notes
 
 **IMPORTANT:** Update this file when:
+
 - Major dependencies change
 - New patterns are established
 - Project structure changes significantly

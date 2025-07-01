@@ -30,6 +30,7 @@ packages/ui/
 ## Exports
 
 The package provides specific exports:
+
 - `./globals.css` - Global styles
 - `./postcss.config` - PostCSS config
 - `./tailwind.config` - Tailwind config
@@ -40,6 +41,7 @@ The package provides specific exports:
 ## Component Library
 
 Built on Radix UI primitives:
+
 - **Accordion:** Collapsible content sections
 - **Avatar:** User profile images
 - **Dialog:** Modal dialogs
@@ -49,10 +51,12 @@ Built on Radix UI primitives:
 ## Key Utilities
 
 ### cn() Function
+
 Combines clsx and tailwind-merge for optimal class handling:
+
 ```typescript
-import { cn } from "@workspace/ui/lib/utils"
-cn("px-4 py-2", conditional && "bg-blue-500")
+import { cn } from "@workspace/ui/lib/utils";
+cn("px-4 py-2", conditional && "bg-blue-500");
 ```
 
 ## Development Patterns
@@ -67,11 +71,11 @@ cn("px-4 py-2", conditional && "bg-blue-500")
 
 ```typescript
 // Import component
-import { Button } from "@workspace/ui/components/button"
-import { cn } from "@workspace/ui/lib/utils"
+import { Button } from "@workspace/ui/components/button";
+import { cn } from "@workspace/ui/lib/utils";
 
 // Import global styles (in root layout)
-import "@workspace/ui/globals.css"
+import "@workspace/ui/globals.css";
 ```
 
 ## Testing
@@ -107,7 +111,8 @@ pnpm lint
 ## Dependencies
 
 Key dependencies to be aware of:
-- **@radix-ui/*:** Headless UI primitives
+
+- **@radix-ui/\*:** Headless UI primitives
 - **class-variance-authority:** Variant API
 - **tailwindcss-animate:** Animation utilities
 
@@ -131,6 +136,7 @@ Key dependencies to be aware of:
 ## Maintenance Notes
 
 **IMPORTANT:** Update this file when:
+
 - New components are added
 - Export patterns change
 - Major dependency updates

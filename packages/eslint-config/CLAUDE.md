@@ -9,6 +9,7 @@ This package provides shared ESLint configuration for the entire monorepo, ensur
 ## Configuration Structure
 
 The package likely exports different configs:
+
 - **Base config:** Core JavaScript/TypeScript rules
 - **React config:** React-specific rules and hooks
 - **Next.js config:** Next.js specific rules
@@ -16,13 +17,14 @@ The package likely exports different configs:
 ## Usage
 
 In app/package `eslint.config.js`:
+
 ```javascript
-import baseConfig from "@workspace/eslint-config"
+import baseConfig from "@workspace/eslint-config";
 
 export default [
   ...baseConfig,
   // app-specific overrides
-]
+];
 ```
 
 ## Key Features
@@ -44,15 +46,16 @@ export default [
 ## Extending Configuration
 
 Apps can extend with specific needs:
+
 ```javascript
 export default [
   ...baseConfig,
   {
     rules: {
       // app-specific overrides
-    }
-  }
-]
+    },
+  },
+];
 ```
 
 ## Notes for AI Assistants
@@ -66,6 +69,7 @@ export default [
 ## Maintenance Notes
 
 **IMPORTANT:** Update this file when:
+
 - Major rule changes
 - New plugins added
 - Config structure changes

@@ -33,12 +33,14 @@ apps/studio/
 ## Schema Organization
 
 ### Documents
+
 - **Pages:** Dynamic page content
 - **Posts:** Blog post documents
 - **Categories:** Content categorization
 - **Authors:** Content author profiles
 
 ### Blocks (Page Builder Components)
+
 - `hero` - Hero sections
 - `cta` - Call-to-action blocks
 - `faq-accordion` - FAQ sections
@@ -47,6 +49,7 @@ apps/studio/
 - `subscribe-newsletter` - Newsletter forms
 
 ### Singletons
+
 - **Settings:** Global site configuration
 - **Navigation:** Menu structures
 - **Footer:** Footer content
@@ -82,17 +85,20 @@ pnpm test
 ## Important Patterns
 
 ### Schema Best Practices
+
 - Use `defineType` and `defineField` for type safety
 - Group related fields with fieldsets
 - Add helpful descriptions and validation rules
 - Use references for relationships
 
 ### Custom Components
+
 - Located in `/components` for schema UI
 - Follow Sanity UI design patterns
 - Use TypeScript for prop types
 
 ### Structure Configuration
+
 - Custom desk structure in `structure.ts`
 - Organize documents logically
 - Hide technical documents from editors
@@ -100,6 +106,7 @@ pnpm test
 ## Studio Configuration
 
 Key configuration in `sanity.config.ts`:
+
 - Project ID and dataset
 - Plugin initialization
 - Schema types registration
@@ -125,6 +132,7 @@ Key configuration in `sanity.config.ts`:
 ## Type Generation
 
 After schema changes:
+
 ```bash
 pnpm type  # Generates TypeScript types
 ```
@@ -143,6 +151,7 @@ Types are used by the web app for type-safe queries.
 ## Deployment
 
 Studio is deployed separately from the web app:
+
 ```bash
 pnpm deploy:studio
 ```
@@ -152,6 +161,7 @@ Requires Sanity CLI authentication.
 ## Maintenance Notes
 
 **IMPORTANT:** Update this file when:
+
 - New schema types are added
 - Plugins are added or removed
 - Structure changes significantly
