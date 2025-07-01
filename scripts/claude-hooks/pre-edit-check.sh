@@ -28,6 +28,12 @@ elif [[ "$FILE_PATH" =~ packages/ ]]; then
     WORKSPACE=$(cd "$PROJECT_ROOT" && pnpm list --depth=-1 --json | jq -r ".[] | select(.path | contains(\"$(dirname "$FILE_PATH")\")) | .name")
 fi
 
+# Check if prettier is available
+if ! command -v pnpm &> /dev/null || ! pnpm exec prettier --version &> /dev/null; then
+    echo "⚠️  Prettier not available - skipping formatting checks"
+    exit 0
+fi
+
 # Run checks with timeout
 timeout 2s bash -c "
     # 1. Format check (non-blocking)

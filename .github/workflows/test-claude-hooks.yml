@@ -1,0 +1,61 @@
+name: Test Claude Code Hooks
+
+on:
+  push:
+    branches: [main, feature/typescript-hooks-issue-33]
+  pull_request:
+    branches: [main]
+    paths:
+      - '.claude/**'
+      - 'scripts/claude-hooks/**'
+      - 'tests/**'
+      - '.github/workflows/test-claude-hooks.yml'
+
+jobs:
+  test-hooks:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    
+    - name: Install test dependencies
+      run: |
+        cd tests
+        python -m venv venv
+        source venv/bin/activate
+        pip install -r requirements.txt
+    
+    - name: Make scripts executable
+      run: |
+        chmod +x scripts/claude-hooks/*.sh
+        chmod +x tests/*.sh
+    
+    - name: Run mock tests
+      run: |
+        cd tests
+        source venv/bin/activate
+        pytest test_hooks_mock.py -v
+    
+    - name: Test security validation
+      run: |
+        cd tests
+        source venv/bin/activate
+        pytest test_hooks_integration.py::TestHookIntegration::test_security_validation_blocks_outside_paths -v
+        pytest test_hooks_integration.py::TestHookIntegration::test_security_validation_blocks_relative_escape -v
+    
+    - name: Test file type filtering
+      run: |
+        cd tests
+        source venv/bin/activate
+        pytest test_hooks_integration.py::TestHookIntegration::test_ignores_non_typescript_files -v
+    
+    - name: Verify hook scripts exist
+      run: |
+        ls -la .claude/
+        ls -la scripts/claude-hooks/
+        cat .claude/hooks.json
