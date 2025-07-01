@@ -6,15 +6,14 @@ import { RichText } from "@/components/richtext";
 import { SanityImage } from "@/components/sanity-image";
 import { TableOfContent } from "@/components/table-of-content";
 import { client } from "@/lib/sanity/client";
-import { sanityFetch } from "@/lib/sanity/live";
+import { sanityFetch } from "@/lib/sanity/fetch-with-tracing";
 import { queryBlogPaths, queryBlogSlugPageData } from "@/lib/sanity/query";
 import { getSEOMetadata } from "@/lib/seo";
 
-async function fetchBlogSlugPageData(slug: string, stega = true) {
+async function fetchBlogSlugPageData(slug: string) {
   return await sanityFetch({
     query: queryBlogSlugPageData,
     params: { slug: `/blog/${slug}` },
-    stega,
   });
 }
 
@@ -35,7 +34,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const { data } = await fetchBlogSlugPageData(slug, false);
+  const { data } = await fetchBlogSlugPageData(slug);
   return getSEOMetadata(
     data
       ? {

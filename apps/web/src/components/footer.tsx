@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { sanityFetch } from "@/lib/sanity/live";
+import { sanityFetch } from "@/lib/sanity/fetch-with-tracing";
 import { queryFooterData, queryGlobalSeoSettings } from "@/lib/sanity/query";
 import type {
   QueryFooterDataResult,

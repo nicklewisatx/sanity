@@ -10,7 +10,7 @@ import { FooterServer, FooterSkeleton } from "@/components/footer";
 import { CombinedJsonLd } from "@/components/json-ld";
 import { NavbarServer, NavbarSkeleton } from "@/components/navbar";
 import { PreviewBar } from "@/components/preview-bar";
-import { SanityLive } from "@/lib/sanity/live";
+import { SanityLive } from "@/lib/sanity/fetch-with-tracing";
 
 import { Providers } from "../components/providers";
 

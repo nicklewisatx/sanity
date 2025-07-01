@@ -1,4 +1,4 @@
-import { sanityFetch } from "@/lib/sanity/live";
+import { sanityFetch } from "@/lib/sanity/fetch-with-tracing";
 import { queryGlobalSeoSettings, queryNavbarData } from "@/lib/sanity/query";
 import type {
   QueryGlobalSeoSettingsResult,
