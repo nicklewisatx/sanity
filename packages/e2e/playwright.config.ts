@@ -24,8 +24,8 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
   ],
-  // Automatic server management
-  webServer: {
+  // Automatic server management (disabled in CI when testing deployed URLs)
+  webServer: process.env.PLAYWRIGHT_TEST_BASE_URL ? undefined : {
     command: 'pnpm --filter=web dev',
     url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
