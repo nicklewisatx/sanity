@@ -7,5 +7,11 @@
       "lintRules": ["no-unused-vars", "no-undef", "prefer-const"],
       "timeout": 2000
     }
+  },
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"]
+    }
   }
 }
