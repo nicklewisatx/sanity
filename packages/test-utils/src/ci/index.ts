@@ -19,7 +19,7 @@ export function validateCIParity(projectRoot = process.cwd()): CIValidationResul
   
   // Check Node version
   const requiredNodeVersion = 20
-  const currentNodeVersion = parseInt(process.version.slice(1).split('.')[0])
+  const currentNodeVersion = parseInt(process.version.slice(1).split('.')[0] || '0')
   if (currentNodeVersion < requiredNodeVersion) {
     errors.push(`Node.js version ${requiredNodeVersion} or higher required. Current: ${process.version}`)
   }

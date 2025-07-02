@@ -1,3 +1,3 @@
-export * from './sanity'
-export * from './ci'
-export * from './api'
+export * from './sanity/index.js'
+export * from './ci/index.js'
+export * from './api/index.js'

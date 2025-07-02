@@ -1,6 +1,6 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { existsSync } from 'fs'
-import { validateCIParity, assertCIParity } from './index'
+import { validateCIParity, assertCIParity } from './index.js'
 
 // Mock fs
 vi.mock('fs', () => ({
@@ -118,8 +118,8 @@ describe('CI Parity Validation', () => {
   
   describe('assertCIParity', () => {
     const consoleSpy = {
-      warn: vi.spyOn(console, 'warn').mockImplementation(),
-      error: vi.spyOn(console, 'error').mockImplementation()
+      warn: vi.spyOn(console, 'warn').mockImplementation(() => {}),
+      error: vi.spyOn(console, 'error').mockImplementation(() => {})
     }
     
     beforeEach(() => {
