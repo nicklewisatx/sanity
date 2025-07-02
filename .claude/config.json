@@ -3,9 +3,17 @@
     "typescript": {
       "enableFormatting": true,
       "enableLinting": true,
-      "enableTypeChecking": false,
+      "enableTypeChecking": true,
       "lintRules": ["no-unused-vars", "no-undef", "prefer-const"],
-      "timeout": 2000
+      "timeout": 5000,
+      "preCommit": {
+        "commands": [
+          "pnpm run ci-parity",
+          "pnpm run test --run",
+          "pnpm run check-types"
+        ],
+        "stopOnError": true
+      }
     }
   },
   "mcpServers": {

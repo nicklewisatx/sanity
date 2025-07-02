@@ -40,7 +40,13 @@
     "test": {
       "dependsOn": ["^test"],
       "outputs": ["coverage/**"],
-      "inputs": ["src/**", "**/*.test.ts", "**/*.test.tsx", "vitest.config.ts"]
+      "inputs": ["src/**", "**/*.test.ts", "**/*.test.tsx", "vitest.config.ts"],
+      "env": [
+        "NEXT_PUBLIC_SANITY_PROJECT_ID",
+        "NEXT_PUBLIC_SANITY_DATASET",
+        "SANITY_STUDIO_PROJECT_ID",
+        "SANITY_STUDIO_DATASET"
+      ]
     },
     "test:watch": {
       "cache": false,

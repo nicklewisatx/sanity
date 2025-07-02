@@ -15,7 +15,11 @@
     "test:watch": "turbo run test:watch",
     "test:ui": "vitest --ui",
     "test:e2e": "turbo run test:e2e",
+    "test:coverage": "vitest run --coverage",
+    "ci-parity": "tsx scripts/test-ci-parity.ts",
+    "pretest": "pnpm run ci-parity",
     "validate": "turbo run lint check-types test",
+    "validate:ci": "pnpm run ci-parity && turbo run lint check-types test --concurrency=1",
     "postinstall": "turbo build --filter=@workspace/*"
   },
   "devDependencies": {
@@ -27,6 +31,7 @@
     "@workspace/typescript-config": "workspace:*",
     "jsdom": "^26.1.0",
     "prettier": "^3.6.2",
+    "tsx": "^4.20.3",
     "turbo": "^2.5.4",
     "typescript": "5.7.3",
     "vitest": "^3.2.4"

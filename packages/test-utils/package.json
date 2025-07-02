@@ -1,0 +1,37 @@
+{
+  "name": "@workspace/test-utils",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts"
+    },
+    "./sanity": {
+      "types": "./src/sanity/index.ts",
+      "import": "./src/sanity/index.ts"
+    },
+    "./ci": {
+      "types": "./src/ci/index.ts",
+      "import": "./src/ci/index.ts"
+    }
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@sanity/client": "^6.31.0",
+    "next": "15.3.4",
+    "vitest": "^3.2.4"
+  },
+  "devDependencies": {
+    "@workspace/eslint-config": "workspace:*",
+    "@workspace/typescript-config": "workspace:*",
+    "eslint": "^9.17.0",
+    "typescript": "5.7.3"
+  }
+}
