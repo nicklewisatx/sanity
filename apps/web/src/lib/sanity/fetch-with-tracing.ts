@@ -1,6 +1,6 @@
 import type { Span } from "@opentelemetry/api";
-import type { QueryParams } from "next-sanity";
 import { withSpan } from "@workspace/observability";
+import type { QueryParams } from "next-sanity";
 
 import { sanityFetch as originalSanityFetch } from "./live";
 

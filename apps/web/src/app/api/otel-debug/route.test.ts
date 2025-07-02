@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { extractResponseData } from "@workspace/test-utils";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 // Mock OpenTelemetry API
 const mockSpan = {

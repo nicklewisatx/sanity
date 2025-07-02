@@ -3,7 +3,7 @@ export function createMockRequest(options: {
   method?: string
   headers?: Record<string, string>
   searchParams?: Record<string, string>
-  body?: any
+  body?: unknown
 } = {}): Request & { nextUrl: URL } {
   const {
     url = 'http://localhost:3000/api/test',

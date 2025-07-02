@@ -1,5 +1,5 @@
-import { vi, describe, it, expect, beforeEach, afterEach } from "vitest";
 import { createMockSanityClient, mockSanityData } from "@workspace/test-utils";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 // Mock next/headers
 const mockIsEnabled = vi.fn();

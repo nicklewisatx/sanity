@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import type { Span } from "@opentelemetry/api";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 // Mock the live module
 const mockOriginalSanityFetch = vi.fn();
