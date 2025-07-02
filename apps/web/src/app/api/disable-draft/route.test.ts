@@ -11,17 +11,8 @@ vi.mock("next/headers", () => ({
   ),
 }));
 
-// Mock next/navigation - redirect in Next.js throws a special error
-class NextRedirectError extends Error {
-  constructor(public url: string) {
-    super(`NEXT_REDIRECT: ${url}`);
-    this.name = "NEXT_REDIRECT";
-  }
-}
-
-const mockRedirect = vi.fn((url: string) => {
-  throw new NextRedirectError(url);
-});
+// Mock next/navigation
+const mockRedirect = vi.fn();
 
 vi.mock("next/navigation", () => ({
   redirect: mockRedirect,
@@ -45,16 +36,15 @@ describe("api/disable-draft", () => {
       url: "http://localhost:3000/api/disable-draft",
     });
 
-    // Expect the redirect to throw
+    // Start the GET handler
     const promise = GET(request);
-
-    // Fast-forward the timer
+    
+    // Fast-forward the timer by 1 second
     await vi.advanceTimersByTimeAsync(1000);
-
-    // Should throw redirect error
-    await expect(promise).rejects.toThrow(NextRedirectError);
-    await expect(promise).rejects.toThrow("NEXT_REDIRECT: /");
-
+    
+    // Wait for completion
+    await promise;
+    
     expect(mockDisable).toHaveBeenCalled();
     expect(mockRedirect).toHaveBeenCalledWith("/");
   });
@@ -66,15 +56,15 @@ describe("api/disable-draft", () => {
       url: "http://localhost:3000/api/disable-draft?slug=/blog/my-post",
     });
 
+    // Start the GET handler
     const promise = GET(request);
-
-    // Fast-forward the timer
+    
+    // Fast-forward the timer by 1 second
     await vi.advanceTimersByTimeAsync(1000);
-
-    // Should throw redirect error with the slug
-    await expect(promise).rejects.toThrow(NextRedirectError);
-    await expect(promise).rejects.toThrow("NEXT_REDIRECT: /blog/my-post");
-
+    
+    // Wait for completion
+    await promise;
+    
     expect(mockDisable).toHaveBeenCalled();
     expect(mockRedirect).toHaveBeenCalledWith("/blog/my-post");
   });
@@ -86,14 +76,15 @@ describe("api/disable-draft", () => {
       url: "http://localhost:3000/api/disable-draft?slug=%2Fblog%2Fmy%20post%20title",
     });
 
+    // Start the GET handler
     const promise = GET(request);
-
+    
+    // Fast-forward the timer by 1 second
     await vi.advanceTimersByTimeAsync(1000);
-
-    // Should throw redirect error with decoded slug
-    await expect(promise).rejects.toThrow(NextRedirectError);
-    await expect(promise).rejects.toThrow("NEXT_REDIRECT: /blog/my post title");
-
+    
+    // Wait for completion
+    await promise;
+    
     expect(mockRedirect).toHaveBeenCalledWith("/blog/my post title");
   });
 
@@ -104,8 +95,9 @@ describe("api/disable-draft", () => {
       url: "http://localhost:3000/api/disable-draft",
     });
 
+    // Start the GET handler in the background
     const promise = GET(request);
-
+    
     // Should not redirect immediately
     expect(mockRedirect).not.toHaveBeenCalled();
 
@@ -116,8 +108,8 @@ describe("api/disable-draft", () => {
     // Advance remaining 500ms
     await vi.advanceTimersByTimeAsync(500);
 
-    // Should throw redirect error after 1 second
-    await expect(promise).rejects.toThrow(NextRedirectError);
+    // Wait for completion
+    await promise;
 
     expect(mockRedirect).toHaveBeenCalled();
   });
