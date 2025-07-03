@@ -32,12 +32,15 @@ Note
  - Text 
  - Link 
  - Tags 
-
+# PAGES
 Homepage: 
  - HERO (featured)
  - Blogs (card)
  - Technologies
  - SECTIONS
+ BLOG 
+  List with sidebar of technologies, article tyopes with search 
+  
 
 # NAVIGATION
  Navigation 

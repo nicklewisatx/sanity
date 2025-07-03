@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
-    "dev": "turbo dev",
+    "dev": "turbo dev storybook",
     "start": "./scripts/start-dev.sh",
     "start:background": "nohup ./scripts/start-dev.sh > dev.log 2>&1 &",
     "start:claude": "turbo dev --no-daemon --concurrency=4",

@@ -61,6 +61,10 @@
         "VERCEL_URL",
         "VERCEL_PROTECTION_BYPASS_SECRET"
       ]
+    },
+    "storybook": {
+      "cache": false,
+      "persistent": true
     }
   }
 }

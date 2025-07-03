@@ -62,7 +62,7 @@ async function startStorybook() {
   // Create or truncate log file
   writeFileSync(LOG_FILE, `Storybook started at ${new Date().toISOString()}\n\n`);
 
-  const storybook = spawn('pnpm', ['run', 'storybook', '--', '--no-open'], {
+  const storybook = spawn('pnpm', ['run', 'storybook:dev'], {
     detached: true,
     stdio: ['ignore', 'pipe', 'pipe'],
     env: { ...process.env, NODE_ENV: 'development' },
@@ -76,8 +76,14 @@ async function startStorybook() {
   const timeoutId = setTimeout(() => {
     console.error('❌ Storybook failed to start within 30 seconds');
     console.error('Check logs at:', LOG_FILE);
-    process.kill(storybook.pid, 'SIGTERM');
-    unlinkSync(PID_FILE);
+    try {
+      process.kill(storybook.pid, 'SIGTERM');
+    } catch (e) {
+      // Process might have already exited
+    }
+    if (existsSync(PID_FILE)) {
+      unlinkSync(PID_FILE);
+    }
     process.exit(1);
   }, STARTUP_TIMEOUT);
 
