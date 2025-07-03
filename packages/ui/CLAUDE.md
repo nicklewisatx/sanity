@@ -1,6 +1,6 @@
 # UI Package - Shared Component Library
 
-**Last Updated by Claude:** 2025-07-01
+**Last Updated by Claude:** 2025-07-03 - Added Typography, Container, Layout components and design tokens
 
 ## Overview
 
@@ -40,13 +40,31 @@ The package provides specific exports:
 
 ## Component Library
 
-Built on Radix UI primitives:
+Built on Radix UI primitives and custom components:
 
+### Radix-based Components
 - **Accordion:** Collapsible content sections
 - **Avatar:** User profile images
 - **Dialog:** Modal dialogs
 - **DropdownMenu:** Context menus
 - **NavigationMenu:** Site navigation
+
+### Layout Components
+- **Typography:** Unified text styling (h1-h6, body, lead, small, muted)
+- **Container:** Content width management (default, full, narrow, wide, etc.)
+- **Section:** Vertical spacing for page sections
+- **Grid:** Responsive grid layouts (1-6 cols, auto-fit)
+- **Flex:** Flexible box layouts with direction and alignment
+- **Stack:** Vertical stacking with consistent spacing
+
+### Design Tokens
+Export TypeScript constants for consistent design:
+- **Colors:** Theme-aware color palette
+- **Spacing:** Consistent spacing scale
+- **Breakpoints:** Responsive design breakpoints  
+- **Typography:** Font sizes, weights, line heights
+- **Shadows:** Box shadow utilities
+- **Radii:** Border radius values
 
 ## Key Utilities
 

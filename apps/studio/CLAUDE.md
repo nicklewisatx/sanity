@@ -1,6 +1,6 @@
 # Sanity Studio - Content Management System
 
-**Last Updated by Claude:** 2025-07-01
+**Last Updated by Claude:** 2025-07-03 - Added Typography and Layout block schemas
 
 ## Overview
 
@@ -47,6 +47,8 @@ apps/studio/
 - `feature-cards-icon` - Feature showcases
 - `image-link-cards` - Visual link cards
 - `subscribe-newsletter` - Newsletter forms
+- `typography` - Styled text blocks (h1-h6, body, lead, etc.)
+- `layout` - Flexible layout containers (section, container, grid, flex, stack)
 
 ### Singletons
 

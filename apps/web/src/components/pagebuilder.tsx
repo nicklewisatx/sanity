@@ -12,7 +12,9 @@ import { FaqAccordion } from "./sections/faq-accordion";
 import { FeatureCardsWithIcon } from "./sections/feature-cards-with-icon";
 import { HeroBlock } from "./sections/hero";
 import { ImageLinkCards } from "./sections/image-link-cards";
+import { LayoutBlock } from "./sections/layout";
 import { SubscribeNewsletter } from "./sections/subscribe-newsletter";
+import { TypographyBlock } from "./sections/typography";
 
 type PageBlock = NonNullable<
   NonNullable<QueryHomePageDataResult>["pageBuilder"]
@@ -37,6 +39,8 @@ const BLOCK_COMPONENTS = {
   featureCardsIcon: FeatureCardsWithIcon,
   subscribeNewsletter: SubscribeNewsletter,
   imageLinkCards: ImageLinkCards,
+  typography: TypographyBlock,
+  layout: LayoutBlock,
 } as const;
 
 type BlockType = keyof typeof BLOCK_COMPONENTS;
