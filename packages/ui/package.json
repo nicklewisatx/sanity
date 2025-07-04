@@ -8,10 +8,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "check-types": "tsc --noEmit",
+    "dev": "storybook dev -p 6006",
     "storybook": "storybook dev -p 6006",
-    "storybook:dev": "storybook dev -p 6006",
-    "storybook:stop": "node scripts/storybook-stop.js",
-    "storybook:logs": "tail -f storybook.log",
     "build-storybook": "storybook build"
   },
   "dependencies": {

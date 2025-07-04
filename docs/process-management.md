@@ -1,361 +1,112 @@
-# Process Management System
+# Process Management
 
-> **⚠️ DEPRECATED**: This documentation describes the legacy process management system. 
-> 
-> **For the current simplified approach, see [process-management-simple.md](./process-management-simple.md)**
-
-A unified process management system for the Sanity + Next.js monorepo, designed to handle development servers, background processes, and Claude Code compatibility.
+Simplified development server orchestration using Turbo's native capabilities.
 
 ## Overview
 
-This system replaces the fragmented approach of individual scripts with a centralized process manager that handles:
-
-- Next.js web app (port 3000)
-- Sanity Studio (port 3333)
-- Storybook (port 6006)
+The project uses TurboRepo's built-in task orchestration for running multiple development servers in parallel. This provides a simple, maintainable solution using standard monorepo patterns.
 
 ## Architecture
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                  Process Manager CLI                     │
-├─────────────────────────────────────────────────────────┤
-│  Commands: start, stop, restart, status, dev, watch     │
-└────────────────┬───────────────────────────┬────────────┘
-                 │                           │
-        ┌────────▼────────┐         ┌───────▼────────┐
-        │ ProcessManager  │         │  TurboRepo     │
-        │   Core Engine   │◄────────┤  Integration   │
-        └────────┬────────┘         └────────────────┘
-                 │
-    ┌────────────┼────────────┬──────────────┐
-    │            │            │              │
-┌───▼───┐  ┌────▼────┐  ┌───▼───┐   ┌──────▼──────┐
-│  Web  │  │ Studio  │  │ Story │   │   Health    │
-│ :3000 │  │  :3333  │  │ :6006 │   │   Checks    │
-└───────┘  └─────────┘  └───────┘   └─────────────┘
+Root package.json scripts:
+├── dev              # turbo run dev --parallel
+├── dev:web          # turbo run dev --filter=web
+├── dev:studio       # turbo run dev --filter=studio
+├── dev:storybook    # turbo run dev --filter=@workspace/ui
+├── start            # pnpm stop && pnpm dev
+├── start:quiet      # turbo run dev --parallel --log-order=stream
+├── stop             # pkill -f 'next-server|sanity dev|storybook'
+└── stop:ports       # npx kill-port 3000 3333 6006
 ```
 
-## Key Features
+## How It Works
 
-### 1. Unified Commands
-
-- Single entry point for all process management
-- Consistent interface across all services
-- Support for individual and collective operations
-
-### 2. Claude Code Compatibility
-
-- Automatic detection of Claude Code environment
-- Built-in `--no-daemon` and concurrency limits
-- Optimized startup sequences to prevent timeouts
-- Enhanced logging for debugging
-
-### 3. Process Lifecycle Management
-
-- PID tracking for all services
-- Graceful shutdown handling
-- Automatic port cleanup
-- Signal propagation (SIGINT, SIGTERM)
-
-### 4. Health Monitoring
-
-- HTTP health checks for web services
-- Process alive verification
-- Automatic restart on failure
-- Configurable retry logic
-
-### 5. Developer Experience
-
-- Clear status reporting
-- Service-specific logging
-- Debug mode for troubleshooting
-- Background operation support
-
-## Commands
-
-### Basic Usage
+### Starting Services
 
 ```bash
-# Start all services
-pnpm dev
-
-# Start specific service
-pnpm dev:web
-pnpm dev:studio
-pnpm dev:storybook
-
-# Stop all services
-pnpm stop
-
-# Check status
-pnpm status
+pnpm dev              # Start all services in parallel
+pnpm dev:web          # Start just web app
+pnpm dev:studio       # Start just Sanity Studio
+pnpm dev:storybook    # Start just Storybook
 ```
 
-### Advanced Commands
+The system:
+1. Uses Turbo's `--parallel` flag to run all dev tasks concurrently
+2. Leverages Turbo's dependency graph for proper startup order
+3. Shows unified output with service prefixes
+4. Handles Ctrl+C gracefully to stop all services
+
+### Stopping Services
 
 ```bash
-# Process manager direct control
-pnpm pm start [service|all]
-pnpm pm stop [service|all]
-pnpm pm restart [service|all]
-pnpm pm status
-pnpm pm logs [service]
-pnpm pm debug [service]
-
-# Claude Code optimized mode
-pnpm dev:claude
+pnpm stop             # Kill processes by name pattern
+pnpm stop:ports       # Kill processes by port number
 ```
 
-## Implementation Details
+Two approaches for flexibility:
+- `pkill` pattern matching for quick cleanup
+- Port-based killing as a fallback option
 
-### Directory Structure
-
-```
-scripts/
-└── process-manager/
-    ├── index.js          # CLI entry point
-    ├── ProcessManager.js # Core process management engine
-    ├── services/         # Service-specific configurations
-    │   ├── web.js
-    │   ├── studio.js
-    │   └── storybook.js
-    ├── utils/
-    │   ├── logger.js     # Logging utilities
-    │   ├── pid.js        # PID file management
-    │   ├── port.js       # Port utilities
-    │   └── health.js     # Health check utilities
-    └── config.js         # Configuration management
-```
-
-### Service Configuration
-
-Each service is configured with:
-
-```javascript
-{
-  name: 'web',
-  displayName: 'Next.js App',
-  port: 3000,
-  command: 'pnpm --filter=web dev',
-  cwd: './apps/web',
-  env: {
-    // Service-specific environment variables
-  },
-  readyCheck: {
-    type: 'http',
-    url: 'http://localhost:3000',
-    interval: 1000,
-    maxAttempts: 30
-  },
-  pidFile: '.turbo-pids/web.pid',
-  logFile: '.turbo-logs/web.log'
-}
-```
-
-### Process States
-
-Services can be in one of the following states:
-
-- `stopped` - Not running
-- `starting` - Starting up
-- `running` - Active and healthy
-- `unhealthy` - Running but failing health checks
-- `stopping` - Shutting down
-- `crashed` - Unexpectedly terminated
-
-### Logging
-
-- **Location**: `.turbo-logs/` directory
-- **Rotation**: Keeps last 5 log files per service
-- **Format**: Timestamped, service-prefixed
-- **Levels**: debug, info, warn, error
-
-### PID Management
-
-- **Location**: `.turbo-pids/` directory
-- **Format**: `[service].pid`
-- **Cleanup**: Automatic on stop/crash
-- **Validation**: Checks if PID is actually running
-
-## Claude Code Optimizations
-
-When `CLAUDE_MODE=true` or using `pnpm dev:claude`:
-
-1. **Concurrency Limiting**
-   - Sets `--concurrency=4` for TurboRepo
-   - Staggers service startup
-
-2. **No Daemon Mode**
-   - Forces `--no-daemon` flag
-   - Ensures output is captured properly
-
-3. **Extended Timeouts**
-   - Increases startup timeout to 60s
-   - More lenient health check intervals
-
-4. **Enhanced Logging**
-   - More verbose output
-   - Progress indicators
-   - Clear error messages
-
-## Error Handling
-
-### Port Conflicts
-
-- Automatically kills processes on required ports
-- Waits for port release before starting
-- Reports which process was using the port
-
-### Failed Starts
-
-- Captures and logs startup errors
-- Provides actionable error messages
-- Suggests troubleshooting steps
-
-### Crashes
-
-- Detects unexpected terminations
-- Optional automatic restart
-- Preserves crash logs
-
-## Configuration
-
-### Environment Variables
+### Quiet Mode
 
 ```bash
-# Process manager behavior
-PM_LOG_LEVEL=debug|info|warn|error
-PM_AUTO_RESTART=true|false
-PM_HEALTH_CHECK_INTERVAL=5000
-
-# Claude Code mode
-CLAUDE_MODE=true
-
-# Service-specific
-PM_WEB_PORT=3000
-PM_STUDIO_PORT=3333
-PM_STORYBOOK_PORT=6006
+pnpm start:quiet
 ```
 
-### Config File (optional)
+Uses `--log-order=stream` for cleaner, sequential output that's easier to read in terminals with limited scrollback.
 
-`.turbo-pm.config.js`:
+## Service Configuration
 
-```javascript
-module.exports = {
-  services: {
-    web: {
-      // Override default settings
-    },
-  },
-  claude: {
-    concurrency: 4,
-    timeout: 60000,
-  },
-};
-```
+| Service | Port | Package | Command |
+|---------|------|---------|---------|
+| Web | 3000 | apps/web | `next dev --turbopack` |
+| Studio | 3333 | apps/studio | `sanity dev` |
+| Storybook | 6006 | packages/ui | `storybook dev -p 6006` |
 
-## Migration Guide
+## Benefits of Turbo Approach
 
-### From Existing Scripts
+1. **Native Monorepo Support**: Built for this use case
+2. **Dependency Awareness**: Respects task dependencies
+3. **Intelligent Caching**: Skips unnecessary work
+4. **Unified Configuration**: All in turbo.json
+5. **Standard Patterns**: Familiar to any Turbo user
 
-1. **Old way**:
+## Migration from Custom Scripts
 
-   ```bash
-   ./scripts/start-dev.sh
-   ```
+We've replaced ~200 lines of custom Node.js process management with ~10 lines of standard npm scripts:
 
-2. **New way**:
-   ```bash
-   pnpm dev
-   ```
+**Before**: Custom scripts → concurrently → services  
+**After**: npm script → turbo → services
 
-### Backward Compatibility
-
-During transition period:
-
-- Old scripts remain functional
-- Deprecation warnings guide to new commands
-- Gradual migration path
+This reduces complexity, improves maintainability, and follows established patterns.
 
 ## Troubleshooting
 
-### Common Issues
-
-1. **Services won't start**
-   - Check `pnpm status` for port conflicts
-   - Review logs in `.turbo-logs/`
-   - Try `pnpm pm debug [service]`
-
-2. **Claude Code timeouts**
-   - Use `pnpm dev:claude` instead of `pnpm dev`
-   - Check if services are actually starting
-   - Review Claude-specific logs
-
-3. **Orphaned processes**
-   - Run `pnpm pm cleanup` to kill orphans
-   - Check `.turbo-pids/` for stale PID files
-
-### Debug Mode
+### Port Already in Use
 
 ```bash
-PM_LOG_LEVEL=debug pnpm dev
+pnpm stop:ports       # Kill specific ports
+pnpm start           # Auto-cleanup before starting
 ```
 
-Provides:
+### Process Won't Stop
 
-- Detailed startup sequences
-- Health check results
-- Signal handling info
-- Environment details
+```bash
+# Nuclear option - kills all Node processes
+pkill -f node
+```
 
-## Future Enhancements
+### Individual Service Issues
 
-### Planned Features
+```bash
+# Check individual service logs
+pnpm dev:web --log-order=stream
+```
 
-- [ ] Web UI for process management
-- [ ] Metrics collection and reporting
-- [ ] Plugin system for custom services
-- [ ] Remote process management
-- [ ] Integration with deployment systems
+## Best Practices
 
-### Potential Integrations
-
-- PM2 compatibility layer
-- Docker compose integration
-- Kubernetes local development
-- VS Code extension
-
-## Technical Details
-
-### Signal Handling
-
-- `SIGINT` (Ctrl+C): Graceful shutdown all services
-- `SIGTERM`: Graceful shutdown all services
-- `SIGUSR1`: Reload configuration
-- `SIGUSR2`: Dump status to logs
-
-### Health Check Types
-
-1. **HTTP**: GET request expecting 2xx response
-2. **TCP**: Port connection test
-3. **Process**: PID existence check
-4. **Custom**: User-defined health check function
-
-### Performance Considerations
-
-- Minimal overhead (~10MB memory)
-- Efficient process spawning
-- Non-blocking health checks
-- Optimized for development workflow
-
-## Contributing
-
-When adding new services:
-
-1. Create service definition in `services/`
-2. Add to service registry
-3. Update documentation
-4. Add tests
-5. Update CLAUDE.md files
+1. Use `pnpm start` for a clean startup (includes automatic cleanup)
+2. Use `pnpm dev` for quick restarts during development
+3. Use individual service commands when debugging specific issues
+4. Let Turbo handle the orchestration complexity

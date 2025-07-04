@@ -1,46 +1,52 @@
 # Scripts Directory
 
-This directory contains development scripts for the monorepo.
+This directory contains utility scripts for development and CI/CD tasks.
 
-## Current Scripts (Simplified Approach)
+## Current Scripts
 
-### Core Development Scripts
-- **dev-simple.js** - Basic development server using concurrently
-- **dev-clean.js** - Kills ports before starting (recommended)
-- **dev-claude.js** - Claude Code optimized with rate-limited output
-- **stop.js** - Stops all development servers
+### Development Support
 
-### Other Scripts
-- **lint-safe.js** - Safe linting wrapper
-- **test-safe.js** - Safe testing wrapper
-- **test-ci-parity.ts** - CI parity testing
+- **`test-ci-parity.ts`** - Ensures local and CI environments match
+  - Used by `pnpm ci-parity` command
+  - Runs before tests to validate environment consistency
 
-## Legacy Scripts (To Be Removed)
+### Claude Hooks
 
-The following can be safely deleted after migration:
-- `process-manager/` - Complex custom process management
-- `claude-safe-wrapper.js` - No longer needed
-- `start-background.js` - Replaced by new scripts
-- `stop-all.js` - Replaced by stop.js
-- `dev.js` - Replaced by dev-simple.js
+- **`claude-hooks/`** - AI assistant integration
+  - Automatic formatting and linting on file edits
+  - Helps maintain code quality during AI-assisted development
 
-## Usage
+## Process Management
+
+We've simplified process management to use Turbo's native capabilities:
 
 ```bash
-# Recommended for development
-pnpm start          # Cleans ports and starts all services
+# Start all services
+pnpm dev              # Uses turbo run dev --parallel
 
-# For Claude Code
-pnpm start:claude   # Rate-limited output
+# Start individual services  
+pnpm dev:web          # turbo run dev --filter=web
+pnpm dev:studio       # turbo run dev --filter=studio
+pnpm dev:storybook    # turbo run dev --filter=@workspace/ui
 
-# Stop everything
-pnpm stop
+# Stop services
+pnpm stop             # pkill -f 'next-server|sanity dev|storybook'
+pnpm stop:ports       # npx kill-port 3000 3333 6006
 ```
 
-## Benefits of New Approach
+## Design Philosophy
 
-1. **Simplicity** - Uses industry-standard tools (concurrently, kill-port)
-2. **No State Management** - No PID files or state.json
-3. **Better Error Handling** - Built into concurrently
-4. **Easier Maintenance** - Simple, readable scripts
-5. **Claude Compatibility** - Special mode for AI assistants
+- **Native Tools**: Use Turbo's built-in orchestration
+- **Simple Scripts**: Direct commands, no wrapper complexity
+- **Standard Patterns**: Follow Turbo/monorepo best practices
+- **Minimal Dependencies**: Reduce external tool requirements
+
+## Migration Notes
+
+We've removed custom process management scripts in favor of:
+- Turbo's `--parallel` flag for concurrent execution
+- Turbo's `--filter` flag for selective service starting
+- Native `pkill` for process cleanup
+- Direct npm scripts without Node.js wrappers
+
+This reduces complexity from ~200 lines of custom code to ~10 lines of standard commands.

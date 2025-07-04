@@ -2,7 +2,7 @@
 
 This is a modern monorepo project using Next.js 15, Sanity Studio v3, and TurboRepo with comprehensive TypeScript support and observability.
 
-**Last Updated by Claude:** 2025-07-03 - Comprehensive documentation regeneration with architectural insights
+**Last Updated by Claude:** 2025-07-04 - Refactored to native Turbo process management
 
 ## Project Overview
 
@@ -65,22 +65,23 @@ When making significant changes:
 # Install dependencies
 pnpm install
 
-# Start all development servers (simple)
-pnpm dev
+# Start all development servers
+pnpm dev              # Uses Turbo parallel execution
 
-# Start with automatic port cleanup (recommended)
-pnpm start
+# Start with automatic port cleanup
+pnpm start            # Stops any running processes first, then starts
 
-# Start with Claude Code optimizations
-pnpm start:claude
+# Start with quiet output  
+pnpm start:quiet      # Streamlined output mode
 
 # Start individual services
-pnpm dev:web       # Just the web app
-pnpm dev:studio    # Just Sanity Studio
-pnpm dev:storybook # Just Storybook
+pnpm dev:web          # Just the web app
+pnpm dev:studio       # Just Sanity Studio
+pnpm dev:storybook    # Just Storybook
 
 # Stop all services
-pnpm stop
+pnpm stop             # Kills all dev processes
+pnpm stop:ports       # Alternative: kills by port numbers
 ```
 
 ### Service URLs
@@ -118,13 +119,14 @@ pnpm stop
 
 ```bash
 # Development
-pnpm dev                    # Start all apps concurrently
+pnpm dev                    # Start all apps using Turbo
 pnpm start                  # Start with automatic port cleanup
-pnpm start:claude          # Claude Code-optimized (rate-limited output)
+pnpm start:quiet           # Start with streamlined output
 pnpm dev:web               # Start just the web app
 pnpm dev:studio            # Start just Sanity Studio
 pnpm dev:storybook         # Start just Storybook
 pnpm stop                  # Stop all development servers
+pnpm stop:ports            # Stop by killing specific ports
 
 # Code Quality
 pnpm lint                  # Run ESLint across all packages
@@ -217,12 +219,12 @@ Sanity Studio → Schema Definition → Type Generation → Next.js App
 - **Environment Variables**: Use TurboRepo's env configuration for proper variable passthrough
 - **Type Generation**: Run type generation after any Sanity schema changes
 
-### AI Assistant Optimizations
+### Process Management
 
-- **Claude Code Dev Server**: Use `pnpm start:claude` for rate-limited output
-- **Automatic Port Cleanup**: Use `pnpm start` to avoid port conflicts
-- **Simple Stop Command**: Use `pnpm stop` to clean up all services
-- **Claude Hooks**: Automatic formatting and linting on file edits
+- **Native Turbo**: All dev commands use Turbo's built-in parallel execution
+- **Simple Scripts**: Direct commands without wrapper scripts
+- **Automatic Cleanup**: `pnpm start` handles port cleanup automatically
+- **Clean Shutdown**: Ctrl+C properly stops all services
 
 ### Performance Considerations
 
