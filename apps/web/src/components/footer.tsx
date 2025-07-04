@@ -1,5 +1,4 @@
 import { Footer as UIFooter } from "@workspace/ui/components/footer";
-import Link from "next/link";
 
 import { sanityFetch } from "@/lib/sanity/fetch-with-tracing";
 import { queryFooterData, queryGlobalSeoSettings } from "@/lib/sanity/query";
@@ -8,7 +7,7 @@ import type {
   QueryGlobalSeoSettingsResult,
 } from "@/lib/sanity/sanity.types";
 
-import { Logo } from "./logo";
+import { ImageLogo } from "./image-logo";
 import {
   FacebookIcon,
   InstagramIcon,
@@ -142,7 +141,7 @@ function Footer({ data, settingsData }: FooterProps) {
   return (
     <UIFooter
       className="mt-20"
-      logo={<Logo image={logo} alt={siteTitle} priority />}
+      logo={logo ? <ImageLogo image={logo} alt={siteTitle} priority /> : undefined}
       description={subtitle || undefined}
       sections={footerSections}
       socialLinks={uiSocialLinks}

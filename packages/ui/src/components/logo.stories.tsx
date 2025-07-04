@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Logo } from "./logo.js";
+
+import { Logo } from "./logo";
 
 const meta = {
   title: "Components/Logo",
@@ -10,7 +11,7 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {
     size: {
-      control: "select",
+      control: { type: "select" },
       options: ["sm", "default", "lg", "xl"],
     },
   },
@@ -19,43 +20,65 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Text: Story = {
+export const Default: Story = {
   args: {
-    text: "Acme Corp",
+    primary: "Nick Lewis",
+    secondary: "The Blog",
   },
 };
 
-export const Image: Story = {
+export const WithLink: Story = {
   args: {
-    src: "https://via.placeholder.com/150x50",
-    alt: "Company Logo",
+    primary: "Nick Lewis",
+    secondary: "The Blog",
+    href: "/",
   },
 };
 
 export const Small: Story = {
   args: {
-    text: "Acme Corp",
     size: "sm",
+    primary: "Nick Lewis",
+    secondary: "The Blog",
   },
 };
 
 export const Large: Story = {
   args: {
-    text: "Acme Corp",
     size: "lg",
+    primary: "Nick Lewis",
+    secondary: "The Blog",
   },
 };
 
 export const ExtraLarge: Story = {
   args: {
-    text: "Acme Corp",
     size: "xl",
+    primary: "Nick Lewis",
+    secondary: "The Blog",
   },
 };
 
-export const CustomStyling: Story = {
+export const CustomText: Story = {
   args: {
-    text: "Acme Corp",
-    className: "text-blue-600 dark:text-blue-400",
+    primary: "ACME Corp",
+    secondary: "Enterprise Solutions",
+    separator: "|",
+  },
+};
+
+export const SingleText: Story = {
+  args: {
+    primary: "BrandName",
+    secondary: "",
+    separator: "",
+  },
+};
+
+export const WithCustomClass: Story = {
+  args: {
+    className: "text-blue-600",
+    primary: "Styled",
+    secondary: "Logo",
   },
 };

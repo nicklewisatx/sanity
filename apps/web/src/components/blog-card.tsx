@@ -204,8 +204,8 @@ export function BlogHeader({
       overlay={true}
       variant="background-image"
       size="sm"
-      alignment="center"
-      className="mb-8"
+      alignment="left"
+      className=""
     />
   );
 }

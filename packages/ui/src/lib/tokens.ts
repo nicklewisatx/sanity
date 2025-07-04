@@ -1,6 +1,9 @@
 /**
  * Design tokens exported as TypeScript constants
  * These values match the CSS variables defined in globals.css
+ * 
+ * NOTE: For the new design system tokens, see design-system.ts
+ * This file is maintained for backward compatibility
  */
 
 export const colors = {

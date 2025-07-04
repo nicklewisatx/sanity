@@ -91,7 +91,7 @@ const bottomLinks = [
 
 export const Default: Story = {
   args: {
-    logo: <Logo text="Acme Corp" />,
+    logo: <Logo primary="Acme Corp" secondary="" separator="" />,
     description:
       "Building the future of web applications with modern tools and best practices.",
     sections: defaultSections,
@@ -104,7 +104,7 @@ export const Default: Story = {
 export const Dark: Story = {
   args: {
     variant: "dark",
-    logo: <Logo text="Acme Corp" className="text-white" />,
+    logo: <Logo primary="Acme Corp" secondary="" separator="" className="text-white" />,
     description:
       "Building the future of web applications with modern tools and best practices.",
     sections: defaultSections,
@@ -117,7 +117,7 @@ export const Dark: Story = {
 export const Minimal: Story = {
   args: {
     variant: "minimal",
-    logo: <Logo text="Minimal Co" size="sm" />,
+    logo: <Logo primary="Minimal Co" secondary="" separator="" size="sm" />,
     copyright: "© 2024 Minimal Co. All rights reserved.",
     bottomLinks: bottomLinks,
   },
@@ -143,7 +143,7 @@ export const WithLinksOnly: Story = {
 
 export const WithBrandOnly: Story = {
   args: {
-    logo: <Logo text="Brand" size="lg" />,
+    logo: <Logo primary="Brand" secondary="" separator="" size="lg" />,
     description:
       "We create beautiful digital experiences that people love. Join us on our journey to make the web a better place.",
     socialLinks: socialLinks,
@@ -154,7 +154,7 @@ export const WithBrandOnly: Story = {
 export const Small: Story = {
   args: {
     size: "sm",
-    logo: <Logo text="Compact" size="sm" />,
+    logo: <Logo primary="Compact" secondary="" separator="" size="sm" />,
     sections: defaultSections.slice(0, 2),
     copyright: "© 2024 Compact Inc.",
   },
@@ -164,7 +164,7 @@ export const Large: Story = {
   args: {
     size: "lg",
     variant: "dark",
-    logo: <Logo text="Enterprise" size="lg" className="text-white" />,
+    logo: <Logo primary="Enterprise" secondary="" separator="" size="lg" className="text-white" />,
     description:
       "Enterprise-grade solutions for modern businesses. Trusted by thousands of companies worldwide.",
     sections: defaultSections,
@@ -178,7 +178,7 @@ export const CenteredSimple: Story = {
   render: () => (
     <Footer variant="minimal" className="text-center">
       <div className="mb-4">
-        <Logo text="Simple" className="mx-auto" />
+        <Logo primary="Simple" secondary="" separator="" className="mx-auto" />
       </div>
       <nav className="mb-4 flex justify-center gap-6">
         <a
@@ -210,7 +210,7 @@ export const CenteredSimple: Story = {
 export const WithNewsletter: Story = {
   render: () => (
     <Footer
-      logo={<Logo text="Newsletter Co" />}
+      logo={<Logo primary="Newsletter Co" secondary="" separator="" />}
       sections={defaultSections}
       copyright="© 2024 Newsletter Co. All rights reserved."
     >

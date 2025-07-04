@@ -62,7 +62,7 @@ const FrontpageComponent = () => {
         <div className="container mx-auto px-4">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center gap-8">
-              <Logo size="default" text="Nick Lewis" />
+              <Logo size="default" primary="Nick Lewis" secondary="" separator="" />
               <NavigationMenu className="hidden md:flex">
                 <NavigationMenuList>
                   <NavigationMenuItem>
@@ -338,7 +338,7 @@ const FrontpageComponent = () => {
       {/* Footer */}
       <Footer
         variant="dark"
-        logo={<Logo size="default" text="Nick Lewis" className="text-white" />}
+        logo={<Logo size="default" primary="Nick Lewis" secondary="" separator="" className="text-white" />}
         description="Sharing knowledge and building cool things on the web."
         sections={[
           {
@@ -394,7 +394,7 @@ export const CompactVersion: Story = {
       <header className="border-b">
         <div className="container mx-auto px-4">
           <div className="flex h-16 items-center justify-between">
-            <Logo size="default" text="Nick Lewis" />
+            <Logo size="default" primary="Nick Lewis" secondary="" separator="" />
             <div className="flex items-center gap-4">
               <Button variant="ghost" size="sm">
                 Blog
@@ -453,7 +453,7 @@ export const CompactVersion: Story = {
       {/* Minimal Footer */}
       <Footer
         variant="minimal"
-        logo={<Logo size="sm">Nick Lewis</Logo>}
+        logo={<Logo size="sm" primary="Nick Lewis" secondary="" separator="" />}
         bottomLinks={[
           { label: "Privacy", href: "#" },
           { label: "RSS", href: "#" },
@@ -470,7 +470,7 @@ export const DarkTheme: Story = {
       <header className="border-b border-slate-800">
         <div className="container mx-auto px-4">
           <div className="flex h-16 items-center justify-between">
-            <Logo size="default" text="Nick Lewis" className="text-white" />
+            <Logo size="default" primary="Nick Lewis" secondary="" separator="" className="text-white" />
             <div className="flex items-center gap-4">
               <Button
                 variant="ghost"
@@ -549,7 +549,7 @@ export const DarkTheme: Story = {
       {/* Already dark footer */}
       <Footer
         variant="dark"
-        logo={<Logo size="default" text="Nick Lewis" className="text-white" />}
+        logo={<Logo size="default" primary="Nick Lewis" secondary="" separator="" className="text-white" />}
         description="Building and writing in the quiet hours."
         sections={[
           {
