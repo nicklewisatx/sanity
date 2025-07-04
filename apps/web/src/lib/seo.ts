@@ -33,10 +33,10 @@ interface OgImageParams {
 
 // Default site configuration
 const siteConfig: SiteConfig = {
-  title: "Roboto Studio Demo",
-  description: "Roboto Studio Demo",
-  twitterHandle: "@studioroboto",
-  keywords: ["roboto", "studio", "demo", "sanity", "next", "react", "template"],
+  title: "The Blog",
+  description: "Exploring the intersection of artificial intelligence and software development",
+  twitterHandle: "@nicklewisatx",
+  keywords: ["AI", "coding", "blog", "Nick Lewis", "artificial intelligence", "software development", "programming"],
 };
 
 function generateOgImageUrl(params: OgImageParams = {}): string {
@@ -118,7 +118,15 @@ export function getSEOMetadata(page: PageSeoData = {}): Metadata {
     creator: siteConfig.title,
     authors: [{ name: siteConfig.title }],
     icons: {
-      icon: `${baseUrl}/favicon.ico`,
+      icon: [
+        { url: `${baseUrl}/favicon.ico` },
+        { url: `${baseUrl}/favicon-16x16.png`, sizes: "16x16", type: "image/png" },
+        { url: `${baseUrl}/favicon-32x32.png`, sizes: "32x32", type: "image/png" },
+      ],
+      apple: `${baseUrl}/apple-touch-icon.png`,
+      other: [
+        { rel: "manifest", url: `${baseUrl}/site.webmanifest` },
+      ],
     },
     keywords: allKeywords,
     robots: seoNoIndex ? "noindex, nofollow" : "index, follow",
