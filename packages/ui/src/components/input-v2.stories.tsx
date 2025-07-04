@@ -353,7 +353,7 @@ export const LoginForm: Story = {
           </ButtonV2>
           
           <p className="text-center text-sm text-gray-600">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <a href="#" className="text-primary-600 hover:text-primary-700">
               Sign up
             </a>

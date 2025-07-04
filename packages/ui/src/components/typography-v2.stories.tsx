@@ -151,7 +151,7 @@ export const SpecializedComponents: StoryObj = {
       
       <div>
         <Lead>
-          This is a lead paragraph. It's larger and more prominent than regular body text, 
+          This is a lead paragraph. It&apos;s larger and more prominent than regular body text, 
           perfect for introductions or key messages that need to stand out.
         </Lead>
       </div>
@@ -194,7 +194,7 @@ export const CodeExamples: StoryObj = {
   render: () => (
     <div className="space-y-6">
       <Text>
-        Inline code like <Code>const variable = "value"</Code> can be used within text.
+        Inline code like <Code>const variable = &quot;value&quot;</Code> can be used within text.
       </Text>
       
       <div>
@@ -236,7 +236,7 @@ export const BlogPost: StoryObj = {
         <Heading level={2} className="mt-8 mb-4">Why Design Systems Matter</Heading>
         
         <Text>
-          A well-implemented design system serves as a single source of truth for your product's 
+          A well-implemented design system serves as a single source of truth for your product&apos;s 
           visual language. It includes <Code>components</Code>, <Code>patterns</Code>, and{" "}
           <Code>guidelines</Code> that teams can use to build consistent user interfaces.
         </Text>

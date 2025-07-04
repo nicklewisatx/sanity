@@ -4,7 +4,6 @@ import {
   spacing, 
   colors, 
   elevation, 
-  radius, 
   animation,
   breakpoints,
   zIndex
@@ -345,8 +344,8 @@ export const BestPractices: StoryObj = {
             </p>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="bg-red-50 p-3 rounded">
-                <p className="text-sm font-medium text-red-700 mb-1">❌ Don't</p>
-                <code className="text-xs">color: "#3B82F6"</code>
+                <p className="text-sm font-medium text-red-700 mb-1">❌ Don&apos;t</p>
+                <code className="text-xs">color: &quot;#3B82F6&quot;</code>
               </div>
               <div className="bg-green-50 p-3 rounded">
                 <p className="text-sm font-medium text-green-700 mb-1">✅ Do</p>
@@ -362,8 +361,8 @@ export const BestPractices: StoryObj = {
             </p>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="bg-red-50 p-3 rounded">
-                <p className="text-sm font-medium text-red-700 mb-1">❌ Don't</p>
-                <code className="text-xs">margin: "13px"</code>
+                <p className="text-sm font-medium text-red-700 mb-1">❌ Don&apos;t</p>
+                <code className="text-xs">margin: &quot;13px&quot;</code>
               </div>
               <div className="bg-green-50 p-3 rounded">
                 <p className="text-sm font-medium text-green-700 mb-1">✅ Do</p>

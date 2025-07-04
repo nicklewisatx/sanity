@@ -1,7 +1,7 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@workspace/ui/lib/utils";
-import { colors } from "../lib/design-system";
+// Removed unused import
 
 const inputVariants = cva(
   "w-full rounded-md border bg-white dark:bg-gray-900 px-3 py-2 text-sm transition-colors duration-200 placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
@@ -131,7 +131,8 @@ export interface CheckboxProps
 
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   ({ className, label, id, ...props }, ref) => {
-    const inputId = id || React.useId();
+    const generatedId = React.useId();
+    const inputId = id || generatedId;
     
     return (
       <div className="flex items-center">
@@ -167,7 +168,8 @@ export interface RadioProps
 
 export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
   ({ className, label, id, ...props }, ref) => {
-    const inputId = id || React.useId();
+    const generatedId = React.useId();
+    const inputId = id || generatedId;
     
     return (
       <div className="flex items-center">

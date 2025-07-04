@@ -1,7 +1,7 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@workspace/ui/lib/utils";
-import { elevation, radius, spacing } from "../lib/design-system";
+import { spacing } from "../lib/design-system";
 
 const cardVariants = cva(
   "bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 transition-all duration-200",
