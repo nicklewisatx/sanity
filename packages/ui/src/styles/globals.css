@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "./modern-art.css";
-
 @layer base {
   :root {
     /* Modern Art-Inspired Palette - Light Mode */
@@ -123,4 +121,149 @@
 
 .page-transition.active {
   opacity: 1;
+}
+
+/* Modern Art-Inspired CSS Effects */
+@layer utilities {
+  /* Gradient animations */
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .gradient-animate {
+    background-size: 200% 200%;
+    animation: gradient-shift 15s ease infinite;
+  }
+
+  /* Memphis-style shapes */
+  .shape-circle {
+    background: hsl(var(--primary));
+    border-radius: 50%;
+    opacity: 0.1;
+  }
+
+  .shape-triangle {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 100px solid hsl(var(--accent));
+    opacity: 0.1;
+  }
+
+  .shape-square {
+    background: hsl(var(--secondary));
+    transform: rotate(45deg);
+    opacity: 0.1;
+  }
+
+  /* Decorative patterns */
+  .pattern-dots {
+    background-image: radial-gradient(circle, hsl(var(--primary)) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.05;
+  }
+
+  .pattern-grid {
+    background-image: 
+      linear-gradient(hsl(var(--border)) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border)) 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.1;
+  }
+
+  /* Interactive hover effects */
+  .card-modern {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-modern::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, hsl(var(--primary)) 0%, transparent 70%);
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+
+  .card-modern:hover::before {
+    opacity: 0.1;
+    transform: scale(1);
+  }
+
+  /* Text effects */
+  .text-gradient {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--secondary)) 50%,
+      hsl(var(--accent)) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Button effects */
+  .btn-modern {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .btn-modern::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  .btn-modern:hover::after {
+    width: 300px;
+    height: 300px;
+  }
+
+  /* Geometric decorations */
+  .decoration-wrapper {
+    position: absolute;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .decoration-shape {
+    position: absolute;
+    transform-origin: center;
+    animation: float 20s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    33% {
+      transform: translateY(-20px) rotate(120deg);
+    }
+    66% {
+      transform: translateY(10px) rotate(240deg);
+    }
+  }
 }
