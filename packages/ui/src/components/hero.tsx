@@ -85,13 +85,13 @@ const Hero = React.forwardRef<HTMLElement, HeroProps>(
             )}
           >
             {subtitle && (
-              <p className="mb-4 text-sm font-medium uppercase tracking-wide text-muted-foreground">
+              <p className="mb-4 text-sm font-medium uppercase tracking-wider opacity-80">
                 {subtitle}
               </p>
             )}
 
             {title && (
-              <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+              <h1 className="mb-6 text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
                 {title}
               </h1>
             )}

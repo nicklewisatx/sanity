@@ -2,7 +2,6 @@ import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@workspace/ui/lib/utils";
-import { components, spacing, typography, animation } from "../lib/design-system";
 
 const buttonVariants = cva(
   [
@@ -142,7 +141,6 @@ const ButtonV2 = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    const Comp = asChild ? Slot : "button";
     const isDisabled = disabled || loading;
 
     // When using asChild, we can't have multiple children
@@ -154,7 +152,6 @@ const ButtonV2 = React.forwardRef<HTMLButtonElement, ButtonProps>(
             buttonVariants({ variant, size, fullWidth, loading, className })
           )}
           ref={ref}
-          disabled={isDisabled}
           {...props}
         >
           {children}

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
 import { cn } from "@workspace/ui/lib/utils";
 import { 
   NavigationMenu, 
@@ -13,9 +13,8 @@ import {
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./sheet";
 import { Button } from "./button";
 import { ButtonV2 } from "./button-v2";
-import { Menu, ChevronDown, X } from "lucide-react";
+import { Menu } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./accordion";
-import { Text, Heading } from "./typography-v2";
 
 // Navigation item types
 export interface NavLink {
@@ -98,7 +97,7 @@ function DesktopNavigation({
   rightContent 
 }: Pick<NavigationProps, 'columns' | 'buttons' | 'rightContent'>) {
   return (
-    <div className="flex items-center justify-between gap-8">
+    <div className="flex items-center justify-between gap-6">
       <NavigationMenu>
         <NavigationMenuList>
           {columns.map((item, index) => {
@@ -144,7 +143,7 @@ function DesktopNavigation({
         </NavigationMenuList>
       </NavigationMenu>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3">
         {rightContent}
         {buttons.map((button, index) => {
           // Skip buttons without text
@@ -349,7 +348,7 @@ export const NavigationV2 = React.forwardRef<HTMLDivElement, NavigationProps>(
         {...props}
       >
         {/* Logo */}
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-6">
           {logo && (
             <div 
               onClick={onLogoClick} 

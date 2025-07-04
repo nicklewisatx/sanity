@@ -91,7 +91,7 @@ export function PageBuilder({
 
         // Hero blocks should be full-width without container constraints
         const isHeroBlock = block._type === "hero";
-        const blockClasses = isHeroBlock ? "" : "my-16";
+        const blockClasses = isHeroBlock ? "" : "my-8 md:my-10";
 
         return (
           <div
