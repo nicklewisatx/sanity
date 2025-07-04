@@ -1,5 +1,6 @@
 import { Badge } from "@workspace/ui/components/badge";
 import { Hero } from "@workspace/ui/components/hero";
+import { urlFor } from "@/lib/sanity/client";
 
 import type { PagebuilderType } from "@/types";
 
@@ -20,56 +21,58 @@ export function HeroBlock({
   image,
   richText,
 }: HeroBlockProps) {
-  // For layouts with images, we'll keep the custom implementation
-  // For simpler heroes without images, we can use the UI component
-  if (image) {
+  // Build background image URL if image is provided
+  const backgroundImage = image && image.asset
+    ? urlFor(image.asset).width(1920).height(1080).url()
+    : undefined;
+
+  // For heroes with images, use the background-image variant
+  if (image && image.asset) {
     return (
-      <section id="hero" className="mt-4 md:my-16">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid items-center gap-8 lg:grid-cols-2">
-            <div className="grid h-full grid-rows-[auto_1fr_auto] gap-4 items-center justify-items-center text-center lg:items-start lg:justify-items-start lg:text-left">
-              {badge && <Badge variant="secondary">{badge}</Badge>}
-              <div className="grid gap-4">
-                <h1 className="text-4xl lg:text-6xl font-semibold text-balance">
-                  {title}
-                </h1>
-                <RichText
-                  richText={richText}
-                  className="text-base md:text-lg font-normal"
-                />
-              </div>
-
-              <SanityButtons
-                buttons={buttons}
-                buttonClassName="w-full sm:w-auto"
-                className="w-full sm:w-fit grid gap-2 sm:grid-flow-col lg:justify-start mb-8"
-              />
-            </div>
-
-            <div className="h-96 w-full">
-              <SanityImage
-                asset={image}
-                loading="eager"
-                width={800}
-                height={800}
-                priority
-                quality={80}
-                className="max-h-96 w-full rounded-3xl object-cover"
-              />
-            </div>
+      <Hero
+        id="hero"
+        title={title || undefined}
+        subtitle={badge || undefined}
+        alignment="center"
+        variant="background-image"
+        backgroundImage={backgroundImage}
+        overlay={true}
+        className="mt-4 md:my-16"
+      >
+        {/* Rich text content as children */}
+        {richText && (
+          <div className="mt-6">
+            <RichText
+              richText={richText}
+              className="text-base md:text-lg font-normal text-white/90"
+            />
           </div>
-        </div>
-      </section>
+        )}
+
+        {/* Buttons section */}
+        {buttons && buttons.length > 0 && (
+          <div className="mt-8">
+            <SanityButtons
+              buttons={buttons}
+              buttonClassName="w-full sm:w-auto"
+              className="w-full sm:w-fit grid gap-2 sm:grid-flow-col justify-center"
+            />
+          </div>
+        )}
+      </Hero>
     );
   }
 
-  // For heroes without images, use the UI component
+  // For heroes without images, use the background-image variant with a default image
   return (
     <Hero
       id="hero"
       title={title || undefined}
       subtitle={badge || undefined}
       alignment="center"
+      variant="background-image"
+      backgroundImage="https://images.unsplash.com/photo-1557683316-973673baf926?w=1920&h=1080&fit=crop"
+      overlay={true}
       className="mt-4 md:my-16"
     >
       {/* Rich text content as children */}
@@ -77,7 +80,7 @@ export function HeroBlock({
         <div className="mt-6">
           <RichText
             richText={richText}
-            className="text-base md:text-lg font-normal text-muted-foreground"
+            className="text-base md:text-lg font-normal text-white/90"
           />
         </div>
       )}

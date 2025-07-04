@@ -24,7 +24,7 @@ We've simplified process management to use Turbo's native capabilities:
 # Start all services
 pnpm dev              # Uses turbo run dev --parallel
 
-# Start individual services  
+# Start individual services
 pnpm dev:web          # turbo run dev --filter=web
 pnpm dev:studio       # turbo run dev --filter=studio
 pnpm dev:storybook    # turbo run dev --filter=@workspace/ui
@@ -44,6 +44,7 @@ pnpm stop:ports       # npx kill-port 3000 3333 6006
 ## Migration Notes
 
 We've removed custom process management scripts in favor of:
+
 - Turbo's `--parallel` flag for concurrent execution
 - Turbo's `--filter` flag for selective service starting
 - Native `pkill` for process cleanup

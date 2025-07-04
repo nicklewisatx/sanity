@@ -11,7 +11,7 @@ const meta = {
   argTypes: {
     variant: {
       control: "select",
-      options: ["default", "gradient", "dark"],
+      options: ["default", "gradient", "dark", "background-image"],
     },
     size: {
       control: "select",
@@ -89,7 +89,7 @@ export const WithBackgroundImage: Story = {
     backgroundImage:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=1080&fit=crop",
     overlay: true,
-    variant: "dark",
+    variant: "background-image",
     title: "Stunning Visuals",
     description: "Combine beautiful imagery with compelling content.",
     actions: [{ text: "Get Started", variant: "default" }],

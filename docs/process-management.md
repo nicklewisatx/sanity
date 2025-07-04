@@ -32,6 +32,7 @@ pnpm dev:storybook    # Start just Storybook
 ```
 
 The system:
+
 1. Uses Turbo's `--parallel` flag to run all dev tasks concurrently
 2. Leverages Turbo's dependency graph for proper startup order
 3. Shows unified output with service prefixes
@@ -45,6 +46,7 @@ pnpm stop:ports       # Kill processes by port number
 ```
 
 Two approaches for flexibility:
+
 - `pkill` pattern matching for quick cleanup
 - Port-based killing as a fallback option
 
@@ -58,10 +60,10 @@ Uses `--log-order=stream` for cleaner, sequential output that's easier to read i
 
 ## Service Configuration
 
-| Service | Port | Package | Command |
-|---------|------|---------|---------|
-| Web | 3000 | apps/web | `next dev --turbopack` |
-| Studio | 3333 | apps/studio | `sanity dev` |
+| Service   | Port | Package     | Command                 |
+| --------- | ---- | ----------- | ----------------------- |
+| Web       | 3000 | apps/web    | `next dev --turbopack`  |
+| Studio    | 3333 | apps/studio | `sanity dev`            |
 | Storybook | 6006 | packages/ui | `storybook dev -p 6006` |
 
 ## Benefits of Turbo Approach
