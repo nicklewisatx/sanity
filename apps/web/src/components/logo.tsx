@@ -1,56 +1,24 @@
-import Image from "next/image";
 import Link from "next/link";
 
-import type { Maybe, SanityImageProps } from "@/types";
-
-import { SanityImage } from "./sanity-image";
-
-const LOGO_URL =
-  "https://cdn.sanity.io/images/s6kuy1ts/production/68c438f68264717e93c7ba1e85f1d0c4b58b33c2-1200x621.svg";
-
-interface LogoProps {
-  src?: Maybe<string>;
-  image?: Maybe<SanityImageProps>;
-  alt?: Maybe<string>;
-  width?: number;
-  height?: number;
-  priority?: boolean;
+interface TextLogoProps {
+  className?: string;
 }
 
-export function Logo({
-  src,
-  alt = "logo",
-  image,
-  width = 170,
-  height = 40,
-  priority = true,
-}: LogoProps) {
+export function TextLogo({ className }: TextLogoProps) {
   return (
-    <Link href="/" className="">
-      {image ? (
-        <SanityImage
-          asset={image}
-          alt={alt ?? "logo"}
-          // width={width}
-          // height={height}
-          className="w-[170px]  dark:invert"
-          priority={priority}
-          loading="eager"
-          decoding="sync"
-          quality={100}
-        />
-      ) : (
-        <Image
-          src={src ?? LOGO_URL}
-          alt={alt ?? "logo"}
-          width={width}
-          className="w-[170px] h-[40px] dark:invert"
-          height={height}
-          loading="eager"
-          priority={priority}
-          decoding="sync"
-        />
-      )}
+    <Link href="/" className={`group inline-flex items-center ${className}`}>
+      <div className="relative">
+        <h1 className="text-2xl font-bold tracking-tight transition-all duration-300 group-hover:tracking-wide">
+          <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
+            Nick Lewis
+          </span>
+          <span className="mx-2 text-gray-400 dark:text-gray-600 font-light">:</span>
+          <span className="font-light text-gray-600 dark:text-gray-400">
+            The Blog
+          </span>
+        </h1>
+        <div className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full" />
+      </div>
     </Link>
   );
 }

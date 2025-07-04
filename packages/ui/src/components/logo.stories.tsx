@@ -22,13 +22,15 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    alt: "Sanity Logo",
+    primary: "Nick Lewis",
+    secondary: "The Blog",
   },
 };
 
 export const WithLink: Story = {
   args: {
-    alt: "Sanity Logo",
+    primary: "Nick Lewis",
+    secondary: "The Blog",
     href: "/",
   },
 };
@@ -36,42 +38,47 @@ export const WithLink: Story = {
 export const Small: Story = {
   args: {
     size: "sm",
-    alt: "Sanity Logo",
+    primary: "Nick Lewis",
+    secondary: "The Blog",
   },
 };
 
 export const Large: Story = {
   args: {
     size: "lg",
-    alt: "Sanity Logo",
+    primary: "Nick Lewis",
+    secondary: "The Blog",
   },
 };
 
 export const ExtraLarge: Story = {
   args: {
     size: "xl",
-    alt: "Sanity Logo",
+    primary: "Nick Lewis",
+    secondary: "The Blog",
   },
 };
 
-export const CustomImage: Story = {
+export const CustomText: Story = {
   args: {
-    src: "https://via.placeholder.com/200x50",
-    alt: "Custom Logo",
+    primary: "ACME Corp",
+    secondary: "Enterprise Solutions",
+    separator: "|",
   },
 };
 
-export const TextLogo: Story = {
+export const SingleText: Story = {
   args: {
-    text: "ACME Corp",
-    src: undefined,
+    primary: "BrandName",
+    secondary: "",
+    separator: "",
   },
 };
 
 export const WithCustomClass: Story = {
   args: {
     className: "text-blue-600",
-    text: "Styled Text",
-    src: undefined,
+    primary: "Styled",
+    secondary: "Logo",
   },
 };

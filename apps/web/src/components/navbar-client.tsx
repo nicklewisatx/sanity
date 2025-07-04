@@ -34,7 +34,7 @@ import type {
   QueryNavbarDataResult,
 } from "@/lib/sanity/sanity.types";
 
-import { Logo } from "./logo";
+import { ImageLogo } from "./image-logo";
 import { ModeToggle } from "./mode-toggle";
 import { SanityButtons } from "./sanity-buttons";
 import { SanityIcon } from "./sanity-icon";
@@ -137,7 +137,7 @@ function MobileNavbar({
       <SheetContent className="overflow-y-auto">
         <SheetHeader>
           <SheetTitle>
-            {logo && <Logo alt={siteTitle} priority image={logo} />}
+            {logo && <ImageLogo alt={siteTitle} priority image={logo} />}
           </SheetTitle>
         </SheetHeader>
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { NavbarV2, type NavColumn, type NavLink, type NavButton } from "@workspace/ui/components/navigation-v2";
-import { Logo } from "./logo";
+import { ImageLogo } from "./image-logo";
 import { ModeToggle } from "./mode-toggle";
 import { SanityIcon } from "./sanity-icon";
 import { usePathname } from "next/navigation";
@@ -69,7 +69,7 @@ export function NavbarClientV2({
 
   return (
     <NavbarV2
-      logo={logo && <Logo alt={siteTitle} priority image={logo} />}
+      logo={logo && <ImageLogo alt={siteTitle} priority image={logo} />}
       columns={navColumns}
       buttons={navButtons}
       rightContent={<ModeToggle />}

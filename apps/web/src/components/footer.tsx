@@ -7,7 +7,7 @@ import type {
   QueryGlobalSeoSettingsResult,
 } from "@/lib/sanity/sanity.types";
 
-import { Logo } from "./logo";
+import { ImageLogo } from "./image-logo";
 import {
   FacebookIcon,
   InstagramIcon,
@@ -141,7 +141,7 @@ function Footer({ data, settingsData }: FooterProps) {
   return (
     <UIFooter
       className="mt-20"
-      logo={<Logo image={logo} alt={siteTitle} priority />}
+      logo={logo ? <ImageLogo image={logo} alt={siteTitle} priority /> : undefined}
       description={subtitle || undefined}
       sections={footerSections}
       socialLinks={uiSocialLinks}

@@ -3,18 +3,15 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@workspace/ui/lib/utils";
 
-const DEFAULT_LOGO_URL =
-  "https://cdn.sanity.io/images/s6kuy1ts/production/68c438f68264717e93c7ba1e85f1d0c4b58b33c2-1200x621.svg";
-
 const logoVariants = cva(
-  "inline-flex items-center justify-center font-semibold",
+  "group inline-flex items-center font-bold tracking-tight transition-all duration-300",
   {
     variants: {
       size: {
-        default: "h-10",
-        sm: "h-8",
-        lg: "h-12",
-        xl: "h-16",
+        default: "text-2xl",
+        sm: "text-xl",
+        lg: "text-3xl",
+        xl: "text-4xl",
       },
     },
     defaultVariants: {
@@ -26,9 +23,9 @@ const logoVariants = cva(
 export interface LogoProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof logoVariants> {
-  src?: string;
-  alt?: string;
-  text?: string;
+  primary?: string;
+  secondary?: string;
+  separator?: string;
   href?: string;
   asChild?: boolean;
 }
@@ -38,9 +35,9 @@ const Logo = React.forwardRef<HTMLDivElement, LogoProps>(
     {
       className,
       size,
-      src = DEFAULT_LOGO_URL,
-      alt = "Logo",
-      text,
+      primary = "Nick Lewis",
+      secondary = "The Blog",
+      separator = ":",
       href,
       asChild,
       ...props
@@ -48,30 +45,29 @@ const Logo = React.forwardRef<HTMLDivElement, LogoProps>(
     ref,
   ) => {
     const content = (
-      <div
-        ref={ref}
-        className={cn(logoVariants({ size, className }))}
-        {...props}
-      >
-        {src || text ? (
-          src ? (
-            <img
-              src={src}
-              alt={alt}
-              className="h-full w-auto object-contain dark:invert"
-              loading="eager"
-              decoding="sync"
-            />
-          ) : (
-            <span>{text}</span>
-          )
-        ) : null}
+      <div className="relative">
+        <div
+          ref={ref}
+          className={cn(logoVariants({ size, className }), "group-hover:tracking-wide")}
+          {...props}
+        >
+          <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
+            {primary}
+          </span>
+          <span className="mx-2 text-gray-400 dark:text-gray-600 font-light">
+            {separator}
+          </span>
+          <span className="font-light text-gray-600 dark:text-gray-400">
+            {secondary}
+          </span>
+        </div>
+        <div className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full" />
       </div>
     );
 
     if (href && !asChild) {
       return (
-        <a href={href} className="inline-flex">
+        <a href={href} className="group inline-flex">
           {content}
         </a>
       );
