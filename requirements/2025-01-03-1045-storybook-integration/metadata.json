@@ -1,0 +1,19 @@
+{
+  "id": "storybook-integration",
+  "started": "2025-01-03T10:45:00Z",
+  "lastUpdated": "2025-01-03T10:50:00Z",
+  "status": "complete",
+  "phase": "complete",
+  "progress": {
+    "discovery": { "answered": 5, "total": 5 },
+    "detail": { "answered": 5, "total": 5 }
+  },
+  "contextFiles": [
+    "/packages/ui/package.json",
+    "/packages/ui/tailwind.config.ts",
+    "/packages/ui/src/styles/globals.css",
+    "/apps/web/src/components/pagebuilder.tsx",
+    "/apps/studio/schemaTypes/definitions/pagebuilder.ts"
+  ],
+  "relatedFeatures": ["pagebuilder", "ui-components", "design-system"]
+}

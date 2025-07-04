@@ -6,10 +6,13 @@
 **Assignees:** TBD
 
 ## Problem Statement
+
 Currently lacking a comprehensive portfolio site that showcases AI development expertise, technical analysis, and professional work. Need a modern, performant solution that allows easy content management and provides excellent user experience.
 
 ## Solution Overview
+
 Build a full-featured portfolio site with:
+
 - Dynamic content management via Sanity CMS
 - Type-safe React components
 - Modern UI with accessibility focus
@@ -18,6 +21,7 @@ Build a full-featured portfolio site with:
 - Curated technology showcase
 
 ## Business Value
+
 - Establish professional online presence
 - Showcase technical expertise
 - Enable direct client contact
@@ -25,6 +29,7 @@ Build a full-featured portfolio site with:
 - Demonstrate modern development skills
 
 ## Technical Architecture
+
 ```
 ┌─────────────────┐     ┌──────────────┐     ┌─────────────┐
 │   Sanity CMS    │────▶│  Next.js 15  │────▶│   Browser   │
@@ -41,16 +46,18 @@ Build a full-featured portfolio site with:
 ## Implementation Plan
 
 ### Phase 1: Content Models (Week 1)
+
 **Owner:** Backend Developer
 
 - [ ] **About Page Singleton** - Create developer profile schema
-- [ ] **Technology Document** - Build tech showcase schema  
+- [ ] **Technology Document** - Build tech showcase schema
 - [ ] **Note Document** - Design lightweight content type
 - [ ] **Analysis Document** - Extend blog with technical features
 - [ ] **Contact Submission** - Form data storage schema
 - [ ] **Update Studio Structure** - Organize new content types
 
 ### Phase 2: API & Infrastructure (Week 1-2)
+
 **Owner:** Full-Stack Developer
 
 - [ ] **Email Service Setup** - Configure Resend API
@@ -60,6 +67,7 @@ Build a full-featured portfolio site with:
 - [ ] **Rate Limiting** - Implement spam protection
 
 ### Phase 3: Component Library (Week 2)
+
 **Owner:** Frontend Developer
 
 - [ ] **Technology Components** - Card, Grid, Filter
@@ -68,6 +76,7 @@ Build a full-featured portfolio site with:
 - [ ] **Content Display** - Note cards, Analysis layout
 
 ### Phase 4: Page Implementation (Week 3)
+
 **Owner:** Frontend Developer
 
 - [ ] **About Page** - /about route
@@ -77,6 +86,7 @@ Build a full-featured portfolio site with:
 - [ ] **Contact Page** - /contact with form
 
 ### Phase 5: Quality Assurance (Week 3-4)
+
 **Owner:** QA Engineer
 
 - [ ] **E2E Test Suite** - Playwright coverage
@@ -86,6 +96,7 @@ Build a full-featured portfolio site with:
 - [ ] **Documentation** - Update all docs
 
 ## Definition of Done
+
 - [ ] All TypeScript strict mode passing
 - [ ] No console errors or warnings
 - [ ] All components have unit tests
@@ -96,24 +107,27 @@ Build a full-featured portfolio site with:
 - [ ] Documentation updated
 
 ## Success Metrics
-| Metric | Target | Measurement |
-|--------|--------|-------------|
-| Page Load Time | < 100ms | Web Vitals |
-| Lighthouse Score | > 90 | CI Pipeline |
-| Type Coverage | 100% | TypeScript |
-| Test Coverage | > 80% | Jest/Vitest |
-| Accessibility | WCAG AA | axe DevTools |
-| Email Delivery | 100% | Resend Dashboard |
+
+| Metric           | Target  | Measurement      |
+| ---------------- | ------- | ---------------- |
+| Page Load Time   | < 100ms | Web Vitals       |
+| Lighthouse Score | > 90    | CI Pipeline      |
+| Type Coverage    | 100%    | TypeScript       |
+| Test Coverage    | > 80%   | Jest/Vitest      |
+| Accessibility    | WCAG AA | axe DevTools     |
+| Email Delivery   | 100%    | Resend Dashboard |
 
 ## Risk Mitigation
-| Risk | Impact | Mitigation |
-|------|--------|------------|
-| Resend API limits | High | Implement queue system |
-| Large code blocks | Medium | Lazy load syntax highlighter |
-| Schema migration | High | Create backup, test locally |
-| Performance regression | Medium | Monitor Core Web Vitals |
+
+| Risk                   | Impact | Mitigation                   |
+| ---------------------- | ------ | ---------------------------- |
+| Resend API limits      | High   | Implement queue system       |
+| Large code blocks      | Medium | Lazy load syntax highlighter |
+| Schema migration       | High   | Create backup, test locally  |
+| Performance regression | Medium | Monitor Core Web Vitals      |
 
 ## Resources Needed
+
 - [ ] Resend API key ($20/month)
 - [ ] Sanity project (existing)
 - [ ] Vercel deployment (existing)
@@ -121,19 +135,22 @@ Build a full-featured portfolio site with:
 - [ ] QA testing time (8 hours)
 
 ## Timeline
+
 ```
 Week 1: █████░░░░░ Content Models + API Setup
-Week 2: ░░███████░ Components + Infrastructure  
+Week 2: ░░███████░ Components + Infrastructure
 Week 3: ░░░░█████░ Pages + Integration
 Week 4: ░░░░░░████ Testing + Launch Prep
 ```
 
 ## Related Issues
+
 - Depends on: #123 (TypeScript 5.5 upgrade)
 - Blocks: #456 (Public launch)
 - Related to: #789 (Design system updates)
 
 ## Discussion Points
+
 - [ ] Should we use Resend or SendGrid for emails?
 - [ ] Do we need A/B testing for contact forms?
 - [ ] Should analysis posts have comment functionality?

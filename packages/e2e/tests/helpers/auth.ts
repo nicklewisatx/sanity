@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { Page } from "@playwright/test";
 
 export async function bypassVercelProtection(page: Page) {
   const bypass = process.env.VERCEL_PROTECTION_BYPASS_SECRET;

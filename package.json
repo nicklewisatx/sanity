@@ -4,10 +4,14 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
-    "dev": "turbo dev",
-    "start": "./scripts/start-dev.sh",
-    "start:background": "nohup ./scripts/start-dev.sh > dev.log 2>&1 &",
-    "start:claude": "turbo dev --no-daemon --concurrency=4",
+    "dev": "turbo run dev --parallel",
+    "dev:web": "turbo run dev --filter=web",
+    "dev:studio": "turbo run dev --filter=studio",
+    "dev:storybook": "turbo run dev --filter=@workspace/ui",
+    "start": "pnpm stop && pnpm dev",
+    "start:quiet": "turbo run dev --parallel --log-order=stream",
+    "stop": "npx kill-port 3000 3333 6006",
+    "stop:pkill": "pkill -f 'next-server|sanity dev|storybook' || true",
     "lint": "turbo lint",
     "check-types": "turbo check-types",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
@@ -30,11 +34,13 @@
     "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
     "jsdom": "^26.1.0",
+    "kill-port": "^2.0.1",
     "prettier": "^3.6.2",
     "tsx": "^4.20.3",
     "turbo": "^2.5.4",
     "typescript": "5.7.3",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "wait-on": "^8.0.3"
   },
   "packageManager": "pnpm@10.12.2",
   "engines": {

@@ -1,6 +1,6 @@
 # Web App - Next.js Frontend
 
-**Last Updated by Claude:** 2025-07-01
+**Last Updated by Claude:** 2025-07-03 - Added Typography and Layout block components with visual editing support
 
 ## Overview
 
@@ -40,6 +40,8 @@ apps/web/
 4. **API Routes:** Custom endpoints for draft mode, telemetry testing
 5. **SEO:** Dynamic sitemap and robots.txt generation
 6. **Dark Mode:** Theme support via next-themes
+7. **Visual Editing:** Edit-in-place functionality with @sanity/visual-editing
+8. **Component Library:** Integrated Storybook components from @workspace/ui
 
 ## Important Patterns
 

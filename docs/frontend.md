@@ -17,6 +17,37 @@ This guide covers Next.js 15 App Router development patterns and integration wit
 - Client components marked with `'use client'`
 - Shared UI components in `packages/ui/`
 
+### UI Component Integration
+
+The web app leverages the shared UI component library from `@workspace/ui` for consistency:
+
+#### Using Shared Components
+```typescript
+// Import UI components
+import { Button } from "@workspace/ui/components/button";
+import { Card, CardContent } from "@workspace/ui/components/card";
+import { Input } from "@workspace/ui/components/input";
+import { Badge } from "@workspace/ui/components/badge";
+import { Container } from "@workspace/ui/components/container";
+import { Typography } from "@workspace/ui/components/typography";
+```
+
+#### Adapter Pattern for Complex Components
+When Sanity data structures don't match UI component interfaces, use adapters:
+
+```typescript
+// Example: Footer adapter
+const footerSections = columns?.map((column) => ({
+  title: column?.title || "",
+  links: column?.links?.map((link) => ({
+    label: link.name || "",
+    href: link.href || "#",
+  })) || [],
+})) || [];
+
+<UIFooter sections={footerSections} />
+```
+
 ## Schema to Component Architecture
 
 ### Overview of Data Flow

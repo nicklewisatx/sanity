@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@workspace/ui/components/button";
+import { Input } from "@workspace/ui/components/input";
 import { ChevronRight, LoaderCircle } from "lucide-react";
 import Form from "next/form";
 import { useFormStatus } from "react-dom";
@@ -74,12 +75,12 @@ export function SubscribeNewsletter({
             action={newsletterSubmission}
           >
             <div className="flex bg-white dark:bg-zinc-200 items-center border rounded-xl p-2 drop-shadow-lg md:w-96 justify-between pl-4">
-              <input
+              <Input
                 type="email"
                 name="email"
                 required
                 placeholder="Enter your email address"
-                className="rounded-e-none border-e-0 focus-visible:ring-0 outline-none bg-transparent w-full dark:text-zinc-900 dark:placeholder:text-zinc-900"
+                className="rounded-e-none border-e-0 focus-visible:ring-0 outline-none bg-transparent w-full dark:text-zinc-900 dark:placeholder:text-zinc-900 h-auto py-0 px-0 shadow-none border-0"
               />
               <SubscribeNewsletterButton />
             </div>

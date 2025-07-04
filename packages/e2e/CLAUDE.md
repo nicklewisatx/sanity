@@ -43,10 +43,10 @@ pnpm --filter=@repo/e2e test:report
 Focus on critical user paths first:
 
 ```typescript
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-test('user can navigate site', async ({ page }) => {
-  await page.goto('/');
+test("user can navigate site", async ({ page }) => {
+  await page.goto("/");
   await expect(page).toHaveTitle(/Sanity/);
 });
 ```
