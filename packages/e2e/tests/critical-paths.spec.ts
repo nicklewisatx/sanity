@@ -20,7 +20,7 @@ test.describe("Critical User Paths", () => {
     // Note: Blog posts may not exist in test environments
     const posts = page.getByRole("article");
     const count = await posts.count();
-    
+
     // If no posts exist, verify the empty state or page structure
     if (count === 0) {
       // Verify the page still renders correctly without posts

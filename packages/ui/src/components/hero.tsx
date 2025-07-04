@@ -10,6 +10,7 @@ const heroVariants = cva("relative overflow-hidden", {
       default: "bg-background text-foreground",
       gradient: "bg-gradient-to-b from-muted/50 to-muted",
       dark: "bg-gray-900 text-white",
+      "background-image": "text-white", // New variant for background images
     },
     size: {
       default: "py-24 md:py-32",

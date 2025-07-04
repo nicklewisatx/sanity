@@ -1,4 +1,5 @@
 import { Card, CardContent } from "@workspace/ui/components/card";
+import { Hero } from "@workspace/ui/components/hero";
 import Link from "next/link";
 
 import type { QueryBlogIndexPageDataResult } from "@/lib/sanity/sanity.types";
@@ -185,18 +186,26 @@ export function BlogCard({ blog }: BlogCardProps) {
 export function BlogHeader({
   title,
   description,
+  backgroundImage,
 }: {
   title: string | null;
   description: string | null;
+  backgroundImage?: string;
 }) {
+  // Default background image for blog section
+  const defaultBlogBackground =
+    "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1920&h=1080&fit=crop";
+
   return (
-    <div className="mx-auto max-w-7xl px-6 lg:px-8">
-      <div className="mx-auto max-w-2xl text-center">
-        <h1 className="text-3xl font-bold sm:text-4xl">{title}</h1>
-        <p className="mt-4 text-lg leading-8 text-muted-foreground">
-          {description}
-        </p>
-      </div>
-    </div>
+    <Hero
+      title={title || undefined}
+      description={description || undefined}
+      backgroundImage={backgroundImage || defaultBlogBackground}
+      overlay={true}
+      variant="background-image"
+      size="sm"
+      alignment="center"
+      className="mb-8"
+    />
   );
 }

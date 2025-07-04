@@ -71,7 +71,7 @@ pnpm dev              # Uses Turbo parallel execution
 # Start with automatic port cleanup
 pnpm start            # Stops any running processes first, then starts
 
-# Start with quiet output  
+# Start with quiet output
 pnpm start:quiet      # Streamlined output mode
 
 # Start individual services

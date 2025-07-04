@@ -22,6 +22,7 @@ This guide covers Next.js 15 App Router development patterns and integration wit
 The web app leverages the shared UI component library from `@workspace/ui` for consistency:
 
 #### Using Shared Components
+
 ```typescript
 // Import UI components
 import { Button } from "@workspace/ui/components/button";
@@ -33,6 +34,7 @@ import { Typography } from "@workspace/ui/components/typography";
 ```
 
 #### Adapter Pattern for Complex Components
+
 When Sanity data structures don't match UI component interfaces, use adapters:
 
 ```typescript

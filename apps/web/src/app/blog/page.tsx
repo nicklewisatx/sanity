@@ -50,12 +50,14 @@ export default async function BlogIndexPage() {
 
   if (!blogs.length) {
     return (
-      <main className="container my-16 mx-auto px-4 md:px-6">
+      <main>
         <BlogHeader title={title} description={description} />
-        <div className="text-center py-12">
-          <p className="text-muted-foreground">
-            No blog posts available at the moment.
-          </p>
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">
+              No blog posts available at the moment.
+            </p>
+          </div>
         </div>
         {pageBuilder && pageBuilder.length > 0 && (
           <PageBuilder pageBuilder={pageBuilder} id={_id} type={_type} />
@@ -76,9 +78,9 @@ export default async function BlogIndexPage() {
 
   return (
     <main className="bg-background">
-      <div className="container my-16 mx-auto px-4 md:px-6">
-        <BlogHeader title={title} description={description} />
+      <BlogHeader title={title} description={description} />
 
+      <div className="container my-16 mx-auto px-4 md:px-6">
         {featuredBlogs.length > 0 && (
           <div className="mx-auto mt-8 sm:mt-12 md:mt-16 mb-12 lg:mb-20 grid grid-cols-1 gap-8 md:gap-12">
             {featuredBlogs.map((blog: any) => (

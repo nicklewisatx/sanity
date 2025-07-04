@@ -6,6 +6,7 @@
 ## Current State Analysis
 
 ### Problems with Current Setup
+
 1. **Over-engineered**: Custom Node.js scripts wrapping simple commands
 2. **Redundant tooling**: Using `concurrently` when Turbo can handle parallel execution
 3. **Manual port management**: Custom scripts for killing ports instead of letting services manage themselves
@@ -13,11 +14,13 @@
 5. **Multiple abstraction layers**: Scripts calling scripts calling package commands
 
 ### Current Architecture
+
 ```
 User → npm script → Node.js wrapper → concurrently → pnpm filter → actual service
 ```
 
 ### What We're Using
+
 - `concurrently` for parallel process execution
 - `kill-port` for manual port cleanup
 - Custom Node.js scripts with complex process management
@@ -26,11 +29,13 @@ User → npm script → Node.js wrapper → concurrently → pnpm filter → act
 ## Proposed Solution: Pure Turbo Approach
 
 ### New Architecture
+
 ```
 User → npm script → turbo run → service
 ```
 
 ### Key Principles
+
 1. **Turbo handles orchestration**: Use `turbo run dev` with proper configuration
 2. **Services manage their own ports**: No pre-emptive port killing
 3. **Simple npm scripts**: Direct commands, no Node.js wrappers
@@ -39,6 +44,7 @@ User → npm script → turbo run → service
 ## Implementation Plan
 
 ### Phase 1: Update turbo.json
+
 ```json
 {
   "$schema": "https://turbo.build/schema.json",
@@ -66,6 +72,7 @@ User → npm script → turbo run → service
 ```
 
 ### Phase 2: Simplify package.json scripts
+
 ```json
 {
   "scripts": {
@@ -74,14 +81,14 @@ User → npm script → turbo run → service
     "dev:web": "turbo run dev --filter=web",
     "dev:studio": "turbo run dev --filter=studio",
     "dev:storybook": "turbo run dev --filter=@workspace/ui",
-    
+
     // Start commands (with cleanup)
     "start": "pnpm stop && pnpm dev",
     "start:quiet": "turbo run dev --parallel --log-order=stream",
-    
+
     // Stop command (simple)
     "stop": "pkill -f 'next-server|sanity dev|storybook' || true",
-    
+
     // Alternative stop with ports
     "stop:ports": "npx kill-port 3000 3333 6006"
   }
@@ -91,6 +98,7 @@ User → npm script → turbo run → service
 ### Phase 3: Update Individual Package Scripts
 
 #### apps/web/package.json
+
 ```json
 {
   "scripts": {
@@ -101,6 +109,7 @@ User → npm script → turbo run → service
 ```
 
 #### apps/studio/package.json
+
 ```json
 {
   "scripts": {
@@ -111,6 +120,7 @@ User → npm script → turbo run → service
 ```
 
 #### packages/ui/package.json
+
 ```json
 {
   "scripts": {
@@ -123,6 +133,7 @@ User → npm script → turbo run → service
 ### Phase 4: Clean Up
 
 **Files to Remove:**
+
 - `/scripts/dev.js`
 - `/scripts/dev-claude.js`
 - `/scripts/dev-turbo.js`
@@ -135,6 +146,7 @@ User → npm script → turbo run → service
 - All `/scripts/process-manager/` files
 
 **Dependencies to Remove:**
+
 - `concurrently` (unless used elsewhere)
 - `kill-port` (unless used elsewhere)
 
