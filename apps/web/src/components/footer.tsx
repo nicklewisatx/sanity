@@ -1,5 +1,4 @@
 import { Footer as UIFooter } from "@workspace/ui/components/footer";
-import Link from "next/link";
 
 import { sanityFetch } from "@/lib/sanity/fetch-with-tracing";
 import { queryFooterData, queryGlobalSeoSettings } from "@/lib/sanity/query";

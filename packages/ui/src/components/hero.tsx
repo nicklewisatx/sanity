@@ -75,13 +75,13 @@ const Hero = React.forwardRef<HTMLElement, HeroProps>(
           </>
         )}
 
-        <div className="container relative mx-auto px-4">
+        <div className="container relative mx-auto px-4 md:px-6">
           <div
             className={cn(
-              "mx-auto",
-              alignment === "center" && "max-w-4xl",
-              alignment === "left" && "max-w-2xl",
-              alignment === "right" && "ml-auto max-w-2xl",
+              "mx-auto max-w-7xl",
+              alignment === "center" && "text-center",
+              alignment === "left" && "text-left",
+              alignment === "right" && "text-right",
             )}
           >
             {subtitle && (

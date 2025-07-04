@@ -62,8 +62,8 @@ export function PageBuilder({
   );
 
   return (
-    <section
-      className="flex flex-col gap-16 my-16 max-w-7xl mx-auto"
+    <div
+      className="flex flex-col"
       data-sanity={createDataAttribute({
         id: id,
         baseUrl: studioUrl,
@@ -82,16 +82,21 @@ export function PageBuilder({
           return (
             <div
               key={`${block._type}-${block._key}`}
-              className="flex items-center justify-center p-8 text-center text-muted-foreground bg-muted rounded-lg"
+              className="flex items-center justify-center p-8 text-center text-muted-foreground bg-muted rounded-lg max-w-7xl mx-auto my-8"
             >
               Component not found for block type: <code>{block._type}</code>
             </div>
           );
         }
 
+        // Hero blocks should be full-width without container constraints
+        const isHeroBlock = block._type === "hero";
+        const blockClasses = isHeroBlock ? "" : "my-16";
+
         return (
           <div
             key={`${block._type}-${block._key}`}
+            className={blockClasses}
             data-sanity={createDataAttribute({
               id: id,
               baseUrl: studioUrl,
@@ -105,6 +110,6 @@ export function PageBuilder({
           </div>
         );
       })}
-    </section>
+    </div>
   );
 }

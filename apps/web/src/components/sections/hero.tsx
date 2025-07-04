@@ -1,12 +1,10 @@
-import { Badge } from "@workspace/ui/components/badge";
 import { Hero } from "@workspace/ui/components/hero";
-import { urlFor } from "@/lib/sanity/client";
 
+import { urlFor } from "@/lib/sanity/client";
 import type { PagebuilderType } from "@/types";
 
 import { RichText } from "../richtext";
 import { SanityButtons } from "../sanity-buttons";
-import { SanityImage } from "../sanity-image";
 
 type HeroBlockProps = PagebuilderType<"hero">;
 
@@ -22,9 +20,10 @@ export function HeroBlock({
   richText,
 }: HeroBlockProps) {
   // Build background image URL if image is provided
-  const backgroundImage = image && image.asset
-    ? urlFor(image.asset).width(1920).height(1080).url()
-    : undefined;
+  const backgroundImage =
+    image && image.asset
+      ? urlFor(image.asset).width(1920).height(1080).url()
+      : undefined;
 
   // For heroes with images, use the background-image variant
   if (image && image.asset) {
@@ -33,11 +32,11 @@ export function HeroBlock({
         id="hero"
         title={title || undefined}
         subtitle={badge || undefined}
-        alignment="center"
+        alignment="left"
         variant="background-image"
         backgroundImage={backgroundImage}
         overlay={true}
-        className="mt-4 md:my-16"
+        className=""
       >
         {/* Rich text content as children */}
         {richText && (
@@ -69,11 +68,11 @@ export function HeroBlock({
       id="hero"
       title={title || undefined}
       subtitle={badge || undefined}
-      alignment="center"
+      alignment="left"
       variant="background-image"
       backgroundImage="https://images.unsplash.com/photo-1557683316-973673baf926?w=1920&h=1080&fit=crop"
       overlay={true}
-      className="mt-4 md:my-16"
+      className=""
     >
       {/* Rich text content as children */}
       {richText && (

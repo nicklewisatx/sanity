@@ -1,0 +1,184 @@
+{
+  "timestamp": "2025-07-04T13:55:40.539Z",
+  "pages": {
+    "homepage": {
+      "hero": {
+        "exists": true,
+        "height": 484,
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "textAlignment": "left",
+        "heading": {
+          "text": "Welcome to our new blog",
+          "fontSize": "60px",
+          "fontWeight": "700",
+          "color": "rgb(255, 255, 255)"
+        },
+        "subtitle": {
+          "text": "Article",
+          "fontSize": "14px",
+          "color": "rgb(113, 113, 122)"
+        },
+        "buttons": []
+      },
+      "navigation": {
+        "exists": true,
+        "height": 194,
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "borderBottom": "1px solid rgb(228, 228, 231)",
+        "logo": {
+          "exists": true,
+          "src": "http://localhost:3000/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2F7pbquh5r%2Fproduction%2F0323bd591c0ef254db9abb117af58bbba419774b-1024x1024.png%3Fw%3D1024%26h%3D1024%26fm%3Dwebp%26q%3D100%26fit%3Dmax%26auto%3Dformat%26dpr%3D2&w=3840&q=75",
+          "width": 170,
+          "height": 170
+        },
+        "navItems": [
+          {
+            "text": "Blog",
+            "href": "http://localhost:3000/blog"
+          },
+          {
+            "text": "Projects",
+            "href": "http://localhost:3000/projects"
+          },
+          {
+            "text": "Technology Tracker",
+            "href": "http://localhost:3000/technology"
+          },
+          {
+            "text": "About",
+            "href": "http://localhost:3000/about"
+          }
+        ]
+      },
+      "typography": {
+        "fontSizes": [
+          "14px",
+          "16px",
+          "18px",
+          "20px",
+          "48px",
+          "60px"
+        ],
+        "fontWeights": [
+          "400",
+          "500",
+          "600",
+          "700"
+        ],
+        "lineHeights": [
+          "20px",
+          "24px",
+          "28px",
+          "48px",
+          "60px"
+        ],
+        "colors": [
+          "rgb(9, 9, 11)",
+          "rgb(113, 113, 122)",
+          "rgb(250, 250, 250)",
+          "rgb(255, 255, 255)",
+          "rgba(255, 255, 255, 0.9)",
+          "rgb(63, 63, 70)",
+          "rgb(17, 24, 39)",
+          "rgb(55, 65, 81)",
+          "rgb(31, 41, 55)"
+        ],
+        "fontFamily": "Geist, \"Geist Fallback\", ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\""
+      },
+      "spacing": {
+        "paddings": [
+          "0px 24px",
+          "128px 0px",
+          "0px",
+          "64px 16px",
+          "128px 32px",
+          "0px 16px"
+        ],
+        "margins": [
+          "0px 80px",
+          "0px",
+          "64px 0px",
+          "0px 64px"
+        ]
+      },
+      "colors": {
+        "backgrounds": [
+          "rgb(255, 255, 255)",
+          "rgb(24, 24, 27)",
+          "rgba(0, 0, 0, 0.5)",
+          "rgb(244, 244, 245)",
+          "rgba(113, 113, 122, 0.1)",
+          "rgb(228, 228, 231)",
+          "rgb(249, 250, 251)"
+        ],
+        "textColors": [
+          "rgb(0, 0, 0)",
+          "rgb(9, 9, 11)",
+          "rgba(0, 0, 0, 0)",
+          "rgb(113, 113, 122)",
+          "rgb(250, 250, 250)",
+          "rgb(255, 255, 255)",
+          "rgba(255, 255, 255, 0.9)",
+          "rgb(24, 24, 27)",
+          "rgb(63, 63, 70)",
+          "rgb(17, 24, 39)",
+          "rgb(55, 65, 81)",
+          "rgb(31, 41, 55)",
+          "rgb(117, 117, 117)"
+        ],
+        "borderColors": [
+          "rgb(228, 228, 231)"
+        ]
+      }
+    }
+  },
+  "components": {},
+  "designPatterns": {},
+  "improvements": [
+    {
+      "category": "Typography",
+      "priority": "high",
+      "recommendations": [
+        "Establish a consistent type scale using a modular ratio (1.25 or 1.333)",
+        "Limit font weights to 3-4 variations for better hierarchy",
+        "Ensure consistent line-height ratios across text sizes"
+      ]
+    },
+    {
+      "category": "Spacing",
+      "priority": "high",
+      "recommendations": [
+        "Use a consistent spacing scale (8px baseline grid)",
+        "Create spacing tokens for consistent vertical rhythm",
+        "Implement section-level spacing patterns"
+      ]
+    },
+    {
+      "category": "Color System",
+      "priority": "medium",
+      "recommendations": [
+        "Define semantic color tokens (primary, secondary, accent)",
+        "Ensure proper contrast ratios for accessibility (WCAG AA)",
+        "Create systematic color variations for interactive states"
+      ]
+    },
+    {
+      "category": "Component Patterns",
+      "priority": "high",
+      "recommendations": [
+        "Extract reusable button variants with consistent sizing",
+        "Create flexible card components with predictable layouts",
+        "Implement responsive grid system with standard breakpoints"
+      ]
+    },
+    {
+      "category": "Navigation",
+      "priority": "medium",
+      "recommendations": [
+        "Add active state indicators for current page",
+        "Implement consistent hover/focus states",
+        "Consider sticky navigation for better UX"
+      ]
+    }
+  ]
+}
