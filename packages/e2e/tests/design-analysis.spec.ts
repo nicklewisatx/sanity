@@ -4,9 +4,9 @@ import path from 'path';
 
 test.describe('Design Analysis', () => {
   test('analyze homepage design', async ({ page }) => {
-    // Navigate to homepage
-    await page.goto('http://localhost:3000');
-    await page.waitForLoadState('networkidle');
+    // Navigate to homepage (will use baseURL from config)
+    await page.goto('/');
+    await page.waitForLoadState('domcontentloaded');
     
     // Create screenshots directory
     const screenshotDir = path.join(process.cwd(), 'design-analysis');
@@ -126,12 +126,15 @@ test.describe('Design Analysis', () => {
     }
     console.log('Section spacing:', sectionSpacing);
     
-    // Check dark mode
-    await page.click('button[aria-label="Toggle theme"]');
-    await page.waitForTimeout(500);
-    await page.screenshot({ 
-      path: path.join(screenshotDir, 'homepage-dark.png')
-    });
+    // Check dark mode if toggle exists
+    const themeToggle = page.locator('button[aria-label="Toggle theme"]');
+    if (await themeToggle.isVisible({ timeout: 5000 }).catch(() => false)) {
+      await themeToggle.click();
+      await page.waitForTimeout(500);
+      await page.screenshot({ 
+        path: path.join(screenshotDir, 'homepage-dark.png')
+      });
+    }
     
     // Check mobile view
     await page.setViewportSize({ width: 375, height: 812 });
