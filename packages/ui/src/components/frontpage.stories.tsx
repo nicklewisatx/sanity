@@ -353,7 +353,7 @@ const FrontpageComponent = () => {
           {
             title: "Topics",
             links: [
-              { label: "React & Next.js", href: "#" },
+              { label: "React & Next", href: "#" },
               { label: "TypeScript", href: "#" },
               { label: "Architecture", href: "#" },
               { label: "Performance", href: "#" },

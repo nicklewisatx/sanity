@@ -1,8 +1,8 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 
-import { cn } from "@workspace/ui/lib/utils.js";
-import { Button, type ButtonProps } from "./button.js";
+import { cn } from "@workspace/ui/lib/utils";
+import { Button, type ButtonProps } from "./button";
 
 const ctaVariants = cva("relative overflow-hidden rounded-lg", {
   variants: {
