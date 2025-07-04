@@ -11,6 +11,7 @@ Extend the existing UI component library with missing foundational components (T
 ## Functional Requirements
 
 ### 1. Typography Component System
+
 - Create a Typography component supporting h1-h6 and body variants
 - Match the heading hierarchy used in RichText (h2-h6 for content, h1 reserved for page titles)
 - Support size, weight, and color variants
@@ -18,24 +19,26 @@ Extend the existing UI component library with missing foundational components (T
 - Full TypeScript support with proper props interface
 
 ### 2. Layout Components
+
 - **Container Component**:
   - Default max-width of 1216px (matching existing patterns)
   - Full-width variant for hero sections
   - Responsive padding adjustments
   - Support for all existing breakpoints
-  
 - **Layout/Wrapper Components**:
   - Section wrapper with consistent spacing
   - Grid and flex layout helpers
   - Responsive utilities
 
 ### 3. Design Tokens Export
+
 - Create exportable TypeScript constants in `@workspace/ui/lib/tokens`
 - Include color palette, spacing scale, breakpoints, and typography scales
 - Ensure tokens match CSS variables for consistency
 - Type-safe access to all design system values
 
 ### 4. Sanity Page Builder Integration
+
 - Create Sanity block schemas for appropriate components
 - Ensure visual editing support with data-sanity attributes
 - Maintain type safety between Sanity schemas and React components
@@ -44,6 +47,7 @@ Extend the existing UI component library with missing foundational components (T
 ## Technical Requirements
 
 ### File Structure
+
 ```
 packages/ui/
 ├── src/
@@ -60,7 +64,9 @@ packages/ui/
 ```
 
 ### Import Pattern
+
 Maintain the current optimized pattern:
+
 ```typescript
 import { Typography } from "@workspace/ui/components/typography";
 import { Container } from "@workspace/ui/components/container";
@@ -68,7 +74,9 @@ import { tokens } from "@workspace/ui/lib/tokens";
 ```
 
 ### Component Implementation Pattern
+
 All components must follow the established pattern:
+
 - Use `forwardRef` for ref forwarding
 - Implement with `class-variance-authority` for variants
 - Accept `className` prop with `cn()` utility
@@ -76,13 +84,17 @@ All components must follow the established pattern:
 - Add displayName for debugging
 
 ### Responsive Breakpoints
+
 Align with Sanity preview breakpoints:
+
 - Mobile: 420px
-- Tablet: 768px  
+- Tablet: 768px
 - Desktop: 1024px+ (full width)
 
 ### Sanity Integration Pattern
+
 For page builder blocks:
+
 1. Create schema in `/apps/studio/schemaTypes/blocks/[component].ts`
 2. Register in `/apps/studio/schemaTypes/blocks/index.ts`
 3. Add to pagebuilder type definition
@@ -92,6 +104,7 @@ For page builder blocks:
 ## Implementation Hints
 
 ### Typography Component Example Structure
+
 ```typescript
 const typographyVariants = cva("base", {
   variants: {
@@ -105,16 +118,17 @@ const typographyVariants = cva("base", {
       default: "text-foreground",
       muted: "text-muted-foreground",
       // ... other colors
-    }
+    },
   },
   defaultVariants: {
     variant: "body",
-    color: "default"
-  }
+    color: "default",
+  },
 });
 ```
 
 ### Design Tokens Structure
+
 ```typescript
 export const tokens = {
   colors: {
@@ -133,11 +147,12 @@ export const tokens = {
   },
   typography: {
     // Font families, sizes, weights
-  }
+  },
 } as const;
 ```
 
 ### Container Component Variants
+
 ```typescript
 const containerVariants = cva("mx-auto px-4 sm:px-6 lg:px-8", {
   variants: {
@@ -145,11 +160,11 @@ const containerVariants = cva("mx-auto px-4 sm:px-6 lg:px-8", {
       default: "max-w-[1216px]",
       full: "max-w-none",
       narrow: "max-w-4xl",
-    }
+    },
   },
   defaultVariants: {
-    size: "default"
-  }
+    size: "default",
+  },
 });
 ```
 
@@ -204,8 +219,9 @@ const containerVariants = cva("mx-auto px-4 sm:px-6 lg:px-8", {
 ## Next Steps
 
 After requirements approval:
+
 1. Create Typography component with stories
-2. Create Container and Layout components with stories  
+2. Create Container and Layout components with stories
 3. Export design tokens with TypeScript types
 4. Create Sanity schemas for content-appropriate components
 5. Test integration in apps/web with existing pages

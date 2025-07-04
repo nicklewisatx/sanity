@@ -6,10 +6,13 @@
 **Assignees:** TBD
 
 ## Problem Statement
+
 Current blog system lacks flexibility in display formats and doesn't support technology references or content categorization. Need enhanced content models to showcase technical expertise and enable better content discovery.
 
 ## Solution Overview
+
 Enhance the existing blog system with:
+
 - Multiple display formats (full, hero, card, list)
 - Technology stack references with ratings
 - Article categorization (coding, satire, news, misc)
@@ -18,6 +21,7 @@ Enhance the existing blog system with:
 - Advanced filtering and search
 
 ## Technical Architecture
+
 ```
 ┌─────────────────┐     ┌──────────────┐     ┌─────────────┐
 │  Enhanced Blog  │────▶│ Display      │────▶│   Homepage  │
@@ -37,7 +41,8 @@ Enhance the existing blog system with:
 ### Phase 1: Content Model Updates
 
 #### 1.1 Enhance Blog Schema
-```typescript
+
+````typescript
 // apps/studio/schemaTypes/documents/blog.ts
 - [ ] Add teaser field
   ```typescript
@@ -49,76 +54,80 @@ Enhance the existing blog system with:
     rows: 3,
     validation: (Rule) => Rule.max(160).warning('Keep it under 160 characters')
   })
-  ```
+````
 
 - [ ] Add article type field
+
   ```typescript
   defineField({
-    name: 'articleType',
-    type: 'string',
-    title: 'Article Type',
+    name: "articleType",
+    type: "string",
+    title: "Article Type",
     options: {
       list: [
-        { title: 'Coding', value: 'coding' },
-        { title: 'Satire', value: 'satire' },
-        { title: 'News', value: 'news' },
-        { title: 'Miscellaneous', value: 'misc' }
+        { title: "Coding", value: "coding" },
+        { title: "Satire", value: "satire" },
+        { title: "News", value: "news" },
+        { title: "Miscellaneous", value: "misc" },
       ],
-      layout: 'radio'
+      layout: "radio",
     },
-    initialValue: 'coding',
-    validation: (Rule) => Rule.required()
-  })
+    initialValue: "coding",
+    validation: (Rule) => Rule.required(),
+  });
   ```
 
 - [ ] Add technology references
+
   ```typescript
   defineField({
-    name: 'technologies',
-    type: 'array',
-    title: 'Technologies',
+    name: "technologies",
+    type: "array",
+    title: "Technologies",
     of: [
       defineArrayMember({
-        type: 'reference',
-        to: [{ type: 'technology' }]
-      })
+        type: "reference",
+        to: [{ type: "technology" }],
+      }),
     ],
-    validation: (Rule) => Rule.unique()
-  })
+    validation: (Rule) => Rule.unique(),
+  });
   ```
 
 - [ ] Add keywords field (auto-generated)
+
   ```typescript
   defineField({
-    name: 'keywords',
-    type: 'array',
-    title: 'Keywords',
-    description: 'Auto-generated from technologies and tags',
-    of: [{ type: 'string' }],
-    readOnly: true
-  })
+    name: "keywords",
+    type: "array",
+    title: "Keywords",
+    description: "Auto-generated from technologies and tags",
+    of: [{ type: "string" }],
+    readOnly: true,
+  });
   ```
 
 - [ ] Add hero and card image fields
   ```typescript
-  defineField({
-    name: 'heroImage',
-    type: 'image',
-    title: 'Hero Image',
-    description: 'Large image for hero displays (1920x1080)',
-    options: { hotspot: true }
+  (defineField({
+    name: "heroImage",
+    type: "image",
+    title: "Hero Image",
+    description: "Large image for hero displays (1920x1080)",
+    options: { hotspot: true },
   }),
-  defineField({
-    name: 'cardImage',
-    type: 'image',
-    title: 'Card Image',
-    description: 'Square image for card displays (400x400)',
-    options: { hotspot: true }
-  })
+    defineField({
+      name: "cardImage",
+      type: "image",
+      title: "Card Image",
+      description: "Square image for card displays (400x400)",
+      options: { hotspot: true },
+    }));
   ```
 
 #### 1.2 Create Technology Schema
-```typescript
+
+````typescript
 // apps/studio/schemaTypes/documents/technology.ts
 - [ ] Create base technology schema
   ```typescript
@@ -222,10 +231,11 @@ Enhance the existing blog system with:
       })
     }
   })
-  ```
+````
 
 #### 1.3 Create Note Schema
-```typescript
+
+````typescript
 // apps/studio/schemaTypes/documents/note.ts
 - [ ] Create lightweight note schema
   ```typescript
@@ -276,11 +286,12 @@ Enhance the existing blog system with:
       })
     }
   })
-  ```
+````
 
 ### Phase 2: Component Development
 
 #### 2.1 Blog Display Components
+
 ```typescript
 // packages/ui/src/blog/
 - [ ] FullBlogView component
@@ -307,6 +318,7 @@ Enhance the existing blog system with:
 ```
 
 #### 2.2 Technology Components
+
 ```typescript
 // packages/ui/src/technology/
 - [ ] TechnologyBadge
@@ -325,6 +337,7 @@ Enhance the existing blog system with:
 ```
 
 #### 2.3 Filter Components
+
 ```typescript
 // packages/ui/src/filters/
 - [ ] FilterSidebar
@@ -341,6 +354,7 @@ Enhance the existing blog system with:
 ### Phase 3: Page Implementation
 
 #### 3.1 Homepage Updates
+
 ```typescript
 // apps/web/src/app/page.tsx
 - [ ] Hero section with featured blog
@@ -350,6 +364,7 @@ Enhance the existing blog system with:
 ```
 
 #### 3.2 Blog Listing Page
+
 ```typescript
 // apps/web/src/app/blog/page.tsx
 - [ ] Sidebar layout
@@ -362,6 +377,7 @@ Enhance the existing blog system with:
 ### Phase 4: Auto-Generation Functions
 
 #### 4.1 Keywords Generation
+
 ```typescript
 // functions/generate-keywords/
 - [ ] Create Sanity function
@@ -372,6 +388,7 @@ Enhance the existing blog system with:
 ```
 
 #### 4.2 SEO Description
+
 ```typescript
 // functions/generate-seo/
 - [ ] Create Sanity function
@@ -383,6 +400,7 @@ Enhance the existing blog system with:
 ## GROQ Queries
 
 ### Homepage Featured Query
+
 ```groq
 *[_type == "blog" && featured == true] | order(publishedAt desc)[0] {
   _id,
@@ -395,8 +413,9 @@ Enhance the existing blog system with:
 ```
 
 ### Blog Listing with Filters
+
 ```groq
-*[_type == "blog" 
+*[_type == "blog"
   && articleType == $articleType
   && count((technologies[]->slug.current)[@ in $techFilters]) > 0
 ] | order(publishedAt desc)[$start...$end] {
@@ -411,6 +430,7 @@ Enhance the existing blog system with:
 ```
 
 ## Definition of Done
+
 - [ ] All schemas deployed to Sanity
 - [ ] TypeScript types generated
 - [ ] All display components render correctly
@@ -424,15 +444,17 @@ Enhance the existing blog system with:
 - [ ] Accessibility compliant
 
 ## Success Metrics
-| Metric | Target | Measurement |
-|--------|--------|-------------|
-| Schema Deployment | 100% | Sanity Studio |
-| Type Coverage | 100% | TypeScript |
-| Component Tests | > 90% | Vitest |
-| Page Load | < 200ms | Web Vitals |
-| Filter Performance | < 50ms | Browser DevTools |
+
+| Metric             | Target  | Measurement      |
+| ------------------ | ------- | ---------------- |
+| Schema Deployment  | 100%    | Sanity Studio    |
+| Type Coverage      | 100%    | TypeScript       |
+| Component Tests    | > 90%   | Vitest           |
+| Page Load          | < 200ms | Web Vitals       |
+| Filter Performance | < 50ms  | Browser DevTools |
 
 ## Technical Considerations
+
 - Reuse existing rich text fields
 - Extend current SEO field patterns
 - Maintain backward compatibility
@@ -440,12 +462,14 @@ Enhance the existing blog system with:
 - Leverage current caching strategy
 
 ## Dependencies
+
 - Existing blog schema structure
 - Current author system
 - SEO fields utilities
 - Rich text configuration
 
 ## Out of Scope
+
 - User comments
 - Blog analytics
 - Social sharing (future enhancement)

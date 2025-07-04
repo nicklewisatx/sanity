@@ -8,7 +8,8 @@ const meta = {
     layout: "padded",
     docs: {
       description: {
-        component: "A flexible typography component supporting all heading levels and text styles.",
+        component:
+          "A flexible typography component supporting all heading levels and text styles.",
       },
     },
   },
@@ -16,12 +17,33 @@ const meta = {
   argTypes: {
     variant: {
       control: "select",
-      options: ["h1", "h2", "h3", "h4", "h5", "h6", "body", "lead", "large", "small", "muted", "blockquote", "code"],
+      options: [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "h6",
+        "body",
+        "lead",
+        "large",
+        "small",
+        "muted",
+        "blockquote",
+        "code",
+      ],
       description: "Typography variant",
     },
     color: {
       control: "select",
-      options: ["default", "primary", "secondary", "muted", "destructive", "accent"],
+      options: [
+        "default",
+        "primary",
+        "secondary",
+        "muted",
+        "destructive",
+        "accent",
+      ],
       description: "Text color variant",
     },
     align: {
@@ -36,7 +58,17 @@ const meta = {
     },
     size: {
       control: "select",
-      options: ["default", "sm", "base", "lg", "xl", "2xl", "3xl", "4xl", "5xl"],
+      options: [
+        "default",
+        "sm",
+        "base",
+        "lg",
+        "xl",
+        "2xl",
+        "3xl",
+        "4xl",
+        "5xl",
+      ],
       description: "Override default size",
     },
     as: {
@@ -72,10 +104,12 @@ export const TextVariants: Story = {
   render: () => (
     <div className="space-y-4">
       <Typography variant="body">
-        Body text: The quick brown fox jumps over the lazy dog. This is the default text style used for paragraphs and general content.
+        Body text: The quick brown fox jumps over the lazy dog. This is the
+        default text style used for paragraphs and general content.
       </Typography>
       <Typography variant="lead">
-        Lead text: Make a statement with slightly larger, muted text perfect for introductions.
+        Lead text: Make a statement with slightly larger, muted text perfect for
+        introductions.
       </Typography>
       <Typography variant="large">
         Large text: Emphasize important content without using headings.
@@ -87,9 +121,12 @@ export const TextVariants: Story = {
         Muted text: De-emphasized content that provides additional context.
       </Typography>
       <Typography variant="blockquote">
-        &ldquo;This is a blockquote. Use it to highlight quotes or important statements that deserve special attention.&rdquo;
+        &ldquo;This is a blockquote. Use it to highlight quotes or important
+        statements that deserve special attention.&rdquo;
       </Typography>
-      <Typography variant="code">const example = &quot;inline code&quot;;</Typography>
+      <Typography variant="code">
+        const example = &quot;inline code&quot;;
+      </Typography>
     </div>
   ),
 };
@@ -114,7 +151,9 @@ export const Alignment: Story = {
       <Typography align="center">Center aligned text</Typography>
       <Typography align="right">Right aligned text</Typography>
       <Typography align="justify">
-        Justified text will stretch to fill the full width of its container. This is useful for creating newspaper-style layouts where text forms clean edges on both sides.
+        Justified text will stretch to fill the full width of its container.
+        This is useful for creating newspaper-style layouts where text forms
+        clean edges on both sides.
       </Typography>
     </div>
   ),
@@ -165,7 +204,8 @@ export const CombinedProps: Story = {
         A muted lead paragraph that introduces the content below
       </Typography>
       <Typography variant="body" weight="medium">
-        This body text has medium weight for slight emphasis without being too bold.
+        This body text has medium weight for slight emphasis without being too
+        bold.
       </Typography>
       <Typography variant="small" color="secondary" align="right">
         Small secondary text aligned to the right
@@ -181,17 +221,35 @@ export const RealWorldExample: Story = {
         Building Modern Web Applications
       </Typography>
       <Typography variant="lead" color="muted">
-        Discover the latest techniques and best practices for creating scalable, performant web applications.
+        Discover the latest techniques and best practices for creating scalable,
+        performant web applications.
       </Typography>
       <Typography variant="body">
-        Modern web development has evolved significantly over the past decade. With the rise of component-based architectures and advanced build tools, developers can create more sophisticated applications than ever before.
+        Modern web development has evolved significantly over the past decade.
+        With the rise of component-based architectures and advanced build tools,
+        developers can create more sophisticated applications than ever before.
       </Typography>
       <Typography variant="h2">Key Technologies</Typography>
       <Typography variant="body">
-        Today&apos;s web stack typically includes <Typography variant="code" as="span">React</Typography>, <Typography variant="code" as="span">TypeScript</Typography>, and modern CSS solutions like <Typography variant="code" as="span">Tailwind CSS</Typography>.
+        Today&apos;s web stack typically includes{" "}
+        <Typography variant="code" as="span">
+          React
+        </Typography>
+        ,{" "}
+        <Typography variant="code" as="span">
+          TypeScript
+        </Typography>
+        , and modern CSS solutions like{" "}
+        <Typography variant="code" as="span">
+          Tailwind CSS
+        </Typography>
+        .
       </Typography>
       <Typography variant="blockquote">
-        &ldquo;The best code is no code at all. Every new line of code you willingly bring into the world is code that has to be debugged, code that has to be read and understood, code that has to be supported.&rdquo;
+        &ldquo;The best code is no code at all. Every new line of code you
+        willingly bring into the world is code that has to be debugged, code
+        that has to be read and understood, code that has to be
+        supported.&rdquo;
       </Typography>
       <Typography variant="small" color="muted" align="right">
         — Jeff Atwood, Coding Horror

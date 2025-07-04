@@ -69,7 +69,10 @@ export interface TypographyProps
 }
 
 const Typography = React.forwardRef<HTMLElement, TypographyProps>(
-  ({ className, variant, color, align, weight, size, as, children, ...props }, ref) => {
+  (
+    { className, variant, color, align, weight, size, as, children, ...props },
+    ref,
+  ) => {
     const Component = as || getDefaultElement(variant);
 
     return (
@@ -77,19 +80,21 @@ const Typography = React.forwardRef<HTMLElement, TypographyProps>(
         ref={ref}
         className={cn(
           typographyVariants({ variant, color, align, weight, size }),
-          className
+          className,
         )}
         {...props}
       >
         {children}
       </Component>
     );
-  }
+  },
 );
 
 Typography.displayName = "Typography";
 
-function getDefaultElement(variant: TypographyProps["variant"]): React.ElementType {
+function getDefaultElement(
+  variant: TypographyProps["variant"],
+): React.ElementType {
   const variantElementMap: Record<string, React.ElementType> = {
     h1: "h1",
     h2: "h2",

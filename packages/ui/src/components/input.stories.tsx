@@ -1,50 +1,62 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import { Input } from './input.js'
-import { Search, Mail, Lock, User, CreditCard, DollarSign } from 'lucide-react'
-import * as React from 'react'
+import type { Meta, StoryObj } from "@storybook/react";
+import { Input } from "./input.js";
+import { Search, Mail, Lock, User, CreditCard, DollarSign } from "lucide-react";
+import * as React from "react";
 
 const meta = {
-  title: 'Primitives/Input',
+  title: "Primitives/Input",
   component: Input,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
-        component: 'A basic input field component with various states and types.'
-      }
-    }
+        component:
+          "A basic input field component with various states and types.",
+      },
+    },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     type: {
-      control: 'select',
-      options: ['text', 'email', 'password', 'number', 'search', 'tel', 'url', 'date', 'time', 'datetime-local'],
-      description: 'The type of input'
+      control: "select",
+      options: [
+        "text",
+        "email",
+        "password",
+        "number",
+        "search",
+        "tel",
+        "url",
+        "date",
+        "time",
+        "datetime-local",
+      ],
+      description: "The type of input",
     },
     placeholder: {
-      control: 'text',
-      description: 'Placeholder text'
+      control: "text",
+      description: "Placeholder text",
     },
     disabled: {
-      control: 'boolean',
-      description: 'Whether the input is disabled'
+      control: "boolean",
+      description: "Whether the input is disabled",
     },
     className: {
-      control: 'text',
-      description: 'Additional CSS classes'
-    }
-  }
-} satisfies Meta<typeof Input>
+      control: "text",
+      description: "Additional CSS classes",
+    },
+  },
+} satisfies Meta<typeof Input>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    type: 'text',
-    placeholder: 'Enter text...'
-  }
-}
+    type: "text",
+    placeholder: "Enter text...",
+  },
+};
 
 export const Types: Story = {
   render: () => (
@@ -74,20 +86,26 @@ export const Types: Story = {
         <Input type="date" />
       </div>
     </div>
-  )
-}
+  ),
+};
 
 export const States: Story = {
   render: () => (
     <div className="space-y-4 w-[350px]">
       <Input placeholder="Default input" />
-      <Input placeholder="Focused input" className="focus-visible:ring-1 focus-visible:ring-ring" />
+      <Input
+        placeholder="Focused input"
+        className="focus-visible:ring-1 focus-visible:ring-ring"
+      />
       <Input placeholder="Disabled input" disabled />
       <Input placeholder="Read-only input" readOnly value="Read-only content" />
-      <Input placeholder="Error state" className="border-destructive focus-visible:ring-destructive" />
+      <Input
+        placeholder="Error state"
+        className="border-destructive focus-visible:ring-destructive"
+      />
     </div>
-  )
-}
+  ),
+};
 
 export const WithIcons: Story = {
   render: () => (
@@ -109,8 +127,8 @@ export const WithIcons: Story = {
         <DollarSign className="absolute right-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
       </div>
     </div>
-  )
-}
+  ),
+};
 
 export const Sizes: Story = {
   render: () => (
@@ -119,8 +137,8 @@ export const Sizes: Story = {
       <Input placeholder="Default input" />
       <Input className="h-11 text-base" placeholder="Large input" />
     </div>
-  )
-}
+  ),
+};
 
 export const FileInput: Story = {
   render: () => (
@@ -129,151 +147,165 @@ export const FileInput: Story = {
       <Input type="file" multiple />
       <Input type="file" accept="image/*" />
     </div>
-  )
-}
+  ),
+};
 
 export const FormExample: Story = {
   render: function FormExampleComponent() {
     const [formData, setFormData] = React.useState({
-      username: '',
-      email: '',
-      password: ''
-    })
-    
+      username: "",
+      email: "",
+      password: "",
+    });
+
     return (
-      <form className="space-y-4 w-[350px]" onSubmit={(e: React.FormEvent) => e.preventDefault()}>
+      <form
+        className="space-y-4 w-[350px]"
+        onSubmit={(e: React.FormEvent) => e.preventDefault()}
+      >
         <div>
           <label htmlFor="username" className="text-sm font-medium mb-2 block">
             Username
           </label>
           <div className="relative">
             <User className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input 
+            <Input
               id="username"
-              className="pl-8" 
+              className="pl-8"
               placeholder="johndoe"
               value={formData.username}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({...formData, username: e.target.value})}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setFormData({ ...formData, username: e.target.value })
+              }
             />
           </div>
         </div>
-        
+
         <div>
           <label htmlFor="email" className="text-sm font-medium mb-2 block">
             Email
           </label>
           <div className="relative">
             <Mail className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input 
+            <Input
               id="email"
               type="email"
-              className="pl-8" 
+              className="pl-8"
               placeholder="john@example.com"
               value={formData.email}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({...formData, email: e.target.value})}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
             />
           </div>
         </div>
-        
+
         <div>
           <label htmlFor="password" className="text-sm font-medium mb-2 block">
             Password
           </label>
           <div className="relative">
             <Lock className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input 
+            <Input
               id="password"
               type="password"
-              className="pl-8" 
+              className="pl-8"
               placeholder="••••••••"
               value={formData.password}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({...formData, password: e.target.value})}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setFormData({ ...formData, password: e.target.value })
+              }
             />
           </div>
         </div>
-        
-        <button 
-          type="submit" 
+
+        <button
+          type="submit"
           className="w-full bg-primary text-primary-foreground rounded-md py-2 text-sm font-medium hover:bg-primary/90"
         >
           Create Account
         </button>
       </form>
-    )
-  }
-}
+    );
+  },
+};
 
 export const WithValidation: Story = {
   render: function WithValidationComponent() {
-    const [email, setEmail] = React.useState('')
-    const [error, setError] = React.useState('')
-    
+    const [email, setEmail] = React.useState("");
+    const [error, setError] = React.useState("");
+
     const validateEmail = (value: string) => {
       if (!value) {
-        setError('Email is required')
+        setError("Email is required");
       } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-        setError('Please enter a valid email')
+        setError("Please enter a valid email");
       } else {
-        setError('')
+        setError("");
       }
-    }
-    
+    };
+
     return (
       <div className="w-[350px]">
-        <label htmlFor="validation-email" className="text-sm font-medium mb-2 block">
+        <label
+          htmlFor="validation-email"
+          className="text-sm font-medium mb-2 block"
+        >
           Email Address
         </label>
-        <Input 
+        <Input
           id="validation-email"
           type="email"
           placeholder="Enter your email"
           value={email}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setEmail(e.target.value)
-            validateEmail(e.target.value)
+            setEmail(e.target.value);
+            validateEmail(e.target.value);
           }}
-          className={error ? "border-destructive focus-visible:ring-destructive" : ""}
+          className={
+            error ? "border-destructive focus-visible:ring-destructive" : ""
+          }
         />
-        {error && (
-          <p className="text-sm text-destructive mt-1">{error}</p>
-        )}
+        {error && <p className="text-sm text-destructive mt-1">{error}</p>}
       </div>
-    )
-  }
-}
+    );
+  },
+};
 
 export const CreditCardInput: Story = {
   render: function CreditCardInputComponent() {
-    const [cardNumber, setCardNumber] = React.useState('')
-    
+    const [cardNumber, setCardNumber] = React.useState("");
+
     const formatCardNumber = (value: string) => {
-      const v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '')
-      const matches = v.match(/\d{4,16}/g)
-      const match = matches && matches[0] || ''
-      const parts = []
-      
+      const v = value.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
+      const matches = v.match(/\d{4,16}/g);
+      const match = (matches && matches[0]) || "";
+      const parts = [];
+
       for (let i = 0, len = match.length; i < len; i += 4) {
-        parts.push(match.substring(i, i + 4))
+        parts.push(match.substring(i, i + 4));
       }
-      
+
       if (parts.length) {
-        return parts.join(' ')
+        return parts.join(" ");
       } else {
-        return value
+        return value;
       }
-    }
-    
+    };
+
     return (
       <div className="space-y-4 w-[350px]">
         <div>
           <label className="text-sm font-medium mb-2 block">Card Number</label>
           <div className="relative">
             <CreditCard className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input 
-              className="pl-8" 
+            <Input
+              className="pl-8"
               placeholder="1234 5678 9012 3456"
               value={cardNumber}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCardNumber(formatCardNumber(e.target.value))}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setCardNumber(formatCardNumber(e.target.value))
+              }
               maxLength={19}
             />
           </div>
@@ -289,6 +321,6 @@ export const CreditCardInput: Story = {
           </div>
         </div>
       </div>
-    )
-  }
-}
+    );
+  },
+};

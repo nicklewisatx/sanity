@@ -1,40 +1,47 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import { Badge } from './badge.js'
-import { Star, AlertCircle, CheckCircle, Clock, TrendingUp, XCircle } from 'lucide-react'
+import type { Meta, StoryObj } from "@storybook/react";
+import { Badge } from "./badge.js";
+import {
+  Star,
+  AlertCircle,
+  CheckCircle,
+  Clock,
+  TrendingUp,
+  XCircle,
+} from "lucide-react";
 
 const meta = {
-  title: 'Primitives/Badge',
+  title: "Primitives/Badge",
   component: Badge,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
-        component: 'Displays a badge or label.'
-      }
-    }
+        component: "Displays a badge or label.",
+      },
+    },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     variant: {
-      control: 'select',
-      options: ['default', 'secondary', 'destructive', 'outline'],
-      description: 'The visual style variant of the badge'
+      control: "select",
+      options: ["default", "secondary", "destructive", "outline"],
+      description: "The visual style variant of the badge",
     },
     children: {
-      control: 'text',
-      description: 'The content to display inside the badge'
-    }
-  }
-} satisfies Meta<typeof Badge>
+      control: "text",
+      description: "The content to display inside the badge",
+    },
+  },
+} satisfies Meta<typeof Badge>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    children: 'Badge'
-  }
-}
+    children: "Badge",
+  },
+};
 
 export const AllVariants: Story = {
   render: () => (
@@ -44,8 +51,8 @@ export const AllVariants: Story = {
       <Badge variant="destructive">Destructive</Badge>
       <Badge variant="outline">Outline</Badge>
     </div>
-  )
-}
+  ),
+};
 
 export const WithIcons: Story = {
   render: () => (
@@ -67,8 +74,8 @@ export const WithIcons: Story = {
         Verified
       </Badge>
     </div>
-  )
-}
+  ),
+};
 
 export const StatusBadges: Story = {
   render: () => (
@@ -102,8 +109,8 @@ export const StatusBadges: Story = {
         </Badge>
       </div>
     </div>
-  )
-}
+  ),
+};
 
 export const SizesAndShapes: Story = {
   render: () => (
@@ -120,24 +127,33 @@ export const SizesAndShapes: Story = {
         <Badge className="rounded-full">Pill</Badge>
       </div>
     </div>
-  )
-}
+  ),
+};
 
 export const CounterBadges: Story = {
   render: () => (
     <div className="flex items-center gap-4">
-      <Badge variant="secondary" className="rounded-full px-2 py-0 h-5 min-w-[20px] text-center">
+      <Badge
+        variant="secondary"
+        className="rounded-full px-2 py-0 h-5 min-w-[20px] text-center"
+      >
         5
       </Badge>
-      <Badge variant="destructive" className="rounded-full px-2 py-0 h-5 min-w-[20px] text-center">
+      <Badge
+        variant="destructive"
+        className="rounded-full px-2 py-0 h-5 min-w-[20px] text-center"
+      >
         99+
       </Badge>
-      <Badge variant="outline" className="rounded-full px-2 py-0 h-5 min-w-[20px] text-center">
+      <Badge
+        variant="outline"
+        className="rounded-full px-2 py-0 h-5 min-w-[20px] text-center"
+      >
         <TrendingUp className="h-3 w-3" />
       </Badge>
     </div>
-  )
-}
+  ),
+};
 
 export const InContext: Story = {
   render: () => (
@@ -145,23 +161,29 @@ export const InContext: Story = {
       <div className="flex items-center justify-between p-4 border rounded-lg">
         <div>
           <h3 className="font-semibold">API Documentation</h3>
-          <p className="text-sm text-muted-foreground">Complete guide to our REST API</p>
+          <p className="text-sm text-muted-foreground">
+            Complete guide to our REST API
+          </p>
         </div>
         <Badge variant="secondary">v2.0</Badge>
       </div>
-      
+
       <div className="flex items-center justify-between p-4 border rounded-lg">
         <div>
           <h3 className="font-semibold">Premium Plan</h3>
-          <p className="text-sm text-muted-foreground">Unlimited access to all features</p>
+          <p className="text-sm text-muted-foreground">
+            Unlimited access to all features
+          </p>
         </div>
         <Badge>Popular</Badge>
       </div>
-      
+
       <div className="flex items-center justify-between p-4 border rounded-lg">
         <div>
           <h3 className="font-semibold">System Status</h3>
-          <p className="text-sm text-muted-foreground">All systems operational</p>
+          <p className="text-sm text-muted-foreground">
+            All systems operational
+          </p>
         </div>
         <Badge className="bg-green-100 text-green-800 border-green-200">
           <CheckCircle className="mr-1 h-3 w-3" />
@@ -169,8 +191,8 @@ export const InContext: Story = {
         </Badge>
       </div>
     </div>
-  )
-}
+  ),
+};
 
 export const ComplexContent: Story = {
   render: () => (
@@ -184,13 +206,13 @@ export const ComplexContent: Story = {
         Processing
       </Badge>
       <Badge variant="secondary">
-        <img 
-          src="https://github.com/vercel.png" 
-          alt="Vercel" 
+        <img
+          src="https://github.com/vercel.png"
+          alt="Vercel"
           className="mr-1 h-3 w-3 rounded-full"
         />
         Powered by Vercel
       </Badge>
     </div>
-  )
-}
+  ),
+};

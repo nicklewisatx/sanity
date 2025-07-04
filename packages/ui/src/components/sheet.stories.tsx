@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import { Button } from './button.js'
-import { Input } from './input.js'
-import { Badge } from './badge.js'
+import type { Meta, StoryObj } from "@storybook/react";
+import { Button } from "./button.js";
+import { Input } from "./input.js";
+import { Badge } from "./badge.js";
 import {
   Sheet,
   SheetClose,
@@ -11,26 +11,27 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from './sheet.js'
-import { Menu, ShoppingCart, Settings, User } from 'lucide-react'
-import * as React from 'react'
+} from "./sheet.js";
+import { Menu, ShoppingCart, Settings, User } from "lucide-react";
+import * as React from "react";
 
 const meta = {
-  title: 'Primitives/Sheet',
+  title: "Primitives/Sheet",
   component: Sheet,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
-        component: 'A sheet is a surface that slides in from the edge of the screen.'
-      }
-    }
+        component:
+          "A sheet is a surface that slides in from the edge of the screen.",
+      },
+    },
   },
-  tags: ['autodocs']
-} satisfies Meta<typeof Sheet>
+  tags: ["autodocs"],
+} satisfies Meta<typeof Sheet>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: () => (
@@ -66,8 +67,8 @@ export const Default: Story = {
         </SheetFooter>
       </SheetContent>
     </Sheet>
-  )
-}
+  ),
+};
 
 export const Sides: Story = {
   render: () => (
@@ -128,8 +129,8 @@ export const Sides: Story = {
         </SheetContent>
       </Sheet>
     </div>
-  )
-}
+  ),
+};
 
 export const MobileMenu: Story = {
   render: () => (
@@ -173,21 +174,24 @@ export const MobileMenu: Story = {
         </div>
       </SheetContent>
     </Sheet>
-  )
-}
+  ),
+};
 
 export const ShoppingCartExample: Story = {
   render: function ShoppingCartExampleComponent() {
     const [cartItems] = React.useState([
-      { id: 1, name: 'Wireless Headphones', price: 99.99, quantity: 1 },
-      { id: 2, name: 'Smart Watch', price: 249.99, quantity: 2 },
-      { id: 3, name: 'USB-C Cable', price: 19.99, quantity: 3 },
-    ])
-    
-    const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0)
-    const tax = subtotal * 0.08
-    const total = subtotal + tax
-    
+      { id: 1, name: "Wireless Headphones", price: 99.99, quantity: 1 },
+      { id: 2, name: "Smart Watch", price: 249.99, quantity: 2 },
+      { id: 3, name: "USB-C Cable", price: 19.99, quantity: 3 },
+    ]);
+
+    const subtotal = cartItems.reduce(
+      (acc, item) => acc + item.price * item.quantity,
+      0,
+    );
+    const tax = subtotal * 0.08;
+    const total = subtotal + tax;
+
     return (
       <Sheet>
         <SheetTrigger asChild>
@@ -208,7 +212,10 @@ export const ShoppingCartExample: Story = {
           </SheetHeader>
           <div className="mt-8 space-y-4">
             {cartItems.map((item) => (
-              <div key={item.id} className="flex items-center justify-between py-2">
+              <div
+                key={item.id}
+                className="flex items-center justify-between py-2"
+              >
                 <div className="flex-1">
                   <h4 className="text-sm font-medium">{item.name}</h4>
                   <p className="text-sm text-muted-foreground">
@@ -240,16 +247,16 @@ export const ShoppingCartExample: Story = {
           </SheetFooter>
         </SheetContent>
       </Sheet>
-    )
-  }
-}
+    );
+  },
+};
 
 export const SettingsPanel: Story = {
   render: function SettingsPanelComponent() {
-    const [notifications, setNotifications] = React.useState(true)
-    const [marketing, setMarketing] = React.useState(false)
-    const [theme, setTheme] = React.useState('system')
-    
+    const [notifications, setNotifications] = React.useState(true);
+    const [marketing, setMarketing] = React.useState(false);
+    const [theme, setTheme] = React.useState("system");
+
     return (
       <Sheet>
         <SheetTrigger asChild>
@@ -278,19 +285,24 @@ export const SettingsPanel: Story = {
                 </Button>
               </div>
             </div>
-            
+
             <div>
               <h3 className="text-sm font-medium mb-4">Preferences</h3>
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <label htmlFor="notifications" className="text-sm font-medium">
+                  <label
+                    htmlFor="notifications"
+                    className="text-sm font-medium"
+                  >
                     Push Notifications
                   </label>
                   <input
                     type="checkbox"
                     id="notifications"
                     checked={notifications}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNotifications(e.target.checked)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setNotifications(e.target.checked)
+                    }
                     className="h-4 w-4"
                   />
                 </div>
@@ -302,18 +314,22 @@ export const SettingsPanel: Story = {
                     type="checkbox"
                     id="marketing"
                     checked={marketing}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMarketing(e.target.checked)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setMarketing(e.target.checked)
+                    }
                     className="h-4 w-4"
                   />
                 </div>
               </div>
             </div>
-            
+
             <div>
               <h3 className="text-sm font-medium mb-4">Appearance</h3>
               <select
                 value={theme}
-                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setTheme(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                  setTheme(e.target.value)
+                }
                 className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
               >
                 <option value="light">Light</option>
@@ -330,20 +346,20 @@ export const SettingsPanel: Story = {
           </SheetFooter>
         </SheetContent>
       </Sheet>
-    )
-  }
-}
+    );
+  },
+};
 
 export const WithForm: Story = {
   render: function WithFormComponent() {
     const [formData, setFormData] = React.useState({
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      message: ''
-    })
-    
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      message: "",
+    });
+
     return (
       <Sheet>
         <SheetTrigger asChild>
@@ -353,7 +369,8 @@ export const WithForm: Story = {
           <SheetHeader>
             <SheetTitle>Contact Form</SheetTitle>
             <SheetDescription>
-              Fill out the form below and we&apos;ll get back to you as soon as possible.
+              Fill out the form below and we&apos;ll get back to you as soon as
+              possible.
             </SheetDescription>
           </SheetHeader>
           <form className="mt-6 space-y-4">
@@ -365,7 +382,9 @@ export const WithForm: Story = {
                 <Input
                   id="firstName"
                   value={formData.firstName}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({...formData, firstName: e.target.value})}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    setFormData({ ...formData, firstName: e.target.value })
+                  }
                   className="mt-1"
                 />
               </div>
@@ -376,12 +395,14 @@ export const WithForm: Story = {
                 <Input
                   id="lastName"
                   value={formData.lastName}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({...formData, lastName: e.target.value})}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    setFormData({ ...formData, lastName: e.target.value })
+                  }
                   className="mt-1"
                 />
               </div>
             </div>
-            
+
             <div>
               <label htmlFor="email" className="text-sm font-medium">
                 Email
@@ -390,11 +411,13 @@ export const WithForm: Story = {
                 id="email"
                 type="email"
                 value={formData.email}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({...formData, email: e.target.value})}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
                 className="mt-1"
               />
             </div>
-            
+
             <div>
               <label htmlFor="phone" className="text-sm font-medium">
                 Phone (optional)
@@ -403,11 +426,13 @@ export const WithForm: Story = {
                 id="phone"
                 type="tel"
                 value={formData.phone}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({...formData, phone: e.target.value})}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setFormData({ ...formData, phone: e.target.value })
+                }
                 className="mt-1"
               />
             </div>
-            
+
             <div>
               <label htmlFor="message" className="text-sm font-medium">
                 Message
@@ -416,7 +441,9 @@ export const WithForm: Story = {
                 id="message"
                 rows={4}
                 value={formData.message}
-                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setFormData({...formData, message: e.target.value})}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                  setFormData({ ...formData, message: e.target.value })
+                }
                 className="mt-1 flex w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
                 placeholder="Tell us how we can help..."
               />
@@ -430,6 +457,6 @@ export const WithForm: Story = {
           </SheetFooter>
         </SheetContent>
       </Sheet>
-    )
-  }
-}
+    );
+  },
+};

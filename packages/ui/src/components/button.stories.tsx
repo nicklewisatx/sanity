@@ -1,31 +1,38 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from './button.js';
+import type { Meta, StoryObj } from "@storybook/react";
+import { Button } from "./button.js";
 
 const meta = {
-  title: 'Primitives/Button',
+  title: "Primitives/Button",
   component: Button,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     variant: {
-      control: 'select',
-      options: ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link'],
-      description: 'The visual style of the button',
+      control: "select",
+      options: [
+        "default",
+        "destructive",
+        "outline",
+        "secondary",
+        "ghost",
+        "link",
+      ],
+      description: "The visual style of the button",
     },
     size: {
-      control: 'select',
-      options: ['default', 'sm', 'lg', 'icon'],
-      description: 'The size of the button',
+      control: "select",
+      options: ["default", "sm", "lg", "icon"],
+      description: "The size of the button",
     },
     asChild: {
-      control: 'boolean',
-      description: 'Whether to render as a child component',
+      control: "boolean",
+      description: "Whether to render as a child component",
     },
     disabled: {
-      control: 'boolean',
-      description: 'Whether the button is disabled',
+      control: "boolean",
+      description: "Whether the button is disabled",
     },
   },
 } satisfies Meta<typeof Button>;
@@ -35,7 +42,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    children: 'Button',
+    children: "Button",
   },
 };
 
@@ -124,7 +131,7 @@ export const WithIcon: Story = {
 
 export const AsLink: Story = {
   args: {
-    variant: 'link',
+    variant: "link",
     asChild: true,
     children: <a href="https://example.com">External Link</a>,
   },

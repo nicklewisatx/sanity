@@ -708,3 +708,38 @@
 [2025-07-03T16:46:17.027Z] [INFO] [process-manager] Next.js App started successfully (PID: 8616)
 [2025-07-03T19:07:52.294Z] [WARN] [process-manager] Next.js App is unhealthy: Request timeout
 [2025-07-03T19:08:17.793Z] [INFO] [process-manager] Next.js App is healthy again
+[2025-07-03T22:45:48.166Z] [WARN] [process-manager] Next.js App is unhealthy: HTTP 500
+[2025-07-03T22:46:00.326Z] [INFO] [process-manager] Storybook is already running (PID: 8402)
+[2025-07-03T22:46:00.327Z] [INFO] [process-manager] Sanity Studio is already running (PID: 8516)
+[2025-07-03T22:46:00.327Z] [INFO] [process-manager] Next.js App is already running (PID: 8616)
+[2025-07-03T22:46:06.728Z] [WARN] [process-manager] Sanity Studio exited with code null (signal: SIGKILL)
+[2025-07-03T22:46:07.004Z] [WARN] [process-manager] Next.js App exited with code 0 (signal: null)
+[2025-07-03T22:46:42.985Z] [INFO] [process-manager] Storybook is already running (PID: 8402)
+[2025-07-03T22:46:42.986Z] [INFO] [process-manager] Starting Sanity Studio...
+[2025-07-03T22:46:45.030Z] [INFO] [process-manager] Sanity Studio started successfully (PID: 89639)
+[2025-07-03T22:46:45.030Z] [INFO] [process-manager] Starting Next.js App...
+[2025-07-03T22:47:18.968Z] [ERROR] [process-manager] Failed to start Next.js App: Max health check attempts reached
+[2025-07-03T22:47:18.968Z] [INFO] [process-manager] Stopping Next.js App...
+[2025-07-03T22:47:19.076Z] [WARN] [process-manager] Next.js App exited with code 0 (signal: null)
+[2025-07-03T22:47:19.076Z] [INFO] [process-manager] Next.js App stopped
+[2025-07-03T22:48:09.672Z] [INFO] [process-manager] Storybook is already running (PID: 8402)
+[2025-07-03T22:48:10.675Z] [INFO] [process-manager] Starting Sanity Studio...
+[2025-07-03T22:48:10.696Z] [INFO] [process-manager] Sanity Studio started successfully (PID: 92882)
+[2025-07-03T22:48:11.698Z] [INFO] [process-manager] Starting Next.js App...
+[2025-07-03T22:48:11.956Z] [WARN] [process-manager] Next.js App exited with code 1 (signal: null)
+[2025-07-03T22:48:12.653Z] [WARN] [process-manager] Sanity Studio exited with code 1 (signal: null)
+[2025-07-03T22:48:40.729Z] [ERROR] [process-manager] Failed to start Next.js App: Max health check attempts reached
+[2025-07-03T22:48:40.730Z] [INFO] [process-manager] Next.js App is not running
+[2025-07-03T22:51:13.725Z] [INFO] [process-manager] Storybook is already running (PID: 8402)
+[2025-07-03T22:51:13.726Z] [INFO] [process-manager] Starting Sanity Studio...
+[2025-07-03T22:51:13.748Z] [INFO] [process-manager] Sanity Studio started successfully (PID: 99848)
+[2025-07-03T22:51:13.749Z] [INFO] [process-manager] Starting Next.js App...
+[2025-07-03T22:51:15.676Z] [WARN] [process-manager] Sanity Studio exited with code 1 (signal: null)
+[2025-07-03T22:51:28.799Z] [INFO] [process-manager] Received SIGINT, shutting down...
+[2025-07-03T22:51:28.800Z] [INFO] [process-manager] Stopping Next.js App...
+[2025-07-03T22:51:28.802Z] [INFO] [process-manager] Received SIGINT, shutting down...
+[2025-07-03T22:51:28.802Z] [INFO] [process-manager] Stopping Next.js App...
+[2025-07-03T22:51:28.811Z] [WARN] [process-manager] Next.js App exited with code null (signal: SIGTERM)
+[2025-07-03T22:51:28.812Z] [INFO] [process-manager] Next.js App stopped
+[2025-07-03T22:51:28.812Z] [INFO] [process-manager] Next.js App stopped
+[2025-07-03T23:03:24.069Z] [WARN] [process-manager] Storybook exited with code 0 (signal: null)

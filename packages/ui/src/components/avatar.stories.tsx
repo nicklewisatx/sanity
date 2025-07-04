@@ -1,30 +1,31 @@
-import * as React from 'react'
-import type { Meta, StoryObj } from '@storybook/react'
-import { Avatar, AvatarImage, AvatarFallback } from './avatar.js'
-import { User } from 'lucide-react'
+import * as React from "react";
+import type { Meta, StoryObj } from "@storybook/react";
+import { Avatar, AvatarImage, AvatarFallback } from "./avatar.js";
+import { User } from "lucide-react";
 
 const meta = {
-  title: 'Primitives/Avatar',
+  title: "Primitives/Avatar",
   component: Avatar,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
-        component: 'An image element with a fallback for representing the user.'
-      }
-    }
+        component:
+          "An image element with a fallback for representing the user.",
+      },
+    },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     className: {
-      control: 'text',
-      description: 'Additional CSS classes'
-    }
-  }
-} satisfies Meta<typeof Avatar>
+      control: "text",
+      description: "Additional CSS classes",
+    },
+  },
+} satisfies Meta<typeof Avatar>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: () => (
@@ -32,8 +33,8 @@ export const Default: Story = {
       <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
       <AvatarFallback>CN</AvatarFallback>
     </Avatar>
-  )
-}
+  ),
+};
 
 export const WithFallback: Story = {
   render: () => (
@@ -41,8 +42,8 @@ export const WithFallback: Story = {
       <AvatarImage src="https://broken-link.com/image.jpg" alt="User" />
       <AvatarFallback>JD</AvatarFallback>
     </Avatar>
-  )
-}
+  ),
+};
 
 export const Sizes: Story = {
   render: () => (
@@ -64,8 +65,8 @@ export const Sizes: Story = {
         <AvatarFallback className="text-2xl">CN</AvatarFallback>
       </Avatar>
     </div>
-  )
-}
+  ),
+};
 
 export const WithIcon: Story = {
   render: () => (
@@ -74,8 +75,8 @@ export const WithIcon: Story = {
         <User className="h-5 w-5" />
       </AvatarFallback>
     </Avatar>
-  )
-}
+  ),
+};
 
 export const Group: Story = {
   render: () => (
@@ -93,18 +94,23 @@ export const Group: Story = {
         <AvatarFallback>U3</AvatarFallback>
       </Avatar>
       <Avatar className="border-2 border-background">
-        <AvatarFallback className="bg-muted-foreground text-background">+5</AvatarFallback>
+        <AvatarFallback className="bg-muted-foreground text-background">
+          +5
+        </AvatarFallback>
       </Avatar>
     </div>
-  )
-}
+  ),
+};
 
 export const Status: Story = {
   render: () => (
     <div className="flex gap-4">
       <div className="relative">
         <Avatar>
-          <AvatarImage src="https://i.pravatar.cc/150?img=4" alt="Online user" />
+          <AvatarImage
+            src="https://i.pravatar.cc/150?img=4"
+            alt="Online user"
+          />
           <AvatarFallback>ON</AvatarFallback>
         </Avatar>
         <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-green-500 ring-2 ring-background" />
@@ -118,14 +124,17 @@ export const Status: Story = {
       </div>
       <div className="relative">
         <Avatar>
-          <AvatarImage src="https://i.pravatar.cc/150?img=6" alt="Offline user" />
+          <AvatarImage
+            src="https://i.pravatar.cc/150?img=6"
+            alt="Offline user"
+          />
           <AvatarFallback>OF</AvatarFallback>
         </Avatar>
         <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-gray-500 ring-2 ring-background" />
       </div>
     </div>
-  )
-}
+  ),
+};
 
 export const CustomStyles: Story = {
   render: () => (
@@ -134,31 +143,36 @@ export const CustomStyles: Story = {
         <AvatarFallback className="bg-blue-500 text-white">BG</AvatarFallback>
       </Avatar>
       <Avatar>
-        <AvatarFallback className="bg-gradient-to-br from-purple-500 to-pink-500 text-white">GR</AvatarFallback>
+        <AvatarFallback className="bg-gradient-to-br from-purple-500 to-pink-500 text-white">
+          GR
+        </AvatarFallback>
       </Avatar>
       <Avatar className="rounded-lg">
-        <AvatarImage src="https://i.pravatar.cc/150?img=7" alt="Square avatar" />
+        <AvatarImage
+          src="https://i.pravatar.cc/150?img=7"
+          alt="Square avatar"
+        />
         <AvatarFallback>SQ</AvatarFallback>
       </Avatar>
     </div>
-  )
-}
+  ),
+};
 
 export const LoadingStates: Story = {
   render: function LoadingStatesComponent() {
-    const [loading, setLoading] = React.useState(true)
-    
+    const [loading, setLoading] = React.useState(true);
+
     React.useEffect(() => {
-      const timer = setTimeout(() => setLoading(false), 2000)
-      return () => clearTimeout(timer)
-    }, [])
-    
+      const timer = setTimeout(() => setLoading(false), 2000);
+      return () => clearTimeout(timer);
+    }, []);
+
     return (
       <div className="flex flex-col items-center gap-4">
         <Avatar>
-          <AvatarImage 
-            src={loading ? "" : "https://i.pravatar.cc/150?img=8"} 
-            alt="Delayed load" 
+          <AvatarImage
+            src={loading ? "" : "https://i.pravatar.cc/150?img=8"}
+            alt="Delayed load"
           />
           <AvatarFallback>DL</AvatarFallback>
         </Avatar>
@@ -166,6 +180,6 @@ export const LoadingStates: Story = {
           {loading ? "Loading image..." : "Image loaded!"}
         </p>
       </div>
-    )
-  }
-}
+    );
+  },
+};

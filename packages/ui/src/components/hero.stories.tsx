@@ -44,7 +44,8 @@ export const Gradient: Story = {
   args: {
     variant: "gradient",
     title: "Beautiful Gradients",
-    description: "Create stunning visual experiences with gradient backgrounds.",
+    description:
+      "Create stunning visual experiences with gradient backgrounds.",
     actions: [{ text: "Explore Features" }],
   },
 };
@@ -85,7 +86,8 @@ export const RightAligned: Story = {
 
 export const WithBackgroundImage: Story = {
   args: {
-    backgroundImage: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=1080&fit=crop",
+    backgroundImage:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=1080&fit=crop",
     overlay: true,
     variant: "dark",
     title: "Stunning Visuals",

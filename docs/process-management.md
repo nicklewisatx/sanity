@@ -1,10 +1,15 @@
 # Process Management System
 
+> **⚠️ DEPRECATED**: This documentation describes the legacy process management system. 
+> 
+> **For the current simplified approach, see [process-management-simple.md](./process-management-simple.md)**
+
 A unified process management system for the Sanity + Next.js monorepo, designed to handle development servers, background processes, and Claude Code compatibility.
 
 ## Overview
 
 This system replaces the fragmented approach of individual scripts with a centralized process manager that handles:
+
 - Next.js web app (port 3000)
 - Sanity Studio (port 3333)
 - Storybook (port 6006)
@@ -34,29 +39,34 @@ This system replaces the fragmented approach of individual scripts with a centra
 ## Key Features
 
 ### 1. Unified Commands
+
 - Single entry point for all process management
 - Consistent interface across all services
 - Support for individual and collective operations
 
 ### 2. Claude Code Compatibility
+
 - Automatic detection of Claude Code environment
 - Built-in `--no-daemon` and concurrency limits
 - Optimized startup sequences to prevent timeouts
 - Enhanced logging for debugging
 
 ### 3. Process Lifecycle Management
+
 - PID tracking for all services
 - Graceful shutdown handling
 - Automatic port cleanup
 - Signal propagation (SIGINT, SIGTERM)
 
 ### 4. Health Monitoring
+
 - HTTP health checks for web services
 - Process alive verification
 - Automatic restart on failure
 - Configurable retry logic
 
 ### 5. Developer Experience
+
 - Clear status reporting
 - Service-specific logging
 - Debug mode for troubleshooting
@@ -121,6 +131,7 @@ scripts/
 ### Service Configuration
 
 Each service is configured with:
+
 ```javascript
 {
   name: 'web',
@@ -145,6 +156,7 @@ Each service is configured with:
 ### Process States
 
 Services can be in one of the following states:
+
 - `stopped` - Not running
 - `starting` - Starting up
 - `running` - Active and healthy
@@ -190,16 +202,19 @@ When `CLAUDE_MODE=true` or using `pnpm dev:claude`:
 ## Error Handling
 
 ### Port Conflicts
+
 - Automatically kills processes on required ports
 - Waits for port release before starting
 - Reports which process was using the port
 
 ### Failed Starts
+
 - Captures and logs startup errors
 - Provides actionable error messages
 - Suggests troubleshooting steps
 
 ### Crashes
+
 - Detects unexpected terminations
 - Optional automatic restart
 - Preserves crash logs
@@ -226,18 +241,19 @@ PM_STORYBOOK_PORT=6006
 ### Config File (optional)
 
 `.turbo-pm.config.js`:
+
 ```javascript
 module.exports = {
   services: {
     web: {
       // Override default settings
-    }
+    },
   },
   claude: {
     concurrency: 4,
-    timeout: 60000
-  }
-}
+    timeout: 60000,
+  },
+};
 ```
 
 ## Migration Guide
@@ -245,6 +261,7 @@ module.exports = {
 ### From Existing Scripts
 
 1. **Old way**:
+
    ```bash
    ./scripts/start-dev.sh
    ```
@@ -257,6 +274,7 @@ module.exports = {
 ### Backward Compatibility
 
 During transition period:
+
 - Old scripts remain functional
 - Deprecation warnings guide to new commands
 - Gradual migration path
@@ -286,6 +304,7 @@ PM_LOG_LEVEL=debug pnpm dev
 ```
 
 Provides:
+
 - Detailed startup sequences
 - Health check results
 - Signal handling info
@@ -294,6 +313,7 @@ Provides:
 ## Future Enhancements
 
 ### Planned Features
+
 - [ ] Web UI for process management
 - [ ] Metrics collection and reporting
 - [ ] Plugin system for custom services
@@ -301,6 +321,7 @@ Provides:
 - [ ] Integration with deployment systems
 
 ### Potential Integrations
+
 - PM2 compatibility layer
 - Docker compose integration
 - Kubernetes local development
@@ -309,18 +330,21 @@ Provides:
 ## Technical Details
 
 ### Signal Handling
+
 - `SIGINT` (Ctrl+C): Graceful shutdown all services
 - `SIGTERM`: Graceful shutdown all services
 - `SIGUSR1`: Reload configuration
 - `SIGUSR2`: Dump status to logs
 
 ### Health Check Types
+
 1. **HTTP**: GET request expecting 2xx response
 2. **TCP**: Port connection test
 3. **Process**: PID existence check
 4. **Custom**: User-defined health check function
 
 ### Performance Considerations
+
 - Minimal overhead (~10MB memory)
 - Efficient process spawning
 - Non-blocking health checks
@@ -329,6 +353,7 @@ Provides:
 ## Contributing
 
 When adding new services:
+
 1. Create service definition in `services/`
 2. Add to service registry
 3. Update documentation

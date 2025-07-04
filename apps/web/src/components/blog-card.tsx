@@ -1,3 +1,4 @@
+import { Card, CardContent } from "@workspace/ui/components/card";
 import Link from "next/link";
 
 import type { QueryBlogIndexPageDataResult } from "@/lib/sanity/sanity.types";
@@ -132,50 +133,52 @@ export function FeaturedBlogCard({ blog }: BlogCardProps) {
   const { title, publishedAt, slug, authors, description, image } = blog ?? {};
 
   return (
-    <article className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full">
-      <BlogImage image={image} title={title} />
-      <div className="space-y-6">
-        <BlogMeta publishedAt={publishedAt} />
-        <BlogContent
-          title={title}
-          slug={slug}
-          description={description}
-          isFeatured
-        />
-        <AuthorSection authors={authors} />
+    <Card className="w-full shadow-lg">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <BlogImage image={image} title={title} />
+        <CardContent className="space-y-6 pt-4 lg:pt-6">
+          <BlogMeta publishedAt={publishedAt} />
+          <BlogContent
+            title={title}
+            slug={slug}
+            description={description}
+            isFeatured
+          />
+          <AuthorSection authors={authors} />
+        </CardContent>
       </div>
-    </article>
+    </Card>
   );
 }
 
 export function BlogCard({ blog }: BlogCardProps) {
   if (!blog) {
     return (
-      <article className="grid grid-cols-1 gap-4 w-full">
-        <div className="h-48 bg-muted rounded-2xl animate-pulse" />
-        <div className="space-y-2">
+      <Card className="w-full">
+        <div className="h-48 bg-muted rounded-t-lg animate-pulse" />
+        <CardContent className="space-y-2 pt-4">
           <div className="h-4 w-24 bg-muted rounded animate-pulse" />
           <div className="h-6 w-full bg-muted rounded animate-pulse" />
           <div className="h-4 w-3/4 bg-muted rounded animate-pulse" />
-        </div>
-      </article>
+        </CardContent>
+      </Card>
     );
   }
 
   const { title, publishedAt, slug, authors, description, image } = blog;
 
   return (
-    <article className="grid grid-cols-1 gap-4 w-full">
-      <div className="relative w-full h-auto aspect-[16/9] overflow-hidden rounded-2xl">
+    <Card className="w-full overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+      <div className="relative w-full h-auto aspect-[16/9] overflow-hidden">
         <BlogImage image={image} title={title} />
-        <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
+        <div className="absolute inset-0 ring-1 ring-inset ring-gray-900/10" />
       </div>
-      <div className="w-full space-y-4">
+      <CardContent className="space-y-4 pt-4">
         <BlogMeta publishedAt={publishedAt} />
         <BlogContent title={title} slug={slug} description={description} />
         <AuthorSection authors={authors} />
-      </div>
-    </article>
+      </CardContent>
+    </Card>
   );
 }
 

@@ -208,3 +208,221 @@ Sanity Studio using vite@6.3.5 ready in 174ms and running at http://localhost:33
 ✓ Starting dev server
 1:11:42 PM [vite] (client) page reload schemaTypes/blocks/index.ts
 [2025-07-03T17:11:42.241Z] [INFO] [studio] 1:11:42 PM [vite] (client) page reload schemaTypes/blocks/index.ts
+
+> studio@1.0.0 dev /Users/nicholaslewis/projects/sanity/apps/studio
+> sanity dev
+
+[2025-07-03T22:46:43.126Z] [INFO] [studio] > studio@1.0.0 dev /Users/nicholaslewis/projects/sanity/apps/studio
+[2025-07-03T22:46:43.126Z] [INFO] [studio] > sanity dev
+✓ Checking configuration files...
+[2025-07-03T22:46:44.057Z] [ERROR] [studio] ✓ Checking configuration files...
+[2025-07-03T22:46:44.058Z] [ERROR] [studio] - Starting dev server
+- Starting dev server
+Sanity Studio using vite@6.3.5 ready in 166ms and running at http://localhost:3333/
+[2025-07-03T22:46:44.223Z] [INFO] [studio] Sanity Studio using vite@6.3.5 ready in 166ms and running at http://localhost:3333/
+[2025-07-03T22:46:44.224Z] [ERROR] [studio] ✓ Starting dev server
+✓ Starting dev server
+
+> studio@1.0.0 dev /Users/nicholaslewis/projects/sanity/apps/studio
+> sanity dev --no-daemon --concurrency\=4
+
+[2025-07-03T22:48:10.816Z] [INFO] [studio] > studio@1.0.0 dev /Users/nicholaslewis/projects/sanity/apps/studio
+[2025-07-03T22:48:10.816Z] [INFO] [studio] > sanity dev --no-daemon --concurrency\=4
+✓ Checking configuration files...
+[2025-07-03T22:48:11.781Z] [ERROR] [studio] ✓ Checking configuration files...
+[2025-07-03T22:48:11.781Z] [ERROR] [studio] - Starting dev server
+- Starting dev server
+
+Error: Port 3333 is already in use
+    at Server.onError (file://~/projects/sanity/node_modules/.pnpm/vite@6.3.5_@types+node@24.0.3_jiti@2.4.2_terser@5.37.0_tsx@4.20.3_yaml@2.6.1/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:25023:18)
+    at Server.emit (node:events:518:28)
+    at emitErrorNT (node:net:1975:8)
+[2025-07-03T22:48:12.436Z] [ERROR] [studio] Error: Port 3333 is already in use
+[2025-07-03T22:48:12.436Z] [ERROR] [studio] at Server.onError (file://~/projects/sanity/node_modules/.pnpm/vite@6.3.5_@types+node@24.0.3_jiti@2.4.2_terser@5.37.0_tsx@4.20.3_yaml@2.6.1/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:25023:18)
+[2025-07-03T22:48:12.436Z] [ERROR] [studio] at Server.emit (node:events:518:28)
+[2025-07-03T22:48:12.436Z] [ERROR] [studio] at emitErrorNT (node:net:1975:8)
+/Users/nicholaslewis/projects/sanity/apps/studio:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  studio@1.0.0 dev: `sanity dev --no-daemon --concurrency\=4`
+Exit status 1
+[2025-07-03T22:48:12.627Z] [INFO] [studio] /Users/nicholaslewis/projects/sanity/apps/studio:
+[2025-07-03T22:48:12.627Z] [INFO] [studio] ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  studio@1.0.0 dev: `sanity dev --no-daemon --concurrency\=4`
+[2025-07-03T22:48:12.628Z] [INFO] [studio] Exit status 1
+
+> studio@1.0.0 dev /Users/nicholaslewis/projects/sanity/apps/studio
+> sanity dev
+
+[2025-07-03T22:51:13.869Z] [INFO] [studio] > studio@1.0.0 dev /Users/nicholaslewis/projects/sanity/apps/studio
+[2025-07-03T22:51:13.869Z] [INFO] [studio] > sanity dev
+✓ Checking configuration files...
+[2025-07-03T22:51:14.862Z] [ERROR] [studio] ✓ Checking configuration files...
+[2025-07-03T22:51:14.862Z] [ERROR] [studio] - Starting dev server
+- Starting dev server
+
+Error: Port 3333 is already in use
+    at Server.onError (file://~/projects/sanity/node_modules/.pnpm/vite@6.3.5_@types+node@24.0.3_jiti@2.4.2_terser@5.37.0_tsx@4.20.3_yaml@2.6.1/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:25023:18)
+    at Server.emit (node:events:518:28)
+    at emitErrorNT (node:net:1975:8)
+[2025-07-03T22:51:15.461Z] [ERROR] [studio] Error: Port 3333 is already in use
+[2025-07-03T22:51:15.461Z] [ERROR] [studio] at Server.onError (file://~/projects/sanity/node_modules/.pnpm/vite@6.3.5_@types+node@24.0.3_jiti@2.4.2_terser@5.37.0_tsx@4.20.3_yaml@2.6.1/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:25023:18)
+[2025-07-03T22:51:15.461Z] [ERROR] [studio] at Server.emit (node:events:518:28)
+[2025-07-03T22:51:15.461Z] [ERROR] [studio] at emitErrorNT (node:net:1975:8)
+/Users/nicholaslewis/projects/sanity/apps/studio:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  studio@1.0.0 dev: `sanity dev`
+Exit status 1
+[2025-07-03T22:51:15.650Z] [INFO] [studio] /Users/nicholaslewis/projects/sanity/apps/studio:
+[2025-07-03T22:51:15.650Z] [INFO] [studio] ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  studio@1.0.0 dev: `sanity dev`
+[2025-07-03T22:51:15.650Z] [INFO] [studio] Exit status 1
+turbo 2.5.4
+
+[2m• Packages in scope: studio[0m
+[2m• Running [0m[1m[2mdev[0m[2m in 1 packages
+[0m[2m• Remote caching disabled[0m
+[35mstudio:dev: [0mcache bypass, force executing [2m085aa50ee6e93ec7[0m
+[35mstudio:dev: [0m
+[35mstudio:dev: [0m> studio@1.0.0 dev /Users/nicholaslewis/projects/sanity/apps/studio
+[35mstudio:dev: [0m> sanity dev
+[35mstudio:dev: [0m
+turbo 2.5.4
+
+[2m• Packages in scope: studio[0m
+[2m• Running [0m[1m[2mdev[0m[2m in 1 packages
+[0m[2m• Remote caching disabled[0m
+[35mstudio:dev: [0mcache bypass, force executing [2m085aa50ee6e93ec7[0m
+[35mstudio:dev: [0m
+[35mstudio:dev: [0m> studio@1.0.0 dev /Users/nicholaslewis/projects/sanity/apps/studio
+[35mstudio:dev: [0m> sanity dev
+[35mstudio:dev: [0m
+[35mstudio:dev: [0m✓ Checking configuration files...
+[35mstudio:dev: [0m- Starting dev server
+[35mstudio:dev: [0mSanity Studio using vite@6.3.5 ready in 169ms and running at http://localhost:3333/
+[35mstudio:dev: [0m✓ Starting dev server
+turbo 2.5.4
+
+[2m• Packages in scope: studio[0m
+[2m• Running [0m[1m[2mdev[0m[2m in 1 packages
+[0m[2m• Remote caching disabled[0m
+[35mstudio:dev: [0mcache bypass, force executing [2m085aa50ee6e93ec7[0m
+[35mstudio:dev: [0m
+[35mstudio:dev: [0m> studio@1.0.0 dev /Users/nicholaslewis/projects/sanity/apps/studio
+[35mstudio:dev: [0m> sanity dev
+[35mstudio:dev: [0m
+[35mstudio:dev: [0m✓ Checking configuration files...
+[35mstudio:dev: [0m- Starting dev server
+[35mstudio:dev: [0m10:30:37 PM [vite] (client) page reload .sanity/runtime/index.html
+[35mstudio:dev: [0m10:30:37 PM [vite] (client) page reload .sanity/runtime/app.js
+[35mstudio:dev: [0m
+[35mstudio:dev: [0mError: Port 3333 is already in use
+[35mstudio:dev: [0m    at Server.onError (file://~/projects/sanity/node_modules/.pnpm/vite@6.3.5_@types+node@24.0.3_jiti@2.4.2_terser@5.37.0_tsx@4.20.3_yaml@2.6.1/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:25023:18)
+[35mstudio:dev: [0m    at Server.emit (node:events:518:28)
+[35mstudio:dev: [0m    at emitErrorNT (node:net:1975:8)
+[35mstudio:dev: [0m ELIFECYCLE  Command failed with exit code 1.
+[35mstudio:dev: [0mERROR: command finished with error: command (/Users/nicholaslewis/projects/sanity/apps/studio) /Users/nicholaslewis/.local/state/fnm_multishells/5843_1751425933026/bin/pnpm run dev exited (1)
+studio#dev: command (/Users/nicholaslewis/projects/sanity/apps/studio) /Users/nicholaslewis/.local/state/fnm_multishells/5843_1751425933026/bin/pnpm run dev exited (1)
+
+[1m Tasks:    [32m[1m0 successful[0m, 1 total[0m
+[1mCached:    [1m0 cached[0m, 1 total[0m
+[1m  Time:    [1m2.51s[0m [0m
+[1mFailed:    [31m[1mstudio#dev[0m[0m
+
+[31;40m ERROR [0m [31;49mrun failed: command  exited (1)[0m
+turbo 2.5.4
+
+[2m• Packages in scope: studio[0m
+[2m• Running [0m[1m[2mdev[0m[2m in 1 packages
+[0m[2m• Remote caching disabled[0m
+[35mstudio:dev: [0mcache bypass, force executing [2m085aa50ee6e93ec7[0m
+[35mstudio:dev: [0m
+[35mstudio:dev: [0m> studio@1.0.0 dev /Users/nicholaslewis/projects/sanity/apps/studio
+[35mstudio:dev: [0m> sanity dev
+[35mstudio:dev: [0m
+[35mstudio:dev: [0m✓ Checking configuration files...
+[35mstudio:dev: [0m- Starting dev server
+[35mstudio:dev: [0m10:30:42 PM [vite] (client) page reload .sanity/runtime/index.html
+[35mstudio:dev: [0m10:30:42 PM [vite] (client) page reload .sanity/runtime/app.js
+[35mstudio:dev: [0m
+[35mstudio:dev: [0mError: Port 3333 is already in use
+[35mstudio:dev: [0m    at Server.onError (file://~/projects/sanity/node_modules/.pnpm/vite@6.3.5_@types+node@24.0.3_jiti@2.4.2_terser@5.37.0_tsx@4.20.3_yaml@2.6.1/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:25023:18)
+[35mstudio:dev: [0m    at Server.emit (node:events:518:28)
+[35mstudio:dev: [0m    at emitErrorNT (node:net:1975:8)
+[35mstudio:dev: [0m ELIFECYCLE  Command failed with exit code 1.
+[35mstudio:dev: [0mERROR: command finished with error: command (/Users/nicholaslewis/projects/sanity/apps/studio) /Users/nicholaslewis/.local/state/fnm_multishells/5843_1751425933026/bin/pnpm run dev exited (1)
+studio#dev: command (/Users/nicholaslewis/projects/sanity/apps/studio) /Users/nicholaslewis/.local/state/fnm_multishells/5843_1751425933026/bin/pnpm run dev exited (1)
+
+[1m Tasks:    [32m[1m0 successful[0m, 1 total[0m
+[1mCached:    [1m0 cached[0m, 1 total[0m
+[1m  Time:    [1m2.461s[0m [0m
+[1mFailed:    [31m[1mstudio#dev[0m[0m
+
+[31;40m ERROR [0m [31;49mrun failed: command  exited (1)[0m
+turbo 2.5.4
+
+[2m• Packages in scope: studio[0m
+[2m• Running [0m[1m[2mdev[0m[2m in 1 packages
+[0m[2m• Remote caching disabled[0m
+[35mstudio:dev: [0mcache bypass, force executing [2m085aa50ee6e93ec7[0m
+[35mstudio:dev: [0m
+[35mstudio:dev: [0m> studio@1.0.0 dev /Users/nicholaslewis/projects/sanity/apps/studio
+[35mstudio:dev: [0m> sanity dev
+[35mstudio:dev: [0m
+[35mstudio:dev: [0m✓ Checking configuration files...
+[35mstudio:dev: [0m- Starting dev server
+[35mstudio:dev: [0mSanity Studio using vite@6.3.5 ready in 168ms and running at http://localhost:3333/
+[35mstudio:dev: [0m✓ Starting dev server
+turbo 2.5.4
+
+[2m• Packages in scope: studio[0m
+[2m• Running [0m[1m[2mdev[0m[2m in 1 packages
+[0m[2m• Remote caching disabled[0m
+[35mstudio:dev: [0mcache bypass, force executing [2m085aa50ee6e93ec7[0m
+[35mstudio:dev: [0m
+[35mstudio:dev: [0m> studio@1.0.0 dev /Users/nicholaslewis/projects/sanity/apps/studio
+[35mstudio:dev: [0m> sanity dev
+[35mstudio:dev: [0m
+[35mstudio:dev: [0m✓ Checking configuration files...
+[35mstudio:dev: [0m- Starting dev server
+[35mstudio:dev: [0m10:31:38 PM [vite] (client) page reload .sanity/runtime/index.html
+[35mstudio:dev: [0m10:31:38 PM [vite] (client) page reload .sanity/runtime/app.js
+[35mstudio:dev: [0m
+[35mstudio:dev: [0mError: Port 3333 is already in use
+[35mstudio:dev: [0m    at Server.onError (file://~/projects/sanity/node_modules/.pnpm/vite@6.3.5_@types+node@24.0.3_jiti@2.4.2_terser@5.37.0_tsx@4.20.3_yaml@2.6.1/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:25023:18)
+[35mstudio:dev: [0m    at Server.emit (node:events:518:28)
+[35mstudio:dev: [0m    at emitErrorNT (node:net:1975:8)
+[35mstudio:dev: [0m ELIFECYCLE  Command failed with exit code 1.
+[35mstudio:dev: [0mERROR: command finished with error: command (/Users/nicholaslewis/projects/sanity/apps/studio) /Users/nicholaslewis/.local/state/fnm_multishells/5843_1751425933026/bin/pnpm run dev exited (1)
+studio#dev: command (/Users/nicholaslewis/projects/sanity/apps/studio) /Users/nicholaslewis/.local/state/fnm_multishells/5843_1751425933026/bin/pnpm run dev exited (1)
+
+[1m Tasks:    [32m[1m0 successful[0m, 1 total[0m
+[1mCached:    [1m0 cached[0m, 1 total[0m
+[1m  Time:    [1m2.281s[0m [0m
+[1mFailed:    [31m[1mstudio#dev[0m[0m
+
+[31;40m ERROR [0m [31;49mrun failed: command  exited (1)[0m
+turbo 2.5.4
+
+[2m• Packages in scope: studio[0m
+[2m• Running [0m[1m[2mdev[0m[2m in 1 packages
+[0m[2m• Remote caching disabled[0m
+[35mstudio:dev: [0mcache bypass, force executing [2m085aa50ee6e93ec7[0m
+[35mstudio:dev: [0m
+[35mstudio:dev: [0m> studio@1.0.0 dev /Users/nicholaslewis/projects/sanity/apps/studio
+[35mstudio:dev: [0m> sanity dev
+[35mstudio:dev: [0m
+[35mstudio:dev: [0m✓ Checking configuration files...
+[35mstudio:dev: [0m- Starting dev server
+[35mstudio:dev: [0m10:31:43 PM [vite] (client) page reload .sanity/runtime/index.html
+[35mstudio:dev: [0m10:31:43 PM [vite] (client) page reload .sanity/runtime/app.js
+[35mstudio:dev: [0m
+[35mstudio:dev: [0mError: Port 3333 is already in use
+[35mstudio:dev: [0m    at Server.onError (file://~/projects/sanity/node_modules/.pnpm/vite@6.3.5_@types+node@24.0.3_jiti@2.4.2_terser@5.37.0_tsx@4.20.3_yaml@2.6.1/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:25023:18)
+[35mstudio:dev: [0m    at Server.emit (node:events:518:28)
+[35mstudio:dev: [0m    at emitErrorNT (node:net:1975:8)
+[35mstudio:dev: [0m ELIFECYCLE  Command failed with exit code 1.
+[35mstudio:dev: [0mERROR: command finished with error: command (/Users/nicholaslewis/projects/sanity/apps/studio) /Users/nicholaslewis/.local/state/fnm_multishells/5843_1751425933026/bin/pnpm run dev exited (1)
+studio#dev: command (/Users/nicholaslewis/projects/sanity/apps/studio) /Users/nicholaslewis/.local/state/fnm_multishells/5843_1751425933026/bin/pnpm run dev exited (1)
+
+[1m Tasks:    [32m[1m0 successful[0m, 1 total[0m
+[1mCached:    [1m0 cached[0m, 1 total[0m
+[1m  Time:    [1m1.936s[0m [0m
+[1mFailed:    [31m[1mstudio#dev[0m[0m
+
+[31;40m ERROR [0m [31;49mrun failed: command  exited (1)[0m

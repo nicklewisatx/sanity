@@ -1,3 +1,4 @@
+import { Footer as UIFooter } from "@workspace/ui/components/footer";
 import Link from "next/link";
 
 import { sanityFetch } from "@/lib/sanity/fetch-with-tracing";
@@ -16,10 +17,6 @@ import {
   YoutubeIcon,
 } from "./social-icons";
 
-interface SocialLinksProps {
-  data: NonNullable<QueryGlobalSeoSettingsResult>["socialLinks"];
-}
-
 interface FooterProps {
   data: NonNullable<QueryFooterDataResult>;
   settingsData: NonNullable<QueryGlobalSeoSettingsResult>;
@@ -37,50 +34,6 @@ export async function FooterServer() {
 
   if (!response?.data || !settingsResponse?.data) return <FooterSkeleton />;
   return <Footer data={response.data} settingsData={settingsResponse.data} />;
-}
-
-function SocialLinks({ data }: SocialLinksProps) {
-  if (!data) return null;
-
-  const { facebook, twitter, instagram, youtube, linkedin } = data;
-
-  const socialLinks = [
-    {
-      url: instagram,
-      Icon: InstagramIcon,
-      label: "Follow us on Instagram",
-    },
-    { url: facebook, Icon: FacebookIcon, label: "Follow us on Facebook" },
-    { url: twitter, Icon: XIcon, label: "Follow us on Twitter" },
-    { url: linkedin, Icon: LinkedinIcon, label: "Follow us on LinkedIn" },
-    {
-      url: youtube,
-      Icon: YoutubeIcon,
-      label: "Subscribe to our YouTube channel",
-    },
-  ].filter((link) => link.url);
-
-  return (
-    <ul className="flex items-center space-x-6 text-muted-foreground">
-      {socialLinks.map(({ url, Icon, label }, index) => (
-        <li
-          key={`social-link-${url}-${index.toString()}`}
-          className="font-medium hover:text-primary"
-        >
-          <Link
-            href={url ?? "#"}
-            target="_blank"
-            prefetch={false}
-            rel="noopener noreferrer"
-            aria-label={label}
-          >
-            <Icon className="fill-muted-foreground hover:fill-primary/80 dark:fill-zinc-400 dark:hover:fill-primary" />
-            <span className="sr-only">{label}</span>
-          </Link>
-        </li>
-      ))}
-    </ul>
-  );
 }
 
 export function FooterSkeleton() {
@@ -139,73 +92,62 @@ function Footer({ data, settingsData }: FooterProps) {
   const { siteTitle, logo, socialLinks } = settingsData;
   const year = new Date().getFullYear();
 
+  // Transform Sanity data to UI Footer format
+  const footerSections =
+    columns?.map((column) => ({
+      title: column?.title || "",
+      links:
+        column?.links?.map((link) => ({
+          label: link.name || "",
+          href: link.href || "#",
+        })) || [],
+    })) || [];
+
+  // Transform social links to UI Footer format
+  const uiSocialLinks = socialLinks
+    ? ([
+        socialLinks.instagram && {
+          name: "Instagram",
+          href: socialLinks.instagram,
+          icon: <InstagramIcon className="h-5 w-5" />,
+        },
+        socialLinks.facebook && {
+          name: "Facebook",
+          href: socialLinks.facebook,
+          icon: <FacebookIcon className="h-5 w-5" />,
+        },
+        socialLinks.twitter && {
+          name: "Twitter",
+          href: socialLinks.twitter,
+          icon: <XIcon className="h-5 w-5" />,
+        },
+        socialLinks.linkedin && {
+          name: "LinkedIn",
+          href: socialLinks.linkedin,
+          icon: <LinkedinIcon className="h-5 w-5" />,
+        },
+        socialLinks.youtube && {
+          name: "YouTube",
+          href: socialLinks.youtube,
+          icon: <YoutubeIcon className="h-5 w-5" />,
+        },
+      ].filter(Boolean) as any)
+    : [];
+
+  const bottomLinks = [
+    { label: "Terms and Conditions", href: "/terms" },
+    { label: "Privacy Policy", href: "/privacy" },
+  ];
+
   return (
-    <footer className="mt-20 pb-8">
-      <section className="container mx-auto">
-        <div className="h-[500px] lg:h-auto">
-          <div className="flex flex-col items-center justify-between gap-10 text-center lg:flex-row lg:text-left mx-auto max-w-7xl px-4 md:px-6">
-            <div className="flex w-full max-w-96 shrink flex-col items-center justify-between gap-6 md:gap-8 lg:items-start">
-              <div>
-                <span className="flex items-center justify-center gap-4 lg:justify-start">
-                  <Logo image={logo} alt={siteTitle} priority />
-                </span>
-                {subtitle && (
-                  <p className="mt-6 text-sm text-muted-foreground dark:text-zinc-400">
-                    {subtitle}
-                  </p>
-                )}
-              </div>
-              {socialLinks && <SocialLinks data={socialLinks} />}
-            </div>
-            {Array.isArray(columns) && columns?.length > 0 && (
-              <div className="grid grid-cols-3 gap-6 lg:gap-28 lg:mr-20">
-                {columns.map((column, index) => (
-                  <div key={`column-${column?._key}-${index}`}>
-                    <h3 className="mb-6 font-semibold">{column?.title}</h3>
-                    {column?.links && column?.links?.length > 0 && (
-                      <ul className="space-y-4 text-sm text-muted-foreground dark:text-zinc-400">
-                        {column?.links?.map((link, index) => (
-                          <li
-                            key={`${link?._key}-${index}-column-${column?._key}`}
-                            className="font-medium hover:text-primary"
-                          >
-                            <Link
-                              href={link.href ?? "#"}
-                              target={link.openInNewTab ? "_blank" : undefined}
-                              rel={
-                                link.openInNewTab
-                                  ? "noopener noreferrer"
-                                  : undefined
-                              }
-                            >
-                              {link.name}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-          <div className="mt-20 border-t pt-8">
-            <div className="flex flex-col justify-between gap-4  text-center text-sm font-normal text-muted-foreground lg:flex-row lg:items-center lg:text-left mx-auto max-w-7xl px-4 md:px-6">
-              <p>
-                © {year} {siteTitle}. All rights reserved.
-              </p>
-              <ul className="flex justify-center gap-4 lg:justify-start">
-                <li className="hover:text-primary">
-                  <Link href="/terms">Terms and Conditions</Link>
-                </li>
-                <li className="hover:text-primary">
-                  <Link href="/privacy">Privacy Policy</Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-    </footer>
+    <UIFooter
+      className="mt-20"
+      logo={<Logo image={logo} alt={siteTitle} priority />}
+      description={subtitle || undefined}
+      sections={footerSections}
+      socialLinks={uiSocialLinks}
+      copyright={`© ${year} ${siteTitle}. All rights reserved.`}
+      bottomLinks={bottomLinks}
+    />
   );
 }

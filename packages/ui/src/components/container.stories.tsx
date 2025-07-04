@@ -8,7 +8,8 @@ const meta = {
     layout: "fullscreen",
     docs: {
       description: {
-        component: "A responsive container component that constrains content width and provides consistent padding.",
+        component:
+          "A responsive container component that constrains content width and provides consistent padding.",
       },
     },
   },
@@ -16,7 +17,23 @@ const meta = {
   argTypes: {
     size: {
       control: "select",
-      options: ["default", "full", "narrow", "wide", "xs", "sm", "md", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "6xl", "7xl"],
+      options: [
+        "default",
+        "full",
+        "narrow",
+        "wide",
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl",
+        "2xl",
+        "3xl",
+        "4xl",
+        "5xl",
+        "6xl",
+        "7xl",
+      ],
       description: "Container max-width constraint",
     },
     padding: {
@@ -112,25 +129,33 @@ export const SpecialSizes: Story = {
       <Container size="narrow">
         <div className="bg-primary/10 p-8 text-center">
           <p>Narrow Container (max-w-4xl)</p>
-          <p className="text-sm text-muted-foreground mt-2">Perfect for blog posts and readable content</p>
+          <p className="text-sm text-muted-foreground mt-2">
+            Perfect for blog posts and readable content
+          </p>
         </div>
       </Container>
       <Container size="default">
         <div className="bg-primary/10 p-8 text-center">
           <p>Default Container (1216px)</p>
-          <p className="text-sm text-muted-foreground mt-2">Standard width matching existing components</p>
+          <p className="text-sm text-muted-foreground mt-2">
+            Standard width matching existing components
+          </p>
         </div>
       </Container>
       <Container size="wide">
         <div className="bg-primary/10 p-8 text-center">
           <p>Wide Container (max-w-7xl)</p>
-          <p className="text-sm text-muted-foreground mt-2">For content that needs more breathing room</p>
+          <p className="text-sm text-muted-foreground mt-2">
+            For content that needs more breathing room
+          </p>
         </div>
       </Container>
       <Container size="full">
         <div className="bg-primary/10 p-8 text-center">
           <p>Full Width Container</p>
-          <p className="text-sm text-muted-foreground mt-2">No max-width constraint - perfect for full-width heroes</p>
+          <p className="text-sm text-muted-foreground mt-2">
+            No max-width constraint - perfect for full-width heroes
+          </p>
         </div>
       </Container>
     </div>
@@ -175,7 +200,8 @@ export const ResponsiveBehavior: Story = {
       <div className="bg-accent/20 p-8">
         <h3 className="text-lg font-semibold mb-4">Responsive Container</h3>
         <p className="text-sm text-muted-foreground mb-4">
-          Resize your browser to see how the padding adjusts at different breakpoints:
+          Resize your browser to see how the padding adjusts at different
+          breakpoints:
         </p>
         <ul className="text-sm space-y-2">
           <li>• Mobile: 16px padding (px-4)</li>
@@ -194,7 +220,8 @@ export const NestedContainers: Story = {
         <Container size="default">
           <h2 className="text-2xl font-bold mb-4">Full-width Background</h2>
           <p className="mb-8">
-            This demonstrates a common pattern: full-width background with constrained content.
+            This demonstrates a common pattern: full-width background with
+            constrained content.
           </p>
         </Container>
       </div>
@@ -202,8 +229,9 @@ export const NestedContainers: Story = {
         <Container size="narrow">
           <h3 className="text-xl font-semibold mb-4">Narrow Content Section</h3>
           <p>
-            Perfect for blog posts or content that needs optimal reading width. The narrow container
-            ensures lines don&apos;t get too long for comfortable reading.
+            Perfect for blog posts or content that needs optimal reading width.
+            The narrow container ensures lines don&apos;t get too long for
+            comfortable reading.
           </p>
         </Container>
       </div>
@@ -265,13 +293,14 @@ export const RealWorldExample: Story = {
           <article className="prose prose-gray dark:prose-invert">
             <h2>Article Title</h2>
             <p>
-              This narrow container provides optimal reading width for long-form content.
-              It ensures that line lengths stay within comfortable reading limits, improving
-              the overall reading experience.
+              This narrow container provides optimal reading width for long-form
+              content. It ensures that line lengths stay within comfortable
+              reading limits, improving the overall reading experience.
             </p>
             <p>
-              The narrow container is particularly useful for blog posts, documentation,
-              and any other text-heavy content where readability is paramount.
+              The narrow container is particularly useful for blog posts,
+              documentation, and any other text-heavy content where readability
+              is paramount.
             </p>
           </article>
         </Container>

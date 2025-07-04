@@ -39,7 +39,12 @@ const preview: Preview = {
     layout: "centered",
   },
   decorators: [
-    (Story) => createElement('div', { className: 'font-sans antialiased' }, createElement(Story)),
+    (Story) =>
+      createElement(
+        "div",
+        { className: "font-sans antialiased" },
+        createElement(Story),
+      ),
   ],
 };
 

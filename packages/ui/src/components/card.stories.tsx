@@ -175,9 +175,7 @@ export const StatsCard: Story = {
         <CardTitle className="text-3xl">$45,231.89</CardTitle>
       </CardHeader>
       <CardContent>
-        <p className="text-xs text-muted-foreground">
-          +20.1% from last month
-        </p>
+        <p className="text-xs text-muted-foreground">+20.1% from last month</p>
       </CardContent>
     </Card>
   ),

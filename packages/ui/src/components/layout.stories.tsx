@@ -9,7 +9,8 @@ const sectionMeta = {
     layout: "fullscreen",
     docs: {
       description: {
-        component: "A section wrapper component with consistent vertical spacing.",
+        component:
+          "A section wrapper component with consistent vertical spacing.",
       },
     },
   },
@@ -70,7 +71,8 @@ export const GridMeta = {
     layout: "padded",
     docs: {
       description: {
-        component: "A responsive grid layout component with automatic breakpoints.",
+        component:
+          "A responsive grid layout component with automatic breakpoints.",
       },
     },
   },
@@ -193,7 +195,8 @@ export const FlexMeta = {
     layout: "padded",
     docs: {
       description: {
-        component: "A flexible box layout component for one-dimensional layouts.",
+        component:
+          "A flexible box layout component for one-dimensional layouts.",
       },
     },
   },
@@ -276,20 +279,26 @@ export const FlexAlignment: FlexStory = {
   render: () => (
     <div className="space-y-8">
       <div>
-        <p className="mb-4 text-sm text-muted-foreground">Justify: space-between</p>
+        <p className="mb-4 text-sm text-muted-foreground">
+          Justify: space-between
+        </p>
         <Flex justify="between" className="bg-muted/50 p-4">
           <div className="bg-background p-4">Start</div>
           <div className="bg-background p-4">End</div>
         </Flex>
       </div>
       <div>
-        <p className="mb-4 text-sm text-muted-foreground">Justify: center, Align: center</p>
+        <p className="mb-4 text-sm text-muted-foreground">
+          Justify: center, Align: center
+        </p>
         <Flex justify="center" align="center" className="bg-muted/50 p-4 h-32">
           <div className="bg-background p-4">Centered</div>
         </Flex>
       </div>
       <div>
-        <p className="mb-4 text-sm text-muted-foreground">Justify: space-evenly</p>
+        <p className="mb-4 text-sm text-muted-foreground">
+          Justify: space-evenly
+        </p>
         <Flex justify="evenly" className="bg-muted/50 p-4">
           <div className="bg-background p-4">1</div>
           <div className="bg-background p-4">2</div>
@@ -420,9 +429,15 @@ export const RealWorldLayoutExample: StackStory = {
             <p className="text-sm text-muted-foreground">© 2024 Company</p>
           </div>
           <Flex gap="lg">
-            <a href="#" className="text-sm hover:underline">Privacy</a>
-            <a href="#" className="text-sm hover:underline">Terms</a>
-            <a href="#" className="text-sm hover:underline">Contact</a>
+            <a href="#" className="text-sm hover:underline">
+              Privacy
+            </a>
+            <a href="#" className="text-sm hover:underline">
+              Terms
+            </a>
+            <a href="#" className="text-sm hover:underline">
+              Contact
+            </a>
           </Flex>
         </Flex>
       </Stack>

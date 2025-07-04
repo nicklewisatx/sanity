@@ -3,7 +3,18 @@ import { defineField, defineType } from "sanity";
 
 import { capitalize, createRadioListLayout } from "../../utils/helper";
 
-const typographyVariants = ["h1", "h2", "h3", "h4", "h5", "h6", "body", "lead", "small", "muted"];
+const typographyVariants = [
+  "h1",
+  "h2",
+  "h3",
+  "h4",
+  "h5",
+  "h6",
+  "body",
+  "lead",
+  "small",
+  "muted",
+];
 const typographyAlign = ["left", "center", "right"];
 
 export const typography = defineType({
@@ -57,8 +68,9 @@ export const typography = defineType({
       align: "align",
     },
     prepare: ({ text, variant, align }) => {
-      const truncatedText = text?.length > 50 ? `${text.substring(0, 50)}...` : text;
-      
+      const truncatedText =
+        text?.length > 50 ? `${text.substring(0, 50)}...` : text;
+
       return {
         title: truncatedText || "Empty Text",
         subtitle: `${capitalize(variant ?? "body")} • ${capitalize(align ?? "left")} aligned`,

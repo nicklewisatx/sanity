@@ -1,13 +1,25 @@
-import * as React from 'react'
-import type { Meta, StoryObj } from '@storybook/react'
-import { Logo } from './logo.js'
-import { Hero } from './hero.js'
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from './card.js'
-import { CTA } from './cta.js'
-import { Footer } from './footer.js'
-import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink } from './navigation-menu.js'
-import { Button } from './button.js'
-import { Star, Zap, Shield, Globe, ChevronRight, Code, Palette, Layers, PenTool } from 'lucide-react'
+import * as React from "react";
+import type { Meta, StoryObj } from "@storybook/react";
+import { Logo } from "./logo.js";
+import { Hero } from "./hero.js";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "./card.js";
+import { CTA } from "./cta.js";
+import { Footer } from "./footer.js";
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuLink,
+} from "./navigation-menu.js";
+import { Button } from "./button.js";
+import { Star, ChevronRight, Code, Layers, PenTool } from "lucide-react";
 
 // Simple social media icons for demo purposes
 const TwitterIcon = () => (
@@ -18,7 +30,11 @@ const TwitterIcon = () => (
 
 const GitHubIcon = () => (
   <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-    <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+    <path
+      fillRule="evenodd"
+      d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+      clipRule="evenodd"
+    />
   </svg>
 );
 
@@ -29,14 +45,14 @@ const LinkedInIcon = () => (
 );
 
 const meta = {
-  title: 'Pages/Frontpage',
+  title: "Pages/Frontpage",
   parameters: {
-    layout: 'fullscreen',
+    layout: "fullscreen",
   },
-} satisfies Meta
+} satisfies Meta;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 const FrontpageComponent = () => {
   return (
@@ -73,8 +89,10 @@ const FrontpageComponent = () => {
               </NavigationMenu>
             </div>
             <div className="flex items-center gap-4">
-              <Button variant="ghost" size="sm">Subscribe</Button>
-              <Button size="sm">Let's Talk</Button>
+              <Button variant="ghost" size="sm">
+                Subscribe
+              </Button>
+              <Button size="sm">Let&apos;s Talk</Button>
             </div>
           </div>
         </div>
@@ -90,7 +108,7 @@ const FrontpageComponent = () => {
         description="I write about web development, software architecture, and the latest technologies. Join me as I explore the ever-evolving world of tech."
         actions={[
           { text: "Read My Blog", variant: "default" },
-          { text: "Get In Touch", variant: "outline" }
+          { text: "Get In Touch", variant: "outline" },
         ]}
       />
 
@@ -102,7 +120,8 @@ const FrontpageComponent = () => {
               What I Write About
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Exploring the latest in web development, sharing insights, and building in public.
+              Exploring the latest in web development, sharing insights, and
+              building in public.
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -118,7 +137,8 @@ const FrontpageComponent = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground">
-                  Deep dives into React, Next.js, TypeScript, and the modern web development ecosystem.
+                  Deep dives into React, Next.js, TypeScript, and the modern web
+                  development ecosystem.
                 </p>
               </CardContent>
               <CardFooter>
@@ -140,7 +160,8 @@ const FrontpageComponent = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground">
-                  Patterns, principles, and strategies for building maintainable software systems.
+                  Patterns, principles, and strategies for building maintainable
+                  software systems.
                 </p>
               </CardContent>
               <CardFooter>
@@ -162,7 +183,8 @@ const FrontpageComponent = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground">
-                  Practical tutorials to help you level up your skills and build better applications.
+                  Practical tutorials to help you level up your skills and build
+                  better applications.
                 </p>
               </CardContent>
               <CardFooter>
@@ -207,7 +229,7 @@ const FrontpageComponent = () => {
               What Readers Say
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Feedback from developers who've found value in my content.
+              Feedback from developers who&apos;ve found value in my content.
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-3">
@@ -215,11 +237,16 @@ const FrontpageComponent = () => {
               <CardHeader>
                 <div className="flex gap-1 mb-4">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+                    <Star
+                      key={i}
+                      className="h-4 w-4 fill-primary text-primary"
+                    />
                   ))}
                 </div>
                 <CardDescription>
-                  &quot;Nick's tutorials on Next.js and TypeScript have been invaluable. Clear explanations and practical examples that actually work.&quot;
+                  &quot;Nick&apos;s tutorials on Next.js and TypeScript have
+                  been invaluable. Clear explanations and practical examples
+                  that actually work.&quot;
                 </CardDescription>
               </CardHeader>
               <CardFooter>
@@ -227,7 +254,9 @@ const FrontpageComponent = () => {
                   <div className="rounded-full bg-muted h-10 w-10" />
                   <div>
                     <div className="font-semibold text-sm">Sarah Chen</div>
-                    <div className="text-xs text-muted-foreground">Frontend Developer</div>
+                    <div className="text-xs text-muted-foreground">
+                      Frontend Developer
+                    </div>
                   </div>
                 </div>
               </CardFooter>
@@ -237,11 +266,15 @@ const FrontpageComponent = () => {
               <CardHeader>
                 <div className="flex gap-1 mb-4">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+                    <Star
+                      key={i}
+                      className="h-4 w-4 fill-primary text-primary"
+                    />
                   ))}
                 </div>
                 <CardDescription>
-                  &quot;The architecture posts are gold. Finally someone who explains complex patterns in a way that makes sense.&quot;
+                  &quot;The architecture posts are gold. Finally someone who
+                  explains complex patterns in a way that makes sense.&quot;
                 </CardDescription>
               </CardHeader>
               <CardFooter>
@@ -249,7 +282,9 @@ const FrontpageComponent = () => {
                   <div className="rounded-full bg-muted h-10 w-10" />
                   <div>
                     <div className="font-semibold text-sm">Alex Rivera</div>
-                    <div className="text-xs text-muted-foreground">Software Architect</div>
+                    <div className="text-xs text-muted-foreground">
+                      Software Architect
+                    </div>
                   </div>
                 </div>
               </CardFooter>
@@ -259,11 +294,15 @@ const FrontpageComponent = () => {
               <CardHeader>
                 <div className="flex gap-1 mb-4">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+                    <Star
+                      key={i}
+                      className="h-4 w-4 fill-primary text-primary"
+                    />
                   ))}
                 </div>
                 <CardDescription>
-                  &quot;Been following Nick's blog for years. Always up-to-date with the latest tech and best practices.&quot;
+                  &quot;Been following Nick&apos;s blog for years. Always
+                  up-to-date with the latest tech and best practices.&quot;
                 </CardDescription>
               </CardHeader>
               <CardFooter>
@@ -271,7 +310,9 @@ const FrontpageComponent = () => {
                   <div className="rounded-full bg-muted h-10 w-10" />
                   <div>
                     <div className="font-semibold text-sm">Jordan Smith</div>
-                    <div className="text-xs text-muted-foreground">Full-Stack Engineer</div>
+                    <div className="text-xs text-muted-foreground">
+                      Full-Stack Engineer
+                    </div>
                   </div>
                 </div>
               </CardFooter>
@@ -289,7 +330,7 @@ const FrontpageComponent = () => {
         description="Get the latest articles and tutorials delivered straight to your inbox. No spam, unsubscribe anytime."
         actions={[
           { text: "Subscribe to Newsletter", variant: "default" },
-          { text: "Follow on Twitter", variant: "outline" }
+          { text: "Follow on Twitter", variant: "outline" },
         ]}
         backgroundPattern
       />
@@ -339,12 +380,12 @@ const FrontpageComponent = () => {
         ]}
       />
     </div>
-  )
-}
+  );
+};
 
 export const Default: Story = {
   render: () => <FrontpageComponent />,
-}
+};
 
 export const CompactVersion: Story = {
   render: () => (
@@ -355,7 +396,9 @@ export const CompactVersion: Story = {
           <div className="flex h-16 items-center justify-between">
             <Logo size="default" text="Nick Lewis" />
             <div className="flex items-center gap-4">
-              <Button variant="ghost" size="sm">Blog</Button>
+              <Button variant="ghost" size="sm">
+                Blog
+              </Button>
               <Button size="sm">Subscribe</Button>
             </div>
           </div>
@@ -369,9 +412,7 @@ export const CompactVersion: Story = {
         alignment="center"
         title="Hi, I'm Nick"
         subtitle="I write about web development"
-        actions={[
-          { text: "Read Blog", variant: "default" }
-        ]}
+        actions={[{ text: "Read Blog", variant: "default" }]}
       />
 
       {/* Simple Cards */}
@@ -406,9 +447,7 @@ export const CompactVersion: Story = {
         size="sm"
         alignment="center"
         heading="Get updates"
-        actions={[
-          { text: "Subscribe", variant: "default" }
-        ]}
+        actions={[{ text: "Subscribe", variant: "default" }]}
       />
 
       {/* Minimal Footer */}
@@ -422,7 +461,7 @@ export const CompactVersion: Story = {
       />
     </div>
   ),
-}
+};
 
 export const DarkTheme: Story = {
   render: () => (
@@ -433,8 +472,16 @@ export const DarkTheme: Story = {
           <div className="flex h-16 items-center justify-between">
             <Logo size="default" text="Nick Lewis" className="text-white" />
             <div className="flex items-center gap-4">
-              <Button variant="ghost" size="sm" className="text-white hover:text-white hover:bg-slate-800">Blog</Button>
-              <Button size="sm" variant="secondary">Subscribe</Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-white hover:text-white hover:bg-slate-800"
+              >
+                Blog
+              </Button>
+              <Button size="sm" variant="secondary">
+                Subscribe
+              </Button>
             </div>
           </div>
         </div>
@@ -450,7 +497,7 @@ export const DarkTheme: Story = {
         description="Join me as I explore web development, share insights, and build cool things - preferably after midnight."
         actions={[
           { text: "Read Latest", variant: "default" },
-          { text: "Subscribe", variant: "outline" }
+          { text: "Subscribe", variant: "outline" },
         ]}
       />
 
@@ -468,7 +515,9 @@ export const DarkTheme: Story = {
             </Card>
             <Card className="bg-slate-800 border-slate-700">
               <CardHeader>
-                <CardTitle className="text-white">Dark Mode Everything</CardTitle>
+                <CardTitle className="text-white">
+                  Dark Mode Everything
+                </CardTitle>
                 <CardDescription className="text-slate-400">
                   Tools and tips for the dark theme enthusiast
                 </CardDescription>
@@ -493,9 +542,7 @@ export const DarkTheme: Story = {
         alignment="center"
         heading="Join the night shift"
         description="Get updates when I publish new content"
-        actions={[
-          { text: "Subscribe", variant: "default" }
-        ]}
+        actions={[{ text: "Subscribe", variant: "default" }]}
         className="bg-slate-800"
       />
 
@@ -523,4 +570,4 @@ export const DarkTheme: Story = {
       />
     </div>
   ),
-}
+};

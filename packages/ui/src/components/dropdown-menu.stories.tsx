@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import { Button } from './button.js'
+import type { Meta, StoryObj } from "@storybook/react";
+import { Button } from "./button.js";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,12 +15,12 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuCheckboxItem,
   DropdownMenuShortcut,
-} from './dropdown-menu.js'
-import { 
-  User, 
-  Settings, 
-  UserPlus, 
-  Mail, 
+} from "./dropdown-menu.js";
+import {
+  User,
+  Settings,
+  UserPlus,
+  Mail,
   MessageSquare,
   Plus,
   CreditCard,
@@ -35,26 +35,27 @@ import {
   Download,
   Share,
   Star,
-  Trash2
-} from 'lucide-react'
-import * as React from 'react'
+  Trash2,
+} from "lucide-react";
+import * as React from "react";
 
 const meta = {
-  title: 'Primitives/DropdownMenu',
+  title: "Primitives/DropdownMenu",
   component: DropdownMenu,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
-        component: 'A menu that appears on click with various actions and options.'
-      }
-    }
+        component:
+          "A menu that appears on click with various actions and options.",
+      },
+    },
   },
-  tags: ['autodocs']
-} satisfies Meta<typeof DropdownMenu>
+  tags: ["autodocs"],
+} satisfies Meta<typeof DropdownMenu>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: () => (
@@ -84,8 +85,8 @@ export const Default: Story = {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
-}
+  ),
+};
 
 export const WithShortcuts: Story = {
   render: () => (
@@ -122,15 +123,15 @@ export const WithShortcuts: Story = {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
-}
+  ),
+};
 
 export const WithCheckboxes: Story = {
   render: function WithCheckboxesComponent() {
-    const [showStatusBar, setShowStatusBar] = React.useState(true)
-    const [showActivityBar, setShowActivityBar] = React.useState(false)
-    const [showPanel, setShowPanel] = React.useState(false)
-    
+    const [showStatusBar, setShowStatusBar] = React.useState(true);
+    const [showActivityBar, setShowActivityBar] = React.useState(false);
+    const [showPanel, setShowPanel] = React.useState(false);
+
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -159,14 +160,14 @@ export const WithCheckboxes: Story = {
           </DropdownMenuCheckboxItem>
         </DropdownMenuContent>
       </DropdownMenu>
-    )
-  }
-}
+    );
+  },
+};
 
 export const WithRadioGroup: Story = {
   render: function WithRadioGroupComponent() {
-    const [position, setPosition] = React.useState("bottom")
-    
+    const [position, setPosition] = React.useState("bottom");
+
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -183,9 +184,9 @@ export const WithRadioGroup: Story = {
           </DropdownMenuRadioGroup>
         </DropdownMenuContent>
       </DropdownMenu>
-    )
-  }
-}
+    );
+  },
+};
 
 export const WithSubmenus: Story = {
   render: () => (
@@ -235,15 +236,15 @@ export const WithSubmenus: Story = {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
-}
+  ),
+};
 
 export const ComplexExample: Story = {
   render: function ComplexExampleComponent() {
-    const [bookmarksChecked, setBookmarksChecked] = React.useState(true)
-    const [urlsChecked, setUrlsChecked] = React.useState(false)
-    const [theme, setTheme] = React.useState("system")
-    
+    const [bookmarksChecked, setBookmarksChecked] = React.useState(true);
+    const [urlsChecked, setUrlsChecked] = React.useState(false);
+    const [theme, setTheme] = React.useState("system");
+
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -313,9 +314,9 @@ export const ComplexExample: Story = {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-    )
-  }
-}
+    );
+  },
+};
 
 export const ContextMenu: Story = {
   render: () => (
@@ -323,10 +324,13 @@ export const ContextMenu: Story = {
       Right click anywhere
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <div className="absolute inset-0" onContextMenu={(e) => {
-            e.preventDefault()
-            e.currentTarget.click()
-          }} />
+          <div
+            className="absolute inset-0"
+            onContextMenu={(e) => {
+              e.preventDefault();
+              e.currentTarget.click();
+            }}
+          />
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-64">
           <DropdownMenuItem inset>
@@ -370,5 +374,5 @@ export const ContextMenu: Story = {
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
-  )
-}
+  ),
+};

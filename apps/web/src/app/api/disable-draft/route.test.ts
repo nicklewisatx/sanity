@@ -38,13 +38,13 @@ describe("api/disable-draft", () => {
 
     // Start the GET handler
     const promise = GET(request);
-    
+
     // Fast-forward the timer by 1 second
     await vi.advanceTimersByTimeAsync(1000);
-    
+
     // Wait for completion
     await promise;
-    
+
     expect(mockDisable).toHaveBeenCalled();
     expect(mockRedirect).toHaveBeenCalledWith("/");
   });
@@ -58,13 +58,13 @@ describe("api/disable-draft", () => {
 
     // Start the GET handler
     const promise = GET(request);
-    
+
     // Fast-forward the timer by 1 second
     await vi.advanceTimersByTimeAsync(1000);
-    
+
     // Wait for completion
     await promise;
-    
+
     expect(mockDisable).toHaveBeenCalled();
     expect(mockRedirect).toHaveBeenCalledWith("/blog/my-post");
   });
@@ -78,13 +78,13 @@ describe("api/disable-draft", () => {
 
     // Start the GET handler
     const promise = GET(request);
-    
+
     // Fast-forward the timer by 1 second
     await vi.advanceTimersByTimeAsync(1000);
-    
+
     // Wait for completion
     await promise;
-    
+
     expect(mockRedirect).toHaveBeenCalledWith("/blog/my post title");
   });
 
@@ -97,7 +97,7 @@ describe("api/disable-draft", () => {
 
     // Start the GET handler in the background
     const promise = GET(request);
-    
+
     // Should not redirect immediately
     expect(mockRedirect).not.toHaveBeenCalled();
 

@@ -33,7 +33,7 @@ const Section = React.forwardRef<HTMLElement, SectionProps>(
         {...props}
       />
     );
-  }
+  },
 );
 
 Section.displayName = "Section";
@@ -93,7 +93,7 @@ const Grid = React.forwardRef<HTMLDivElement, GridProps>(
         {...props}
       />
     );
-  }
+  },
 );
 
 Grid.displayName = "Grid";
@@ -155,12 +155,12 @@ const Flex = React.forwardRef<HTMLDivElement, FlexProps>(
         ref={ref}
         className={cn(
           flexVariants({ direction, wrap, align, justify, gap }),
-          className
+          className,
         )}
         {...props}
       />
     );
-  }
+  },
 );
 
 Flex.displayName = "Flex";
@@ -202,9 +202,18 @@ const Stack = React.forwardRef<HTMLDivElement, StackProps>(
         {...props}
       />
     );
-  }
+  },
 );
 
 Stack.displayName = "Stack";
 
-export { Section, sectionVariants, Grid, gridVariants, Flex, flexVariants, Stack, stackVariants };
+export {
+  Section,
+  sectionVariants,
+  Grid,
+  gridVariants,
+  Flex,
+  flexVariants,
+  Stack,
+  stackVariants,
+};

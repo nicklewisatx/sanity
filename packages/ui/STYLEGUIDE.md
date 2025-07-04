@@ -7,6 +7,7 @@
 This style guide helps you build and extend UI components in our monorepo. We provide a solid foundation of accessible, type-safe components built with React, TypeScript, Tailwind CSS, and Radix UI primitives.
 
 **What this guide provides:**
+
 - Clear patterns for adding new components
 - Extension examples and best practices
 - Practical workflow for immediate productivity
@@ -36,6 +37,7 @@ This section provides the standard process for adding new components. We'll use 
 #### 1. Choose Component Type
 
 Determine which category your component belongs to:
+
 - **Primitives** - Basic UI elements (buttons, inputs, badges)
 - **Compositions** - Combined primitives (cards, forms, modals)
 - **Patterns** - Specific implementations (loading states, error boundaries)
@@ -58,26 +60,24 @@ touch src/components/primitives/alert/index.ts
 
 ```tsx
 // alert.tsx
-import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "@/lib/utils"
+import * as React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
 
-const alertVariants = cva(
-  "relative w-full rounded-lg border p-4",
-  {
-    variants: {
-      variant: {
-        default: "bg-background text-foreground",
-        destructive: "border-destructive/50 text-destructive dark:border-destructive",
-        warning: "border-yellow-500/50 text-yellow-800 dark:text-yellow-300",
-        success: "border-green-500/50 text-green-800 dark:text-green-300",
-      },
+const alertVariants = cva("relative w-full rounded-lg border p-4", {
+  variants: {
+    variant: {
+      default: "bg-background text-foreground",
+      destructive:
+        "border-destructive/50 text-destructive dark:border-destructive",
+      warning: "border-yellow-500/50 text-yellow-800 dark:text-yellow-300",
+      success: "border-green-500/50 text-green-800 dark:text-green-300",
     },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
-)
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
 
 export interface AlertProps
   extends React.HTMLAttributes<HTMLDivElement>,
@@ -91,50 +91,50 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
       className={cn(alertVariants({ variant }), className)}
       {...props}
     />
-  )
-)
-Alert.displayName = "Alert"
+  ),
+);
+Alert.displayName = "Alert";
 
-export { Alert, alertVariants }
+export { Alert, alertVariants };
 ```
 
 #### 4. Create Storybook Stories
 
 ```tsx
 // alert.stories.tsx
-import type { Meta, StoryObj } from '@storybook/react'
-import { Alert } from './alert'
+import type { Meta, StoryObj } from "@storybook/react";
+import { Alert } from "./alert";
 
 const meta = {
-  title: 'Primitives/Alert',
+  title: "Primitives/Alert",
   component: Alert,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     variant: {
-      control: 'select',
-      options: ['default', 'destructive', 'warning', 'success'],
+      control: "select",
+      options: ["default", "destructive", "warning", "success"],
     },
   },
-} satisfies Meta<typeof Alert>
+} satisfies Meta<typeof Alert>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    children: 'This is a default alert message.',
+    children: "This is a default alert message.",
   },
-}
+};
 
 export const Destructive: Story = {
   args: {
-    variant: 'destructive',
-    children: 'This is a destructive alert message.',
+    variant: "destructive",
+    children: "This is a destructive alert message.",
   },
-}
+};
 
 export const AllVariants: Story = {
   render: () => (
@@ -145,20 +145,21 @@ export const AllVariants: Story = {
       <Alert variant="success">Success: Operation completed</Alert>
     </div>
   ),
-}
+};
 ```
 
 #### 5. Export the Component
 
 ```tsx
 // index.ts
-export * from './alert'
+export * from "./alert";
 ```
 
 Update the main package exports:
+
 ```tsx
 // src/components/primitives/index.ts
-export * from './alert'
+export * from "./alert";
 ```
 
 #### 6. Run Storybook to Test
@@ -187,25 +188,25 @@ When creating any new component:
 
 ```tsx
 // Example: LoadingButton extends Button
-import { Button, ButtonProps } from '@/components/primitives/button'
-import { Loader2 } from 'lucide-react'
+import { Button, ButtonProps } from "@/components/primitives/button";
+import { Loader2 } from "lucide-react";
 
 interface LoadingButtonProps extends ButtonProps {
-  loading?: boolean
+  loading?: boolean;
 }
 
-export function LoadingButton({ 
-  loading, 
-  children, 
+export function LoadingButton({
+  loading,
+  children,
   disabled,
-  ...props 
+  ...props
 }: LoadingButtonProps) {
   return (
     <Button disabled={disabled || loading} {...props}>
       {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
       {children}
     </Button>
-  )
+  );
 }
 ```
 
@@ -213,7 +214,7 @@ export function LoadingButton({
 
 ```tsx
 // Example: Card composed from primitives
-import { cn } from '@/lib/utils'
+import { cn } from "@/lib/utils";
 
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -222,11 +223,11 @@ export function Card({ className, ...props }: CardProps) {
     <div
       className={cn(
         "rounded-lg border bg-card text-card-foreground shadow-sm",
-        className
+        className,
       )}
       {...props}
     />
-  )
+  );
 }
 
 Card.Header = function CardHeader({ className, ...props }: CardProps) {
@@ -235,20 +236,20 @@ Card.Header = function CardHeader({ className, ...props }: CardProps) {
       className={cn("flex flex-col space-y-1.5 p-6", className)}
       {...props}
     />
-  )
-}
+  );
+};
 
-Card.Title = function CardTitle({ 
-  className, 
-  ...props 
+Card.Title = function CardTitle({
+  className,
+  ...props
 }: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h3
       className={cn("text-lg font-semibold leading-none", className)}
       {...props}
     />
-  )
-}
+  );
+};
 ```
 
 ## Implementation Plan
@@ -282,12 +283,14 @@ Our implementation follows a practical 3-phase approach designed to deliver imme
 **Goal:** Make existing components discoverable and useful
 
 #### Tasks
+
 1. **Document Existing Components**
    - Create `.stories.tsx` for: accordion, avatar, badge, dropdown-menu, input, navigation-menu, sheet
    - Add interactive controls and variant examples
    - Include usage documentation
 
 2. **Organize Directory Structure**
+
    ```
    src/components/
    ├── primitives/      # Basic UI elements
@@ -311,6 +314,7 @@ Our implementation follows a practical 3-phase approach designed to deliver imme
 **Goal:** Demonstrate how to extend and compose components
 
 #### Tasks
+
 1. **Create Pattern Examples**
    - `LoadingButton` - Shows primitive extension
    - `Card` - Demonstrates composition
@@ -331,7 +335,9 @@ Our implementation follows a practical 3-phase approach designed to deliver imme
 **Goal:** Automate repetitive tasks and ensure quality
 
 #### Tasks
+
 1. **Component Generator**
+
    ```bash
    pnpm ui:generate <type> <name>
    # Example: pnpm ui:generate primitive Alert
@@ -350,21 +356,25 @@ Our implementation follows a practical 3-phase approach designed to deliver imme
 ## Core Principles
 
 ### 1. Schema-First Design
+
 - Components are designed to match Sanity schema types exactly
 - Props names must match Sanity field names (e.g., `richText`, not `content`)
 - Components handle Sanity data structures natively
 
 ### 2. Portable Text as First-Class Citizen
+
 - Rich text content uses Sanity's Portable Text format
 - Custom serializers for blocks, marks, and annotations
 - Support for inline images and custom components
 
 ### 3. Type Safety
+
 - Use generated Sanity types for all component props
 - Strict TypeScript throughout
 - Runtime validation for critical data
 
 ### 4. Graceful Data Handling
+
 - Components handle undefined/null data gracefully
 - Sensible defaults for missing content
 - No runtime errors from missing data
@@ -392,6 +402,7 @@ packages/ui/src/
 Direct mapping to Sanity block schemas. These are the main content sections used in page builders.
 
 **Example: Hero Block**
+
 ```tsx
 // Maps to Sanity schema: hero
 export interface HeroBlockProps {
@@ -402,12 +413,19 @@ export interface HeroBlockProps {
   buttons?: Button[];
 }
 
-export function HeroBlock({ badge, title, richText, image, buttons }: HeroBlockProps) {
+export function HeroBlock({
+  badge,
+  title,
+  richText,
+  image,
+  buttons,
+}: HeroBlockProps) {
   // Component implementation
 }
 ```
 
 **Naming Convention:**
+
 - Component: `{BlockName}Block` (e.g., `HeroBlock`, `CTABlock`)
 - File: `{block-name}-block.tsx` (e.g., `hero-block.tsx`)
 
@@ -416,12 +434,14 @@ export function HeroBlock({ badge, title, richText, image, buttons }: HeroBlockP
 Render individual Sanity field types. These are the building blocks for block components.
 
 **Core Field Components:**
+
 - `RichText` - Renders Portable Text content
 - `SanityImage` - Handles Sanity images with transformations
 - `Buttons` - Renders button arrays
 - `Icon` - Renders icon picker selections
 
 **Example: RichText Field**
+
 ```tsx
 export interface RichTextProps {
   value?: PortableTextBlock[];
@@ -430,9 +450,9 @@ export interface RichTextProps {
 
 export function RichText({ value, className }: RichTextProps) {
   if (!value?.length) return null;
-  
+
   return (
-    <PortableText 
+    <PortableText
       value={value}
       components={portableTextComponents}
       className={className}
@@ -446,6 +466,7 @@ export function RichText({ value, className }: RichTextProps) {
 Custom components for rendering Portable Text marks, blocks, and annotations.
 
 **Structure:**
+
 ```
 portable-text/
 ├── index.ts           # Main components export
@@ -455,15 +476,16 @@ portable-text/
 ```
 
 **Example: Custom Link Annotation**
+
 ```tsx
 // annotations/custom-link.tsx
 export function CustomLink({ value, children }) {
   const { customLink } = value;
-  
-  if (customLink?.type === 'internal') {
+
+  if (customLink?.type === "internal") {
     return <Link href={customLink.href}>{children}</Link>;
   }
-  
+
   return (
     <a href={customLink?.href} target="_blank" rel="noopener noreferrer">
       {children}
@@ -477,11 +499,13 @@ export function CustomLink({ value, children }) {
 Base UI components used across the library. These don't map directly to Sanity schemas but provide consistent styling and behavior.
 
 **Examples:**
+
 - `Button` - Base button component
 - `Card` - Container component
 - `Badge` - Label/tag component
 
 **Characteristics:**
+
 - Schema-agnostic
 - Highly reusable
 - Follow design system patterns
@@ -502,7 +526,7 @@ Dynamic component rendering based on block type:
 const blockComponents = {
   hero: HeroBlock,
   cta: CTABlock,
-  'faq-accordion': FAQAccordionBlock,
+  "faq-accordion": FAQAccordionBlock,
   // ... other blocks
 };
 
@@ -512,7 +536,7 @@ export function BlockRenderer({ blocks }: { blocks: any[] }) {
       {blocks?.map((block) => {
         const Component = blockComponents[block._type];
         if (!Component) return null;
-        
+
         return <Component key={block._key} {...block} />;
       })}
     </>
@@ -526,7 +550,7 @@ Handle Sanity images with hotspot and transformations:
 
 ```tsx
 // components/fields/sanity-image.tsx
-import { urlForImage } from '@/lib/sanity/image';
+import { urlForImage } from "@/lib/sanity/image";
 
 export interface SanityImageProps {
   value?: SanityImageSource;
@@ -536,20 +560,26 @@ export interface SanityImageProps {
   className?: string;
 }
 
-export function SanityImage({ value, alt, width, height, className }: SanityImageProps) {
+export function SanityImage({
+  value,
+  alt,
+  width,
+  height,
+  className,
+}: SanityImageProps) {
   if (!value?.asset) return null;
-  
+
   const imageUrl = urlForImage(value)
     ?.width(width || 1920)
     .height(height || 1080)
     .url();
-    
+
   if (!imageUrl) return null;
-  
+
   return (
     <img
       src={imageUrl}
-      alt={alt || ''}
+      alt={alt || ""}
       width={width}
       height={height}
       className={className}
@@ -569,15 +599,15 @@ export interface ButtonsProps {
   buttons?: Array<{
     _key: string;
     text?: string;
-    link?: { href: string; type: 'internal' | 'external' };
-    variant?: 'default' | 'secondary' | 'outline';
+    link?: { href: string; type: "internal" | "external" };
+    variant?: "default" | "secondary" | "outline";
   }>;
   className?: string;
 }
 
 export function Buttons({ buttons, className }: ButtonsProps) {
   if (!buttons?.length) return null;
-  
+
   return (
     <div className={cn("flex flex-wrap gap-4", className)}>
       {buttons.map((button) => (
@@ -597,16 +627,19 @@ export function Buttons({ buttons, className }: ButtonsProps) {
 ## Styling Guidelines
 
 ### 1. Tailwind CSS
+
 - Use Tailwind utility classes for styling
 - Keep component styles minimal and composable
 - Use `cn()` utility for conditional classes
 
 ### 2. CSS Variables
+
 - Define semantic color variables
 - Support light/dark mode through CSS variables
 - Keep animations consistent
 
 ### 3. Responsive Design
+
 - Mobile-first approach
 - Use Tailwind responsive prefixes
 - Test all breakpoints
@@ -614,9 +647,10 @@ export function Buttons({ buttons, className }: ButtonsProps) {
 ## Type Safety
 
 ### 1. Generated Types
+
 ```tsx
 // Import generated Sanity types
-import type { Hero, Button, RichTextBlock } from '@/types/sanity';
+import type { Hero, Button, RichTextBlock } from "@/types/sanity";
 
 // Use in component props
 export interface HeroBlockProps {
@@ -625,12 +659,13 @@ export interface HeroBlockProps {
 ```
 
 ### 2. Utility Types
+
 ```tsx
 // Common utility types
 export type Maybe<T> = T | null | undefined;
 export type SanityImageSource = {
-  _type: 'image';
-  asset: { _ref: string; _type: 'reference' };
+  _type: "image";
+  asset: { _ref: string; _type: "reference" };
   hotspot?: { x: number; y: number; height: number; width: number };
   crop?: { top: number; bottom: number; left: number; right: number };
 };
@@ -639,11 +674,13 @@ export type SanityImageSource = {
 ## Testing Strategy
 
 ### 1. Component Testing
+
 - Test with various data states (empty, partial, full)
 - Verify Portable Text rendering
 - Check responsive behavior
 
 ### 2. Visual Testing
+
 - Storybook for component documentation
 - Stories for each data state
 - Visual regression testing
@@ -653,6 +690,7 @@ export type SanityImageSource = {
 ### From Old Components to New
 
 **Old Pattern:**
+
 ```tsx
 <Hero
   title="Welcome"
@@ -662,36 +700,43 @@ export type SanityImageSource = {
 ```
 
 **New Pattern:**
+
 ```tsx
 <HeroBlock
   title="Welcome"
   richText={portableTextData}
-  buttons={[{ 
-    _key: "button1",
-    text: "Get Started",
-    link: { href: "/", type: "internal" }
-  }]}
+  buttons={[
+    {
+      _key: "button1",
+      text: "Get Started",
+      link: { href: "/", type: "internal" },
+    },
+  ]}
 />
 ```
 
 ## Best Practices
 
 ### 1. Data Validation
+
 - Always check for data existence
 - Provide meaningful fallbacks
 - Don't assume field presence
 
 ### 2. Performance
+
 - Lazy load images
 - Use proper image dimensions
 - Minimize client-side processing
 
 ### 3. Accessibility
+
 - Semantic HTML structure
 - Proper ARIA labels
 - Keyboard navigation support
 
 ### 4. Developer Experience
+
 - Clear prop documentation
 - Comprehensive TypeScript types
 - Helpful error messages
@@ -703,22 +748,26 @@ export type SanityImageSource = {
 Essential requirements for every component:
 
 **Structure**
+
 - [ ] Proper directory structure (`primitives/`, `compositions/`, or `patterns/`)
 - [ ] Index file for exports
 - [ ] TypeScript interfaces defined
 
 **Implementation**
+
 - [ ] Uses `React.forwardRef` for ref support
 - [ ] Extends base HTML element props
 - [ ] Supports `className` override via `cn()`
 - [ ] Handles undefined/null props gracefully
 
 **Documentation**
+
 - [ ] Storybook story with all variants
 - [ ] Interactive controls in Storybook
 - [ ] JSDoc comments for complex props
 
 **Quality**
+
 - [ ] Semantic HTML and ARIA labels
 - [ ] Works in dark and light modes
 - [ ] Responsive across breakpoints
@@ -761,17 +810,20 @@ export * from './components/patterns'
 ## Resources
 
 ### Documentation
+
 - [Radix UI Primitives](https://www.radix-ui.com/primitives) - Accessibility-first components
 - [Tailwind CSS](https://tailwindcss.com/docs) - Utility-first CSS
 - [CVA Documentation](https://cva.style/docs) - Variant management
 - [Storybook Docs](https://storybook.js.org/docs) - Component documentation
 
 ### Internal References
+
 - [Component Examples](./src/components) - Browse existing components
 - [Utility Functions](./src/lib/utils.ts) - Helper functions
 - [Global Styles](./src/styles/globals.css) - Base styles
 
 ### Getting Help
+
 - Check existing components for patterns
 - Run `pnpm storybook` to explore interactively
 - Follow the examples in this guide

@@ -4,7 +4,15 @@ import { defineField, defineType } from "sanity";
 import { capitalize, createRadioListLayout } from "../../utils/helper";
 
 const layoutTypes = ["section", "container", "grid", "flex", "stack"];
-const containerSizes = ["default", "full", "narrow", "wide", "small", "medium", "large"];
+const containerSizes = [
+  "default",
+  "full",
+  "narrow",
+  "wide",
+  "small",
+  "medium",
+  "large",
+];
 const sectionSpacing = ["default", "sm", "md", "lg", "xl", "2xl"];
 const gridColumns = ["1", "2", "3", "4", "5", "6", "auto-fit", "auto-fill"];
 const flexDirection = ["row", "column"];
@@ -84,7 +92,8 @@ export const layout = defineType({
       name: "flexDirection",
       type: "string",
       title: "Flex Direction",
-      description: "Direction of flex items - row for horizontal, column for vertical",
+      description:
+        "Direction of flex items - row for horizontal, column for vertical",
       initialValue: () => "row",
       options: createRadioListLayout(flexDirection, {
         direction: "horizontal",
@@ -172,7 +181,7 @@ export const layout = defineType({
     },
     prepare: ({ type, containerSize, gridColumns, flexDirection, content }) => {
       let subtitle = capitalize(type ?? "section");
-      
+
       if (type === "container") {
         subtitle += ` • ${capitalize(containerSize ?? "default")} width`;
       } else if (type === "grid") {
@@ -180,12 +189,12 @@ export const layout = defineType({
       } else if (type === "flex") {
         subtitle += ` • ${capitalize(flexDirection ?? "row")} direction`;
       }
-      
+
       const contentCount = content?.length ?? 0;
       if (contentCount > 0) {
         subtitle += ` • ${contentCount} item${contentCount === 1 ? "" : "s"}`;
       }
-      
+
       return {
         title: "Layout Block",
         subtitle,

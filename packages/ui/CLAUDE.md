@@ -43,6 +43,7 @@ The package provides specific exports:
 Built on Radix UI primitives and custom components:
 
 ### Radix-based Components
+
 - **Accordion:** Collapsible content sections
 - **Avatar:** User profile images
 - **Dialog:** Modal dialogs
@@ -50,6 +51,7 @@ Built on Radix UI primitives and custom components:
 - **NavigationMenu:** Site navigation
 
 ### Layout Components
+
 - **Typography:** Unified text styling (h1-h6, body, lead, small, muted)
 - **Container:** Content width management (default, full, narrow, wide, etc.)
 - **Section:** Vertical spacing for page sections
@@ -58,10 +60,12 @@ Built on Radix UI primitives and custom components:
 - **Stack:** Vertical stacking with consistent spacing
 
 ### Design Tokens
+
 Export TypeScript constants for consistent design:
+
 - **Colors:** Theme-aware color palette
 - **Spacing:** Consistent spacing scale
-- **Breakpoints:** Responsive design breakpoints  
+- **Breakpoints:** Responsive design breakpoints
 - **Typography:** Font sizes, weights, line heights
 - **Shadows:** Box shadow utilities
 - **Radii:** Border radius values

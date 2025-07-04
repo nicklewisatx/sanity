@@ -56,7 +56,8 @@ export const Gradient: Story = {
   args: {
     variant: "gradient",
     heading: "Experience the difference",
-    description: "See why teams choose our platform for their most important work.",
+    description:
+      "See why teams choose our platform for their most important work.",
     actions: [{ text: "Start Your Journey", variant: "secondary", size: "lg" }],
   },
 };
@@ -65,7 +66,8 @@ export const Bordered: Story = {
   args: {
     variant: "bordered",
     heading: "Have questions?",
-    description: "Our team is here to help. Reach out and we'll get back to you shortly.",
+    description:
+      "Our team is here to help. Reach out and we'll get back to you shortly.",
     actions: [{ text: "Contact Support", variant: "default" }],
   },
 };

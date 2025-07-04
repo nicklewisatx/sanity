@@ -48,15 +48,15 @@ export function LayoutBlock({
   _id,
   _type,
 }: LayoutBlockProps & { _id?: string; _type?: string }) {
-  const optimisticContent = useOptimistic<typeof content, SanityDocument<{ content: typeof content }>>(
-    content,
-    (currentContent, action) => {
-      if (_id && action.id === _id && action.document.content) {
-        return action.document.content;
-      }
-      return currentContent;
+  const optimisticContent = useOptimistic<
+    typeof content,
+    SanityDocument<{ content: typeof content }>
+  >(content, (currentContent, action) => {
+    if (_id && action.id === _id && action.document.content) {
+      return action.document.content;
     }
-  );
+    return currentContent;
+  });
 
   const renderContent = () => {
     return optimisticContent.map((block: any) => {
@@ -64,14 +64,18 @@ export function LayoutBlock({
         return (
           <div
             key={block._key}
-            data-sanity={_id ? createDataAttribute({
-              id: _id,
-              baseUrl: studioUrl,
-              projectId: projectId,
-              dataset: dataset,
-              type: _type || "layout",
-              path: `content[_key=="${block._key}"]`,
-            }).toString() : undefined}
+            data-sanity={
+              _id
+                ? createDataAttribute({
+                    id: _id,
+                    baseUrl: studioUrl,
+                    projectId: projectId,
+                    dataset: dataset,
+                    type: _type || "layout",
+                    path: `content[_key=="${block._key}"]`,
+                  }).toString()
+                : undefined
+            }
           >
             <RichText richText={block} />
           </div>
@@ -93,14 +97,18 @@ export function LayoutBlock({
       return (
         <div
           key={block._key}
-          data-sanity={_id ? createDataAttribute({
-            id: _id,
-            baseUrl: studioUrl,
-            projectId: projectId,
-            dataset: dataset,
-            type: _type || "layout",
-            path: `content[_key=="${block._key}"]`,
-          }).toString() : undefined}
+          data-sanity={
+            _id
+              ? createDataAttribute({
+                  id: _id,
+                  baseUrl: studioUrl,
+                  projectId: projectId,
+                  dataset: dataset,
+                  type: _type || "layout",
+                  path: `content[_key=="${block._key}"]`,
+                }).toString()
+              : undefined
+          }
         >
           <Component {...block} />
         </div>
@@ -113,15 +121,28 @@ export function LayoutBlock({
   switch (type) {
     case "section":
       return (
-        <Section spacing={sectionSpacing === "md" || sectionSpacing === "2xl" ? "lg" : sectionSpacing} className={baseClassName}>
+        <Section
+          spacing={
+            sectionSpacing === "md" || sectionSpacing === "2xl"
+              ? "lg"
+              : sectionSpacing
+          }
+          className={baseClassName}
+        >
           {renderContent()}
         </Section>
       );
 
     case "container":
       return (
-        <Container 
-          size={containerSize === "small" || containerSize === "medium" || containerSize === "large" ? "default" : containerSize} 
+        <Container
+          size={
+            containerSize === "small" ||
+            containerSize === "medium" ||
+            containerSize === "large"
+              ? "default"
+              : containerSize
+          }
           className={baseClassName}
         >
           {renderContent()}
@@ -129,12 +150,20 @@ export function LayoutBlock({
       );
 
     case "grid":
-      const colsValue = gridColumns === "auto-fit" || gridColumns === "auto-fill" 
-        ? "auto" 
-        : (parseInt(gridColumns || "1") || 1) as 1 | 2 | 3 | 4 | 5 | 6 | "auto";
-      
+      const colsValue =
+        gridColumns === "auto-fit" || gridColumns === "auto-fill"
+          ? "auto"
+          : ((parseInt(gridColumns || "1") || 1) as
+              | 1
+              | 2
+              | 3
+              | 4
+              | 5
+              | 6
+              | "auto");
+
       return (
-        <Grid 
+        <Grid
           cols={colsValue}
           gap={gridGap === "md" || gridGap === "2xl" ? "lg" : gridGap}
           className={baseClassName}
@@ -158,8 +187,12 @@ export function LayoutBlock({
 
     case "stack":
       return (
-        <Stack 
-          gap={stackSpacing === "md" || stackSpacing === "2xl" ? "lg" : stackSpacing}
+        <Stack
+          gap={
+            stackSpacing === "md" || stackSpacing === "2xl"
+              ? "lg"
+              : stackSpacing
+          }
           className={baseClassName}
         >
           {renderContent()}

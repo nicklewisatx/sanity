@@ -32,8 +32,8 @@ To use it in tests, you have two options:
 ### Option 1: Use the bypass helper (Recommended)
 
 ```typescript
-import { test } from '@playwright/test';
-import { bypassVercelProtection } from './helpers/auth';
+import { test } from "@playwright/test";
+import { bypassVercelProtection } from "./helpers/auth";
 
 test.beforeEach(async ({ page }) => {
   await bypassVercelProtection(page);
@@ -45,11 +45,14 @@ test.beforeEach(async ({ page }) => {
 ```typescript
 export default defineConfig({
   use: {
-    baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://localhost:3000',
+    baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || "http://localhost:3000",
     // Add bypass token to all requests
-    extraHTTPHeaders: process.env.VERCEL_PROTECTION_BYPASS_SECRET ? {
-      'x-vercel-protection-bypass': process.env.VERCEL_PROTECTION_BYPASS_SECRET,
-    } : undefined,
+    extraHTTPHeaders: process.env.VERCEL_PROTECTION_BYPASS_SECRET
+      ? {
+          "x-vercel-protection-bypass":
+            process.env.VERCEL_PROTECTION_BYPASS_SECRET,
+        }
+      : undefined,
   },
 });
 ```
