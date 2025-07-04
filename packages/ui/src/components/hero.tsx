@@ -62,7 +62,7 @@ const Hero = React.forwardRef<HTMLElement, HeroProps>(
     return (
       <section
         ref={ref}
-        className={cn(heroVariants({ variant, size, alignment, className }))}
+        className={cn(heroVariants({ variant, size, alignment, className }), "relative")}
         {...props}
       >
         {backgroundImage && (
@@ -85,13 +85,15 @@ const Hero = React.forwardRef<HTMLElement, HeroProps>(
             )}
           >
             {subtitle && (
-              <p className="mb-4 text-sm font-medium uppercase tracking-wider opacity-80">
-                {subtitle}
-              </p>
+              <div className="mb-4">
+                <span className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold bg-accent text-accent-foreground shadow-sm">
+                  {subtitle}
+                </span>
+              </div>
             )}
 
             {title && (
-              <h1 className="mb-6 text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
+              <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
                 {title}
               </h1>
             )}

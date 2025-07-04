@@ -50,7 +50,7 @@ export function NavbarClientV2({
       // Map Sanity button variants to ButtonV2 variants
       let variant: "primary" | "secondary" | "outline" | "ghost" = "outline";
       if (button.variant === "default") {
-        variant = "primary";
+        variant = "outline"; // Default buttons in navbar should be outline
       } else if (button.variant === "secondary") {
         variant = "secondary";
       } else if (button.variant === "outline") {

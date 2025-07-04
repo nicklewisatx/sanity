@@ -54,61 +54,117 @@ export const spacing = {
   20: "10rem", // 160px
 } as const;
 
-// Color System - Semantic tokens
+// Color System - Modern Art Inspired
 export const colors = {
   // Base colors
   white: "#FFFFFF",
   black: "#000000",
   
-  // Gray scale - Using perceptually uniform scale
+  // Neutral scale - Purple-tinted grays for sophistication
   gray: {
-    50: "#FAFAFA",
-    100: "#F4F4F5",
-    200: "#E4E4E7",
-    300: "#D4D4D8",
-    400: "#A1A1AA",
-    500: "#71717A",
-    600: "#52525B",
-    700: "#3F3F46",
-    800: "#27272A",
-    900: "#18181B",
-    950: "#09090B",
+    50: "#FAF9FB",  // Hint of purple
+    100: "#F5F3F7",
+    200: "#EDE8F5",
+    300: "#DDD6E8",
+    400: "#A599B5",
+    500: "#776B87",
+    600: "#5A4F6B",
+    700: "#443B54",
+    800: "#2B253A",
+    900: "#1B1725",
+    950: "#0E0B15",
   },
   
-  // Brand colors
+  // Primary - Electric Blue (Klein Blue inspired)
   primary: {
-    50: "#EFF6FF",
-    100: "#DBEAFE",
-    200: "#BFDBFE",
-    300: "#93BBFD",
-    400: "#60A5FA",
-    500: "#3B82F6",
-    600: "#2563EB",
-    700: "#1D4ED8",
-    800: "#1E40AF",
-    900: "#1E3A8A",
+    50: "#E6F0FF",
+    100: "#CCE0FF",
+    200: "#99C2FF",
+    300: "#66A3FF",
+    400: "#3384FF",
+    500: "#1971F2", // Main brand blue
+    600: "#1461D9",
+    700: "#0F4CAB",
+    800: "#0A3680",
+    900: "#052155",
   },
   
-  // Semantic colors
+  // Secondary - Coral Pink (Memphis Design)
+  coral: {
+    50: "#FFF5F7",
+    100: "#FFEBEF",
+    200: "#FFD6E0",
+    300: "#FFC2D1",
+    400: "#FF99B3",
+    500: "#FF6B96", // Main coral
+    600: "#E6507A",
+    700: "#CC3A5F",
+    800: "#992B47",
+    900: "#661D2F",
+  },
+  
+  // Accent - Vibrant Yellow (Bauhaus)
+  yellow: {
+    50: "#FFFEF5",
+    100: "#FFFCE6",
+    200: "#FFF9CC",
+    300: "#FFF3A3",
+    400: "#FFEB7A",
+    500: "#F7C41F", // Main yellow
+    600: "#DBA919",
+    700: "#B38A14",
+    800: "#8C6B0F",
+    900: "#664C0A",
+  },
+  
+  // Additional accent - Mint Green
+  mint: {
+    50: "#F0FDF9",
+    100: "#CCFBEF",
+    200: "#99F6DF",
+    300: "#5FECC8",
+    400: "#2DD9AA",
+    500: "#14C38E", // Main mint
+    600: "#0FA573",
+    700: "#0F8B61",
+    800: "#10714F",
+    900: "#0E5940",
+  },
+  
+  // Additional accent - Purple
+  purple: {
+    50: "#FAF5FF",
+    100: "#F3E8FF",
+    200: "#E9D5FF",
+    300: "#D8B4FE",
+    400: "#C084FC",
+    500: "#A855F7", // Main purple
+    600: "#9333EA",
+    700: "#7C3AED",
+    800: "#6B21A8",
+    900: "#581C87",
+  },
+  
+  // Semantic colors with modern art twist
   success: {
-    50: "#F0FDF4",
-    500: "#22C55E",
-    700: "#15803D",
+    50: "#F0FDF9",
+    500: "#14C38E", // Using mint for success
+    700: "#0F8B61",
   },
   warning: {
-    50: "#FFFBEB",
-    500: "#F59E0B",
-    700: "#B45309",
+    50: "#FFFEF5",
+    500: "#F7C41F", // Using yellow for warning
+    700: "#B38A14",
   },
   error: {
-    50: "#FEF2F2",
-    500: "#EF4444",
-    700: "#B91C1C",
+    50: "#FFF5F5",
+    500: "#F23E3E", // Vivid red
+    700: "#CC2E2E",
   },
   info: {
-    50: "#EFF6FF",
-    500: "#3B82F6",
-    700: "#1D4ED8",
+    50: "#E6F0FF",
+    500: "#1971F2", // Using primary blue
+    700: "#0F4CAB",
   },
 } as const;
 
@@ -122,15 +178,16 @@ export const elevation = {
   xl: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
 } as const;
 
-// Border Radius
+// Border Radius - More playful, modern art inspired
 export const radius = {
   none: "0",
-  sm: "0.25rem", // 4px
-  base: "0.375rem", // 6px
-  md: "0.5rem", // 8px
-  lg: "0.75rem", // 12px
-  xl: "1rem", // 16px
-  "2xl": "1.5rem", // 24px
+  sm: "0.375rem", // 6px
+  base: "0.5rem", // 8px
+  md: "0.75rem", // 12px - Default
+  lg: "1rem", // 16px
+  xl: "1.25rem", // 20px
+  "2xl": "1.75rem", // 28px
+  "3xl": "2.5rem", // 40px - Memphis style
   full: "9999px",
 } as const;
 

@@ -12,13 +12,11 @@ export function CTABlock({ richText, title, eyebrow, buttons }: CTABlockProps) {
   return (
     <section id="features" className="my-6 md:my-16">
       <Container>
-        <div className="bg-muted py-16 rounded-3xl px-4">
-          <div className="text-center max-w-3xl mx-auto space-y-8">
+        <div className="bg-gradient-to-br from-secondary/30 via-muted to-accent/20 py-16 rounded-3xl px-4 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,hsl(var(--accent))_0%,transparent_50%)] opacity-20"></div>
+          <div className="text-center max-w-3xl mx-auto space-y-8 relative z-10">
             {eyebrow && (
-              <Badge
-                variant="secondary"
-                className="bg-zinc-200 dark:text-black"
-              >
+              <Badge className="bg-accent text-accent-foreground border-0 px-4 py-1 shadow-sm">
                 {eyebrow}
               </Badge>
             )}

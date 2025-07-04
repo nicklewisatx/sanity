@@ -28,20 +28,19 @@ export default function SubscribeNewsletterButton() {
       size="icon"
       type="submit"
       disabled={pending}
-      className="size-8 aspect-square bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-700"
+      className="size-8 aspect-square bg-primary text-primary-foreground hover:bg-primary/90"
       aria-label={pending ? "Subscribing..." : "Subscribe to newsletter"}
     >
       <span className="flex items-center justify-center gap-2">
         {pending ? (
           <LoaderCircle
-            className="animate-spin text-black"
+            className="animate-spin"
             size={16}
             strokeWidth={2}
             aria-hidden="true"
           />
         ) : (
           <ChevronRight
-            className="text-black dark:text-neutral-300"
             size={16}
             strokeWidth={2}
             aria-hidden="true"
@@ -59,7 +58,7 @@ export function SubscribeNewsletter({
 }: SubscribeNewsletterProps) {
   return (
     <section id="subscribe" className="px-4 py-8 sm:py-12 md:py-16">
-      <div className="relative container mx-auto px-4 md:px-8 py-8 sm:py-16 md:py-24 lg:py-32 bg-gray-50 dark:bg-zinc-900 rounded-3xl overflow-hidden">
+      <div className="relative container mx-auto px-4 md:px-8 py-8 sm:py-16 md:py-24 lg:py-32 bg-gradient-to-br from-primary/10 via-secondary/20 to-accent/10 dark:from-primary/20 dark:via-secondary/30 dark:to-accent/20 rounded-3xl overflow-hidden border border-border/50">
         <div className="relative z-10 mx-auto text-center">
           <h2 className="mb-4 text-xl font-semibold text-gray-900 dark:text-neutral-300 sm:text-3xl md:text-5xl text-balance">
             {title}
