@@ -68,7 +68,7 @@ const NavLinkItem = React.forwardRef<
       ref={ref}
       href={link.href}
       className={cn(
-        "flex select-none gap-3 rounded-md p-3 leading-none outline-none transition-colors",
+        "flex select-none gap-3 rounded-md p-3 leading-none outline-none transition-colors duration-150",
         "hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
         className
       )}
@@ -146,25 +146,36 @@ function DesktopNavigation({
 
       <div className="flex items-center gap-4">
         {rightContent}
-        {buttons.map((button, index) => (
-          <ButtonV2
-            key={index}
-            variant={button.variant || "outline"}
-            onClick={button.onClick}
-            asChild={!!button.href}
-          >
-            {button.href ? (
-              <a 
-                href={button.href} 
-                {...(button.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        {buttons.map((button, index) => {
+          // Skip buttons without text
+          if (!button.text) return null;
+          
+          if (button.href) {
+            return (
+              <ButtonV2
+                key={index}
+                variant={button.variant || "outline"}
+                asChild
               >
-                {button.text}
-              </a>
-            ) : (
-              button.text
-            )}
-          </ButtonV2>
-        ))}
+                <a 
+                  href={button.href} 
+                  {...(button.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                >
+                  {button.text}
+                </a>
+              </ButtonV2>
+            );
+          }
+          return (
+            <ButtonV2
+              key={index}
+              variant={button.variant || "outline"}
+              onClick={button.onClick}
+            >
+              {button.text}
+            </ButtonV2>
+          );
+        })}
       </div>
     </div>
   );
@@ -240,29 +251,42 @@ function MobileNavigation({
           
           {buttons.length > 0 && (
             <div className="border-t pt-4 flex flex-col gap-3">
-              {buttons.map((button, index) => (
-                <ButtonV2
-                  key={index}
-                  variant={button.variant || "outline"}
-                  onClick={() => {
-                    button.onClick?.();
-                    setIsOpen(false);
-                  }}
-                  className="w-full"
-                  asChild={!!button.href}
-                >
-                  {button.href ? (
-                    <a 
-                      href={button.href}
-                      {...(button.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              {buttons.map((button, index) => {
+                // Skip buttons without text
+                if (!button.text) return null;
+                
+                if (button.href) {
+                  return (
+                    <ButtonV2
+                      key={index}
+                      variant={button.variant || "outline"}
+                      className="w-full"
+                      asChild
                     >
-                      {button.text}
-                    </a>
-                  ) : (
-                    button.text
-                  )}
-                </ButtonV2>
-              ))}
+                      <a 
+                        href={button.href}
+                        onClick={() => setIsOpen(false)}
+                        {...(button.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                      >
+                        {button.text}
+                      </a>
+                    </ButtonV2>
+                  );
+                }
+                return (
+                  <ButtonV2
+                    key={index}
+                    variant={button.variant || "outline"}
+                    onClick={() => {
+                      button.onClick?.();
+                      setIsOpen(false);
+                    }}
+                    className="w-full"
+                  >
+                    {button.text}
+                  </ButtonV2>
+                );
+              })}
             </div>
           )}
         </div>
@@ -372,7 +396,7 @@ export interface NavbarProps extends NavigationProps {
 }
 
 const navbarVariants = cva(
-  "w-full transition-all duration-200",
+  "w-full",
   {
     variants: {
       variant: {

@@ -44,12 +44,28 @@ export function NavbarClientV2({
   }).filter(Boolean) ?? [];
 
   // Transform buttons
-  const navButtons: NavButton[] = buttons?.map((button) => ({
-    text: button.text ?? "",
-    href: button.href ?? undefined,
-    variant: button.variant === "default" ? "primary" : button.variant as any,
-    external: button.openInNewTab ?? undefined,
-  })) ?? [];
+  const navButtons: NavButton[] = buttons
+    ?.filter((button) => button.text) // Filter out buttons without text
+    .map((button) => {
+      // Map Sanity button variants to ButtonV2 variants
+      let variant: "primary" | "secondary" | "outline" | "ghost" = "outline";
+      if (button.variant === "default") {
+        variant = "primary";
+      } else if (button.variant === "secondary") {
+        variant = "secondary";
+      } else if (button.variant === "outline") {
+        variant = "outline";
+      } else if (button.variant === "link") {
+        variant = "ghost"; // Map "link" variant to "ghost"
+      }
+      
+      return {
+        text: button.text!,
+        href: button.href ?? undefined,
+        variant,
+        external: button.openInNewTab ?? undefined,
+      };
+    }) ?? [];
 
   return (
     <NavbarV2

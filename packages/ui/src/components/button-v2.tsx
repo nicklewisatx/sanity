@@ -145,8 +145,25 @@ const ButtonV2 = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : "button";
     const isDisabled = disabled || loading;
 
+    // When using asChild, we can't have multiple children
+    // The child component should handle icons and loading state
+    if (asChild) {
+      return (
+        <Slot
+          className={cn(
+            buttonVariants({ variant, size, fullWidth, loading, className })
+          )}
+          ref={ref}
+          disabled={isDisabled}
+          {...props}
+        >
+          {children}
+        </Slot>
+      );
+    }
+
     return (
-      <Comp
+      <button
         className={cn(
           buttonVariants({ variant, size, fullWidth, loading, className })
         )}
@@ -166,7 +183,7 @@ const ButtonV2 = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {rightIcon && !loading && (
           <span className="inline-flex shrink-0">{rightIcon}</span>
         )}
-      </Comp>
+      </button>
     );
   }
 );
