@@ -8,7 +8,7 @@ import { preconnect, prefetchDNS } from "react-dom";
 
 import { FooterServer, FooterSkeleton } from "@/components/footer";
 import { CombinedJsonLd } from "@/components/json-ld";
-import { NavbarServer, NavbarSkeleton } from "@/components/navbar";
+import { NavbarServerV2, NavbarSkeletonV2 } from "@/components/navbar-v2";
 import { PreviewBar } from "@/components/preview-bar";
 import { SanityLive } from "@/lib/sanity/fetch-with-tracing";
 
@@ -41,8 +41,8 @@ export default async function RootLayout({
         className={`${fontGeist.variable} ${fontMono.variable} font-geist antialiased`}
       >
         <Providers>
-          <Suspense fallback={<NavbarSkeleton />}>
-            <NavbarServer />
+          <Suspense fallback={<NavbarSkeletonV2 />}>
+            <NavbarServerV2 />
           </Suspense>
           {children}
 

@@ -93,21 +93,22 @@ const textVariants = cva("", {
 
 // Heading component
 export interface HeadingProps
-  extends React.HTMLAttributes<HTMLHeadingElement>,
+  extends Omit<React.HTMLAttributes<HTMLHeadingElement>, 'color'>,
     VariantProps<typeof headingVariants> {
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 }
 
 export const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
   ({ className, level, color, align, weight, as, ...props }, ref) => {
-    const Component = as || (`h${level}` as keyof JSX.IntrinsicElements);
+    const Component = as || `h${level}`;
     
-    return (
-      <Component
-        ref={ref}
-        className={cn(headingVariants({ level, color, align, weight }), className)}
-        {...props}
-      />
+    return React.createElement(
+      Component,
+      {
+        ref,
+        className: cn(headingVariants({ level, color, align, weight }), className),
+        ...props
+      }
     );
   }
 );
@@ -115,7 +116,7 @@ Heading.displayName = "Heading";
 
 // Text component
 export interface TextProps
-  extends React.HTMLAttributes<HTMLParagraphElement>,
+  extends Omit<React.HTMLAttributes<HTMLParagraphElement>, 'color'>,
     VariantProps<typeof textVariants> {
   as?: "p" | "span" | "div" | "label";
 }
@@ -135,15 +136,16 @@ export const Text = React.forwardRef<HTMLParagraphElement, TextProps>(
     }, 
     ref
   ) => {
-    return (
-      <Component
-        ref={ref}
-        className={cn(
+    return React.createElement(
+      Component,
+      {
+        ref,
+        className: cn(
           textVariants({ size, color, weight, align, lineHeight, decoration }),
           className
-        )}
-        {...props}
-      />
+        ),
+        ...props
+      }
     );
   }
 );
@@ -198,7 +200,7 @@ Lead.displayName = "Lead";
 
 // Link component
 export interface LinkProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement>,
+  extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'color'>,
     VariantProps<typeof textVariants> {
   external?: boolean;
   underline?: boolean;
@@ -248,18 +250,19 @@ export const Code = React.forwardRef<HTMLElement, CodeProps>(
   ({ className, block = false, ...props }, ref) => {
     const Component = block ? "pre" : "code";
     
-    return (
-      <Component
-        ref={ref}
-        className={cn(
+    return React.createElement(
+      Component,
+      {
+        ref,
+        className: cn(
           "font-mono text-sm",
           block
             ? "block overflow-x-auto rounded-md bg-gray-900 p-4 text-gray-100"
             : "inline-block rounded bg-gray-100 px-1 py-0.5 text-gray-900 dark:bg-gray-800 dark:text-gray-100",
           className
-        )}
-        {...props}
-      />
+        ),
+        ...props
+      }
     );
   }
 );

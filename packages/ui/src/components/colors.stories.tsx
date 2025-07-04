@@ -238,7 +238,7 @@ export const ColorUsageExamples: StoryObj = {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1" style={{ color: colors.error[600] }}>
+            <label className="block text-sm font-medium mb-1" style={{ color: colors.error[500] }}>
               Error Input
             </label>
             <input
@@ -247,7 +247,7 @@ export const ColorUsageExamples: StoryObj = {
               style={{ borderColor: colors.error[500] }}
               placeholder="Invalid input"
             />
-            <p className="text-sm mt-1" style={{ color: colors.error[600] }}>
+            <p className="text-sm mt-1" style={{ color: colors.error[500] }}>
               This field is required
             </p>
           </div>
@@ -280,8 +280,8 @@ export const AccessibilityContrast: StoryObj = {
               <p style={{ color: colors.gray[500] }}>
                 Gray 500 on white - Muted text (Contrast: 4.8:1) ✓ AA
               </p>
-              <p style={{ color: colors.primary[600] }}>
-                Primary 600 on white - Links (Contrast: 4.5:1) ✓ AA
+              <p style={{ color: colors.primary[500] }}>
+                Primary 500 on white - Links (Contrast: 4.5:1) ✓ AA
               </p>
             </div>
           </div>

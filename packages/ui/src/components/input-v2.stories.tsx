@@ -105,7 +105,7 @@ export const InputTypes: Story = {
       </FormField>
       
       <FormField label="Number Input">
-        <Input type="number" placeholder="0" min="0" max="100" />
+        <Input type="number" placeholder="0" min={0} max={100} />
       </FormField>
       
       <FormField label="Date Input">

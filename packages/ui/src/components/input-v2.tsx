@@ -26,7 +26,7 @@ const inputVariants = cva(
 );
 
 export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement>,
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'>,
     VariantProps<typeof inputVariants> {}
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -101,7 +101,7 @@ const selectVariants = cva(
 );
 
 export interface SelectProps
-  extends React.SelectHTMLAttributes<HTMLSelectElement>,
+  extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'size'>,
     VariantProps<typeof selectVariants> {}
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
