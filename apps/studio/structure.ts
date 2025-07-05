@@ -2,6 +2,7 @@ import { orderableDocumentListDeskItem } from "@sanity/orderable-document-list";
 import {
   BookMarked,
   CogIcon,
+  Cpu,
   File,
   FileText,
   HomeIcon,
@@ -10,6 +11,7 @@ import {
   PanelBottomIcon,
   PanelTopDashedIcon,
   Settings2,
+  Tag,
   User,
 } from "lucide-react";
 import type {
@@ -122,6 +124,8 @@ export const structure = (
         icon: MessageCircleQuestion,
       }),
       createList({ S, type: "author", title: "Authors", icon: User }),
+      createList({ S, type: "technology", title: "Technologies", icon: Cpu }),
+      createList({ S, type: "articleType", title: "Article Types", icon: Tag }),
       S.divider(),
       S.listItem()
         .title("Site Configuration")

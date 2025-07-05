@@ -1,105 +1,73 @@
-import { notFound } from "next/navigation";
-
-import { BlogCard, BlogHeader, FeaturedBlogCard } from "@/components/blog-card";
+import { BlogCard } from "@/components/blog-card";
+import { BlogHero } from "@/components/blog-hero";
 import { PageBuilder } from "@/components/pagebuilder";
 import { sanityFetch } from "@/lib/sanity/fetch-with-tracing";
 import { queryBlogIndexPageData } from "@/lib/sanity/query";
 import { getSEOMetadata } from "@/lib/seo";
-import { handleErrors } from "@/utils";
 
-async function fetchBlogPosts() {
-  return await handleErrors(sanityFetch({ query: queryBlogIndexPageData }));
+async function fetchBlogIndexData() {
+  return await sanityFetch({
+    query: queryBlogIndexPageData,
+  });
 }
 
 export async function generateMetadata() {
-  const { data: result } = await sanityFetch({
-    query: queryBlogIndexPageData,
-    stega: false,
-  });
+  const { data: blogIndexData } = await fetchBlogIndexData();
   return getSEOMetadata(
-    result
+    blogIndexData
       ? {
-          title: result?.title ?? result?.seoTitle ?? "",
-          description: result?.description ?? result?.seoDescription ?? "",
-          slug: result?.slug,
-          contentId: result?._id,
-          contentType: result?._type,
+          title: blogIndexData?.title ?? blogIndexData?.seoTitle ?? "Blog",
+          description:
+            blogIndexData?.description ??
+            blogIndexData?.seoDescription ??
+            "Read our latest blog posts and insights.",
+          slug: blogIndexData?.slug,
+          contentId: blogIndexData?._id,
+          contentType: blogIndexData?._type,
         }
       : {},
   );
 }
 
-export default async function BlogIndexPage() {
-  const [res, err] = await fetchBlogPosts();
-  if (err || !res?.data) notFound();
+export default async function BlogPage() {
+  const { data: blogIndexData } = await fetchBlogIndexData();
 
-  const {
-    blogs = [],
-    title,
-    description,
-    pageBuilder = [],
-    _id,
-    _type,
-    displayFeaturedBlogs,
-    featuredBlogsCount,
-  } = res.data;
-
-  const validFeaturedBlogsCount = featuredBlogsCount
-    ? Number.parseInt(featuredBlogsCount)
-    : 0;
-
-  if (!blogs.length) {
-    return (
-      <main>
-        <BlogHeader title={title} description={description} />
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center py-12">
-            <p className="text-muted-foreground">
-              No blog posts available at the moment.
-            </p>
-          </div>
-        </div>
-        {pageBuilder && pageBuilder.length > 0 && (
-          <PageBuilder pageBuilder={pageBuilder} id={_id} type={_type} />
-        )}
-      </main>
-    );
+  if (!blogIndexData) {
+    return <div>No blog data found</div>;
   }
 
-  const shouldDisplayFeaturedBlogs =
-    displayFeaturedBlogs && validFeaturedBlogsCount > 0;
+  const { _id, _type, pageBuilder, blogs = [] } = blogIndexData;
 
-  const featuredBlogs = shouldDisplayFeaturedBlogs
-    ? blogs.slice(0, validFeaturedBlogsCount)
-    : [];
-  const remainingBlogs = shouldDisplayFeaturedBlogs
-    ? blogs.slice(validFeaturedBlogsCount)
-    : blogs;
+  // Get the latest article (first in the ordered array from Sanity)
+  const [latestArticle, ...remainingArticles] = blogs;
 
   return (
     <main className="bg-background">
-      <BlogHeader title={title} description={description} />
+      {/* Hero Section featuring the Latest Article */}
+      {latestArticle && <BlogHero blog={latestArticle} id={_id} type={_type} />}
 
-      <div className="container my-16 mx-auto px-4 md:px-6">
-        {featuredBlogs.length > 0 && (
-          <div className="mx-auto mt-8 sm:mt-12 md:mt-16 mb-12 lg:mb-20 grid grid-cols-1 gap-8 md:gap-12">
-            {featuredBlogs.map((blog: any) => (
-              <FeaturedBlogCard key={blog._id} blog={blog} />
-            ))}
-          </div>
-        )}
-
-        {remainingBlogs.length > 0 && (
-          <div className="grid grid-cols-1 gap-8 md:gap-12 lg:grid-cols-2 mt-8">
-            {remainingBlogs.map((blog: any) => (
-              <BlogCard key={blog._id} blog={blog} />
-            ))}
-          </div>
-        )}
-      </div>
-
+      {/* Page Builder Content (if any) */}
       {pageBuilder && pageBuilder.length > 0 && (
         <PageBuilder pageBuilder={pageBuilder} id={_id} type={_type} />
+      )}
+
+      {/* Remaining Blog Cards */}
+      {remainingArticles.length > 0 && (
+        <div className="container mx-auto px-4 md:px-6 py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {remainingArticles.map(
+              (blog: (typeof remainingArticles)[0], index: number) => (
+                <BlogCard
+                  key={blog._id}
+                  blog={blog}
+                  index={index + 1} // +1 because index 0 is the hero blog
+                  parentId={_id}
+                  parentType={_type}
+                />
+              ),
+            )}
+          </div>
+        </div>
       )}
     </main>
   );

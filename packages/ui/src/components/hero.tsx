@@ -2,7 +2,7 @@ import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@workspace/ui/lib/utils";
-import { Button, type ButtonProps } from "./button";
+import { ButtonV2 as Button, type ButtonProps } from "./button-v2";
 
 const heroVariants = cva("relative overflow-hidden", {
   variants: {

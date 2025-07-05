@@ -11,7 +11,7 @@ import {
   navigationMenuTriggerStyle
 } from "./navigation-menu";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "./sheet";
-import { Button } from "./button";
+import { ButtonV2 as Button } from "./button-v2";
 import { ButtonV2 } from "./button-v2";
 import { Menu } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./accordion";
@@ -193,7 +193,7 @@ function MobileNavigation({
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="shrink-0">
+        <Button variant="ghost" size="sm" className="shrink-0 p-2">
           <Menu className="h-4 w-4" />
           <span className="sr-only">Toggle navigation menu</span>
         </Button>

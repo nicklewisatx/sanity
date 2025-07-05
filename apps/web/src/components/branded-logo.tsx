@@ -1,6 +1,6 @@
+import { cn } from "@workspace/ui/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { cn } from "@workspace/ui/lib/utils";
 
 interface BrandedLogoProps {
   className?: string;
@@ -8,18 +8,18 @@ interface BrandedLogoProps {
   variant?: "horizontal" | "stacked";
 }
 
-export function BrandedLogo({ 
-  className, 
+export function BrandedLogo({
+  className,
   priority = false,
-  variant = "horizontal" 
+  variant = "horizontal",
 }: BrandedLogoProps) {
   return (
-    <Link 
-      href="/" 
+    <Link
+      href="/"
       className={cn(
         "flex items-center gap-3 hover:opacity-80 transition-opacity",
         variant === "stacked" && "flex-col gap-1 text-center",
-        className
+        className,
       )}
     >
       <Image
@@ -31,14 +31,16 @@ export function BrandedLogo({
         className={cn(
           "h-8 w-auto sm:h-10",
           // Dark mode: invert the logo colors for better visibility
-          "dark:invert dark:brightness-0 dark:contrast-200"
+          "dark:invert dark:brightness-0 dark:contrast-200",
         )}
       />
-      <div className={cn(
-        "flex flex-col justify-center",
-        variant === "horizontal" && "items-start",
-        variant === "stacked" && "items-center"
-      )}>
+      <div
+        className={cn(
+          "flex flex-col justify-center",
+          variant === "horizontal" && "items-start",
+          variant === "stacked" && "items-center",
+        )}
+      >
         <span className="font-bold text-lg sm:text-xl leading-none tracking-tight">
           The Blog
         </span>

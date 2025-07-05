@@ -26,7 +26,7 @@ export function FaqAccordion({
     setOpenItems((prev) =>
       prev.includes(itemId)
         ? prev.filter((id) => id !== itemId)
-        : [...prev, itemId]
+        : [...prev, itemId],
     );
   };
 
@@ -48,10 +48,7 @@ export function FaqAccordion({
             {faqs?.map((faq, index) => {
               const isOpen = openItems.includes(faq._id);
               return (
-                <div
-                  key={`faq-${faq._id}-${index}`}
-                  className="border-b py-2"
-                >
+                <div key={`faq-${faq._id}-${index}`} className="border-b py-2">
                   <button
                     onClick={() => toggleItem(faq._id)}
                     className="flex w-full items-center justify-between py-2 text-left text-[15px] leading-6 font-medium transition-all hover:opacity-80"

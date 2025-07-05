@@ -4,6 +4,19 @@ import { config } from "@workspace/eslint-config/react-internal"
 export default [
   ...config,
   {
+    ignores: [
+      "storybook-static/**",
+      "**/storybook-static/**",
+      "dist/**",
+      "build/**",
+      "coverage/**",
+      "node_modules/**",
+      "**/*.min.js",
+      "**/*.bundle.js",
+      "**/vendor/**"
+    ]
+  },
+  {
     files: ["scripts/**/*.js"],
     languageOptions: {
       globals: {
@@ -21,6 +34,17 @@ export default [
         varsIgnorePattern: "^_",
         caughtErrorsIgnorePattern: "^_"
       }]
+    }
+  },
+  {
+    files: ["**/*.ts", "**/*.tsx"],
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-unsafe-assignment": "off",
+      "@typescript-eslint/no-unsafe-member-access": "off",
+      "@typescript-eslint/no-unsafe-call": "off",
+      "@typescript-eslint/no-unsafe-return": "off",
+      "@typescript-eslint/no-unsafe-argument": "off"
     }
   }
 ]

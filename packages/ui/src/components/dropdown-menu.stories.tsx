@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Button } from "./button.js";
+import { ButtonV2 as Button } from "./button-v2";
 import {
   DropdownMenu,
   DropdownMenuContent,
