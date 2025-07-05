@@ -37,7 +37,7 @@
     "zod": "^3.25.74"
   },
   "devDependencies": {
-    "@opentelemetry/api": "~1.8.0",
+    "@opentelemetry/api": "~1.9.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@types/node": "^24",
