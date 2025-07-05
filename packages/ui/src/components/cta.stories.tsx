@@ -33,7 +33,7 @@ export const Default: Story = {
     description:
       "Join thousands of satisfied customers who have transformed their business with our platform.",
     actions: [
-      { text: "Start Free Trial", variant: "default" },
+      { text: "Start Free Trial", variant: "primary" },
       { text: "Contact Sales", variant: "outline" },
     ],
   },
@@ -68,7 +68,7 @@ export const Bordered: Story = {
     heading: "Have questions?",
     description:
       "Our team is here to help. Reach out and we'll get back to you shortly.",
-    actions: [{ text: "Contact Support", variant: "default" }],
+    actions: [{ text: "Contact Support", variant: "primary" }],
   },
 };
 
@@ -90,7 +90,7 @@ export const LeftAligned: Story = {
     heading: "Transform your workflow",
     description:
       "Discover powerful features that help you work smarter, not harder.",
-    actions: [{ text: "Explore Features", variant: "default" }],
+    actions: [{ text: "Explore Features", variant: "primary" }],
   },
 };
 
@@ -123,7 +123,7 @@ export const Small: Story = {
     size: "sm",
     heading: "Quick question?",
     description: "Chat with our team.",
-    actions: [{ text: "Open Chat", variant: "default", size: "sm" }],
+    actions: [{ text: "Open Chat", variant: "primary", size: "sm" }],
   },
 };
 
@@ -144,7 +144,7 @@ export const Large: Story = {
 export const MinimalCTA: Story = {
   args: {
     heading: "Simple call to action",
-    actions: [{ text: "Learn More", variant: "default" }],
+    actions: [{ text: "Learn More", variant: "primary" }],
   },
 };
 

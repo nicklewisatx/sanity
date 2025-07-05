@@ -25,7 +25,7 @@ const sampleArticleTypes = [
   { name: "Tips", color: "yellow" },
 ];
 
-const sampleTechnologies = [
+const sampleTechnologies: Array<{ name: string; overallRating: -1 | 0 | 1 }> = [
   { name: "React", overallRating: 1 },
   { name: "TypeScript", overallRating: 1 },
   { name: "Vue.js", overallRating: 0 },
@@ -34,7 +34,7 @@ const sampleTechnologies = [
   { name: "Next.js", overallRating: 1 },
   { name: "Nuxt.js", overallRating: 0 },
   { name: "Remix", overallRating: 0 },
-] as const;
+];
 
 // Main stories
 export const Default: Story = {

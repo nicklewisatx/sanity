@@ -61,7 +61,7 @@ export default async function BlogPage() {
       {remainingArticles.length > 0 && (
         <div className="container mx-auto px-4 md:px-6 py-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {remainingArticles.map((blog, index) => (
+            {remainingArticles.map((blog: typeof remainingArticles[0], index: number) => (
               <BlogCard 
                 key={blog._id} 
                 blog={blog}

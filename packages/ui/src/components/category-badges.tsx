@@ -37,16 +37,14 @@ const technologyBadgeVariants = cva("", {
   },
 });
 
-export interface ArticleTypeBadgeProps 
-  extends Omit<BadgeProps, "variant">,
-    VariantProps<typeof articleTypeBadgeVariants> {
+export interface ArticleTypeBadgeProps extends VariantProps<typeof articleTypeBadgeVariants> {
   children: React.ReactNode;
+  className?: string;
 }
 
-export interface TechnologyBadgeProps 
-  extends Omit<BadgeProps, "variant">,
-    VariantProps<typeof technologyBadgeVariants> {
+export interface TechnologyBadgeProps {
   children: React.ReactNode;
+  className?: string;
   rating?: -1 | 0 | 1;
   showIcon?: boolean;
 }
@@ -64,86 +62,72 @@ export interface CategoryBadgesProps extends React.HTMLAttributes<HTMLDivElement
 }
 
 // Article Type Badge Component
-export const ArticleTypeBadge = React.forwardRef<HTMLDivElement, ArticleTypeBadgeProps>(
-  ({ className, color, children, ...props }, ref) => {
-    return (
-      <Badge
-        ref={ref}
-        className={cn(
-          articleTypeBadgeVariants({ color }),
-          "font-medium",
-          className
-        )}
-        {...props}
-      >
-        {children}
-      </Badge>
-    );
-  }
-);
-ArticleTypeBadge.displayName = "ArticleTypeBadge";
+export function ArticleTypeBadge({ className, color, children }: ArticleTypeBadgeProps) {
+  return (
+    <Badge
+      className={cn(
+        articleTypeBadgeVariants({ color }),
+        "font-medium",
+        className
+      )}
+    >
+      {children}
+    </Badge>
+  );
+}
 
 // Technology Badge Component
-export const TechnologyBadge = React.forwardRef<HTMLDivElement, TechnologyBadgeProps>(
-  ({ className, rating = 0, showIcon = true, children, ...props }, ref) => {
-    const ratingVariant = rating === 1 ? "thumbsUp" : rating === -1 ? "thumbsDown" : "thumbsSideways";
-    const ratingIcon = rating === 1 ? "👍" : rating === -1 ? "👎" : "👌";
+export function TechnologyBadge({ className, rating = 0, showIcon = true, children }: TechnologyBadgeProps) {
+  const ratingVariant = rating === 1 ? "thumbsUp" : rating === -1 ? "thumbsDown" : "thumbsSideways";
+  const ratingIcon = rating === 1 ? "👍" : rating === -1 ? "👎" : "👌";
 
-    return (
-      <Badge
-        ref={ref}
-        className={cn(
-          technologyBadgeVariants({ rating: ratingVariant }),
-          "font-medium",
-          className
-        )}
-        {...props}
-      >
-        {showIcon && <span className="mr-1 text-xs">{ratingIcon}</span>}
-        {children}
-      </Badge>
-    );
-  }
-);
-TechnologyBadge.displayName = "TechnologyBadge";
+  return (
+    <Badge
+      className={cn(
+        technologyBadgeVariants({ rating: ratingVariant }),
+        "font-medium",
+        className
+      )}
+    >
+      {showIcon && <span className="mr-1 text-xs">{ratingIcon}</span>}
+      {children}
+    </Badge>
+  );
+}
 
 // Combined Category Badges Component
-export const CategoryBadges = React.forwardRef<HTMLDivElement, CategoryBadgesProps>(
-  ({ className, articleType, technologies = [], maxTechnologies = 3, ...props }, ref) => {
-    const displayedTechnologies = technologies.slice(0, maxTechnologies);
-    const remainingCount = technologies.length - maxTechnologies;
+export function CategoryBadges({ className, articleType, technologies = [], maxTechnologies = 3, ...props }: CategoryBadgesProps) {
+  const displayedTechnologies = technologies.slice(0, maxTechnologies);
+  const remainingCount = technologies.length - maxTechnologies;
 
-    return (
-      <div
-        ref={ref}
-        className={cn("flex flex-wrap items-center gap-2", className)}
-        {...props}
-      >
-        {articleType && (
-          <ArticleTypeBadge color={articleType.color as any}>
-            {articleType.name}
-          </ArticleTypeBadge>
-        )}
-        
-        {displayedTechnologies.map((tech, index) => (
-          <TechnologyBadge
-            key={`${tech.name}-${index}`}
-            rating={tech.overallRating}
-          >
-            {tech.name}
-          </TechnologyBadge>
-        ))}
-        
-        {remainingCount > 0 && (
-          <Badge variant="outline" className="text-xs font-normal">
-            +{remainingCount} more
-          </Badge>
-        )}
-      </div>
-    );
-  }
-);
-CategoryBadges.displayName = "CategoryBadges";
+  return (
+    <div
+      className={cn("flex flex-wrap items-center gap-2", className)}
+      {...props}
+    >
+      {articleType && (
+        <ArticleTypeBadge color={articleType.color as "blue" | "green" | "purple" | "red" | "orange" | "yellow" | "pink" | "indigo" | "gray"}>
+          {articleType.name}
+        </ArticleTypeBadge>
+      )}
+      
+      {displayedTechnologies.map((tech, index) => (
+        <TechnologyBadge
+          key={`${tech.name}-${index}`}
+          rating={tech.overallRating}
+        >
+          {tech.name}
+        </TechnologyBadge>
+      ))}
+      
+      {remainingCount > 0 && (
+        <Badge variant="outline" className="text-xs font-normal">
+          +{remainingCount} more
+        </Badge>
+      )}
+    </div>
+  );
+}
 
 // Export all variants for external use
 export { articleTypeBadgeVariants, technologyBadgeVariants };

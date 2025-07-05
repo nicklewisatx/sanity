@@ -4,7 +4,7 @@ import { createDataAttribute, type SanityDocument } from "next-sanity";
 import Link from "next/link";
 
 import { Hero } from "@workspace/ui/components/hero";
-import { Button } from "@workspace/ui/components/button";
+import { ButtonV2 as Button } from "@workspace/ui/components/button-v2";
 import { dataset, projectId, studioUrl } from "@/lib/sanity/api";
 import type { QueryBlogIndexPageDataResult } from "@/lib/sanity/sanity.types";
 import { SanityImage } from "./sanity-image";
@@ -63,7 +63,7 @@ export function BlogHero({ blog: initialBlog, id, type }: BlogHeroProps) {
         title={blog.title || ""}
         description={blog.description || ""}
       >
-        <Button asChild variant="default" size="lg">
+        <Button asChild variant="primary" size="lg">
           <Link href={`/blog/${blog.slug}`}>Read More</Link>
         </Button>
       </Hero>

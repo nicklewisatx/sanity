@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Button } from "./button.js";
+import { ButtonV2 as Button } from "./button-v2";
 import { Input } from "./input.js";
 import { Badge } from "./badge.js";
 import {
@@ -136,7 +136,7 @@ export const MobileMenu: Story = {
   render: () => (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon">
+        <Button variant="ghost" size="sm">
           <Menu className="h-5 w-5" />
           <span className="sr-only">Toggle menu</span>
         </Button>
@@ -260,7 +260,7 @@ export const SettingsPanel: Story = {
     return (
       <Sheet>
         <SheetTrigger asChild>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="sm">
             <Settings className="h-5 w-5" />
             <span className="sr-only">Settings</span>
           </Button>
