@@ -193,7 +193,7 @@ function MobileNavigation({
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <Button variant="outline" size="icon" className="shrink-0">
+        <Button variant="ghost" size="icon" className="shrink-0">
           <Menu className="h-4 w-4" />
           <span className="sr-only">Toggle navigation menu</span>
         </Button>

@@ -1,13 +1,10 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@workspace/ui/components/accordion";
+"use client";
+
 import { Badge } from "@workspace/ui/components/badge";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { stegaClean } from "next-sanity";
+import { useState } from "react";
 
 import type { PagebuilderType } from "@/types";
 
@@ -23,6 +20,16 @@ export function FaqAccordion({
   faqs,
   link,
 }: FaqAccordionProps) {
+  const [openItems, setOpenItems] = useState<string[]>([]);
+
+  const toggleItem = (itemId: string) => {
+    setOpenItems((prev) =>
+      prev.includes(itemId)
+        ? prev.filter((id) => id !== itemId)
+        : [...prev, itemId]
+    );
+  };
+
   return (
     <section id="faq" className="my-8">
       <FaqJsonLd faqs={stegaClean(faqs)} />
@@ -37,30 +44,41 @@ export function FaqAccordion({
           </div>
         </div>
         <div className="my-16 max-w-xl mx-auto">
-          <Accordion
-            type="single"
-            collapsible
-            className="w-full"
-            defaultValue="3"
-          >
-            {faqs?.map((faq, index) => (
-              <AccordionItem
-                value={faq?._id}
-                key={`AccordionItem-${faq?._id}-${index}`}
-                className="py-2"
-              >
-                <AccordionTrigger className="py-2 text-[15px] leading-6 hover:no-underline group">
-                  {faq?.title}
-                </AccordionTrigger>
-                <AccordionContent className="pb-2 text-muted-foreground">
-                  <RichText
-                    richText={faq?.richText ?? []}
-                    className="text-sm md:text-base"
-                  />
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+          <div className="w-full space-y-2">
+            {faqs?.map((faq, index) => {
+              const isOpen = openItems.includes(faq._id);
+              return (
+                <div
+                  key={`faq-${faq._id}-${index}`}
+                  className="border-b py-2"
+                >
+                  <button
+                    onClick={() => toggleItem(faq._id)}
+                    className="flex w-full items-center justify-between py-2 text-left text-[15px] leading-6 font-medium transition-all hover:opacity-80"
+                  >
+                    {faq?.title}
+                    <ChevronDown
+                      className={`h-4 w-4 shrink-0 transition-transform duration-200 ${
+                        isOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ${
+                      isOpen ? "max-h-96" : "max-h-0"
+                    }`}
+                  >
+                    <div className="pb-2 text-muted-foreground">
+                      <RichText
+                        richText={faq?.richText ?? []}
+                        className="text-sm md:text-base"
+                      />
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
 
           {link?.href && (
             <div className="w-full py-6">

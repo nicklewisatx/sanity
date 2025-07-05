@@ -1,326 +1,411 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Input } from "./input.js";
-import { Search, Mail, Lock, User, CreditCard, DollarSign } from "lucide-react";
-import * as React from "react";
+import { 
+  Input, 
+  Textarea, 
+  Select, 
+  Checkbox, 
+  Radio,
+  FormField,
+  FormGroup,
+  FormSection
+} from "./input";
+import { Button } from "./button";
+import { Card, CardHeader, CardTitle, CardContent } from "./card";
 
 const meta = {
-  title: "Primitives/Input",
+  title: "Design System/Forms",
   component: Input,
   parameters: {
-    layout: "centered",
+    layout: "padded",
     docs: {
       description: {
-        component:
-          "A basic input field component with various states and types.",
+        component: `
+A comprehensive form component system:
+
+- **Input fields**: Text, email, password, number, etc.
+- **Textarea**: Multi-line text input
+- **Select**: Dropdown selection
+- **Checkbox & Radio**: Boolean and choice inputs
+- **Form helpers**: Field wrappers, groups, and sections
+- **Validation states**: Error, success, and default
+- **Accessibility**: Proper labels, ARIA attributes, and keyboard navigation
+        `,
       },
     },
   },
   tags: ["autodocs"],
-  argTypes: {
-    type: {
-      control: "select",
-      options: [
-        "text",
-        "email",
-        "password",
-        "number",
-        "search",
-        "tel",
-        "url",
-        "date",
-        "time",
-        "datetime-local",
-      ],
-      description: "The type of input",
-    },
-    placeholder: {
-      control: "text",
-      description: "Placeholder text",
-    },
-    disabled: {
-      control: "boolean",
-      description: "Whether the input is disabled",
-    },
-    className: {
-      control: "text",
-      description: "Additional CSS classes",
-    },
-  },
 } satisfies Meta<typeof Input>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+// Basic Input
 export const Default: Story = {
   args: {
-    type: "text",
     placeholder: "Enter text...",
   },
 };
 
-export const Types: Story = {
+// Input Variants
+export const InputVariants: Story = {
   render: () => (
-    <div className="space-y-4 w-[350px]">
-      <div>
-        <label className="text-sm font-medium mb-2 block">Text</label>
-        <Input type="text" placeholder="Enter text..." />
-      </div>
-      <div>
-        <label className="text-sm font-medium mb-2 block">Email</label>
-        <Input type="email" placeholder="name@example.com" />
-      </div>
-      <div>
-        <label className="text-sm font-medium mb-2 block">Password</label>
-        <Input type="password" placeholder="Enter password..." />
-      </div>
-      <div>
-        <label className="text-sm font-medium mb-2 block">Number</label>
-        <Input type="number" placeholder="0" min="0" max="100" />
-      </div>
-      <div>
-        <label className="text-sm font-medium mb-2 block">Search</label>
-        <Input type="search" placeholder="Search..." />
-      </div>
-      <div>
-        <label className="text-sm font-medium mb-2 block">Date</label>
+    <div className="space-y-4 max-w-md">
+      <FormField label="Default Input">
+        <Input placeholder="Enter your name" />
+      </FormField>
+      
+      <FormField label="Error State" error="This field is required">
+        <Input variant="error" placeholder="Enter your email" />
+      </FormField>
+      
+      <FormField label="Success State">
+        <Input variant="success" placeholder="Valid input" defaultValue="john@example.com" />
+      </FormField>
+      
+      <FormField label="Disabled Input">
+        <Input placeholder="Cannot edit" disabled />
+      </FormField>
+    </div>
+  ),
+};
+
+// Input Sizes
+export const InputSizes: Story = {
+  render: () => (
+    <div className="space-y-4 max-w-md">
+      <FormField label="Small Input">
+        <Input size="sm" placeholder="Small size" />
+      </FormField>
+      
+      <FormField label="Medium Input (Default)">
+        <Input size="md" placeholder="Medium size" />
+      </FormField>
+      
+      <FormField label="Large Input">
+        <Input size="lg" placeholder="Large size" />
+      </FormField>
+    </div>
+  ),
+};
+
+// Input Types
+export const InputTypes: Story = {
+  render: () => (
+    <div className="space-y-4 max-w-md">
+      <FormField label="Text Input">
+        <Input type="text" placeholder="Enter text" />
+      </FormField>
+      
+      <FormField label="Email Input">
+        <Input type="email" placeholder="email@example.com" />
+      </FormField>
+      
+      <FormField label="Password Input">
+        <Input type="password" placeholder="Enter password" />
+      </FormField>
+      
+      <FormField label="Number Input">
+        <Input type="number" placeholder="0" min={0} max={100} />
+      </FormField>
+      
+      <FormField label="Date Input">
         <Input type="date" />
-      </div>
+      </FormField>
+      
+      <FormField label="Search Input">
+        <Input type="search" placeholder="Search..." />
+      </FormField>
     </div>
   ),
 };
 
-export const States: Story = {
+// Textarea
+export const TextareaExamples: Story = {
   render: () => (
-    <div className="space-y-4 w-[350px]">
-      <Input placeholder="Default input" />
-      <Input
-        placeholder="Focused input"
-        className="focus-visible:ring-1 focus-visible:ring-ring"
-      />
-      <Input placeholder="Disabled input" disabled />
-      <Input placeholder="Read-only input" readOnly value="Read-only content" />
-      <Input
-        placeholder="Error state"
-        className="border-destructive focus-visible:ring-destructive"
-      />
-    </div>
-  ),
-};
-
-export const WithIcons: Story = {
-  render: () => (
-    <div className="space-y-4 w-[350px]">
-      <div className="relative">
-        <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-        <Input className="pl-8" placeholder="Search..." />
-      </div>
-      <div className="relative">
-        <Mail className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-        <Input className="pl-8" type="email" placeholder="Email" />
-      </div>
-      <div className="relative">
-        <Lock className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-        <Input className="pl-8" type="password" placeholder="Password" />
-      </div>
-      <div className="relative">
-        <Input className="pr-8" placeholder="Amount" />
-        <DollarSign className="absolute right-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-      </div>
-    </div>
-  ),
-};
-
-export const Sizes: Story = {
-  render: () => (
-    <div className="space-y-4 w-[350px]">
-      <Input className="h-8 text-sm" placeholder="Small input" />
-      <Input placeholder="Default input" />
-      <Input className="h-11 text-base" placeholder="Large input" />
-    </div>
-  ),
-};
-
-export const FileInput: Story = {
-  render: () => (
-    <div className="space-y-4 w-[350px]">
-      <Input type="file" />
-      <Input type="file" multiple />
-      <Input type="file" accept="image/*" />
-    </div>
-  ),
-};
-
-export const FormExample: Story = {
-  render: function FormExampleComponent() {
-    const [formData, setFormData] = React.useState({
-      username: "",
-      email: "",
-      password: "",
-    });
-
-    return (
-      <form
-        className="space-y-4 w-[350px]"
-        onSubmit={(e: React.FormEvent) => e.preventDefault()}
-      >
-        <div>
-          <label htmlFor="username" className="text-sm font-medium mb-2 block">
-            Username
-          </label>
-          <div className="relative">
-            <User className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              id="username"
-              className="pl-8"
-              placeholder="johndoe"
-              value={formData.username}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setFormData({ ...formData, username: e.target.value })
-              }
-            />
-          </div>
-        </div>
-
-        <div>
-          <label htmlFor="email" className="text-sm font-medium mb-2 block">
-            Email
-          </label>
-          <div className="relative">
-            <Mail className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              id="email"
-              type="email"
-              className="pl-8"
-              placeholder="john@example.com"
-              value={formData.email}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setFormData({ ...formData, email: e.target.value })
-              }
-            />
-          </div>
-        </div>
-
-        <div>
-          <label htmlFor="password" className="text-sm font-medium mb-2 block">
-            Password
-          </label>
-          <div className="relative">
-            <Lock className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              id="password"
-              type="password"
-              className="pl-8"
-              placeholder="••••••••"
-              value={formData.password}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setFormData({ ...formData, password: e.target.value })
-              }
-            />
-          </div>
-        </div>
-
-        <button
-          type="submit"
-          className="w-full bg-primary text-primary-foreground rounded-md py-2 text-sm font-medium hover:bg-primary/90"
-        >
-          Create Account
-        </button>
-      </form>
-    );
-  },
-};
-
-export const WithValidation: Story = {
-  render: function WithValidationComponent() {
-    const [email, setEmail] = React.useState("");
-    const [error, setError] = React.useState("");
-
-    const validateEmail = (value: string) => {
-      if (!value) {
-        setError("Email is required");
-      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-        setError("Please enter a valid email");
-      } else {
-        setError("");
-      }
-    };
-
-    return (
-      <div className="w-[350px]">
-        <label
-          htmlFor="validation-email"
-          className="text-sm font-medium mb-2 block"
-        >
-          Email Address
-        </label>
-        <Input
-          id="validation-email"
-          type="email"
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setEmail(e.target.value);
-            validateEmail(e.target.value);
-          }}
-          className={
-            error ? "border-destructive focus-visible:ring-destructive" : ""
-          }
+    <div className="space-y-4 max-w-md">
+      <FormField label="Default Textarea">
+        <Textarea placeholder="Enter your message..." rows={4} />
+      </FormField>
+      
+      <FormField label="Error Textarea" error="Message is too short">
+        <Textarea variant="error" placeholder="At least 10 characters" rows={3} />
+      </FormField>
+      
+      <FormField label="Success Textarea">
+        <Textarea 
+          variant="success" 
+          defaultValue="This is a valid message with enough content."
+          rows={3}
         />
-        {error && <p className="text-sm text-destructive mt-1">{error}</p>}
-      </div>
-    );
-  },
+      </FormField>
+    </div>
+  ),
 };
 
-export const CreditCardInput: Story = {
-  render: function CreditCardInputComponent() {
-    const [cardNumber, setCardNumber] = React.useState("");
-
-    const formatCardNumber = (value: string) => {
-      const v = value.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
-      const matches = v.match(/\d{4,16}/g);
-      const match = (matches && matches[0]) || "";
-      const parts = [];
-
-      for (let i = 0, len = match.length; i < len; i += 4) {
-        parts.push(match.substring(i, i + 4));
-      }
-
-      if (parts.length) {
-        return parts.join(" ");
-      } else {
-        return value;
-      }
-    };
-
-    return (
-      <div className="space-y-4 w-[350px]">
-        <div>
-          <label className="text-sm font-medium mb-2 block">Card Number</label>
-          <div className="relative">
-            <CreditCard className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              className="pl-8"
-              placeholder="1234 5678 9012 3456"
-              value={cardNumber}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setCardNumber(formatCardNumber(e.target.value))
-              }
-              maxLength={19}
-            />
-          </div>
+// Select
+export const SelectExamples: Story = {
+  render: () => (
+    <div className="space-y-4 max-w-md">
+      <FormField label="Default Select">
+        <Select>
+          <option value="">Choose an option</option>
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+          <option value="3">Option 3</option>
+        </Select>
+      </FormField>
+      
+      <FormField label="Select with Error" error="Please select an option">
+        <Select variant="error">
+          <option value="">Choose an option</option>
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+        </Select>
+      </FormField>
+      
+      <FormField label="Select Sizes">
+        <div className="space-y-2">
+          <Select size="sm">
+            <option>Small Select</option>
+          </Select>
+          <Select size="md">
+            <option>Medium Select</option>
+          </Select>
+          <Select size="lg">
+            <option>Large Select</option>
+          </Select>
         </div>
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="text-sm font-medium mb-2 block">Expiry</label>
-            <Input placeholder="MM/YY" maxLength={5} />
-          </div>
-          <div>
-            <label className="text-sm font-medium mb-2 block">CVC</label>
-            <Input placeholder="123" maxLength={3} />
-          </div>
+      </FormField>
+    </div>
+  ),
+};
+
+// Checkbox and Radio
+export const CheckboxRadio: Story = {
+  render: () => (
+    <div className="space-y-6 max-w-md">
+      <FormField label="Checkbox Options">
+        <div className="space-y-2">
+          <Checkbox label="Option 1" defaultChecked />
+          <Checkbox label="Option 2" />
+          <Checkbox label="Option 3" />
+          <Checkbox label="Disabled option" disabled />
         </div>
+      </FormField>
+      
+      <FormField label="Radio Options">
+        <div className="space-y-2">
+          <Radio label="Choice 1" name="radio-group" defaultChecked />
+          <Radio label="Choice 2" name="radio-group" />
+          <Radio label="Choice 3" name="radio-group" />
+          <Radio label="Disabled choice" name="radio-group" disabled />
+        </div>
+      </FormField>
+    </div>
+  ),
+};
+
+// Form Field Helpers
+export const FormFieldExamples: Story = {
+  render: () => (
+    <div className="space-y-6 max-w-md">
+      <FormField label="Required Field" required>
+        <Input placeholder="This field is required" />
+      </FormField>
+      
+      <FormField 
+        label="Field with Hint" 
+        hint="Enter your full legal name as it appears on your ID"
+      >
+        <Input placeholder="John Doe" />
+      </FormField>
+      
+      <FormField 
+        label="Field with Error" 
+        error="Username must be at least 3 characters"
+      >
+        <Input variant="error" placeholder="Username" defaultValue="ab" />
+      </FormField>
+      
+      <FormField 
+        label="Field with Hint and Error" 
+        hint="8-20 characters, including letters and numbers"
+        error="Password is too weak"
+      >
+        <Input type="password" variant="error" placeholder="Password" />
+      </FormField>
+    </div>
+  ),
+};
+
+// Complete Form Example
+export const CompleteForm: Story = {
+  render: () => (
+    <Card className="max-w-2xl">
+      <CardHeader>
+        <CardTitle>User Registration</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <form className="space-y-6">
+          <FormSection 
+            title="Personal Information" 
+            description="Please provide your basic information"
+          >
+            <FormGroup>
+              <div className="grid grid-cols-2 gap-4">
+                <FormField label="First Name" required>
+                  <Input placeholder="John" />
+                </FormField>
+                <FormField label="Last Name" required>
+                  <Input placeholder="Doe" />
+                </FormField>
+              </div>
+              
+              <FormField label="Email Address" required hint="We'll never share your email">
+                <Input type="email" placeholder="john@example.com" />
+              </FormField>
+              
+              <FormField label="Phone Number">
+                <Input type="tel" placeholder="+1 (555) 000-0000" />
+              </FormField>
+            </FormGroup>
+          </FormSection>
+          
+          <FormSection 
+            title="Account Settings" 
+            description="Choose your account preferences"
+          >
+            <FormGroup>
+              <FormField label="Username" required hint="3-20 characters, lowercase letters and numbers only">
+                <Input placeholder="johndoe123" />
+              </FormField>
+              
+              <FormField label="Password" required hint="At least 8 characters">
+                <Input type="password" placeholder="••••••••" />
+              </FormField>
+              
+              <FormField label="Confirm Password" required>
+                <Input type="password" placeholder="••••••••" />
+              </FormField>
+            </FormGroup>
+          </FormSection>
+          
+          <FormSection title="Preferences">
+            <FormGroup>
+              <FormField label="Notification Settings">
+                <div className="space-y-2">
+                  <Checkbox label="Email notifications" defaultChecked />
+                  <Checkbox label="SMS notifications" />
+                  <Checkbox label="Marketing updates" />
+                </div>
+              </FormField>
+              
+              <FormField label="Account Type">
+                <div className="space-y-2">
+                  <Radio label="Personal" name="account-type" defaultChecked />
+                  <Radio label="Business" name="account-type" />
+                  <Radio label="Developer" name="account-type" />
+                </div>
+              </FormField>
+            </FormGroup>
+          </FormSection>
+          
+          <div className="flex gap-3 pt-4">
+            <Button type="submit" variant="primary">
+              Create Account
+            </Button>
+            <Button type="button" variant="secondary">
+              Cancel
+            </Button>
+          </div>
+        </form>
+      </CardContent>
+    </Card>
+  ),
+};
+
+// Login Form Example
+export const LoginForm: Story = {
+  render: () => (
+    <Card className="max-w-md mx-auto">
+      <CardHeader>
+        <CardTitle className="text-center">Sign In</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <form className="space-y-4">
+          <FormField label="Email" required>
+            <Input type="email" placeholder="email@example.com" />
+          </FormField>
+          
+          <FormField label="Password" required>
+            <Input type="password" placeholder="••••••••" />
+          </FormField>
+          
+          <div className="flex items-center justify-between">
+            <Checkbox label="Remember me" />
+            <a href="#" className="text-sm text-primary-600 hover:text-primary-700">
+              Forgot password?
+            </a>
+          </div>
+          
+          <Button type="submit" variant="primary" className="w-full">
+            Sign In
+          </Button>
+          
+          <p className="text-center text-sm text-gray-600">
+            Don&apos;t have an account?{" "}
+            <a href="#" className="text-primary-600 hover:text-primary-700">
+              Sign up
+            </a>
+          </p>
+        </form>
+      </CardContent>
+    </Card>
+  ),
+};
+
+// Dark Mode Support
+export const DarkMode: Story = {
+  render: () => (
+    <div className="grid grid-cols-2 gap-8">
+      <div className="p-8 bg-white rounded-lg">
+        <h4 className="font-semibold mb-4">Light Mode</h4>
+        <FormGroup>
+          <FormField label="Input Field">
+            <Input placeholder="Light mode input" />
+          </FormField>
+          <FormField label="Select Field">
+            <Select>
+              <option>Option 1</option>
+              <option>Option 2</option>
+            </Select>
+          </FormField>
+          <FormField label="Checkbox">
+            <Checkbox label="Light mode checkbox" />
+          </FormField>
+        </FormGroup>
       </div>
-    );
+      
+      <div className="p-8 bg-gray-900 rounded-lg dark">
+        <h4 className="font-semibold mb-4 text-white">Dark Mode</h4>
+        <FormGroup>
+          <FormField label="Input Field">
+            <Input placeholder="Dark mode input" />
+          </FormField>
+          <FormField label="Select Field">
+            <Select>
+              <option>Option 1</option>
+              <option>Option 2</option>
+            </Select>
+          </FormField>
+          <FormField label="Checkbox">
+            <Checkbox label="Dark mode checkbox" />
+          </FormField>
+        </FormGroup>
+      </div>
+    </div>
+  ),
+  parameters: {
+    backgrounds: { default: "light" },
   },
 };

@@ -16,6 +16,7 @@
     "test:smoke:ci": "TEST_BASE_URL=http://localhost:3000 vitest run src/app/pages-smoke.test.ts"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.1.1",
     "@sanity/asset-utils": "^2.2.1",
     "@sanity/client": "^7.6.0",
     "@sanity/image-url": "^1.1.0",
@@ -29,9 +30,11 @@
     "next-themes": "^0.4.6",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-hook-form": "^7.60.0",
     "schema-dts": "^1.1.5",
     "server-only": "^0.0.1",
-    "slugify": "^1.6.6"
+    "slugify": "^1.6.6",
+    "zod": "^3.25.74"
   },
   "devDependencies": {
     "@opentelemetry/api": "~1.8.0",

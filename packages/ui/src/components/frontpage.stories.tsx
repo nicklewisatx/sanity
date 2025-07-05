@@ -10,14 +10,7 @@ import {
   CardContent,
   CardFooter,
 } from "./card.js";
-import { CTA } from "./cta.js";
 import { Footer } from "./footer.js";
-import {
-  NavigationMenu,
-  NavigationMenuList,
-  NavigationMenuItem,
-  NavigationMenuLink,
-} from "./navigation-menu.js";
 import { Button } from "./button.js";
 import { Star, ChevronRight, Code, Layers, PenTool } from "lucide-react";
 
@@ -63,30 +56,20 @@ const FrontpageComponent = () => {
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center gap-8">
               <Logo size="default" primary="Nick Lewis" secondary="" separator="" />
-              <NavigationMenu className="hidden md:flex">
-                <NavigationMenuList>
-                  <NavigationMenuItem>
-                    <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
-                      Home
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
-                  <NavigationMenuItem>
-                    <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
-                      Blog
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
-                  <NavigationMenuItem>
-                    <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
-                      About
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
-                  <NavigationMenuItem>
-                    <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
-                      Contact
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
-                </NavigationMenuList>
-              </NavigationMenu>
+              <nav className="hidden md:flex gap-6">
+                <a href="#" className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                  Home
+                </a>
+                <a href="#" className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                  Blog
+                </a>
+                <a href="#" className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                  About
+                </a>
+                <a href="#" className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
+                  Contact
+                </a>
+              </nav>
             </div>
             <div className="flex items-center gap-4">
               <Button variant="ghost" size="sm">
@@ -107,8 +90,8 @@ const FrontpageComponent = () => {
         subtitle="Full-Stack Developer & Tech Enthusiast"
         description="I write about web development, software architecture, and the latest technologies. Join me as I explore the ever-evolving world of tech."
         actions={[
-          { text: "Read My Blog", variant: "default" },
-          { text: "Get In Touch", variant: "outline" },
+          { text: "Read My Blog", variant: "primary" },
+          { text: "Get In Touch", variant: "secondary" },
         ]}
       />
 
@@ -322,18 +305,20 @@ const FrontpageComponent = () => {
       </section>
 
       {/* CTA Section */}
-      <CTA
-        variant="gradient"
-        size="lg"
-        alignment="center"
-        heading="Stay Updated"
-        description="Get the latest articles and tutorials delivered straight to your inbox. No spam, unsubscribe anytime."
-        actions={[
-          { text: "Subscribe to Newsletter", variant: "default" },
-          { text: "Follow on Twitter", variant: "outline" },
-        ]}
-        backgroundPattern
-      />
+      <section className="py-20 bg-gradient-to-r from-primary/10 to-primary/5">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
+            Stay Updated
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
+            Get the latest articles and tutorials delivered straight to your inbox. No spam, unsubscribe anytime.
+          </p>
+          <div className="flex gap-4 justify-center">
+            <Button variant="primary">Subscribe to Newsletter</Button>
+            <Button variant="secondary">Follow on Twitter</Button>
+          </div>
+        </div>
+      </section>
 
       {/* Footer */}
       <Footer
@@ -412,7 +397,7 @@ export const CompactVersion: Story = {
         alignment="center"
         title="Hi, I'm Nick"
         subtitle="I write about web development"
-        actions={[{ text: "Read Blog", variant: "default" }]}
+        actions={[{ text: "Read Blog", variant: "primary" }]}
       />
 
       {/* Simple Cards */}
@@ -442,13 +427,12 @@ export const CompactVersion: Story = {
       </section>
 
       {/* Simple CTA */}
-      <CTA
-        variant="bordered"
-        size="sm"
-        alignment="center"
-        heading="Get updates"
-        actions={[{ text: "Subscribe", variant: "default" }]}
-      />
+      <section className="py-12 border-t border-b">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-2xl font-bold mb-4">Get updates</h2>
+          <Button variant="primary">Subscribe</Button>
+        </div>
+      </section>
 
       {/* Minimal Footer */}
       <Footer
@@ -496,8 +480,8 @@ export const DarkTheme: Story = {
         subtitle="Thoughts on development from a night owl"
         description="Join me as I explore web development, share insights, and build cool things - preferably after midnight."
         actions={[
-          { text: "Read Latest", variant: "default" },
-          { text: "Subscribe", variant: "outline" },
+          { text: "Read Latest", variant: "primary" },
+          { text: "Subscribe", variant: "secondary" },
         ]}
       />
 
@@ -536,15 +520,13 @@ export const DarkTheme: Story = {
       </section>
 
       {/* Dark CTA */}
-      <CTA
-        variant="dark"
-        size="lg"
-        alignment="center"
-        heading="Join the night shift"
-        description="Get updates when I publish new content"
-        actions={[{ text: "Subscribe", variant: "default" }]}
-        className="bg-slate-800"
-      />
+      <section className="py-20 bg-slate-800">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-4">Join the night shift</h2>
+          <p className="text-lg text-gray-300 mb-8">Get updates when I publish new content</p>
+          <Button variant="primary">Subscribe</Button>
+        </div>
+      </section>
 
       {/* Already dark footer */}
       <Footer

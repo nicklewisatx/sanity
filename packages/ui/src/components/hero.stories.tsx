@@ -34,8 +34,8 @@ export const Default: Story = {
     description:
       "Build amazing products with our cutting-edge technology. Get started today and transform your business.",
     actions: [
-      { text: "Get Started", variant: "default" },
-      { text: "Learn More", variant: "outline" },
+      { text: "Get Started", variant: "primary" },
+      { text: "Learn More", variant: "secondary" },
     ],
   },
 };
@@ -56,7 +56,7 @@ export const Dark: Story = {
     title: "Dark Mode Hero",
     description: "Perfect for creating dramatic, high-contrast sections.",
     actions: [
-      { text: "Start Free Trial", variant: "default" },
+      { text: "Start Free Trial", variant: "primary" },
       { text: "View Pricing", variant: "secondary" },
     ],
   },
@@ -69,7 +69,7 @@ export const LeftAligned: Story = {
     subtitle: "Asymmetric Design",
     description:
       "Sometimes you need your hero content aligned to the left for a more dynamic layout.",
-    actions: [{ text: "Learn More", variant: "default" }],
+    actions: [{ text: "Learn More", variant: "primary" }],
   },
 };
 
@@ -80,7 +80,7 @@ export const RightAligned: Story = {
     subtitle: "Unique Layout",
     description:
       "Right-aligned content can create visual interest and break conventional patterns.",
-    actions: [{ text: "Discover More", variant: "default" }],
+    actions: [{ text: "Discover More", variant: "primary" }],
   },
 };
 
@@ -92,7 +92,7 @@ export const WithBackgroundImage: Story = {
     variant: "background-image",
     title: "Stunning Visuals",
     description: "Combine beautiful imagery with compelling content.",
-    actions: [{ text: "Get Started", variant: "default" }],
+    actions: [{ text: "Get Started", variant: "primary" }],
   },
 };
 
@@ -101,7 +101,7 @@ export const Small: Story = {
     size: "sm",
     title: "Compact Hero Section",
     description: "Perfect for inner pages or when you need a smaller hero.",
-    actions: [{ text: "Learn More", variant: "outline" }],
+    actions: [{ text: "Learn More", variant: "secondary" }],
   },
 };
 
@@ -113,8 +113,8 @@ export const Large: Story = {
     description:
       "When you need maximum impact, use the large hero variant to capture attention.",
     actions: [
-      { text: "Start Now", variant: "default", size: "lg" },
-      { text: "Watch Demo", variant: "outline", size: "lg" },
+      { text: "Start Now", variant: "primary", size: "lg" },
+      { text: "Watch Demo", variant: "secondary", size: "lg" },
     ],
   },
 };

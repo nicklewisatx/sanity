@@ -1,31 +1,67 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@workspace/ui/lib/utils";
+// Removed unused imports
 
-const typographyVariants = cva("", {
+// Heading variants
+const headingVariants = cva("font-semibold", {
   variants: {
-    variant: {
-      h1: "scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl",
-      h2: "scroll-m-20 text-3xl font-semibold tracking-tight",
-      h3: "scroll-m-20 text-2xl font-semibold tracking-tight",
-      h4: "scroll-m-20 text-xl font-semibold tracking-tight",
-      h5: "scroll-m-20 text-lg font-semibold tracking-tight",
-      h6: "scroll-m-20 text-base font-semibold tracking-tight",
-      body: "leading-7",
-      lead: "text-xl text-muted-foreground",
-      large: "text-lg font-semibold",
-      small: "text-sm font-medium leading-none",
-      muted: "text-sm text-muted-foreground",
-      blockquote: "border-l-2 pl-6 italic",
-      code: "relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold",
+    level: {
+      1: "text-5xl leading-tight tracking-tight", // 61px
+      2: "text-4xl leading-tight tracking-tight", // 48.8px
+      3: "text-3xl leading-snug", // 39px
+      4: "text-2xl leading-snug", // 31.25px
+      5: "text-xl leading-normal", // 25px
+      6: "text-lg leading-normal", // 20px
     },
     color: {
-      default: "",
-      primary: "text-primary",
-      secondary: "text-secondary",
-      muted: "text-muted-foreground",
-      destructive: "text-destructive",
-      accent: "text-accent-foreground",
+      default: "text-gray-900 dark:text-gray-100",
+      primary: "text-primary-600 dark:text-primary-400",
+      muted: "text-gray-600 dark:text-gray-400",
+    },
+    align: {
+      left: "text-left",
+      center: "text-center",
+      right: "text-right",
+    },
+    weight: {
+      normal: "font-normal",
+      medium: "font-medium",
+      semibold: "font-semibold",
+      bold: "font-bold",
+    },
+  },
+  defaultVariants: {
+    level: 1,
+    color: "default",
+    align: "left",
+    weight: "semibold",
+  },
+});
+
+// Text variants
+const textVariants = cva("", {
+  variants: {
+    size: {
+      xs: "text-xs", // 12px
+      sm: "text-sm", // 14px
+      base: "text-base", // 16px
+      lg: "text-lg", // 20px
+      xl: "text-xl", // 25px
+    },
+    color: {
+      default: "text-gray-700 dark:text-gray-300",
+      primary: "text-primary-600 dark:text-primary-400",
+      muted: "text-gray-500 dark:text-gray-400",
+      error: "text-error-600 dark:text-error-400",
+      success: "text-success-600 dark:text-success-400",
+      warning: "text-warning-600 dark:text-warning-400",
+    },
+    weight: {
+      normal: "font-normal",
+      medium: "font-medium",
+      semibold: "font-semibold",
+      bold: "font-bold",
     },
     align: {
       left: "text-left",
@@ -33,85 +69,204 @@ const typographyVariants = cva("", {
       right: "text-right",
       justify: "text-justify",
     },
-    weight: {
-      normal: "font-normal",
-      medium: "font-medium",
-      semibold: "font-semibold",
-      bold: "font-bold",
-      extrabold: "font-extrabold",
+    lineHeight: {
+      tight: "leading-tight",
+      snug: "leading-snug",
+      normal: "leading-normal",
+      relaxed: "leading-relaxed",
     },
-    size: {
-      default: "",
-      sm: "text-sm",
-      base: "text-base",
-      lg: "text-lg",
-      xl: "text-xl",
-      "2xl": "text-2xl",
-      "3xl": "text-3xl",
-      "4xl": "text-4xl",
-      "5xl": "text-5xl",
+    decoration: {
+      none: "no-underline",
+      underline: "underline",
+      "line-through": "line-through",
     },
   },
   defaultVariants: {
-    variant: "body",
+    size: "base",
     color: "default",
-    align: "left",
     weight: "normal",
-    size: "default",
+    align: "left",
+    lineHeight: "normal",
+    decoration: "none",
   },
 });
 
-export interface TypographyProps
-  extends Omit<React.HTMLAttributes<HTMLElement>, "color">,
-    VariantProps<typeof typographyVariants> {
-  as?: React.ElementType;
-  children?: React.ReactNode;
+// Heading component
+export interface HeadingProps
+  extends Omit<React.HTMLAttributes<HTMLHeadingElement>, 'color'>,
+    VariantProps<typeof headingVariants> {
+  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 }
 
-const Typography = React.forwardRef<HTMLElement, TypographyProps>(
+export const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
+  ({ className, level, color, align, weight, as, ...props }, ref) => {
+    const Component = as || `h${level}`;
+    
+    return React.createElement(
+      Component,
+      {
+        ref,
+        className: cn(headingVariants({ level, color, align, weight }), className),
+        ...props
+      }
+    );
+  }
+);
+Heading.displayName = "Heading";
+
+// Text component
+export interface TextProps
+  extends Omit<React.HTMLAttributes<HTMLParagraphElement>, 'color'>,
+    VariantProps<typeof textVariants> {
+  as?: "p" | "span" | "div" | "label";
+}
+
+export const Text = React.forwardRef<HTMLParagraphElement, TextProps>(
   (
-    { className, variant, color, align, weight, size, as, children, ...props },
-    ref,
+    { 
+      className, 
+      size, 
+      color, 
+      weight, 
+      align, 
+      lineHeight, 
+      decoration, 
+      as: Component = "p", 
+      ...props 
+    }, 
+    ref
   ) => {
-    const Component = as || getDefaultElement(variant);
+    return React.createElement(
+      Component,
+      {
+        ref,
+        className: cn(
+          textVariants({ size, color, weight, align, lineHeight, decoration }),
+          className
+        ),
+        ...props
+      }
+    );
+  }
+);
+Text.displayName = "Text";
+
+// Specialized text components
+export const Label = React.forwardRef<
+  HTMLLabelElement,
+  React.LabelHTMLAttributes<HTMLLabelElement> & VariantProps<typeof textVariants>
+>(({ className, ...props }, ref) => (
+  <label
+    ref={ref}
+    className={cn(
+      textVariants({ size: "sm", weight: "medium", color: "default" }),
+      "block",
+      className
+    )}
+    {...props}
+  />
+));
+Label.displayName = "Label";
+
+export const Caption = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLParagraphElement> & VariantProps<typeof textVariants>
+>(({ className, ...props }, ref) => (
+  <p
+    ref={ref}
+    className={cn(
+      textVariants({ size: "xs", color: "muted" }),
+      className
+    )}
+    {...props}
+  />
+));
+Caption.displayName = "Caption";
+
+export const Lead = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLParagraphElement> & VariantProps<typeof textVariants>
+>(({ className, ...props }, ref) => (
+  <p
+    ref={ref}
+    className={cn(
+      textVariants({ size: "xl", lineHeight: "relaxed", color: "muted" }),
+      className
+    )}
+    {...props}
+  />
+));
+Lead.displayName = "Lead";
+
+// Link component
+export interface LinkProps
+  extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'color'>,
+    VariantProps<typeof textVariants> {
+  external?: boolean;
+  underline?: boolean;
+}
+
+export const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
+  (
+    { 
+      className, 
+      size, 
+      color = "primary", 
+      weight, 
+      external, 
+      underline = true,
+      ...props 
+    }, 
+    ref
+  ) => {
+    const externalProps = external
+      ? { target: "_blank", rel: "noopener noreferrer" }
+      : {};
 
     return (
-      <Component
+      <a
         ref={ref}
         className={cn(
-          typographyVariants({ variant, color, align, weight, size }),
-          className,
+          textVariants({ size, color, weight }),
+          "transition-colors duration-200",
+          underline && "underline decoration-1 underline-offset-2",
+          "hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-sm",
+          className
         )}
+        {...externalProps}
         {...props}
-      >
-        {children}
-      </Component>
+      />
     );
-  },
+  }
 );
+Link.displayName = "Link";
 
-Typography.displayName = "Typography";
-
-function getDefaultElement(
-  variant: TypographyProps["variant"],
-): React.ElementType {
-  const variantElementMap: Record<string, React.ElementType> = {
-    h1: "h1",
-    h2: "h2",
-    h3: "h3",
-    h4: "h4",
-    h5: "h5",
-    h6: "h6",
-    body: "p",
-    lead: "p",
-    large: "p",
-    small: "p",
-    muted: "p",
-    blockquote: "blockquote",
-    code: "code",
-  };
-
-  return variantElementMap[variant || "body"] || "p";
+// Code component
+export interface CodeProps extends React.HTMLAttributes<HTMLElement> {
+  block?: boolean;
 }
 
-export { Typography, typographyVariants };
+export const Code = React.forwardRef<HTMLElement, CodeProps>(
+  ({ className, block = false, ...props }, ref) => {
+    const Component = block ? "pre" : "code";
+    
+    return React.createElement(
+      Component,
+      {
+        ref,
+        className: cn(
+          "font-mono text-sm",
+          block
+            ? "block overflow-x-auto rounded-md bg-gray-900 p-4 text-gray-100"
+            : "inline-block rounded bg-gray-100 px-1 py-0.5 text-gray-900 dark:bg-gray-800 dark:text-gray-100",
+          className
+        ),
+        ...props
+      }
+    );
+  }
+);
+Code.displayName = "Code";
+
+// Export all variants for use in other components
+export { headingVariants, textVariants };

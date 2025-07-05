@@ -1,216 +1,378 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
+import { 
+  Card, 
+  CardHeader, 
+  CardTitle, 
+  CardDescription, 
+  CardContent, 
   CardFooter,
-  CardHeader,
-  CardImage,
-  CardTitle,
-} from "./card.js";
-import { Button } from "./button.js";
+  CardGrid 
+} from "./card";
+import { Button } from "./button";
+import { Text, Caption } from "./typography";
 
 const meta = {
-  title: "Components/Card",
+  title: "Design System/Card",
   component: Card,
   parameters: {
-    layout: "centered",
-  },
-  tags: ["autodocs"],
-  argTypes: {
-    variant: {
-      control: "select",
-      options: ["default", "elevated", "ghost"],
+    layout: "padded",
+    docs: {
+      description: {
+        component: `
+A versatile card component for grouping related content:
+
+- **Multiple variants**: Default, interactive, elevated, ghost
+- **Flexible sizing**: From small to extra large
+- **Composable parts**: Header, content, footer sections
+- **Responsive grid**: Built-in grid layout support
+- **Dark mode**: Full dark mode support
+        `,
+      },
     },
   },
+  tags: ["autodocs"],
 } satisfies Meta<typeof Card>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+// Basic Card
 export const Default: Story = {
-  render: () => (
-    <Card className="w-[350px]">
-      <CardHeader>
-        <CardTitle>Card Title</CardTitle>
-        <CardDescription>Card description goes here.</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p>This is the main content area of the card.</p>
-      </CardContent>
-      <CardFooter>
-        <Button>Action</Button>
-      </CardFooter>
-    </Card>
-  ),
-};
-
-export const WithImage: Story = {
-  render: () => (
-    <Card className="w-[350px]">
-      <CardImage
-        src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=350&h=200&fit=crop"
-        alt="Green sofa"
-      />
-      <CardHeader>
-        <CardTitle>Beautiful Furniture</CardTitle>
-        <CardDescription>Modern and comfortable designs</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p>
-          Discover our latest collection of contemporary furniture pieces that
-          blend style with comfort.
-        </p>
-      </CardContent>
-      <CardFooter className="gap-2">
-        <Button>Shop Now</Button>
-        <Button variant="outline">Learn More</Button>
-      </CardFooter>
-    </Card>
-  ),
-};
-
-export const Elevated: Story = {
   args: {
-    variant: "elevated",
+    children: (
+      <>
+        <CardHeader>
+          <CardTitle>Card Title</CardTitle>
+          <CardDescription>This is a card description that provides context.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Text>
+            Card content goes here. You can include any content like text, images, forms, or other components.
+          </Text>
+        </CardContent>
+        <CardFooter>
+          <Button size="sm">Action</Button>
+        </CardFooter>
+      </>
+    ),
   },
-  render: (args) => (
-    <Card className="w-[350px]" variant={args.variant}>
-      <CardHeader>
-        <CardTitle>Elevated Card</CardTitle>
-        <CardDescription>This card has a stronger shadow</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p>
-          The elevated variant creates more visual separation from the
-          background.
-        </p>
-      </CardContent>
-    </Card>
-  ),
 };
 
-export const Ghost: Story = {
-  args: {
-    variant: "ghost",
-  },
-  render: (args) => (
-    <Card className="w-[350px]" variant={args.variant}>
-      <CardHeader>
-        <CardTitle>Ghost Card</CardTitle>
-        <CardDescription>Minimal styling, no border or shadow</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p>Perfect for when you need a subtle container.</p>
-      </CardContent>
-    </Card>
-  ),
-};
-
-export const ProductCard: Story = {
+// Card Variants
+export const Variants: Story = {
   render: () => (
-    <Card className="w-[300px]">
-      <CardImage
-        src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop"
-        alt="Product"
-      />
-      <CardHeader>
-        <CardTitle>Premium Watch</CardTitle>
-        <CardDescription>Classic timepiece</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="flex items-baseline gap-2">
-          <span className="text-2xl font-bold">$299</span>
-          <span className="text-sm text-muted-foreground line-through">
-            $399
-          </span>
-        </div>
-      </CardContent>
-      <CardFooter>
-        <Button className="w-full">Add to Cart</Button>
-      </CardFooter>
-    </Card>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <Card variant="default">
+        <CardHeader>
+          <CardTitle>Default Card</CardTitle>
+          <CardDescription>Standard card with subtle hover effect</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Text>The default card style for most use cases.</Text>
+        </CardContent>
+      </Card>
+
+      <Card variant="interactive">
+        <CardHeader>
+          <CardTitle>Interactive Card</CardTitle>
+          <CardDescription>Clickable card with enhanced hover state</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Text>Use for cards that are clickable or lead to other content.</Text>
+        </CardContent>
+      </Card>
+
+      <Card variant="elevated">
+        <CardHeader>
+          <CardTitle>Elevated Card</CardTitle>
+          <CardDescription>Card with shadow for visual hierarchy</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Text>Great for important content that needs to stand out.</Text>
+        </CardContent>
+      </Card>
+
+      <Card variant="ghost">
+        <CardHeader>
+          <CardTitle>Ghost Card</CardTitle>
+          <CardDescription>Minimal card with no border</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Text>Subtle card variant for less prominent content.</Text>
+        </CardContent>
+      </Card>
+    </div>
   ),
 };
 
-export const BlogCard: Story = {
+// Card Sizes
+export const Sizes: Story = {
   render: () => (
-    <Card className="w-[400px]">
-      <CardImage
-        src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=200&fit=crop"
-        alt="Blog post"
-      />
+    <div className="space-y-6">
+      <Card size="sm">
+        <CardHeader>
+          <CardTitle>Small Card</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Text size="sm">Compact card with minimal padding (32px)</Text>
+        </CardContent>
+      </Card>
+
+      <Card size="md">
+        <CardHeader>
+          <CardTitle>Medium Card</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Text>Default card size with comfortable padding (48px)</Text>
+        </CardContent>
+      </Card>
+
+      <Card size="lg">
+        <CardHeader>
+          <CardTitle>Large Card</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Text>Spacious card with generous padding (64px)</Text>
+        </CardContent>
+      </Card>
+
+      <Card size="xl">
+        <CardHeader>
+          <CardTitle>Extra Large Card</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Text>Maximum padding for hero or feature cards (80px)</Text>
+        </CardContent>
+      </Card>
+    </div>
+  ),
+};
+
+// Border Radius Options
+export const BorderRadius: Story = {
+  render: () => (
+    <div className="grid grid-cols-3 gap-6">
+      <Card radius="none">
+        <CardHeader>
+          <CardTitle>No Radius</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Text size="sm">Sharp corners</Text>
+        </CardContent>
+      </Card>
+
+      <Card radius="sm">
+        <CardHeader>
+          <CardTitle>Small Radius</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Text size="sm">Subtle rounding</Text>
+        </CardContent>
+      </Card>
+
+      <Card radius="md">
+        <CardHeader>
+          <CardTitle>Medium Radius</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Text size="sm">Balanced rounding</Text>
+        </CardContent>
+      </Card>
+
+      <Card radius="lg">
+        <CardHeader>
+          <CardTitle>Large Radius</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Text size="sm">Default rounding</Text>
+        </CardContent>
+      </Card>
+
+      <Card radius="xl">
+        <CardHeader>
+          <CardTitle>XL Radius</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Text size="sm">Prominent rounding</Text>
+        </CardContent>
+      </Card>
+
+      <Card radius="full">
+        <CardHeader>
+          <CardTitle>Full Radius</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Text size="sm">Maximum rounding</Text>
+        </CardContent>
+      </Card>
+    </div>
+  ),
+};
+
+// Complex Card Examples
+export const BlogPostCard: Story = {
+  render: () => (
+    <Card variant="interactive" className="max-w-md">
+      <div className="aspect-video bg-gray-200 dark:bg-gray-700 rounded-t-lg -m-6 mb-0" />
       <CardHeader>
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <span>Tech</span>
-          <span>•</span>
-          <span>5 min read</span>
-        </div>
-        <CardTitle>The Future of Web Development</CardTitle>
+        <Caption>Published 2 days ago • 5 min read</Caption>
+        <CardTitle className="mt-2">Building Modern Web Applications</CardTitle>
         <CardDescription>
-          Exploring emerging trends and technologies shaping the web
+          Learn the best practices for creating scalable and maintainable web applications
+          using the latest technologies and frameworks.
         </CardDescription>
       </CardHeader>
+      <CardFooter className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-full bg-gray-300 dark:bg-gray-600" />
+          <Text size="sm">Jane Doe</Text>
+        </div>
+        <Button variant="ghost" size="sm">Read More →</Button>
+      </CardFooter>
+    </Card>
+  ),
+};
+
+// Stats Card
+export const StatsCard: Story = {
+  render: () => (
+    <Card variant="elevated">
       <CardContent>
-        <p className="line-clamp-3">
-          As we move forward, the landscape of web development continues to
-          evolve at a rapid pace. New frameworks, tools, and methodologies are
-          constantly emerging...
-        </p>
+        <div className="flex items-center justify-between mb-2">
+          <Text size="sm" color="muted">Total Revenue</Text>
+          <Caption className="text-success-600">+12.5%</Caption>
+        </div>
+        <div className="text-3xl font-bold text-gray-900 dark:text-gray-100">$45,231</div>
+        <Text size="sm" color="muted" className="mt-1">
+          Compared to last month
+        </Text>
+      </CardContent>
+    </Card>
+  ),
+};
+
+// Card Grid Layout
+export const GridLayout: Story = {
+  render: () => (
+    <div className="space-y-8">
+      <div>
+        <h3 className="text-lg font-semibold mb-4">3 Column Grid</h3>
+        <CardGrid cols={3} gap={6}>
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <Card key={i} variant="default">
+              <CardHeader>
+                <CardTitle>Card {i}</CardTitle>
+                <CardDescription>Description for card {i}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Text>Content goes here</Text>
+              </CardContent>
+            </Card>
+          ))}
+        </CardGrid>
+      </div>
+
+      <div>
+        <h3 className="text-lg font-semibold mb-4">2 Column Grid</h3>
+        <CardGrid cols={2} gap={8}>
+          {[1, 2, 3, 4].map((i) => (
+            <Card key={i} variant="elevated">
+              <CardHeader>
+                <CardTitle>Feature {i}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Text>Feature description and details go here.</Text>
+              </CardContent>
+              <CardFooter>
+                <Button variant="secondary" size="sm" className="w-full">
+                  Learn More
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </CardGrid>
+      </div>
+    </div>
+  ),
+};
+
+// Pricing Card Example
+export const PricingCard: Story = {
+  render: () => (
+    <Card variant="elevated" className="max-w-sm">
+      <CardHeader className="text-center">
+        <CardTitle className="text-2xl">Professional</CardTitle>
+        <CardDescription>Perfect for growing businesses</CardDescription>
+      </CardHeader>
+      <CardContent className="text-center">
+        <div className="mt-4 mb-6">
+          <span className="text-4xl font-bold">$49</span>
+          <Text size="sm" color="muted" className="inline ml-1">
+            /month
+          </Text>
+        </div>
+        <ul className="space-y-3 text-left mb-6">
+          {[
+            "Up to 10 users",
+            "Advanced analytics",
+            "24/7 support",
+            "Custom integrations",
+            "99.9% uptime SLA",
+          ].map((feature) => (
+            <li key={feature} className="flex items-center gap-2">
+              <span className="text-success-600">✓</span>
+              <Text size="sm">{feature}</Text>
+            </li>
+          ))}
+        </ul>
       </CardContent>
       <CardFooter>
-        <Button variant="link" className="px-0">
-          Read more →
+        <Button variant="primary" size="md" className="w-full">
+          Get Started
         </Button>
       </CardFooter>
     </Card>
   ),
 };
 
-export const StatsCard: Story = {
+// Dark Mode Support
+export const DarkMode: Story = {
   render: () => (
-    <Card className="w-[250px]">
-      <CardHeader>
-        <CardDescription>Total Revenue</CardDescription>
-        <CardTitle className="text-3xl">$45,231.89</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <p className="text-xs text-muted-foreground">+20.1% from last month</p>
-      </CardContent>
-    </Card>
-  ),
-};
+    <div className="grid grid-cols-2 gap-8">
+      <div className="p-8 bg-white rounded-lg">
+        <h4 className="font-semibold mb-4">Light Mode</h4>
+        <Card>
+          <CardHeader>
+            <CardTitle>Light Card</CardTitle>
+            <CardDescription>Card appearance in light mode</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Text>This card adapts to light mode automatically.</Text>
+          </CardContent>
+          <CardFooter>
+            <Button size="sm">Action</Button>
+          </CardFooter>
+        </Card>
+      </div>
 
-export const CardGrid: Story = {
-  render: () => (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-      <Card>
-        <CardHeader>
-          <CardTitle>Feature One</CardTitle>
-          <CardDescription>Amazing capability</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p>Description of the first feature.</p>
-        </CardContent>
-      </Card>
-      <Card>
-        <CardHeader>
-          <CardTitle>Feature Two</CardTitle>
-          <CardDescription>Powerful functionality</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p>Description of the second feature.</p>
-        </CardContent>
-      </Card>
-      <Card>
-        <CardHeader>
-          <CardTitle>Feature Three</CardTitle>
-          <CardDescription>Innovative solution</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p>Description of the third feature.</p>
-        </CardContent>
-      </Card>
+      <div className="p-8 bg-gray-900 rounded-lg dark">
+        <h4 className="font-semibold mb-4 text-white">Dark Mode</h4>
+        <Card>
+          <CardHeader>
+            <CardTitle>Dark Card</CardTitle>
+            <CardDescription>Card appearance in dark mode</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Text>This card adapts to dark mode automatically.</Text>
+          </CardContent>
+          <CardFooter>
+            <Button size="sm">Action</Button>
+          </CardFooter>
+        </Card>
+      </div>
     </div>
   ),
+  parameters: {
+    backgrounds: { default: "light" },
+  },
 };

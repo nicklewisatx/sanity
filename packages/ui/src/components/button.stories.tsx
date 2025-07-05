@@ -1,38 +1,55 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Button } from "./button.js";
+import { 
+  ArrowRight, 
+  Download, 
+  Heart
+} from "lucide-react";
+
+import { Button } from "./button";
 
 const meta = {
-  title: "Primitives/Button",
+  title: "Design System/Button",
   component: Button,
   parameters: {
     layout: "centered",
+    docs: {
+      description: {
+        component: `
+A simplified button component for blog interfaces:
+
+- **3 variants**: Primary, secondary, and ghost
+- **3 sizes**: Small, medium, and large (plus icon)
+- **Icon support**: Left and right icons
+- **Loading state**: Built-in loading spinner
+- **Full width option**: For responsive layouts
+- **Polymorphic**: Can render as different elements using asChild
+        `,
+      },
+    },
   },
   tags: ["autodocs"],
   argTypes: {
     variant: {
-      control: "select",
-      options: [
-        "default",
-        "destructive",
-        "outline",
-        "secondary",
-        "ghost",
-        "link",
-      ],
-      description: "The visual style of the button",
+      control: { type: "select" },
+      options: ["primary", "secondary", "ghost"],
+      description: "Visual style variant",
     },
     size: {
-      control: "select",
-      options: ["default", "sm", "lg", "icon"],
-      description: "The size of the button",
+      control: { type: "select" },
+      options: ["sm", "md", "lg", "icon"],
+      description: "Button size",
     },
-    asChild: {
-      control: "boolean",
-      description: "Whether to render as a child component",
+    fullWidth: {
+      control: { type: "boolean" },
+      description: "Make button full width",
+    },
+    loading: {
+      control: { type: "boolean" },
+      description: "Show loading state",
     },
     disabled: {
-      control: "boolean",
-      description: "Whether the button is disabled",
+      control: { type: "boolean" },
+      description: "Disable button",
     },
   },
 } satisfies Meta<typeof Button>;
@@ -40,99 +57,202 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+// Basic variants
+export const Primary: Story = {
   args: {
-    children: "Button",
+    children: "Primary Button",
+    variant: "primary",
   },
 };
 
-export const Variants: Story = {
-  render: () => (
-    <div className="flex flex-wrap gap-4">
-      <Button variant="default">Default</Button>
-      <Button variant="secondary">Secondary</Button>
-      <Button variant="destructive">Destructive</Button>
-      <Button variant="outline">Outline</Button>
-      <Button variant="ghost">Ghost</Button>
-      <Button variant="link">Link</Button>
-    </div>
-  ),
+export const Secondary: Story = {
+  args: {
+    children: "Secondary Button",
+    variant: "secondary",
+  },
 };
 
+export const Outline: Story = {
+  args: {
+    children: "Outline Button",
+    variant: "secondary",
+  },
+};
+
+export const Ghost: Story = {
+  args: {
+    children: "Ghost Button",
+    variant: "ghost",
+  },
+};
+
+
+// Sizes
 export const Sizes: Story = {
   render: () => (
     <div className="flex items-center gap-4">
       <Button size="sm">Small</Button>
-      <Button size="default">Default</Button>
+      <Button size="md">Medium</Button>
       <Button size="lg">Large</Button>
-      <Button size="icon">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="h-4 w-4"
-        >
-          <path d="M12 5v14M5 12h14" />
-        </svg>
-      </Button>
+      <Button size="lg">Extra Large</Button>
     </div>
   ),
 };
 
-export const States: Story = {
-  render: () => (
-    <div className="flex flex-wrap gap-4">
-      <Button>Normal</Button>
-      <Button disabled>Disabled</Button>
-    </div>
-  ),
-};
-
-export const WithIcon: Story = {
-  render: () => (
-    <div className="flex gap-4">
-      <Button>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="mr-2 h-4 w-4"
-        >
-          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-        </svg>
-        Call
-      </Button>
-      <Button variant="outline">
-        Next
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="ml-2 h-4 w-4"
-        >
-          <path d="M5 12h14M12 5l7 7-7 7" />
-        </svg>
-      </Button>
-    </div>
-  ),
-};
-
-export const AsLink: Story = {
+// With icons
+export const WithLeftIcon: Story = {
   args: {
-    variant: "link",
-    asChild: true,
-    children: <a href="https://example.com">External Link</a>,
+    children: "Download",
+    leftIcon: <Download className="h-4 w-4" />,
+  },
+};
+
+export const WithRightIcon: Story = {
+  args: {
+    children: "Next",
+    rightIcon: <ArrowRight className="h-4 w-4" />,
+  },
+};
+
+
+// States
+export const Loading: Story = {
+  args: {
+    children: "Saving...",
+    loading: true,
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    children: "Disabled",
+    disabled: true,
+  },
+};
+
+export const FullWidth: Story = {
+  args: {
+    children: "Full Width Button",
+    fullWidth: true,
+  },
+  decorators: [
+    (Story) => (
+      <div className="w-[400px]">
+        <Story />
+      </div>
+    ),
+  ],
+};
+
+// Interactive states demo
+export const InteractiveStates: Story = {
+  render: () => (
+    <div className="grid gap-8">
+      <div>
+        <h3 className="text-sm font-medium text-gray-700 mb-3">Normal States</h3>
+        <div className="flex gap-3">
+          <Button variant="primary">Default</Button>
+          <Button variant="primary" className="hover">Hover</Button>
+          <Button variant="primary" className="active">Active</Button>
+          <Button variant="primary" className="focus-visible">Focus</Button>
+        </div>
+      </div>
+      
+      <div>
+        <h3 className="text-sm font-medium text-gray-700 mb-3">Loading States</h3>
+        <div className="flex gap-3">
+          <Button variant="primary" loading>Primary</Button>
+          <Button variant="secondary" loading>Secondary</Button>
+          <Button variant="secondary" loading>Secondary</Button>
+        </div>
+      </div>
+      
+      <div>
+        <h3 className="text-sm font-medium text-gray-700 mb-3">Disabled States</h3>
+        <div className="flex gap-3">
+          <Button variant="primary" disabled>Primary</Button>
+          <Button variant="secondary" disabled>Secondary</Button>
+          <Button variant="secondary" disabled>Secondary</Button>
+        </div>
+      </div>
+    </div>
+  ),
+};
+
+// Real-world examples
+export const CTAButtons: Story = {
+  name: "CTA Examples",
+  render: () => (
+    <div className="space-y-4">
+      <div className="flex gap-3">
+        <Button variant="primary" size="lg">
+          Get Started Free
+        </Button>
+        <Button variant="secondary" size="lg">
+          View Demo
+        </Button>
+      </div>
+      
+      <div className="flex gap-3">
+        <Button variant="primary" rightIcon={<ArrowRight className="h-4 w-4" />}>
+          Subscribe to Newsletter
+        </Button>
+        <Button variant="ghost" leftIcon={<Heart className="h-4 w-4" />}>
+          Add to Favorites
+        </Button>
+      </div>
+      
+    </div>
+  ),
+};
+
+// Responsive button group
+export const ResponsiveButtonGroup: Story = {
+  render: () => (
+    <div className="space-y-4 w-full max-w-md">
+      <div className="flex flex-col sm:flex-row gap-3">
+        <Button variant="primary" fullWidth className="sm:w-auto">
+          Accept
+        </Button>
+        <Button variant="secondary" fullWidth className="sm:w-auto">
+          Decline
+        </Button>
+      </div>
+      
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <Button variant="secondary">Option 1</Button>
+        <Button variant="secondary">Option 2</Button>
+      </div>
+    </div>
+  ),
+};
+
+// Dark mode support
+export const DarkMode: Story = {
+  render: () => (
+    <div className="grid grid-cols-2 gap-8">
+      <div className="p-8 bg-white rounded-lg">
+        <h3 className="text-sm font-medium text-gray-700 mb-4">Light Mode</h3>
+        <div className="space-y-3">
+          <Button variant="primary">Primary</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="ghost">Ghost</Button>
+        </div>
+      </div>
+      
+      <div className="p-8 bg-gray-900 rounded-lg dark">
+        <h3 className="text-sm font-medium text-gray-300 mb-4">Dark Mode</h3>
+        <div className="space-y-3">
+          <Button variant="primary">Primary</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="ghost">Ghost</Button>
+        </div>
+      </div>
+    </div>
+  ),
+  parameters: {
+    backgrounds: { default: "light" },
   },
 };

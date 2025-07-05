@@ -128,7 +128,7 @@ function MobileNavbar({
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <div className="flex justify-end">
         <SheetTrigger asChild>
-          <Button variant="outline" size="icon">
+          <Button variant="ghost" size="icon">
             <Menu className="size-4" />
             <span className="sr-only">Open menu</span>
           </Button>
