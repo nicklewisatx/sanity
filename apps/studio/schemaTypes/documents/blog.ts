@@ -107,6 +107,32 @@ export const blog = defineType({
       group: GROUP.MAIN_CONTENT,
     }),
     defineField({
+      name: "articleType",
+      title: "Article Type",
+      type: "reference",
+      description: "Categorize your blog post by selecting an article type",
+      to: [{ type: "articleType" }],
+      group: GROUP.MAIN_CONTENT,
+      validation: (Rule) => Rule.required().error("Article type is required"),
+    }),
+    defineField({
+      name: "technologies",
+      title: "Related Technologies",
+      type: "array",
+      description: "Select technologies that are featured or discussed in this blog post",
+      of: [
+        defineArrayMember({
+          type: "reference",
+          to: [{ type: "technology" }],
+          options: {
+            disableNew: false,
+          },
+        }),
+      ],
+      group: GROUP.MAIN_CONTENT,
+      validation: (Rule) => Rule.max(5).warning("Consider limiting to 5 technologies for better readability"),
+    }),
+    defineField({
       name: "publishedAt",
       type: "date",
       initialValue: () => new Date().toISOString().split("T")[0],
@@ -146,6 +172,9 @@ export const blog = defineType({
       slug: "slug.current",
       author: "authors.0.name",
       publishDate: "publishedAt",
+      articleType: "articleType.name",
+      articleTypeColor: "articleType.color",
+      technologiesCount: "technologies",
     },
     prepare: ({
       title,
@@ -155,6 +184,9 @@ export const blog = defineType({
       isHidden,
       author,
       publishDate,
+      articleType,
+      articleTypeColor,
+      technologiesCount,
     }) => {
       // Status indicators
       const visibility = isPrivate
@@ -169,10 +201,17 @@ export const blog = defineType({
         ? `📅 ${new Date(publishDate).toLocaleDateString()}`
         : "⏳ Draft";
 
+      // Article type and technologies
+      const typeInfo = articleType ? `🏷️ ${articleType}` : "📝 No type";
+      const techCount = technologiesCount?.length || 0;
+      const techInfo = techCount > 0 ? `⚡ ${techCount} tech${techCount > 1 ? 's' : ''}` : "";
+
+      const categoryInfo = [typeInfo, techInfo].filter(Boolean).join(" | ");
+
       return {
         title: title || "Untitled Blog",
         media,
-        subtitle: `${visibility} | ${authorInfo} | ${dateInfo}`,
+        subtitle: `${visibility} | ${authorInfo} | ${dateInfo}${categoryInfo ? ` | ${categoryInfo}` : ''}`,
       };
     },
   },

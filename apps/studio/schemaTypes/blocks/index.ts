@@ -1,3 +1,4 @@
+import { blogLanding } from "./blog-landing";
 import { cta } from "./cta";
 import { faqAccordion } from "./faq-accordion";
 import { featureCardsIcon } from "./feature-cards-icon";
@@ -16,4 +17,5 @@ export const pageBuilderBlocks = [
   subscribeNewsletter,
   typography,
   layout,
+  blogLanding,
 ];

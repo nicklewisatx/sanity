@@ -3,19 +3,42 @@ import { cn } from "@workspace/ui/lib/utils";
 import { Card, CardContent } from "./card";
 import { Badge } from "./badge";
 import { Caption } from "./typography";
+import { CategoryBadges } from "./category-badges";
 
 export interface ArticleCardProps extends React.HTMLAttributes<HTMLDivElement> {
   title: string;
-  category: string;
+  category?: string; // Made optional to support new category system
+  articleType?: {
+    name: string;
+    color: string;
+  };
+  technologies?: Array<{
+    name: string;
+    overallRating: -1 | 0 | 1;
+  }>;
   date: string;
   readTime: string;
   image: string;
   imageAlt?: string;
   href?: string;
+  maxTechnologies?: number;
 }
 
 export const ArticleCard = React.forwardRef<HTMLDivElement, ArticleCardProps>(
-  ({ className, title, category, date, readTime, image, imageAlt, href, ...props }, ref) => {
+  ({ 
+    className, 
+    title, 
+    category, 
+    articleType, 
+    technologies, 
+    date, 
+    readTime, 
+    image, 
+    imageAlt, 
+    href, 
+    maxTechnologies = 3,
+    ...props 
+  }, ref) => {
     const CardWrapper = href ? "a" : "div";
     const cardProps = href ? { href } : {};
     
@@ -39,9 +62,19 @@ export const ArticleCard = React.forwardRef<HTMLDivElement, ArticleCardProps>(
         </div>
         
         <CardContent className="pt-4">
-          <Badge variant="secondary" className="mb-3">
-            {category}
-          </Badge>
+          {/* Support both old category system and new article type + technologies */}
+          {(articleType || technologies?.length) ? (
+            <CategoryBadges
+              articleType={articleType}
+              technologies={technologies}
+              maxTechnologies={maxTechnologies}
+              className="mb-3"
+            />
+          ) : category ? (
+            <Badge variant="secondary" className="mb-3">
+              {category}
+            </Badge>
+          ) : null}
           
           <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2 line-clamp-2">
             {title}

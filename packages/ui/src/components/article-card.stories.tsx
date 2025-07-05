@@ -152,3 +152,198 @@ export const ResponsiveGrid = {
     </div>
   ),
 };
+
+// New stories showcasing the category badge system
+export const WithNewCategorySystem: Story = {
+  args: {
+    title: "Building Modern React Apps with TypeScript and Next.js",
+    articleType: {
+      name: "Tutorial",
+      color: "blue",
+    },
+    technologies: [
+      { name: "React", overallRating: 1 },
+      { name: "TypeScript", overallRating: 1 },
+      { name: "Next.js", overallRating: 1 },
+    ],
+    date: "Dec 28, 2024",
+    readTime: "8 min read",
+    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80",
+    imageAlt: "React code on screen",
+    href: "#",
+  },
+};
+
+export const MixedTechnologyRatings: Story = {
+  args: {
+    title: "Framework Comparison: React vs Vue vs Angular in 2025",
+    articleType: {
+      name: "Review",
+      color: "pink",
+    },
+    technologies: [
+      { name: "React", overallRating: 1 },
+      { name: "Vue.js", overallRating: 0 },
+      { name: "Angular", overallRating: -1 },
+      { name: "Svelte", overallRating: 1 },
+      { name: "Solid.js", overallRating: 0 },
+    ],
+    maxTechnologies: 3,
+    date: "Dec 27, 2024",
+    readTime: "12 min read",
+    image: "https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=800&q=80",
+    imageAlt: "Multiple framework logos",
+    href: "#",
+  },
+};
+
+export const OnlyArticleType: Story = {
+  args: {
+    title: "The Future of Web Development: Trends to Watch",
+    articleType: {
+      name: "Opinion",
+      color: "orange",
+    },
+    date: "Dec 26, 2024",
+    readTime: "6 min read",
+    image: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=800&q=80",
+    imageAlt: "Futuristic web interface",
+    href: "#",
+  },
+};
+
+export const OnlyTechnologies: Story = {
+  args: {
+    title: "Deep Dive into Database Performance Optimization",
+    technologies: [
+      { name: "PostgreSQL", overallRating: 1 },
+      { name: "Redis", overallRating: 1 },
+      { name: "MongoDB", overallRating: 0 },
+    ],
+    date: "Dec 25, 2024",
+    readTime: "15 min read",
+    image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=800&q=80",
+    imageAlt: "Database visualization",
+    href: "#",
+  },
+};
+
+export const GridWithNewCategories = {
+  render: () => (
+    <CardGrid cols={2} gap={6}>
+      <ArticleCard
+        title="AI-Powered Development Tools That Will Change Your Workflow"
+        articleType={{ name: "Deep Dive", color: "purple" }}
+        technologies={[
+          { name: "GitHub Copilot", overallRating: 1 },
+          { name: "ChatGPT", overallRating: 1 },
+          { name: "Claude", overallRating: 1 },
+        ]}
+        date="Dec 28, 2024"
+        readTime="10 min read"
+        image="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80"
+        href="#"
+      />
+      <ArticleCard
+        title="Security Vulnerabilities in Popular npm Packages"
+        articleType={{ name: "News", color: "red" }}
+        technologies={[
+          { name: "npm", overallRating: 0 },
+          { name: "Node.js", overallRating: 1 },
+          { name: "ESLint", overallRating: 1 },
+        ]}
+        date="Dec 27, 2024"
+        readTime="7 min read"
+        image="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80"
+        href="#"
+      />
+      <ArticleCard
+        title="Getting Started with Rust: A Beginner's Guide"
+        articleType={{ name: "Guide", color: "indigo" }}
+        technologies={[
+          { name: "Rust", overallRating: 1 },
+          { name: "Cargo", overallRating: 1 },
+          { name: "WebAssembly", overallRating: 0 },
+        ]}
+        date="Dec 26, 2024"
+        readTime="12 min read"
+        image="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80"
+        href="#"
+      />
+      <ArticleCard
+        title="Mobile Development in 2025: Native vs Cross-Platform"
+        articleType={{ name: "Case Study", color: "green" }}
+        technologies={[
+          { name: "React Native", overallRating: 0 },
+          { name: "Flutter", overallRating: 1 },
+          { name: "Swift", overallRating: 1 },
+          { name: "Kotlin", overallRating: 1 },
+          { name: "Expo", overallRating: 0 },
+        ]}
+        maxTechnologies={3}
+        date="Dec 25, 2024"
+        readTime="14 min read"
+        image="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80"
+        href="#"
+      />
+    </CardGrid>
+  ),
+};
+
+export const BackwardCompatibility = {
+  render: () => (
+    <div className="space-y-6">
+      <div>
+        <h3 className="text-lg font-semibold mb-4">Old Category System (Backward Compatible)</h3>
+        <CardGrid cols={2} gap={4}>
+          <ArticleCard
+            title="Legacy Article with Category Badge"
+            category="Engineering"
+            date="Dec 28, 2024"
+            readTime="5 min read"
+            image="https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=800&q=80"
+            href="#"
+          />
+          <ArticleCard
+            title="Another Legacy Article"
+            category="Design"
+            date="Dec 27, 2024"
+            readTime="3 min read"
+            image="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80"
+            href="#"
+          />
+        </CardGrid>
+      </div>
+      
+      <div>
+        <h3 className="text-lg font-semibold mb-4">New Category System</h3>
+        <CardGrid cols={2} gap={4}>
+          <ArticleCard
+            title="Modern Article with Article Type + Technologies"
+            articleType={{ name: "Tutorial", color: "blue" }}
+            technologies={[
+              { name: "React", overallRating: 1 },
+              { name: "TypeScript", overallRating: 1 },
+            ]}
+            date="Dec 28, 2024"
+            readTime="5 min read"
+            image="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80"
+            href="#"
+          />
+          <ArticleCard
+            title="Another Modern Article"
+            articleType={{ name: "Review", color: "pink" }}
+            technologies={[
+              { name: "Figma", overallRating: 1 },
+              { name: "Sketch", overallRating: 0 },
+            ]}
+            date="Dec 27, 2024"
+            readTime="3 min read"
+            image="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80"
+            href="#"
+          />
+        </CardGrid>
+      </div>
+    </div>
+  ),
+};
