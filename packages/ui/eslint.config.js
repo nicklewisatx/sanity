@@ -4,6 +4,19 @@ import { config } from "@workspace/eslint-config/react-internal"
 export default [
   ...config,
   {
+    ignores: [
+      "storybook-static/**",
+      "**/storybook-static/**",
+      "dist/**",
+      "build/**",
+      "coverage/**",
+      "node_modules/**",
+      "**/*.min.js",
+      "**/*.bundle.js",
+      "**/vendor/**"
+    ]
+  },
+  {
     files: ["scripts/**/*.js"],
     languageOptions: {
       globals: {
