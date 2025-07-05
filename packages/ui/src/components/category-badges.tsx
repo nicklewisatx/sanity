@@ -1,6 +1,6 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { Badge, type BadgeProps } from "./badge";
+import { Badge } from "./badge";
 import { cn } from "@workspace/ui/lib/utils";
 
 // Article Type Badge Variants - using contrasting colors from the design system

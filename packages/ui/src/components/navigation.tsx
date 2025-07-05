@@ -1,7 +1,7 @@
 import * as React from "react";
 import { cva } from "class-variance-authority";
 import { cn } from "@workspace/ui/lib/utils";
-import { Button } from "./button";
+import { ButtonV2 as Button } from "./button-v2";
 import { Menu, X } from "lucide-react";
 
 // Navigation item types
@@ -116,8 +116,8 @@ export const Navigation = React.forwardRef<HTMLDivElement, NavigationProps>(
         {/* Mobile Menu Button */}
         <Button
           variant="ghost"
-          size="icon"
-          className="md:hidden"
+          size="sm"
+          className="md:hidden p-2"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           {mobileMenuOpen ? (

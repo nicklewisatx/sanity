@@ -2,7 +2,7 @@ import * as React from "react";
 import { cn } from "@workspace/ui/lib/utils";
 import { Badge } from "./badge";
 import { Caption } from "./typography";
-import { Button } from "./button";
+import { ButtonV2 as Button } from "./button-v2";
 
 export interface ArticleHeroProps extends React.HTMLAttributes<HTMLElement> {
   title: string;
