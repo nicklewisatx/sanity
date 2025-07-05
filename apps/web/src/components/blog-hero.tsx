@@ -1,12 +1,13 @@
 "use client";
 import { useOptimistic } from "@sanity/visual-editing/react";
-import { createDataAttribute, type SanityDocument } from "next-sanity";
-import Link from "next/link";
-
-import { Hero } from "@workspace/ui/components/hero";
 import { ButtonV2 as Button } from "@workspace/ui/components/button-v2";
+import { Hero } from "@workspace/ui/components/hero";
+import Link from "next/link";
+import { createDataAttribute, type SanityDocument } from "next-sanity";
+
 import { dataset, projectId, studioUrl } from "@/lib/sanity/api";
 import type { QueryBlogIndexPageDataResult } from "@/lib/sanity/sanity.types";
+
 import { SanityImage } from "./sanity-image";
 
 type Blog = NonNullable<
@@ -39,7 +40,7 @@ export function BlogHero({ blog: initialBlog, id, type }: BlogHeroProps) {
 
   // Use blog image or fallback to default
   const heroBackgroundImage = blog.image?.asset
-    ? `https://cdn.sanity.io/images/${projectId}/${dataset}/${blog.image.asset._ref?.replace('image-', '').replace('-jpg', '.jpg').replace('-png', '.png')}?w=1920&h=1080&fit=crop`
+    ? `https://cdn.sanity.io/images/${projectId}/${dataset}/${blog.image.asset._ref?.replace("image-", "").replace("-jpg", ".jpg").replace("-png", ".png")}?w=1920&h=1080&fit=crop`
     : "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1920&h=1080&fit=crop";
 
   return (

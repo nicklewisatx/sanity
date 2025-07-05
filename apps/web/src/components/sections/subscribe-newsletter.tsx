@@ -1,6 +1,6 @@
 "use client";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@workspace/ui/components/button";
-import { Input } from "@workspace/ui/components/input";
 import {
   Form,
   FormControl,
@@ -8,11 +8,11 @@ import {
   FormItem,
   FormMessage,
 } from "@workspace/ui/components/form-v2";
+import { Input } from "@workspace/ui/components/input";
 import { ChevronRight, LoaderCircle } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 
 import { newsletterSubmission } from "@/action/newsletter-submission";
 import type { PagebuilderType } from "@/types";
@@ -43,7 +43,7 @@ export function SubscribeNewsletter({
   helperText,
 }: SubscribeNewsletterProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -77,7 +77,7 @@ export function SubscribeNewsletter({
             />
           )}
           <Form {...form}>
-            <form 
+            <form
               onSubmit={form.handleSubmit(onSubmit)}
               className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-2"
             >
@@ -100,7 +100,11 @@ export function SubscribeNewsletter({
                         type="submit"
                         disabled={isSubmitting}
                         className="size-8 aspect-square bg-primary text-primary-foreground hover:bg-primary/90"
-                        aria-label={isSubmitting ? "Subscribing..." : "Subscribe to newsletter"}
+                        aria-label={
+                          isSubmitting
+                            ? "Subscribing..."
+                            : "Subscribe to newsletter"
+                        }
                       >
                         <span className="flex items-center justify-center gap-2">
                           {isSubmitting ? (

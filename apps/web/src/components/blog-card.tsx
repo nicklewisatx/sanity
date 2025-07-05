@@ -1,12 +1,12 @@
 "use client";
 import { useOptimistic } from "@sanity/visual-editing/react";
-import { createDataAttribute, type SanityDocument } from "next-sanity";
 import { Card, CardContent } from "@workspace/ui/components/card";
 import { Hero } from "@workspace/ui/components/hero";
 import Link from "next/link";
+import { createDataAttribute, type SanityDocument } from "next-sanity";
 
-import type { QueryBlogIndexPageDataResult } from "@/lib/sanity/sanity.types";
 import { dataset, projectId, studioUrl } from "@/lib/sanity/api";
+import type { QueryBlogIndexPageDataResult } from "@/lib/sanity/sanity.types";
 
 import { SanityImage } from "./sanity-image";
 
@@ -137,19 +137,25 @@ function AuthorSection({ authors }: { authors: Blog["authors"] }) {
     </div>
   );
 }
-export function FeaturedBlogCard({ blog, index, parentId, parentType }: BlogCardProps) {
+export function FeaturedBlogCard({
+  blog,
+  index,
+  parentId,
+  parentType,
+}: BlogCardProps) {
   const { title, publishedAt, slug, authors, description, image } = blog ?? {};
 
-  const dataAttribute = parentId && parentType && typeof index === 'number' 
-    ? createDataAttribute({
-        id: parentId,
-        baseUrl: studioUrl,
-        projectId: projectId,
-        dataset: dataset,
-        type: parentType,
-        path: `blogs[${index}]`,
-      }).toString()
-    : undefined;
+  const dataAttribute =
+    parentId && parentType && typeof index === "number"
+      ? createDataAttribute({
+          id: parentId,
+          baseUrl: studioUrl,
+          projectId: projectId,
+          dataset: dataset,
+          type: parentType,
+          path: `blogs[${index}]`,
+        }).toString()
+      : undefined;
 
   return (
     <Card className="w-full shadow-lg" data-sanity={dataAttribute}>
@@ -186,19 +192,23 @@ export function BlogCard({ blog, index, parentId, parentType }: BlogCardProps) {
 
   const { title, publishedAt, slug, authors, description, image } = blog;
 
-  const dataAttribute = parentId && parentType && typeof index === 'number' 
-    ? createDataAttribute({
-        id: parentId,
-        baseUrl: studioUrl,
-        projectId: projectId,
-        dataset: dataset,
-        type: parentType,
-        path: `blogs[${index}]`,
-      }).toString()
-    : undefined;
+  const dataAttribute =
+    parentId && parentType && typeof index === "number"
+      ? createDataAttribute({
+          id: parentId,
+          baseUrl: studioUrl,
+          projectId: projectId,
+          dataset: dataset,
+          type: parentType,
+          path: `blogs[${index}]`,
+        }).toString()
+      : undefined;
 
   return (
-    <Card className="w-full overflow-hidden shadow-sm hover:shadow-md transition-shadow" data-sanity={dataAttribute}>
+    <Card
+      className="w-full overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+      data-sanity={dataAttribute}
+    >
       <div className="relative w-full h-auto aspect-[16/9] overflow-hidden">
         <BlogImage image={image} title={title} />
         <div className="absolute inset-0 ring-1 ring-inset ring-gray-900/10" />

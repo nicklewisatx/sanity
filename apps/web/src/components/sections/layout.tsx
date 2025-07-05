@@ -1,13 +1,14 @@
 "use client";
+import { useOptimistic } from "@sanity/visual-editing/react";
 import { Container } from "@workspace/ui/components/container";
 import { Flex, Grid, Section, Stack } from "@workspace/ui/components/layout";
-import { useOptimistic } from "@sanity/visual-editing/react";
 import { createDataAttribute, type SanityDocument } from "next-sanity";
 import type { ComponentType } from "react";
 
 import { dataset, projectId, studioUrl } from "@/lib/sanity/api";
 import type { PagebuilderType } from "@/types";
 
+import { RichText } from "../richtext";
 import { CTABlock } from "./cta";
 import { FaqAccordion } from "./faq-accordion";
 import { FeatureCardsWithIcon } from "./feature-cards-with-icon";
@@ -15,7 +16,6 @@ import { HeroBlock } from "./hero";
 import { ImageLinkCards } from "./image-link-cards";
 import { SubscribeNewsletter } from "./subscribe-newsletter";
 import { TypographyBlock } from "./typography";
-import { RichText } from "../richtext";
 
 type LayoutBlockProps = PagebuilderType<"layout">;
 

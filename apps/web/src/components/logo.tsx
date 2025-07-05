@@ -12,7 +12,9 @@ export function TextLogo({ className }: TextLogoProps) {
           <span className="bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
             Nick Lewis
           </span>
-          <span className="mx-2 text-gray-400 dark:text-gray-600 font-light">:</span>
+          <span className="mx-2 text-gray-400 dark:text-gray-600 font-light">
+            :
+          </span>
           <span className="font-light text-gray-600 dark:text-gray-400">
             The Blog
           </span>

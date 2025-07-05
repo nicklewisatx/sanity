@@ -19,7 +19,9 @@ function SanityButton({
   openInNewTab,
   className,
   ...props
-}: Omit<SanityButtonProps, "variant"> & { variant?: SanityButtonProps["variant"] } & Omit<ComponentProps<typeof ButtonV2>, "variant">) {
+}: Omit<SanityButtonProps, "variant"> & {
+  variant?: SanityButtonProps["variant"];
+} & Omit<ComponentProps<typeof ButtonV2>, "variant">) {
   if (!href) {
     console.log("Link Broken", { text, href, variant, openInNewTab });
     return <ButtonV2 variant="outline">Link Broken</ButtonV2>;

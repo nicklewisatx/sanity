@@ -119,7 +119,8 @@ export const blog = defineType({
       name: "technologies",
       title: "Related Technologies",
       type: "array",
-      description: "Select technologies that are featured or discussed in this blog post",
+      description:
+        "Select technologies that are featured or discussed in this blog post",
       of: [
         defineArrayMember({
           type: "reference",
@@ -130,7 +131,10 @@ export const blog = defineType({
         }),
       ],
       group: GROUP.MAIN_CONTENT,
-      validation: (Rule) => Rule.max(5).warning("Consider limiting to 5 technologies for better readability"),
+      validation: (Rule) =>
+        Rule.max(5).warning(
+          "Consider limiting to 5 technologies for better readability",
+        ),
     }),
     defineField({
       name: "publishedAt",
@@ -204,14 +208,15 @@ export const blog = defineType({
       // Article type and technologies
       const typeInfo = articleType ? `🏷️ ${articleType}` : "📝 No type";
       const techCount = technologiesCount?.length || 0;
-      const techInfo = techCount > 0 ? `⚡ ${techCount} tech${techCount > 1 ? 's' : ''}` : "";
+      const techInfo =
+        techCount > 0 ? `⚡ ${techCount} tech${techCount > 1 ? "s" : ""}` : "";
 
       const categoryInfo = [typeInfo, techInfo].filter(Boolean).join(" | ");
 
       return {
         title: title || "Untitled Blog",
         media,
-        subtitle: `${visibility} | ${authorInfo} | ${dateInfo}${categoryInfo ? ` | ${categoryInfo}` : ''}`,
+        subtitle: `${visibility} | ${authorInfo} | ${dateInfo}${categoryInfo ? ` | ${categoryInfo}` : ""}`,
       };
     },
   },

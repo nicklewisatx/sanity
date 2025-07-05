@@ -18,8 +18,8 @@ export async function generateMetadata() {
       ? {
           title: blogIndexData?.title ?? blogIndexData?.seoTitle ?? "Blog",
           description:
-            blogIndexData?.description ?? 
-            blogIndexData?.seoDescription ?? 
+            blogIndexData?.description ??
+            blogIndexData?.seoDescription ??
             "Read our latest blog posts and insights.",
           slug: blogIndexData?.slug,
           contentId: blogIndexData?._id,
@@ -37,20 +37,14 @@ export default async function BlogPage() {
   }
 
   const { _id, _type, pageBuilder, blogs = [] } = blogIndexData;
-  
+
   // Get the latest article (first in the ordered array from Sanity)
   const [latestArticle, ...remainingArticles] = blogs;
 
   return (
     <main className="bg-background">
       {/* Hero Section featuring the Latest Article */}
-      {latestArticle && (
-        <BlogHero 
-          blog={latestArticle}
-          id={_id}
-          type={_type}
-        />
-      )}
+      {latestArticle && <BlogHero blog={latestArticle} id={_id} type={_type} />}
 
       {/* Page Builder Content (if any) */}
       {pageBuilder && pageBuilder.length > 0 && (
@@ -61,15 +55,17 @@ export default async function BlogPage() {
       {remainingArticles.length > 0 && (
         <div className="container mx-auto px-4 md:px-6 py-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {remainingArticles.map((blog: typeof remainingArticles[0], index: number) => (
-              <BlogCard 
-                key={blog._id} 
-                blog={blog}
-                index={index + 1} // +1 because index 0 is the hero blog
-                parentId={_id}
-                parentType={_type}
-              />
-            ))}
+            {remainingArticles.map(
+              (blog: (typeof remainingArticles)[0], index: number) => (
+                <BlogCard
+                  key={blog._id}
+                  blog={blog}
+                  index={index + 1} // +1 because index 0 is the hero blog
+                  parentId={_id}
+                  parentType={_type}
+                />
+              ),
+            )}
           </div>
         </div>
       )}

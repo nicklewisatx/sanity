@@ -1,4 +1,4 @@
-import { Text, Heading } from "@workspace/ui/components/typography";
+import { Heading, Text } from "@workspace/ui/components/typography";
 
 import type { PagebuilderType } from "@/types";
 
@@ -13,8 +13,9 @@ export function TypographyBlock({
   if (!text) return null;
 
   // Map variants to the appropriate component
-  const isHeading = variant && ["h1", "h2", "h3", "h4", "h5", "h6"].includes(variant);
-  
+  const isHeading =
+    variant && ["h1", "h2", "h3", "h4", "h5", "h6"].includes(variant);
+
   if (isHeading) {
     const level = parseInt(variant.charAt(1)) as 1 | 2 | 3 | 4 | 5 | 6;
     return (
@@ -32,7 +33,7 @@ export function TypographyBlock({
   const sizeMap: Record<string, "xs" | "sm" | "base" | "lg" | "xl"> = {
     "body-xs": "xs",
     "body-sm": "sm",
-    "body": "base",
+    body: "base",
     "body-lg": "lg",
     "body-xl": "xl",
   };

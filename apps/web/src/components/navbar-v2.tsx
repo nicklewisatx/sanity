@@ -12,7 +12,7 @@ export async function NavbarServerV2() {
     sanityFetch({ query: queryNavbarData }),
     sanityFetch({ query: queryGlobalSeoSettings }),
   ]);
-  
+
   return (
     <NavbarV2 navbarData={navbarData.data} settingsData={settingsData.data} />
   );

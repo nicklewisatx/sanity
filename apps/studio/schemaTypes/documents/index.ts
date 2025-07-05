@@ -12,4 +12,12 @@ import technology from "./technology";
 
 export const singletons = [homePage, blogIndex, settings, footer, navbar];
 
-export const documents = [blog, page, faq, author, articleType, technology, ...singletons];
+export const documents = [
+  blog,
+  page,
+  faq,
+  author,
+  articleType,
+  technology,
+  ...singletons,
+];
